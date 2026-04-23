@@ -495,7 +495,7 @@ function HeroSection() {
         {/* Hero image placeholder */}
         <div style={{ opacity: loaded ? 1 : 0, transform: loaded ? "scale(1)" : "scale(0.9)", transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s", position: "relative" }}>
           <div style={{ width: "100%", aspectRatio: "4/5", borderRadius: 24, overflow: "hidden", boxShadow: "0 30px 80px rgba(0,184,192,0.15), 0 10px 30px rgba(0,0,0,0.06)" }}>
-            <img src="/images/pediatria_01.jpg" alt="Família sendo atendida na clínica Vittalis Saúde em São Luís" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src="/images/vittalis_pediatria_2.png" alt="Família sendo atendida na clínica Vittalis Saúde em São Luís" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
 
           {/* Floating card */}
@@ -621,7 +621,7 @@ function VacinacaoSection() {
         <div className="vac-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "center" }}>
           <AnimatedSection>
             <div style={{ aspectRatio: "4/3", borderRadius: 20, overflow: "hidden" }}>
-              <img src="/images/pediatria_01.jpg" alt="Vacinação infantil acolhedora na Vittalis Saúde" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <img src="/images/vacinas_02.jpg" alt="Vacinação com conforto acolhedora na Vittalis Saúde" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
           </AnimatedSection>
 
@@ -682,7 +682,7 @@ function MultidisciplinarSection() {
 
           <AnimatedSection delay={0.15}>
             <div style={{ aspectRatio: "4/5", borderRadius: 24, overflow: "hidden", boxShadow: "0 20px 60px rgba(0,184,192,0.1)" }}>
-              <img src="/images/pediatria_01.jpg" alt="Equipe multidisciplinar da Vittalis Saúde em São Luís" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <img src="/images/multidisciplinar_01.jpg" alt="Equipe multidisciplinar da Vittalis Saúde em São Luís" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
           </AnimatedSection>
         </div>
