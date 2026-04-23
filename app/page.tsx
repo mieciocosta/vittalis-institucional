@@ -44,8 +44,8 @@ const BRAND = {
     week: "Segunda a Sexta — 08h às 18h",
     sat: "Sábado — 08h às 12h",
   },
-  instagram: "https://instagram.com/vittalissaude",
-  facebook: "https://facebook.com/vittalissaude",
+  instagram: "https://www.instagram.com/vittalissaudeslz/",
+  // facebook: removido,
   mapsUrl: "https://maps.app.goo.gl/35Vernq6NtWw9vBLA",
 };
 
@@ -149,14 +149,14 @@ const icons = {
 // DADOS DE CONTEÚDO — Edite textos, serviços, depoimentos e FAQ
 // ═══════════════════════════════════════════════════════════════════
 const DIFERENCIAIS = [
-  { icon: "handHeart", title: "Atendimento Humanizado", desc: "Cada paciente é acolhido com empatia, escuta ativa e respeito, em um ambiente preparado para gerar confiança." },
-  { icon: "award", title: "Estrutura Moderna", desc: "Ambientes planejados para oferecer conforto, segurança e uma experiência premium para toda a família." },
-  { icon: "syringe", title: "Vacinação com Mais Conforto", desc: "Técnicas suaves, ambiente acolhedor e orientação clara para tornar a vacinação mais tranquila." },
-  { icon: "calendar", title: "Planejamento Vacinal", desc: "Organização individualizada da carteira vacinal, garantindo proteção completa em cada fase da vida." },
-  { icon: "users", title: "Equipe Multidisciplinar", desc: "Profissionais integrados para cuidar da saúde física, emocional e do desenvolvimento com visão contínua." },
-  { icon: "home", title: "Atendimento Domiciliar", desc: "Levamos o mesmo padrão de qualidade da clínica até o conforto do seu lar, com horários flexíveis." },
-  { icon: "heart", title: "Todas as Fases da Vida", desc: "Bebês, crianças, adolescentes, adultos e idosos — cuidado completo para toda a família em um só lugar." },
-  { icon: "shield", title: "Segurança Clínica", desc: "Protocolos rigorosos, profissionais qualificados e compromisso com a excelência em cada atendimento." },
+  { icon: "handHeart", title: "Atendimento Humanizado", desc: "Empatia, escuta ativa e respeito em cada atendimento." },
+  { icon: "award", title: "Estrutura Moderna", desc: "Conforto e sofisticação em cada detalhe da clínica." },
+  { icon: "syringe", title: "Vacinação com Mais Conforto", desc: "Técnicas suaves e ambiente acolhedor para os pequenos." },
+  { icon: "calendar", title: "Planejamento Vacinal", desc: "Carteira vacinal organizada e personalizada." },
+  { icon: "users", title: "Equipe Multidisciplinar", desc: "Saúde física, emocional e desenvolvimento integrados." },
+  { icon: "home", title: "Atendimento Domiciliar", desc: "A qualidade da clínica no conforto do seu lar." },
+  { icon: "heart", title: "Todas as Fases da Vida", desc: "Cuidado completo para toda a família, em um só lugar." },
+  { icon: "shield", title: "Segurança Clínica", desc: "Protocolos rigorosos e compromisso com a excelência." },
 ];
 
 const ESPECIALIDADES_MEDICAS = [
@@ -318,103 +318,235 @@ function CTAButton({ children, href = BRAND.whatsapp, variant = "primary", size 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [espOpen, setEspOpen] = useState(false);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handler);
-    return () => window.removeEventListener("scroll", handler);
+    const h = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", h);
+    return () => window.removeEventListener("scroll", h);
   }, []);
 
-  const links = [
-    { label: "Início", href: "#hero" },
-    { label: "Especialidades", href: "#especialidades" },
-    { label: "Vacinação", href: "#vacinacao" },
-    { label: "Sobre", href: "#sobre" },
-    { label: "Depoimentos", href: "#depoimentos" },
-    { label: "FAQ", href: "#faq" },
+  const espMedicas = [
+    { name: "Pediatria", slug: "pediatria", icon: "👶" },
+    { name: "Ginecologia", slug: "ginecologia", icon: "🌸" },
+    { name: "Clínica Geral", slug: "clinica-geral", icon: "🩺" },
+    { name: "Dermatologia", slug: "dermatologia", icon: "✨" },
+    { name: "Pneumologia", slug: "pneumologia", icon: "🫁" },
+  ];
+  const espTerapias = [
+    { name: "Psicologia Infantil", slug: "psicologia-infantil", icon: "🧸" },
+    { name: "Psicologia ABA", slug: "psicologia-aba", icon: "🧩" },
+    { name: "Fonoaudiologia", slug: "fonoaudiologia", icon: "🗣️" },
+    { name: "Fisioterapia", slug: "fisioterapia-infantil", icon: "🤸" },
+    { name: "Terapia Ocupacional", slug: "terapia-ocupacional-infantil", icon: "🎨" },
+    { name: "Neurofeedback", slug: "neurofeedback", icon: "⚡" },
   ];
 
   return (
-    <nav style={{
-      position: "fixed", top: 0, left: 0, right: 0, zIndex: 900,
-      background: scrolled ? "rgba(255,255,255,0.92)" : "transparent",
-      backdropFilter: scrolled ? "blur(20px) saturate(1.4)" : "none",
-      WebkitBackdropFilter: scrolled ? "blur(20px) saturate(1.4)" : "none",
-      borderBottom: scrolled ? "1px solid rgba(0,184,192,0.06)" : "none",
-      transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
-    }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 28px", display: "flex", alignItems: "center", justifyContent: "space-between", height: scrolled ? 64 : 76, transition: "height 0.4s ease" }}>
-        {/* Logo */}
-        <a href="#hero" style={{ display: "flex", alignItems: "center", height: 40, transition: "opacity 0.3s" }}
-           onMouseEnter={e => e.currentTarget.style.opacity = "0.8"}
-           onMouseLeave={e => e.currentTarget.style.opacity = "1"}>
-          <img src="/images/logo-vertical.png" alt="Vittalis Saúde" style={{ height: scrolled ? 36 : 42, width: "auto", objectFit: "contain", transition: "height 0.4s ease" }} />
-        </a>
+    <>
 
-        {/* Desktop links - clean pill style */}
-        <div className="nav-desktop" style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          {links.map(l => (
-            <a key={l.href} href={l.href} style={{
-              fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 500,
-              color: "var(--vit-gray-700)", transition: "all 0.3s",
-              padding: "8px 16px", borderRadius: 100,
-              textDecoration: "none",
+            {/* ════ MAIN NAV ════ */}
+      <nav style={{
+        position: "fixed", top: 0, left: 0, right: 0, zIndex: 900,
+        background: "rgba(255,255,255,0.96)",
+        backdropFilter: "blur(20px) saturate(1.4)",
+        WebkitBackdropFilter: "blur(20px) saturate(1.4)",
+        borderBottom: "1px solid rgba(0,184,192,0.06)",
+        boxShadow: scrolled ? "0 4px 24px rgba(0,0,0,0.04)" : "none",
+        transition: "all .4s cubic-bezier(.16,1,.3,1)",
+      }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 28px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
+
+          {/* Logo */}
+          <a href="#hero" style={{ display: "flex", alignItems: "center" }}>
+            <img src="/images/logo-vertical.png" alt="Vittalis Saúde" style={{ height: 42, width: "auto" }} />
+          </a>
+
+          {/* Desktop Nav */}
+          <div className="nav-desktop" style={{ display: "flex", alignItems: "center", gap: 0 }}>
+            <a href="#hero" style={{ padding: "10px 16px", fontSize: 13, fontWeight: 500, color: "var(--vit-gray-700)", textDecoration: "none", borderRadius: 8, transition: "all .25s" }}
+              onMouseEnter={e => { e.currentTarget.style.background = "var(--vit-primary-light)"; e.currentTarget.style.color = "var(--vit-primary)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--vit-gray-700)"; }}>
+              Início
+            </a>
+
+            {/* Mega menu trigger */}
+            <div style={{ position: "relative" }}
+              onMouseEnter={() => setEspOpen(true)}
+              onMouseLeave={() => setEspOpen(false)}>
+              <button style={{
+                padding: "10px 16px", fontSize: 13, fontWeight: 500,
+                color: espOpen ? "var(--vit-primary)" : "var(--vit-gray-700)",
+                background: espOpen ? "var(--vit-primary-light)" : "transparent",
+                border: "none", borderRadius: 8, cursor: "pointer",
+                display: "flex", alignItems: "center", gap: 4,
+                fontFamily: "var(--font-body)", transition: "all .25s",
+              }}>
+                Especialidades
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ transition: "transform .3s", transform: espOpen ? "rotate(180deg)" : "none" }}><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+
+              {/* ════ MEGA MENU ════ */}
+              {espOpen && (
+                <div style={{
+                  position: "absolute", top: "100%", left: "50%", transform: "translateX(-50%)",
+                  width: 580, background: "white",
+                  borderRadius: 20, padding: "28px 32px",
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.05)",
+                  border: "1px solid rgba(0,184,192,0.06)",
+                  animation: "fadeIn .2s ease",
+                  marginTop: 4,
+                }}>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+                    {/* Consultas médicas */}
+                    <div>
+                      <p style={{ fontSize: 11, fontWeight: 700, color: "var(--vit-primary)", textTransform: "uppercase", letterSpacing: ".08em", marginBottom: 12 }}>Consultas Médicas</p>
+                      {espMedicas.map(e => (
+                        <a key={e.slug} href={`/${e.slug}`} style={{
+                          display: "flex", alignItems: "center", gap: 10, padding: "10px 12px",
+                          borderRadius: 10, textDecoration: "none", transition: "all .2s",
+                          marginBottom: 2,
+                        }}
+                        onMouseEnter={ev => { ev.currentTarget.style.background = "var(--vit-primary-50)"; }}
+                        onMouseLeave={ev => { ev.currentTarget.style.background = "transparent"; }}>
+                          <span style={{ fontSize: 18 }}>{e.icon}</span>
+                          <span style={{ fontSize: 13, fontWeight: 500, color: "var(--vit-charcoal)" }}>{e.name}</span>
+                        </a>
+                      ))}
+                    </div>
+                    {/* Terapias */}
+                    <div>
+                      <p style={{ fontSize: 11, fontWeight: 700, color: "var(--vit-primary)", textTransform: "uppercase", letterSpacing: ".08em", marginBottom: 12 }}>Terapias</p>
+                      {espTerapias.map(e => (
+                        <a key={e.slug} href={`/${e.slug}`} style={{
+                          display: "flex", alignItems: "center", gap: 10, padding: "10px 12px",
+                          borderRadius: 10, textDecoration: "none", transition: "all .2s",
+                          marginBottom: 2,
+                        }}
+                        onMouseEnter={ev => { ev.currentTarget.style.background = "var(--vit-primary-50)"; }}
+                        onMouseLeave={ev => { ev.currentTarget.style.background = "transparent"; }}>
+                          <span style={{ fontSize: 18 }}>{e.icon}</span>
+                          <span style={{ fontSize: 13, fontWeight: 500, color: "var(--vit-charcoal)" }}>{e.name}</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Vacinação destaque */}
+                  <a href="/vacinacao" style={{
+                    display: "flex", alignItems: "center", gap: 14, marginTop: 16, padding: "14px 16px",
+                    background: "linear-gradient(135deg, var(--vit-primary-light), #E0F7F8)",
+                    borderRadius: 14, textDecoration: "none",
+                    border: "1px solid rgba(0,184,192,0.1)", transition: "all .2s",
+                  }}
+                  onMouseEnter={ev => { ev.currentTarget.style.transform = "translateY(-1px)"; ev.currentTarget.style.boxShadow = "0 4px 16px rgba(0,184,192,0.1)"; }}
+                  onMouseLeave={ev => { ev.currentTarget.style.transform = "none"; ev.currentTarget.style.boxShadow = "none"; }}>
+                    <span style={{ fontSize: 24 }}>💉</span>
+                    <div>
+                      <span style={{ fontSize: 14, fontWeight: 600, color: "var(--vit-charcoal)" }}>Vacinação Particular</span>
+                      <span style={{ display: "block", fontSize: 12, color: "var(--vit-gray-500)" }}>Bebês, crianças, adultos e idosos — com conforto</span>
+                    </div>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--vit-primary)" strokeWidth="2" style={{ marginLeft: "auto" }}><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              )}
+            </div>
+
+            <a href="#sobre" style={{ padding: "10px 16px", fontSize: 13, fontWeight: 500, color: "var(--vit-gray-700)", textDecoration: "none", borderRadius: 8, transition: "all .25s" }}
+              onMouseEnter={e => { e.currentTarget.style.background = "var(--vit-primary-light)"; e.currentTarget.style.color = "var(--vit-primary)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--vit-gray-700)"; }}>
+              Sobre
+            </a>
+            <a href="#depoimentos" style={{ padding: "10px 16px", fontSize: 13, fontWeight: 500, color: "var(--vit-gray-700)", textDecoration: "none", borderRadius: 8, transition: "all .25s" }}
+              onMouseEnter={e => { e.currentTarget.style.background = "var(--vit-primary-light)"; e.currentTarget.style.color = "var(--vit-primary)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--vit-gray-700)"; }}>
+              Depoimentos
+            </a>
+            <a href="#faq" style={{ padding: "10px 16px", fontSize: 13, fontWeight: 500, color: "var(--vit-gray-700)", textDecoration: "none", borderRadius: 8, transition: "all .25s" }}
+              onMouseEnter={e => { e.currentTarget.style.background = "var(--vit-primary-light)"; e.currentTarget.style.color = "var(--vit-primary)"; }}
+              onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--vit-gray-700)"; }}>
+              FAQ
+            </a>
+
+            <div style={{ width: 1, height: 28, background: "var(--vit-gray-100)", margin: "0 12px" }} />
+
+            {/* Phone */}
+            <a href="tel:5598984221002" style={{
+              display: "flex", alignItems: "center", gap: 6, padding: "8px 14px",
+              fontSize: 13, fontWeight: 500, color: "var(--vit-gray-700)",
+              textDecoration: "none", borderRadius: 8,
+            }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--vit-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              (98) 98422-1002
+            </a>
+
+            {/* CTA */}
+            <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" style={{
+              fontSize: 13, fontWeight: 600,
+              background: "var(--vit-primary)", color: "white",
+              padding: "11px 24px", borderRadius: 100, textDecoration: "none",
+              boxShadow: "0 2px 12px rgba(0,184,192,0.2)",
+              transition: "all .3s ease",
+              display: "flex", alignItems: "center", gap: 6,
             }}
-            onMouseEnter={e => { e.currentTarget.style.background = "var(--vit-primary-light)"; e.currentTarget.style.color = "var(--vit-primary)"; }}
-            onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "var(--vit-gray-700)"; }}>
-              {l.label}
+            onMouseEnter={e => { e.currentTarget.style.background = "var(--vit-primary-dark)"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 6px 24px rgba(0,184,192,0.3)"; }}
+            onMouseLeave={e => { e.currentTarget.style.background = "var(--vit-primary)"; e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,184,192,0.2)"; }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+              Agendar consulta
             </a>
-          ))}
-          <div style={{ width: 1, height: 24, background: "var(--vit-gray-100)", margin: "0 8px" }} />
-          <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" style={{
-            fontFamily: "var(--font-body)", fontSize: 13, fontWeight: 600,
-            background: "var(--vit-primary)", color: "white",
-            padding: "10px 24px", borderRadius: 100, textDecoration: "none",
-            transition: "all 0.3s ease",
-            boxShadow: "0 2px 12px rgba(0,184,192,0.2)",
-          }}
-          onMouseEnter={e => { e.currentTarget.style.background = "var(--vit-primary-dark)"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 6px 20px rgba(0,184,192,0.3)"; }}
-          onMouseLeave={e => { e.currentTarget.style.background = "var(--vit-primary)"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,184,192,0.2)"; }}>
-            Agende sua consulta
-          </a>
+          </div>
+
+          {/* Mobile button */}
+          <button className="nav-mobile-btn" onClick={() => setMobileOpen(!mobileOpen)}
+            style={{ display: "none", background: "none", border: "none", padding: 8, color: "var(--vit-charcoal)", cursor: "pointer" }}>
+            {mobileOpen ? icons.x : icons.menu}
+          </button>
         </div>
 
-        {/* Mobile menu button */}
-        <button className="nav-mobile-btn" onClick={() => setMobileOpen(!mobileOpen)}
-          style={{ display: "none", background: "none", border: "none", padding: 8, color: "var(--vit-charcoal)", cursor: "pointer" }}>
-          {mobileOpen ? icons.x : icons.menu}
-        </button>
-      </div>
-
-      {/* Mobile Menu - slide down */}
-      {mobileOpen && (
-        <div style={{
-          position: "absolute", top: "100%", left: 0, right: 0,
-          background: "rgba(255,255,255,0.98)", backdropFilter: "blur(24px)",
-          padding: "12px 24px 24px",
-          boxShadow: "0 24px 48px rgba(0,0,0,0.08)",
-          animation: "fadeIn 0.25s ease",
-        }}>
-          {links.map(l => (
-            <a key={l.href} href={l.href} onClick={() => setMobileOpen(false)}
-              style={{ display: "block", padding: "16px 12px", fontFamily: "var(--font-body)", fontSize: 16, fontWeight: 500, color: "var(--vit-charcoal)", borderBottom: "1px solid var(--vit-gray-100)", textDecoration: "none" }}>
-              {l.label}
+        {/* Mobile Menu */}
+        {mobileOpen && (
+          <div style={{
+            position: "absolute", top: "100%", left: 0, right: 0,
+            background: "rgba(255,255,255,0.99)", backdropFilter: "blur(24px)",
+            padding: "8px 24px 24px", maxHeight: "80vh", overflowY: "auto",
+            boxShadow: "0 24px 48px rgba(0,0,0,0.08)",
+            animation: "fadeIn .2s ease",
+          }}>
+            {[
+              { l: "Início", h: "#hero" },
+              { l: "Vacinação", h: "/vacinacao" },
+              { l: "Sobre", h: "#sobre" },
+              { l: "Depoimentos", h: "#depoimentos" },
+              { l: "FAQ", h: "#faq" },
+            ].map(link => (
+              <a key={link.h} href={link.h} onClick={() => setMobileOpen(false)}
+                style={{ display: "block", padding: "16px 0", fontSize: 16, fontWeight: 500, color: "var(--vit-charcoal)", borderBottom: "1px solid var(--vit-gray-100)", textDecoration: "none" }}>
+                {link.l}
+              </a>
+            ))}
+            <p style={{ fontSize: 11, fontWeight: 700, color: "var(--vit-primary)", textTransform: "uppercase", letterSpacing: ".08em", marginTop: 16, marginBottom: 8 }}>Especialidades</p>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 16 }}>
+              {[...espMedicas, ...espTerapias].map(e => (
+                <a key={e.slug} href={`/${e.slug}`} onClick={() => setMobileOpen(false)}
+                  style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px", borderRadius: 10, background: "var(--vit-cream)", textDecoration: "none", fontSize: 13, fontWeight: 500, color: "var(--vit-charcoal)" }}>
+                  <span>{e.icon}</span> {e.name}
+                </a>
+              ))}
+            </div>
+            <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer"
+              style={{ display: "block", textAlign: "center", padding: "16px", borderRadius: 100, background: "var(--vit-primary)", color: "white", fontSize: 15, fontWeight: 600, textDecoration: "none" }}>
+              Agendar pelo WhatsApp
             </a>
-          ))}
-          <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer"
-            style={{ display: "block", textAlign: "center", marginTop: 16, fontFamily: "var(--font-body)", fontSize: 15, fontWeight: 600, background: "var(--vit-primary)", color: "white", padding: "16px 24px", borderRadius: 100, textDecoration: "none" }}>
-            Agende sua consulta
-          </a>
-        </div>
-      )}
+          </div>
+        )}
+      </nav>
 
       <style>{`
-        @media (max-width: 900px) {
+        @media (max-width: 960px) {
           .nav-desktop { display: none !important; }
           .nav-mobile-btn { display: block !important; }
         }
       `}</style>
-    </nav>
+    </>
   );
 }
 
@@ -474,13 +606,13 @@ function HeroSection() {
           </div>
 
           <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px, 5.5vw, 60px)", fontWeight: 600, color: "var(--vit-charcoal)", lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: 20 }}>
-            Cuidado completo{" "}
-            <span style={{ color: "var(--vit-primary)", fontStyle: "italic" }}>para você</span>{" "}
-            e sua família
+            Sua saúde em boas mãos.{" "}
+            <span style={{ color: "var(--vit-primary)", fontStyle: "italic" }}>Cuidado completo</span>{" "}
+            para toda a família
           </h1>
 
           <p style={{ fontSize: "clamp(16px, 1.8vw, 19px)", color: "var(--vit-gray-500)", lineHeight: 1.75, marginBottom: 36, maxWidth: 520 }}>
-            Consultas médicas, vacinação particular, terapias especializadas e acompanhamento multidisciplinar — com segurança clínica, acolhimento humano e estrutura moderna em São Luís.
+            Clínica premium em São Luís com consultas médicas, vacinação particular e terapias especializadas. Agendar consulta pelo WhatsApp.
           </p>
 
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
@@ -513,7 +645,7 @@ function HeroSection() {
 
       <style>{`
         @media (max-width: 900px) {
-          .hero-grid { grid-template-columns: 1fr !important; padding-top: 120px !important; gap: 40px !important; }
+          .hero-grid { grid-template-columns: 1fr !important; padding-top: 100px !important; gap: 40px !important; }
           .hero-float-card { left: 16px !important; bottom: 16px !important; }
           .hero-badges { gap: 20px !important; }
         }
@@ -530,7 +662,7 @@ function DiferenciaisSection() {
     <section style={{ padding: "100px 24px", background: "var(--vit-white)" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
         <AnimatedSection>
-          <SectionTitle badge="Nossos Diferenciais" title="Por que a Vittalis Saúde é a escolha certa para sua família" subtitle="Reunimos em um só lugar tudo o que você precisa para cuidar da saúde com segurança, conforto e acolhimento." />
+          <SectionTitle badge="Nossos Diferenciais" title="Por que mais de 1.200 famílias confiam na Vittalis" subtitle="Atendimento humanizado em São Luís com estrutura moderna e equipe especializada." />
         </AnimatedSection>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
           {DIFERENCIAIS.map((d, i) => (
@@ -578,7 +710,7 @@ function EspecialidadesSection() {
     <section id="especialidades" style={{ padding: "100px 24px", background: "linear-gradient(180deg, var(--vit-primary-50) 0%, var(--vit-white) 100%)" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
         <AnimatedSection>
-          <SectionTitle badge="Especialidades" title="Consultas médicas e terapias em um só lugar" subtitle="Atendimento multidisciplinar integrado para crianças, adolescentes, adultos e idosos em São Luís." />
+          <SectionTitle badge="Especialidades" title="Especialidades médicas e terapias em São Luís" subtitle="Consultas particulares para crianças, adolescentes, adultos e idosos. Agende pelo WhatsApp." />
         </AnimatedSection>
 
         <AnimatedSection><h3 style={{ fontFamily: "var(--font-display)", fontSize: 26, fontWeight: 600, color: "var(--vit-charcoal)", marginBottom: 24, textAlign: "center" }}>Especialidades Médicas</h3></AnimatedSection>
@@ -615,7 +747,7 @@ function VacinacaoSection() {
       <div style={{ position: "absolute", top: -100, right: -100, width: 350, height: 350, borderRadius: "50%", background: "rgba(255,255,255,0.03)" }} />
       <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative" }}>
         <AnimatedSection>
-          <SectionTitle badge="Vacinação Particular" title="Vacinação com mais conforto, segurança e orientação" light subtitle="Proteja sua família em todas as fases da vida — com atendimento acolhedor, técnicas para redução do desconforto e planejamento vacinal individualizado." />
+          <SectionTitle badge="Vacinação Particular" title="Vacinação particular em São Luís" light subtitle="Proteja sua família em todas as fases da vida — com atendimento acolhedor, técnicas para redução do desconforto e planejamento vacinal individualizado." />
         </AnimatedSection>
 
         <div className="vac-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "center" }}>
@@ -703,13 +835,13 @@ function SobreSection() {
         <AnimatedSection delay={0.1}>
           <div style={{ padding: "48px 40px", borderRadius: 24, background: "white", boxShadow: "0 8px 40px rgba(0,184,192,0.05)", border: "1px solid var(--vit-gray-100)" }}>
             <p style={{ fontSize: 17, color: "var(--vit-gray-700)", lineHeight: 1.85, marginBottom: 24 }}>
-              A <strong style={{ color: "var(--vit-primary)" }}>Vittalis Saúde</strong> é mais do que uma clínica — é um refúgio de bem-estar e um parceiro na jornada de saúde dos seus pacientes. Aqui, a saúde vai além do tratamento de doenças: é uma experiência completa, com foco na prevenção, no cuidado contínuo e na qualidade de vida.
+              A <strong style={{ color: "var(--vit-primary)" }}>Vittalis Saúde</strong> é uma clínica multidisciplinar no Jardim Renascença, em São Luís. Aqui, a saúde vai além do tratamento: é prevenção, cuidado contínuo e qualidade de vida para toda a família.
             </p>
             <p style={{ fontSize: 17, color: "var(--vit-gray-700)", lineHeight: 1.85, marginBottom: 24 }}>
-              Nosso compromisso é com a <strong style={{ color: "var(--vit-charcoal)" }}>qualidade de vida e a longevidade</strong> de cada paciente — desde os primeiros dias de vida até a maturidade. Acreditamos que a saúde vai além do diagnóstico: ela começa no acolhimento, passa pela orientação clara e se fortalece na confiança construída em cada consulta.
+              Cada paciente é tratado como uma <strong style={{ color: "var(--vit-charcoal)" }}>joia rara</strong> — com atenção, respeito e um cuidado que vai do primeiro sorriso à maturidade.
             </p>
             <p style={{ fontSize: 17, color: "var(--vit-gray-700)", lineHeight: 1.85 }}>
-              Nosso propósito é simples e poderoso: cuidar das pessoas para que vivam bem. Cada detalhe foi pensado para que você se sinta seguro, valorizado e acolhido — como uma joia rara que merece o melhor cuidado.
+              Nosso propósito é cuidar das pessoas para que vivam bem. Cada detalhe foi pensado para você se sentir seguro e acolhido.
             </p>
             <div style={{ display: "flex", justifyContent: "center", gap: 40, marginTop: 40, paddingTop: 32, borderTop: "1px solid var(--vit-gray-100)", flexWrap: "wrap" }}>
               {[{ l: "Missão", t: "Promover qualidade de vida e longevidade por meio do cuidado com a saúde, em um ambiente humanizado e acolhedor que estimula o autocuidado." }, { l: "Visão", t: "Ser reconhecida como referência e excelência em atendimento humanizado na área da saúde." }, { l: "Valores", t: "Ética, Disciplina, Empatia e Zelo — tratar cada paciente como uma joia rara." }].map((item, i) => (
@@ -839,10 +971,10 @@ function CTAFinalSection() {
             {icons.heart} Fale Conosco
           </div>
           <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(30px, 4.5vw, 48px)", fontWeight: 600, color: "white", lineHeight: 1.15, marginBottom: 20, letterSpacing: "-0.02em" }}>
-            Pronto para cuidar da saúde com <em>acolhimento</em> e <em>segurança</em>?
+            Agende sua consulta na <em>Vittalis Saúde</em>
           </h2>
           <p style={{ fontSize: 17, color: "rgba(255,255,255,0.85)", lineHeight: 1.75, marginBottom: 36 }}>
-            Atendimento na clínica ou no conforto da sua casa. Agende sua consulta, vacinação ou avaliação e descubra a experiência Vittalis Saúde.
+            Atendimento na clínica ou no conforto da sua casa. Agendar consulta, vacinação ou avaliação e descubra a experiência Vittalis Saúde.
           </p>
           <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
             <CTAButton variant="white" size="lg">Agende pelo WhatsApp</CTAButton>
@@ -875,7 +1007,7 @@ function Footer() {
               Clínica multidisciplinar premium em São Luís. Consultas médicas, vacinação particular e terapias para toda a família.
             </p>
             <div style={{ display: "flex", gap: 12 }}>
-              {[{ icon: "instagram", href: BRAND.instagram }, { icon: "facebook", href: BRAND.facebook }].map(({ icon, href }, i) => (
+              {[{ icon: "instagram", href: "https://www.instagram.com/vittalissaudeslz/" }].map(({ icon, href }, i) => (
                 <a key={i} href={href} target="_blank" rel="noopener noreferrer"
                   style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s", color: "rgba(255,255,255,0.7)" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "var(--vit-primary)")}
@@ -910,15 +1042,15 @@ function Footer() {
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.phone}
-                <span style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.5 }}>{BRAND.phone}</span>
+                <a href="tel:5598984221002" style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.5, textDecoration: "none" }}>{BRAND.phone}</a>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.mail}
-                <span style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.5 }}>{BRAND.email}</span>
+                <a href="mailto:contato@vittalissaude.com.br" style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.5, textDecoration: "none" }}>{BRAND.email}</a>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.mapPin}
-                <span style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.5 }}>{BRAND.address}</span>
+                <a href="https://maps.app.goo.gl/35Vernq6NtWw9vBLA" target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.5, textDecoration: "none" }}>{BRAND.address} ↗</a>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.clock}

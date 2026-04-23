@@ -394,9 +394,9 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
           <Anim>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
               {[
-                { icon: <MapIcon />, title: "Localização", text: BRAND.fullAddress, link: BRAND.mapsUrl, linkText: "Ver no Google Maps" },
+                { icon: <MapIcon />, title: "Localização", text: BRAND.fullAddress, link: "https://maps.app.goo.gl/35Vernq6NtWw9vBLA", linkText: "Abrir no Google Maps" },
                 { icon: <ClockIcon />, title: "Horários", text: `${BRAND.hours.week}\n${BRAND.hours.sat}`, link: undefined, linkText: undefined },
-                { icon: <PhoneIcon />, title: "Contato", text: BRAND.whatsappDisplay, link: waUrl, linkText: "Falar pelo WhatsApp" },
+                { icon: <PhoneIcon />, title: "Contato", text: "(98) 98422-1002", link: waUrl, linkText: "Falar pelo WhatsApp" },
               ].map((info, i) => (
                 <div key={i} style={{ background: "white", borderRadius: 18, padding: "24px 22px", border: "1px solid var(--vit-gray-100)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12, color: "var(--vit-primary)" }}>

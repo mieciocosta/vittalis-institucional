@@ -62,7 +62,7 @@ const jsonLd = {
   medicalSpecialty: ["Pediatrics","Gynecology","Dermatology","Pulmonology","Psychology","SpeechTherapy","PhysicalTherapy","OccupationalTherapy"],
   priceRange: "$$$",
   areaServed: { "@type": "City", name: "São Luís", containedInPlace: { "@type": "State", name: "Maranhão" } },
-  sameAs: ["https://instagram.com/vittalissaude", "https://facebook.com/vittalissaude"],
+  sameAs: ["https://www.instagram.com/vittalissaudeslz/"],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

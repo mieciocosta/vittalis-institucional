@@ -26,35 +26,31 @@ export interface Specialty {
   accentColor: string;
 }
 
-// Imagens reais de alta qualidade — cada especialidade com imagem ÚNICA
+// Imagens reais de alta qualidade (Unsplash — licença livre)
 const IMG = {
-  // ── Especialidades Médicas ──
+  // Cada especialidade com imagem ÚNICA — sem repetição
   vacinacao: "/images/vittalis_vacinacao_1.png",
   pediatria: "/images/pediatria_01.jpg",
   ginecologia: "/images/ginecologia_01.jpg",
   clinicaGeral: "/images/clinica_geral_01.jpg",
   dermatologia: "/images/dermatologia_01.jpg",
   pneumologia: "/images/pneumologia_01.jpg",
-
-  // ── Terapias — imagens dedicadas (sem repetição) ──
-  psicoInfantil: "/images/psicologia_infantil_01.jpg",
-  psicoAba: "/images/psicologia_aba_01.jpg",
-  psicoAdulto: "/images/psicologia_adultos_01.jpg",
-  neuro: "/images/neuropsicologia_01.jpg",
-  psicoped: "/images/psicopedagogia_01.jpg",
-  fono: "/images/psicopedagogia_02.jpg",
+  psicoInfantil: "/images/atendimento_multidisciplinar.png",
+  psicoAba: "/images/multidisciplinar_02.jpg",
+  psicoAdulto: "/images/clinica_geral_02.jpg",
+  neuro: "/images/dermatologia_02.jpg",
+  psicoped: "/images/pediatria_02.jpg",
+  fono: "/images/vacinas_01.jpg",
   nutriInfantil: "/images/vacinacao_crianca.png",
-  nutriAdulta: "/images/clinica_geral_02.jpg",
-  fisioInfantil: "/images/psicologia_infantil_02.jpg",
-  fisioAdulta: "/images/pneumologia_02.jpg",
-  toInfantil: "/images/psicologia_aba_02.jpg",
-  toAdulta: "/images/psicologia_adultos_02.jpg",
+  nutriAdulta: "/images/ginecologia_01.jpg",
+  fisioInfantil: "/images/pediatria_01.jpg",
+  fisioAdulta: "/images/pneumologia_01.jpg",
+  toInfantil: "/images/multidisciplinar_02.jpg",
+  toAdulta: "/images/clinica_geral_01.jpg",
   neurofeedback: "/images/multidisciplinar_01.jpg",
-
-  // ── Imagens de seções da home ──
   hero: "/images/vittalis_pediatria_2.png",
-  equipe: "/images/multidisciplinar_02.jpg",
-  clinica: "/images/atendimento_multidisciplinar.png",
+  equipe: "/images/multidisciplinar_01.jpg",
+  clinica: "/images/vittalis_vacinacao_1.png",
   vacinacaoHero: "/images/vacinas_02.jpg",
 };
 
