@@ -470,7 +470,7 @@ function HeroSection() {
       <div className="hero-grid" style={{ maxWidth: 1280, margin: "0 auto", padding: "140px 24px 80px", width: "100%", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "center" }}>
         <div style={{ opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(40px)", transition: "all 0.9s cubic-bezier(0.16, 1, 0.3, 1)" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--vit-gold-light)", color: "var(--vit-gold)", fontSize: 12, fontWeight: 600, padding: "6px 14px", borderRadius: 100, marginBottom: 24, letterSpacing: "0.08em", textTransform: "uppercase", border: "1px solid rgba(196,151,59,0.15)" }}>
-            {icons.award} Clínica Premium em São Luís
+            {icons.award} Sua vida é preciosa
           </div>
 
           <h1 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(36px, 5.5vw, 60px)", fontWeight: 600, color: "var(--vit-charcoal)", lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: 20 }}>
@@ -495,7 +495,7 @@ function HeroSection() {
         {/* Hero image placeholder */}
         <div style={{ opacity: loaded ? 1 : 0, transform: loaded ? "scale(1)" : "scale(0.9)", transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s", position: "relative" }}>
           <div style={{ width: "100%", aspectRatio: "4/5", borderRadius: 24, overflow: "hidden", boxShadow: "0 30px 80px rgba(0,184,192,0.15), 0 10px 30px rgba(0,0,0,0.06)" }}>
-            <img src="https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=800&h=1000&fit=crop&q=80" alt="Família sendo atendida na clínica Vittalis Saúde em São Luís" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src="/images/pediatria_01.jpg" alt="Família sendo atendida na clínica Vittalis Saúde em São Luís" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           </div>
 
           {/* Floating card */}
@@ -621,7 +621,7 @@ function VacinacaoSection() {
         <div className="vac-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40, alignItems: "center" }}>
           <AnimatedSection>
             <div style={{ aspectRatio: "4/3", borderRadius: 20, overflow: "hidden" }}>
-              <img src="https://images.unsplash.com/photo-1615631648086-325025c9e51e?w=800&h=600&fit=crop&q=80" alt="Vacinação infantil acolhedora na Vittalis Saúde" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <img src="/images/pediatria_01.jpg" alt="Vacinação infantil acolhedora na Vittalis Saúde" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
           </AnimatedSection>
 
@@ -682,7 +682,7 @@ function MultidisciplinarSection() {
 
           <AnimatedSection delay={0.15}>
             <div style={{ aspectRatio: "4/5", borderRadius: 24, overflow: "hidden", boxShadow: "0 20px 60px rgba(0,184,192,0.1)" }}>
-              <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=1000&fit=crop&q=80" alt="Equipe multidisciplinar da Vittalis Saúde em São Luís" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <img src="/images/pediatria_01.jpg" alt="Equipe multidisciplinar da Vittalis Saúde em São Luís" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             </div>
           </AnimatedSection>
         </div>
@@ -703,16 +703,16 @@ function SobreSection() {
         <AnimatedSection delay={0.1}>
           <div style={{ padding: "48px 40px", borderRadius: 24, background: "white", boxShadow: "0 8px 40px rgba(0,184,192,0.05)", border: "1px solid var(--vit-gray-100)" }}>
             <p style={{ fontSize: 17, color: "var(--vit-gray-700)", lineHeight: 1.85, marginBottom: 24 }}>
-              A <strong style={{ color: "var(--vit-primary)" }}>Vittalis Saúde</strong> nasceu com o propósito de oferecer um cuidado médico e terapêutico verdadeiramente acolhedor, seguro e integrado. Somos uma clínica multidisciplinar em São Luís que reúne consultas médicas, vacinação particular e terapias especializadas em um só lugar.
+              A <strong style={{ color: "var(--vit-primary)" }}>Vittalis Saúde</strong> é mais do que uma clínica — é um refúgio de bem-estar e um parceiro na jornada de saúde dos seus pacientes. Aqui, a saúde vai além do tratamento de doenças: é uma experiência completa, com foco na prevenção, no cuidado contínuo e na qualidade de vida.
             </p>
             <p style={{ fontSize: 17, color: "var(--vit-gray-700)", lineHeight: 1.85, marginBottom: 24 }}>
-              Nosso compromisso é com a <strong style={{ color: "var(--vit-charcoal)" }}>prevenção, o desenvolvimento e o bem-estar</strong> de cada paciente — desde os primeiros dias de vida até a maturidade. Acreditamos que a saúde vai além do diagnóstico: ela começa no acolhimento, passa pela orientação clara e se fortalece na confiança construída em cada consulta.
+              Nosso compromisso é com a <strong style={{ color: "var(--vit-charcoal)" }}>qualidade de vida e a longevidade</strong> de cada paciente — desde os primeiros dias de vida até a maturidade. Acreditamos que a saúde vai além do diagnóstico: ela começa no acolhimento, passa pela orientação clara e se fortalece na confiança construída em cada consulta.
             </p>
             <p style={{ fontSize: 17, color: "var(--vit-gray-700)", lineHeight: 1.85 }}>
-              Cada detalhe da nossa estrutura foi pensado para proporcionar uma experiência diferenciada — uma clínica moderna e acolhedora onde famílias se sentem seguras, ouvidas e cuidadas com excelência.
+              Nosso propósito é simples e poderoso: cuidar das pessoas para que vivam bem. Cada detalhe foi pensado para que você se sinta seguro, valorizado e acolhido — como uma joia rara que merece o melhor cuidado.
             </p>
             <div style={{ display: "flex", justifyContent: "center", gap: 40, marginTop: 40, paddingTop: 32, borderTop: "1px solid var(--vit-gray-100)", flexWrap: "wrap" }}>
-              {[{ l: "Missão", t: "Cuidar de pessoas com acolhimento, segurança e excelência clínica." }, { l: "Visão", t: "Ser referência em saúde integrada e humanizada em São Luís." }, { l: "Valores", t: "Empatia, ética, inovação, confiança e cuidado contínuo." }].map((item, i) => (
+              {[{ l: "Missão", t: "Promover qualidade de vida e longevidade por meio do cuidado com a saúde, em um ambiente humanizado e acolhedor que estimula o autocuidado." }, { l: "Visão", t: "Ser reconhecida como referência e excelência em atendimento humanizado na área da saúde." }, { l: "Valores", t: "Ética, Disciplina, Empatia e Zelo — tratar cada paciente como uma joia rara." }].map((item, i) => (
                 <div key={i} style={{ flex: "1 1 220px", textAlign: "center" }}>
                   <div style={{ fontFamily: "var(--font-display)", fontSize: 20, fontWeight: 600, color: "var(--vit-primary)", marginBottom: 8 }}>{item.l}</div>
                   <p style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.6 }}>{item.t}</p>
