@@ -37,7 +37,7 @@ const BRAND = {
     "https://wa.me/5598984221002?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20na%20Vittalis%20Saúde.",
   whatsappNumber: "(98) 98422-1002",
   phone: "(98) 98422-1002",
-  email: "contato@vittalissaude.com.br",
+  email: "atendimento@vittalissaude.com.br",
   address: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37 — Jardim Renascença, São Luís – MA",
   cep: "CEP: 65075-441",
   hours: {
@@ -1046,7 +1046,7 @@ function Footer() {
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.mail}
-                <a href="mailto:contato@vittalissaude.com.br" style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.5, textDecoration: "none" }}>{BRAND.email}</a>
+                <a href="mailto:atendimento@vittalissaude.com.br" style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.5, textDecoration: "none" }}>{BRAND.email}</a>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.mapPin}

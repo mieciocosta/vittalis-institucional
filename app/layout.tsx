@@ -52,7 +52,7 @@ const jsonLd = {
   logo: "https://www.vittalissaude.com.br/images/logo-horizontal.png",
   image: "https://www.vittalissaude.com.br/images/og-vittalis.jpg",
   telephone: "+5598984221002",
-  email: "contato@vittalissaude.com.br",
+  email: "atendimento@vittalissaude.com.br",
   address: { "@type": "PostalAddress", streetAddress: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37", addressLocality: "São Luís", addressRegion: "MA", postalCode: "65075-441", addressCountry: "BR" },
   geo: { "@type": "GeoCoordinates", latitude: -2.4966, longitude: -44.2826 },
   openingHoursSpecification: [

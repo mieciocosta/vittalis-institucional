@@ -12,7 +12,7 @@ export const BRAND = {
   whatsappDisplay: "(98) 98422-1002",
   whatsappUrl: "https://wa.me/5598984221002?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20na%20Vittalis%20Saúde.",
   phone: "(98) 98422-1002",
-  email: "contato@vittalissaude.com.br",
+  email: "atendimento@vittalissaude.com.br",
   
   // Endereço
   address: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37",
