@@ -1,0 +1,17 @@
+<svg width="1200" height="900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#185C74"/>
+      <stop offset="50%" stop-color="#207898"/>
+      <stop offset="100%" stop-color="#009BA2"/>
+    </linearGradient>
+    <filter id="bl"><feGaussianBlur stdDeviation="40"/></filter>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bg)"/>
+  <circle cx="200" cy="150" r="180" fill="rgba(255,255,255,0.04)" filter="url(#bl)"/>
+  <circle cx="1000" cy="750" r="200" fill="rgba(0,184,192,0.08)" filter="url(#bl)"/>
+  <text x="600" y="400" text-anchor="middle" font-size="72" opacity="0.4">💉🧸</text>
+  <text x="600" y="500" text-anchor="middle" font-family="Georgia, serif" font-size="36" font-weight="600" fill="white" opacity="0.9">Vacinação Acolhedora</text>
+  <text x="600" y="545" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="white" opacity="0.6">Conforto e segurança para toda a família</text>
+  <text x="600" y="800" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="white" opacity="0.3">Substitua por foto profissional • 1200×900px</text>
+</svg>

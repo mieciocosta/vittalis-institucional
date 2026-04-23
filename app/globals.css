@@ -1,26 +1,107 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap');
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ═══ CORES DA MARCA VITTALIS ═══ */
+  --vit-primary: #00B8C0;        /* Turquesa/Cyan — cor principal (Saúde + Diamante) */
+  --vit-primary-dark: #009BA2;   /* Variação escura do primary */
+  --vit-primary-light: #E6F8F9;  /* Fundo suave da cor primária */
+  --vit-primary-50: #F0FBFB;     /* Tom ultra-suave */
+
+  --vit-secondary: #207898;      /* Azul-petróleo — cor do texto "Vittalis" */
+  --vit-secondary-dark: #185C74; /* Variação escura */
+  --vit-secondary-light: #E8F2F6;
+
+  --vit-gold: #C4973B;           /* Dourado accent premium */
+  --vit-gold-light: #FBF5E9;
+
+  --vit-charcoal: #1A2B2A;       /* Texto principal */
+  --vit-gray-700: #374544;
+  --vit-gray-500: #5A706E;
+  --vit-gray-300: #A3B5B3;
+  --vit-gray-100: #E8EDEC;
+  --vit-cream: #FAFBF9;
+  --vit-white: #FFFFFF;
+
+  /* ═══ TIPOGRAFIA ═══ */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ═══ RESET & BASE ═══ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  color: var(--vit-charcoal);
+  background: var(--vit-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+/* ═══ ANIMAÇÕES ═══ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* ═══ SCROLLBAR PERSONALIZADA ═══ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--vit-gray-100);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--vit-primary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vit-primary-dark);
+}
+
+/* ═══ SELEÇÃO ═══ */
+::selection {
+  background: var(--vit-primary);
+  color: white;
 }
