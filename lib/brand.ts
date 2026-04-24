@@ -32,8 +32,8 @@ export const BRAND = {
   },
   
   // Redes Sociais
-  instagram: "https://www.instagram.com/vittalissaudeslz/",
-  // facebook: removido — sem página ativa,
+  instagram: "https://instagram.com/vittalissaudeslz",
+  facebook: "https://facebook.com/vittalissaude",
   
   // URLs
   siteUrl: "https://vittalissaude.com.br",
