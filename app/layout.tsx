@@ -62,22 +62,21 @@ const jsonLd = {
   medicalSpecialty: ["Pediatrics","Gynecology","Dermatology","Pulmonology","Psychology","SpeechTherapy","PhysicalTherapy","OccupationalTherapy"],
   priceRange: "$$$",
   areaServed: { "@type": "City", name: "São Luís", containedInPlace: { "@type": "State", name: "Maranhão" } },
-  sameAs: ["https://instagram.com/vittalissaude", "https://facebook.com/vittalissaude"],
+  sameAs: ["https://www.instagram.com/vittalissaudeslz/"],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#00B8C0" />
-        <link rel="icon" href="/favicon.ico" sizes="32x32" />
-        <link rel="icon" href="/images/favicon_192.png" type="image/png" sizes="192x192" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/images/icone.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/images/icone.png" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {children}
 
         {/* ═══════════════════════════════════════════════════════════
