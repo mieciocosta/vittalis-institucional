@@ -227,12 +227,17 @@ function useInView() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // iOS Safari: fallback timer ensures content shows even if IO fails
+    const fallback = setTimeout(() => setVisible(true), 800);
+    if (typeof IntersectionObserver === "undefined") {
+      setVisible(true); clearTimeout(fallback); return;
+    }
     const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.unobserve(el); } },
-      { threshold: 0.12 }
+      ([e]) => { if (e.isIntersecting) { setVisible(true); obs.unobserve(el); clearTimeout(fallback); } },
+      { threshold: 0.01, rootMargin: "50px" }
     );
     obs.observe(el);
-    return () => obs.disconnect();
+    return () => { obs.disconnect(); clearTimeout(fallback); };
   }, []);
   return { ref, isVisible };
 }

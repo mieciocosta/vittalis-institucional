@@ -11,8 +11,10 @@ function useInView() {
   const [v, setV] = useState(false);
   useEffect(() => {
     const el = ref.current; if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setV(true); obs.unobserve(el); } }, { threshold: 0.08 });
-    obs.observe(el); return () => obs.disconnect();
+    const fallback = setTimeout(() => setV(true), 800);
+    if (typeof IntersectionObserver === "undefined") { setV(true); return; }
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setV(true); obs.unobserve(el); clearTimeout(fallback); } }, { threshold: 0.01, rootMargin: "50px" });
+    obs.observe(el); return () => { obs.disconnect(); clearTimeout(fallback); };
   }, []);
   return { ref, v };
 }
