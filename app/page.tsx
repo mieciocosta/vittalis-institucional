@@ -223,7 +223,7 @@ function Icon({ name, size = 24, className = "" }: { name: string; size?: number
 // ═══════════════════════════════════════════════════════════════════
 function useInView() {
   const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setVisible] = useState(false);
+  const [isVisible, setVisible] = useState(true);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -264,7 +264,7 @@ function AnimatedSection({ children, className = "", delay = 0 }: { children: Re
   const { ref, isVisible } = useInView();
   return (
     <div ref={ref} className={className}
-      style={{ opacity: isVisible ? 1 : 0, transform: isVisible ? "translateY(0)" : "translateY(30px)", transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s` }}>
+      style={{ opacity: 1, transform: "translateY(0)", transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s` }}>
       {children}
     </div>
   );
@@ -453,9 +453,9 @@ function WhatsAppFab() {
           {/* Instagram DM */}
           <div style={{ display: "flex", alignItems: "center", gap: 10, animation: "fadeIn 0.2s ease" }}>
             <span style={{ background: "white", padding: "8px 16px", borderRadius: 12, fontSize: 13, fontWeight: 600, color: "var(--vit-charcoal)", boxShadow: "0 4px 16px rgba(0,0,0,0.1)", whiteSpace: "nowrap" }}>
-              Chamar no Instagram
+              Siga no Instagram
             </span>
-            <a href="https://ig.me/m/vittalissaudeslz" target="_blank" rel="noopener noreferrer" aria-label="Enviar mensagem no Instagram"
+            <a href="https://www.instagram.com/vittalissaudeslz/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Vittalis"
               style={{ width: 52, height: 52, borderRadius: "50%", background: "linear-gradient(135deg, #833AB4, #E1306C, #F77737)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 18px rgba(225,48,108,0.35)", transition: "transform 0.3s", textDecoration: "none" }}
               onMouseEnter={e => e.currentTarget.style.transform = "scale(1.1)"}
               onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}>
