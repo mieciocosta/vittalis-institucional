@@ -47,7 +47,7 @@ const HeartIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="no
 const UsersIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
 
 /* ─── CTA Button ─── */
-function CTA({ children, href, variant = "primary", big = false }: { children: React.ReactNode; href?: string; variant?: string; big?: boolean }) {
+function CTA({ children, href, variant = "primary", big = false, onClick }: { children: React.ReactNode; href?: string; variant?: string; big?: boolean; onClick?: () => void }) {
   const base: React.CSSProperties = { fontFamily: "var(--font-body)", fontWeight: 600, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 100, transition: "all .3s", cursor: "pointer", border: "none", fontSize: big?16:14, padding: big?"16px 36px":"12px 28px" };
   const vs: Record<string, React.CSSProperties> = {
     primary: { background: "var(--vit-primary)", color: "#fff", boxShadow: "0 4px 20px rgba(0,184,192,.25)" },
@@ -55,7 +55,7 @@ function CTA({ children, href, variant = "primary", big = false }: { children: R
     gold: { background: "var(--vit-gold)", color: "#fff", boxShadow: "0 4px 16px rgba(196,151,59,.25)" },
     outline: { background: "transparent", color: "var(--vit-primary)", border: "2px solid var(--vit-primary)" },
   };
-  return <a href={href || BRAND.whatsappUrl} target="_blank" rel="noopener noreferrer" style={{...base,...(vs[variant]||vs.primary)}} onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-2px)";e.currentTarget.style.filter="brightness(1.08)"}} onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.filter="none"}}>{children} <ArrowR /></a>;
+  return <a href={href || BRAND.whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={onClick} style={{...base,...(vs[variant]||vs.primary)}} onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-2px)";e.currentTarget.style.filter="brightness(1.08)"}} onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.filter="none"}}>{children} <ArrowR /></a>;
 }
 
 /* ─── FAQ Accordion ─── */
