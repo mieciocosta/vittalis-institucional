@@ -1,6 +1,23 @@
 "use client";
 // @ts-nocheck
 
+// ═══ Conversion Tracking — GA4 + GTM ═══
+function trackEvent(eventName: string, params?: Record<string, string>) {
+  try {
+    if (typeof window !== "undefined") {
+      // GA4 gtag
+      if ((window as any).gtag) {
+        (window as any).gtag("event", eventName, params);
+      }
+      // GTM dataLayer
+      if ((window as any).dataLayer) {
+        (window as any).dataLayer.push({ event: eventName, ...params });
+      }
+    }
+  } catch (e) { /* silent */ }
+}
+
+
 import { useState, useEffect, useRef, ReactNode } from "react";
 // import Image from "next/image";
 
@@ -378,14 +395,14 @@ function Navbar() {
 
               <div style={{ width: 1, height: 24, background: "var(--vit-gray-100)", margin: "0 10px" }} />
 
-              <a href="tel:5598984221002" style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 12px", fontSize: 13, fontWeight: 500, color: "var(--vit-gray-600)", textDecoration: "none", borderRadius: 10, transition: "all 0.2s" }}
+              <a href="tel:5598984221002" onClick={() => trackEvent("click_phone", { source: "navbar", page: "home" })} style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 12px", fontSize: 13, fontWeight: 500, color: "var(--vit-gray-600)", textDecoration: "none", borderRadius: 10, transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.color = "var(--vit-primary)"; e.currentTarget.style.background = "var(--vit-primary-50)"; }}
                 onMouseLeave={e => { e.currentTarget.style.color = "var(--vit-gray-600)"; e.currentTarget.style.background = "transparent"; }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 (98) 98422-1002
               </a>
 
-              <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, fontWeight: 600, background: "var(--vit-primary)", color: "white", padding: "10px 22px", borderRadius: 12, textDecoration: "none", boxShadow: "0 2px 12px rgba(0,184,192,0.2)", transition: "all 0.3s", display: "flex", alignItems: "center", gap: 8 }}
+              <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("click_whatsapp", { source: "navbar", page: "home" })} style={{ fontSize: 13, fontWeight: 600, background: "var(--vit-primary)", color: "white", padding: "10px 22px", borderRadius: 12, textDecoration: "none", boxShadow: "0 2px 12px rgba(0,184,192,0.2)", transition: "all 0.3s", display: "flex", alignItems: "center", gap: 8 }}
                 onMouseEnter={e => { e.currentTarget.style.background = "var(--vit-primary-dark)"; e.currentTarget.style.transform = "translateY(-1px)"; e.currentTarget.style.boxShadow = "0 6px 24px rgba(0,184,192,0.3)"; }}
                 onMouseLeave={e => { e.currentTarget.style.background = "var(--vit-primary)"; e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,184,192,0.2)"; }}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
@@ -455,7 +472,7 @@ function WhatsAppFab() {
             <span style={{ background: "white", padding: "8px 16px", borderRadius: 12, fontSize: 13, fontWeight: 600, color: "var(--vit-charcoal)", boxShadow: "0 4px 16px rgba(0,0,0,0.1)", whiteSpace: "nowrap" }}>
               Siga no Instagram
             </span>
-            <a href="https://www.instagram.com/vittalissaudeslz/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Vittalis"
+            <a href="https://www.instagram.com/vittalissaudeslz/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Vittalis" onClick={() => trackEvent("click_instagram", { source: "fab", page: "home" })}
               style={{ width: 52, height: 52, borderRadius: "50%", background: "linear-gradient(135deg, #833AB4, #E1306C, #F77737)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 18px rgba(225,48,108,0.35)", transition: "transform 0.3s", textDecoration: "none" }}
               onMouseEnter={e => e.currentTarget.style.transform = "scale(1.1)"}
               onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}>
@@ -468,7 +485,7 @@ function WhatsAppFab() {
             <span style={{ background: "white", padding: "8px 16px", borderRadius: 12, fontSize: 13, fontWeight: 600, color: "var(--vit-charcoal)", boxShadow: "0 4px 16px rgba(0,0,0,0.1)", whiteSpace: "nowrap" }}>
               Agendar consulta
             </span>
-            <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Agendar pelo WhatsApp"
+            <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="Agendar pelo WhatsApp" onClick={() => trackEvent("click_whatsapp", { source: "fab", page: "home" })}
               style={{ width: 52, height: 52, borderRadius: "50%", background: "#25D366", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 18px rgba(37,211,102,0.35)", transition: "transform 0.3s", textDecoration: "none" }}
               onMouseEnter={e => e.currentTarget.style.transform = "scale(1.1)"}
               onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}>
