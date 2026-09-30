@@ -1,0 +1,4 @@
+[submodule "vittalis"]
+	path = vittalis
+	url = https://github.com/mieciocosta/vittalis-institucional.git
+	update = none
