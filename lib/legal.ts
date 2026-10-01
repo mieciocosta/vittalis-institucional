@@ -33,3 +33,9 @@ export function responsavelTecnicoTexto(): string {
   if (!nome && !registro) return PENDENTE;
   return [nome ?? PENDENTE, registro ?? PENDENTE].join(", ");
 }
+
+/** "Nome, CRM-MA 0000" quando os dois estiverem preenchidos; senão, null (o rodapé da home não mostra "pendente"). */
+export function responsavelTecnico(): string | null {
+  const { responsavelTecnicoNome: nome, responsavelTecnicoRegistro: registro } = LEGAL;
+  return nome && registro ? `${nome}, ${registro}` : null;
+}

@@ -14,7 +14,8 @@ export const BRAND = {
   // Contato
   whatsappNumber: WHATSAPP_NUMERO,
   whatsappDisplay: WHATSAPP_EXIBICAO,
-  whatsappUrl: linkWhatsApp({ mensagem: "Olá! Gostaria de agendar um atendimento na Vittalis Saúde." }),
+  // Mensagem neutra (sem nome de serviço, vacina ou doença), igual em todo o site.
+  whatsappUrl: linkWhatsApp(),
   phone: WHATSAPP_EXIBICAO,
   email: "atendimento@vittalissaude.com.br",
   
@@ -69,5 +70,5 @@ export const BRAND = {
 
 // Função helper para gerar link de WhatsApp com mensagem personalizada
 export function waLink(message?: string): string {
-  return linkWhatsApp({ mensagem: message || "Olá! Gostaria de agendar um atendimento na Vittalis Saúde." });
+  return message ? linkWhatsApp({ mensagem: message }) : linkWhatsApp();
 }
