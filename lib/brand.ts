@@ -10,9 +10,10 @@ export const BRAND = {
   // Contato
   whatsappNumber: "5598920053606",
   whatsappDisplay: "(98) 92005-3606",
-  whatsappUrl: "https://wa.me/5598920053606?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20na%20Vittalis%20Saúde.",
+  // Mensagem neutra (sem nome de serviço, vacina ou doença), igual em todo o site.
+  whatsappUrl: "https://wa.me/5598920053606?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Vittalis%20e%20gostaria%20de%20atendimento.",
   phone: "(98) 92005-3606",
-  email: "contato@vittalissaude.com.br",
+  email: "atendimento@vittalissaude.com.br",
   
   // Endereço
   address: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37",
@@ -65,6 +66,6 @@ export const BRAND = {
 
 // Função helper para gerar link de WhatsApp com mensagem personalizada
 export function waLink(message?: string): string {
-  const msg = message || "Olá! Gostaria de agendar um atendimento na Vittalis Saúde.";
+  const msg = message || "Olá! Vim pelo site da Vittalis e gostaria de atendimento.";
   return `https://wa.me/${BRAND.whatsappNumber}?text=${encodeURIComponent(msg)}`;
 }

@@ -19,6 +19,13 @@ function trackEvent(eventName: string, params?: Record<string, string>) {
 
 
 import { useState, useEffect, useRef, ReactNode } from "react";
+import Link from "next/link";
+import { LEGAL, responsavelTecnico } from "@/lib/legal";
+
+// Depoimentos ESCONDIDOS até o master confirmar que são de pacientes reais
+// e com autorização por escrito. Depoimento inventado é proibido pela Meta
+// (avaliação enganosa) e pelo CFM. Para mostrar de novo: true.
+const MOSTRAR_DEPOIMENTOS = false;
 // import Image from "next/image";
 
 /* ╔══════════════════════════════════════════════════════════════════╗
@@ -51,10 +58,11 @@ const SLUG_MAP: Record<string, string> = {
 // ═══════════════════════════════════════════════════════════════════
 const BRAND = {
   whatsapp:
-    "https://wa.me/5598920053606?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20na%20Vittalis%20Saúde.",
+    // Mensagem neutra (sem nome de serviço, vacina ou doença), igual em todo o site.
+    "https://wa.me/5598920053606?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Vittalis%20e%20gostaria%20de%20atendimento.",
   whatsappNumber: "(98) 92005-3606",
   phone: "(98) 92005-3606",
-  email: "contato@vittalissaude.com.br",
+  email: "atendimento@vittalissaude.com.br",
   address: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37 — Jardim Renascença, São Luís – MA",
   cep: "CEP: 65075-441",
   hours: {
@@ -173,7 +181,7 @@ const DIFERENCIAIS = [
   { icon: "users", title: "Equipe Multidisciplinar", desc: "Saúde física, emocional e desenvolvimento integrados." },
   { icon: "home", title: "Atendimento Domiciliar", desc: "A qualidade da clínica no conforto do seu lar." },
   { icon: "heart", title: "Todas as Fases da Vida", desc: "Cuidado completo para toda a família, em um só lugar." },
-  { icon: "shield", title: "Segurança Clínica", desc: "Protocolos rigorosos e compromisso com a excelência." },
+  { icon: "shield", title: "Segurança Clínica", desc: "Protocolos de segurança e cuidado em cada etapa." },
 ];
 
 const ESPECIALIDADES_MEDICAS = [
@@ -181,7 +189,7 @@ const ESPECIALIDADES_MEDICAS = [
   { icon: "heart", name: "Ginecologia e Obstetrícia", desc: "Acompanhamento integral da saúde da mulher" },
   { icon: "stethoscope", name: "Clínica Geral", desc: "Atendimento adulto preventivo e curativo" },
   { icon: "eye", name: "Dermatologia", desc: "Cuidados com pele, cabelos e unhas" },
-  { icon: "activity", name: "Pneumologia", desc: "Saúde respiratória com excelência" },
+  { icon: "activity", name: "Pneumologia", desc: "Cuidado com a saúde respiratória" },
 ];
 
 const TERAPIAS = [
@@ -352,7 +360,7 @@ function Navbar() {
     { label: "Especialidades", href: "#especialidades" },
     { label: "Vacinação", href: "#vacinacao" },
     { label: "Sobre", href: "#sobre" },
-    { label: "Depoimentos", href: "#depoimentos" },
+    ...(MOSTRAR_DEPOIMENTOS ? [{ label: "Depoimentos", href: "#depoimentos" }] : []),
     { label: "FAQ", href: "#faq" },
   ];
 
@@ -588,7 +596,7 @@ function HeroSection() {
             </div>
             <div>
               <div style={{ fontSize: 14, fontWeight: 600, color: "var(--vit-charcoal)" }}>Segurança Clínica</div>
-              <div style={{ fontSize: 12, color: "var(--vit-gray-500)" }}>Protocolos certificados</div>
+              <div style={{ fontSize: 12, color: "var(--vit-gray-500)" }}>Protocolos de segurança</div>
             </div>
           </div>
         </div>
@@ -613,7 +621,7 @@ function DiferenciaisSection() {
     <section style={{ padding: "100px 24px", background: "var(--vit-white)" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
         <AnimatedSection>
-          <SectionTitle badge="Nossos Diferenciais" title="Por que mais de 1.200 famílias confiam na Vittalis" subtitle="Atendimento humanizado em São Luís com estrutura moderna e equipe especializada." />
+          <SectionTitle badge="Nossos Diferenciais" title="Por que as famílias confiam na Vittalis" subtitle="Atendimento humanizado em São Luís com estrutura moderna e equipe especializada." />
         </AnimatedSection>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
           {DIFERENCIAIS.map((d, i) => (
@@ -782,7 +790,7 @@ function SobreSection() {
   return (
     <section id="sobre" style={{ padding: "100px 24px", background: "linear-gradient(180deg, var(--vit-cream) 0%, var(--vit-primary-50) 100%)" }}>
       <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
-        <AnimatedSection><SectionTitle badge="Sobre a Vittalis" title="Uma nova referência em cuidado com a saúde em São Luís" /></AnimatedSection>
+        <AnimatedSection><SectionTitle badge="Sobre a Vittalis" title="Cuidado com a saúde de toda a família em São Luís" /></AnimatedSection>
         <AnimatedSection delay={0.1}>
           <div style={{ padding: "48px 40px", borderRadius: 24, background: "white", boxShadow: "0 8px 40px rgba(0,184,192,0.05)", border: "1px solid var(--vit-gray-100)" }}>
             <p style={{ fontSize: 17, color: "var(--vit-gray-700)", lineHeight: 1.85, marginBottom: 24 }}>
@@ -816,7 +824,7 @@ function BeneficiosSection() {
   return (
     <section style={{ padding: "100px 24px", background: "var(--vit-white)" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-        <AnimatedSection><SectionTitle badge="Vantagens" title="Por que escolher a Vittalis Saúde" subtitle="Tudo pensado para oferecer a melhor experiência em saúde para você e sua família." /></AnimatedSection>
+        <AnimatedSection><SectionTitle badge="Vantagens" title="Por que escolher a Vittalis Saúde" subtitle="Tudo pensado para um atendimento acolhedor para você e sua família." /></AnimatedSection>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 }}>
           {BENEFICIOS.map((b, i) => (
             <AnimatedSection key={i} delay={i * 0.06}>
@@ -943,69 +951,98 @@ function CTAFinalSection() {
 // 11. FOOTER
 // ═══════════════════════════════════════════════════════════════════
 function Footer() {
-  const linkStyle: React.CSSProperties = { color: "var(--vit-gray-500)", fontSize: 14, lineHeight: 2, transition: "color 0.2s", display: "block" };
+  // Contraste: cinza claro (#A3B5B3) sobre o fundo escuro passa no AA; o
+  // cinza antigo (#5A706E) ficava quase ilegível.
+  const corTexto = "var(--vit-gray-300)";
+  const linkStyle: React.CSSProperties = { color: corTexto, fontSize: 14, lineHeight: 2, transition: "color 0.2s", display: "block", textDecoration: "none" };
+  const realce = (e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = "var(--vit-primary)");
+  const normal = (e: React.MouseEvent<HTMLAnchorElement>) => (e.currentTarget.style.color = corTexto);
+  const titulo: React.CSSProperties = { fontSize: 13, fontWeight: 600, color: "white", marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.08em" };
+  const rt = responsavelTecnico();
+
+  const navegacao = [
+    { l: "Início", href: "#hero" },
+    { l: "Especialidades", href: "#especialidades" },
+    { l: "Vacinação", href: "#vacinacao" },
+    { l: "Sobre", href: "#sobre" },
+    ...(MOSTRAR_DEPOIMENTOS ? [{ l: "Depoimentos", href: "#depoimentos" }] : []),
+    { l: "Perguntas frequentes", href: "#faq" },
+  ];
+  // Cada especialidade leva à sua página.
+  const especialidades = [
+    { l: "Pediatria", href: "/pediatria" },
+    { l: "Vacinação", href: "/vacinacao" },
+    { l: "Ginecologia", href: "/ginecologia" },
+    { l: "Psicologia infantil", href: "/psicologia-infantil" },
+    { l: "Psicologia para adultos", href: "/psicologia-adulto" },
+    { l: "Fonoaudiologia", href: "/fonoaudiologia" },
+    { l: "Fisioterapia", href: "/fisioterapia-infantil" },
+    { l: "Nutrição", href: "/nutricao-infantil" },
+    { l: "Ver todas", href: "#especialidades" },
+  ];
 
   return (
     <footer style={{ padding: "64px 24px 0", background: "var(--vit-charcoal)" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
         <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-          {/* Brand */}
+          {/* Marca */}
           <div>
             <div style={{ marginBottom: 20 }}>
               <img src="/images/logo-vertical.png" alt="Vittalis Saúde" style={{ height: 40, width: "auto", objectFit: "contain", filter: "brightness(0) invert(1)" }} />
             </div>
-            <p style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.7, maxWidth: 280, marginBottom: 20 }}>
-              Clínica multidisciplinar premium em São Luís. Consultas médicas, vacinação particular e terapias para toda a família.
+            <p style={{ fontSize: 14, color: corTexto, lineHeight: 1.7, maxWidth: 300, marginBottom: 20 }}>
+              Clínica multidisciplinar em São Luís. Consultas médicas, vacinação e terapias para toda a família.
             </p>
             <div style={{ display: "flex", gap: 12 }}>
-              {[{ icon: "instagram", href: "https://www.instagram.com/vittalissaudeslz/" }].map(({ icon, href }, i) => (
-                <a key={i} href={href} target="_blank" rel="noopener noreferrer"
-                  style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s", color: "rgba(255,255,255,0.7)" }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "var(--vit-primary)")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.06)")}>
-                  <Icon name={icon} size={18} />
-                </a>
-              ))}
+              <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram da Vittalis Saúde"
+                style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s", color: "rgba(255,255,255,0.8)" }}
+                onMouseEnter={e => (e.currentTarget.style.background = "var(--vit-primary)")}
+                onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.06)")}>
+                <Icon name="instagram" size={18} />
+              </a>
             </div>
           </div>
 
-          {/* Links */}
-          <div>
-            <h4 style={{ fontSize: 13, fontWeight: 600, color: "white", marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.08em" }}>Navegação</h4>
-            {["Início", "Especialidades", "Vacinação", "Sobre", "Depoimentos", "FAQ"].map(l => (
-              <a key={l} href={`#${l.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`} style={linkStyle}
-                onMouseEnter={e => (e.currentTarget.style.color = "var(--vit-primary)")}
-                onMouseLeave={e => (e.currentTarget.style.color = "var(--vit-gray-500)")}>{l}</a>
+          {/* Navegação */}
+          <nav aria-label="Navegação do rodapé">
+            <h4 style={titulo}>Navegação</h4>
+            {navegacao.map(({ l, href }) => (
+              <a key={l} href={href} style={linkStyle} onMouseEnter={realce} onMouseLeave={normal}>{l}</a>
             ))}
-          </div>
+          </nav>
 
           {/* Especialidades */}
-          <div>
-            <h4 style={{ fontSize: 13, fontWeight: 600, color: "white", marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.08em" }}>Especialidades</h4>
-            {["Pediatria", "Ginecologia", "Vacinação", "Psicologia", "Fonoaudiologia", "Fisioterapia", "Nutrição"].map(s => (
-              <span key={s} style={{ ...linkStyle, cursor: "default" }}>{s}</span>
+          <nav aria-label="Especialidades">
+            <h4 style={titulo}>Especialidades</h4>
+            {especialidades.map(({ l, href }) => (
+              <a key={l} href={href} style={linkStyle} onMouseEnter={realce} onMouseLeave={normal}>{l}</a>
             ))}
-          </div>
+          </nav>
 
           {/* Contato */}
           <div>
-            <h4 style={{ fontSize: 13, fontWeight: 600, color: "white", marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.08em" }}>Contato</h4>
+            <h4 style={titulo}>Contato</h4>
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.phone}
-                <a href="tel:+5598920053606" style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.5, textDecoration: "none" }}>{BRAND.phone}</a>
+                <a href="tel:+5598920053606" style={{ fontSize: 14, color: corTexto, lineHeight: 1.5, textDecoration: "none" }}>{BRAND.phone}</a>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.mail}
-                <a href="mailto:contato@vittalissaude.com.br" style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.5, textDecoration: "none" }}>{BRAND.email}</a>
+                <a href={`mailto:${BRAND.email}`} style={{ fontSize: 14, color: corTexto, lineHeight: 1.5, textDecoration: "none", wordBreak: "break-all" }}>{BRAND.email}</a>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.mapPin}
-                <a href="https://maps.app.goo.gl/35Vernq6NtWw9vBLA" target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.5, textDecoration: "none" }}>{BRAND.address} ↗</a>
+                <div style={{ fontSize: 14, color: corTexto, lineHeight: 1.5 }}>
+                  <div>{LEGAL.endereco}</div>
+                  <a href={BRAND.mapsUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--vit-primary)", fontWeight: 600, textDecoration: "underline", display: "inline-block", marginTop: 4 }}>
+                    Ver no mapa (Google Maps) ↗
+                  </a>
+                </div>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.clock}
-                <div style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.5 }}>
+                <div style={{ fontSize: 14, color: corTexto, lineHeight: 1.5 }}>
                   <div>{BRAND.hours.week}</div>
                   <div>{BRAND.hours.sat}</div>
                 </div>
@@ -1014,16 +1051,34 @@ function Footer() {
           </div>
         </div>
 
-        {/* Bottom */}
+        {/* Identificação legal (CFM 2.336/2023) e privacidade */}
+        <div style={{ padding: "24px 0", borderBottom: "1px solid rgba(255,255,255,0.08)", fontSize: 13, color: corTexto, lineHeight: 1.7 }}>
+          <p>
+            {LEGAL.razaoSocial} · CNPJ {LEGAL.cnpj} · {LEGAL.endereco}
+            {rt && <> · Responsável técnico: {rt}</>}
+            {LEGAL.licencaSanitaria && <> · Licença sanitária: {LEGAL.licencaSanitaria}</>}
+          </p>
+          <p style={{ marginTop: 6 }}>
+            A indicação de cada vacina, exame ou tratamento depende de avaliação profissional.
+          </p>
+        </div>
+
         <div style={{ padding: "24px 0", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.3)" }}>© {new Date().getFullYear()} Vittalis Saúde. Todos os direitos reservados.</p>
-          <p style={{ fontSize: 12, color: "rgba(255,255,255,0.2)" }}>Este site respeita a sua privacidade conforme a LGPD.</p>
+          <p style={{ fontSize: 13, color: corTexto }}>© {new Date().getFullYear()} Vittalis Saúde. Todos os direitos reservados.</p>
+          <p style={{ fontSize: 13, color: corTexto }}>
+            <Link href="/politica-de-privacidade" style={{ color: "white", textDecoration: "underline" }}>Política de Privacidade</Link>
+            {" · "}Tratamos seus dados conforme a LGPD.
+          </p>
         </div>
       </div>
 
       <style>{`
-        @media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr !important; } }
-        @media (max-width: 500px) { .footer-grid { grid-template-columns: 1fr !important; } }
+        @media (max-width: 900px) {
+          .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
+        }
+        @media (max-width: 560px) {
+          .footer-grid { grid-template-columns: 1fr !important; }
+        }
       `}</style>
     </footer>
   );
@@ -1043,7 +1098,7 @@ export default function Home() {
       <MultidisciplinarSection />
       <SobreSection />
       <BeneficiosSection />
-      <DepoimentosSection />
+      {MOSTRAR_DEPOIMENTOS && <DepoimentosSection />}
       <FAQSection />
       <CTAFinalSection />
       <Footer />
