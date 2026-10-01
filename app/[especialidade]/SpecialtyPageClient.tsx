@@ -140,7 +140,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
             <img src="/images/logo-vertical.png" alt="Vittalis Saúde" style={{ height: 32, width: "auto" }} />
           </Link>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <a href={`tel:${BRAND.whatsappNumber}`} onClick={() => trackEvent("click_phone", { source: "lp", specialty: s.slug })} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 500, color: "var(--vit-gray-500)", textDecoration: "none" }} className="hide-mobile">
+            <a href={`tel:+${BRAND.whatsappNumber}`} onClick={() => trackEvent("click_phone", { source: "lp", specialty: s.slug })} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 500, color: "var(--vit-gray-500)", textDecoration: "none" }} className="hide-mobile">
               <PhoneIcon /> {BRAND.whatsappDisplay}
             </a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, fontWeight: 600, background: "var(--vit-primary)", color: "#fff", padding: "9px 22px", borderRadius: 100, textDecoration: "none", transition: "all .3s" }}
@@ -190,7 +190,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
 
               <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
                 <CTA href={waUrl} big>{s.ctaText}</CTA>
-                <CTA variant="outline" big href={`tel:${BRAND.whatsappNumber}`} onClick={() => trackEvent("click_phone", { source: "lp", specialty: s.slug })}><PhoneIcon /> Ligar agora</CTA>
+                <CTA variant="outline" big href={`tel:+${BRAND.whatsappNumber}`} onClick={() => trackEvent("click_phone", { source: "lp", specialty: s.slug })}><PhoneIcon /> Ligar agora</CTA>
               </div>
 
               {/* Rating */}
@@ -409,7 +409,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
               {[
                 { icon: <MapIcon />, title: "Localização", text: BRAND.fullAddress, link: "https://maps.app.goo.gl/35Vernq6NtWw9vBLA", linkText: "Abrir no Google Maps" },
                 { icon: <ClockIcon />, title: "Horários", text: `${BRAND.hours.week}\n${BRAND.hours.sat}`, link: undefined, linkText: undefined },
-                { icon: <PhoneIcon />, title: "Contato", text: "(98) 98131-0327", link: waUrl, linkText: "Falar pelo WhatsApp" },
+                { icon: <PhoneIcon />, title: "Contato", text: "(98) 92005-3606", link: waUrl, linkText: "Falar pelo WhatsApp" },
               ].map((info, i) => (
                 <div key={i} style={{ background: "white", borderRadius: 18, padding: "24px 22px", border: "1px solid var(--vit-gray-100)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12, color: "var(--vit-primary)" }}>
@@ -438,7 +438,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
             </p>
             <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
               <CTA variant="white" big href={waUrl}>{s.ctaText}</CTA>
-              <CTA variant="gold" big href={`tel:${BRAND.whatsappNumber}`} onClick={() => trackEvent("click_phone", { source: "lp", specialty: s.slug })}><PhoneIcon /> {BRAND.whatsappDisplay}</CTA>
+              <CTA variant="gold" big href={`tel:+${BRAND.whatsappNumber}`} onClick={() => trackEvent("click_phone", { source: "lp", specialty: s.slug })}><PhoneIcon /> {BRAND.whatsappDisplay}</CTA>
             </div>
           </Anim>
         </div>
