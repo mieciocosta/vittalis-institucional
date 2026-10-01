@@ -1,12 +1,6 @@
 {
   "name": "vittalis-institucional",
   "compatibility_date": "2026-09-01",
-  // O wrangler roda o build antes de publicar: a pasta "out" e gerada pelo
-  // "next build" (export estatico) e nao vai pro git. Sem isso o deploy do
-  // Workers Builds falhava dizendo que "./out" nao existe.
-  "build": {
-    "command": "npm run build"
-  },
   "assets": {
     "directory": "./out",
     "html_handling": "auto-trailing-slash",
