@@ -984,7 +984,7 @@ function Footer() {
   return (
     <footer style={{ padding: "64px 24px 0", background: "var(--vit-charcoal)" }}>
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-        <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+        <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr 1fr 1.35fr", gap: 40, paddingBottom: 48, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
           {/* Marca */}
           <div>
             <div style={{ marginBottom: 20 }}>
@@ -1029,7 +1029,10 @@ function Footer() {
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.mail}
-                <a href={`mailto:${BRAND.email}`} style={{ fontSize: 14, color: corTexto, lineHeight: 1.5, textDecoration: "none", wordBreak: "break-all" }}>{BRAND.email}</a>
+                {/* Quebra só depois do "@" e só se não couber (antes cortava no meio da palavra). */}
+                <a href={`mailto:${BRAND.email}`} style={{ fontSize: 14, color: corTexto, lineHeight: 1.5, textDecoration: "none" }}>
+                  {BRAND.email.split("@")[0]}@<wbr />{BRAND.email.split("@")[1]}
+                </a>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.mapPin}
