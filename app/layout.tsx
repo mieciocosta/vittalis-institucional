@@ -1,6 +1,25 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+// Fontes da marca hospedadas no próprio site (antes vinham do Google Fonts
+// por @import, o que travava a renderização e pesava no Lighthouse).
+// Mesmos pesos (e arquivos estáticos, como o Google Fonts servia) que o
+// @import carregava, então o visual não muda. Cada peso só é baixado se a
+// página usar, e só o recorte latino. Obs.: o circunflexo alto e fino do
+// "ê" é o desenho da Cormorant Garamond, não defeito.
+import "@fontsource/cormorant-garamond/400.css";
+import "@fontsource/cormorant-garamond/500.css";
+import "@fontsource/cormorant-garamond/600.css";
+import "@fontsource/cormorant-garamond/700.css";
+import "@fontsource/cormorant-garamond/400-italic.css";
+import "@fontsource/cormorant-garamond/500-italic.css";
+import "@fontsource/cormorant-garamond/600-italic.css";
+import "@fontsource/dm-sans/300.css";
+import "@fontsource/dm-sans/400.css";
+import "@fontsource/dm-sans/500.css";
+import "@fontsource/dm-sans/600.css";
+import "@fontsource/dm-sans/700.css";
 import "./globals.css";
+import { WHATSAPP_NUMERO } from "@/lib/config/contato";
 
 const GA_ID = "G-1T4S5WGY9W";
 
@@ -51,7 +70,7 @@ const jsonLd = {
   url: "https://www.vittalissaude.com.br",
   logo: "https://www.vittalissaude.com.br/images/logo-horizontal.png",
   image: "https://www.vittalissaude.com.br/images/og-vittalis.jpg",
-  telephone: "+5598920053606",
+  telephone: `+${WHATSAPP_NUMERO}`,
   email: "contato@vittalissaude.com.br",
   address: { "@type": "PostalAddress", streetAddress: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37", addressLocality: "São Luís", addressRegion: "MA", postalCode: "65075-441", addressCountry: "BR" },
   geo: { "@type": "GeoCoordinates", latitude: -2.4966, longitude: -44.2826 },

@@ -4,16 +4,16 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import type { Specialty } from "@/lib/specialties";
 import { BRAND, waLink } from "@/lib/brand";
+import { trackEvent } from "@/lib/analytics";
+import { getCampanha, type Campanha } from "@/lib/content/campanhas";
 
-// ═══ Conversion Tracking ═══
-function trackEvent(eventName: string, params?: Record<string, string>) {
-  try {
-    if (typeof window !== "undefined") {
-      if ((window as any).gtag) { (window as any).gtag("event", eventName, params); }
-      if ((window as any).dataLayer) { (window as any).dataLayer.push({ event: eventName, ...params }); }
-    }
-  } catch (e) { /* silent */ }
-}
+// Páginas de campanha ligadas a cada especialidade (bloco "Conheça também").
+const CAMPANHAS_DA_ESPECIALIDADE: Record<string, string[]> = {
+  vacinacao: ["planejamento-vacinal", "primeiros-meses", "adulto-50-mais"],
+  pediatria: ["planejamento-vacinal", "primeiros-meses"],
+};
+
+// Eventos GA4 + GTM: função única e tipada em lib/analytics.ts.
 
 /* ─── Intersection Observer ─── */
 function useInView() {
@@ -22,7 +22,8 @@ function useInView() {
   useEffect(() => {
     const el = ref.current; if (!el) return;
     const fallback = setTimeout(() => setV(true), 800);
-    if (typeof IntersectionObserver === "undefined") { setV(true); return; }
+    // Sem IntersectionObserver, o timer acima mostra o conteúdo.
+    if (typeof IntersectionObserver === "undefined") return () => clearTimeout(fallback);
     const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setV(true); obs.unobserve(el); clearTimeout(fallback); } }, { threshold: 0.01, rootMargin: "50px" });
     obs.observe(el); return () => { obs.disconnect(); clearTimeout(fallback); };
   }, []);
@@ -84,7 +85,7 @@ function LeadForm({ specialty, waUrl }: { specialty: string; waUrl: string }) {
   const [phone, setPhone] = useState("");
   
   const handleSubmit = () => {
-    trackEvent("generate_lead", { source: "form", specialty: specialty, name: name || "anonimo" });
+    trackEvent("generate_lead", { source: "form", specialty: specialty });
     const msg = `Olá! Meu nome é ${name || "paciente"}. Gostaria de agendar um atendimento de ${specialty}. Meu telefone: ${phone || "informar"}`;
     window.open(waLink(msg), "_blank");
   };
@@ -384,6 +385,9 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
         </div>
       </section>
 
+      {/* ════ Conheça também: páginas de campanha relacionadas ════ */}
+      <ConhecaTambem slug={s.slug} />
+
       {/* ════ 7. FAQ ════ */}
       {s.faq.length > 0 && (
         <section style={{ padding: "80px 24px", background: "var(--vit-white)" }}>
@@ -409,7 +413,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
               {[
                 { icon: <MapIcon />, title: "Localização", text: BRAND.fullAddress, link: "https://maps.app.goo.gl/35Vernq6NtWw9vBLA", linkText: "Abrir no Google Maps" },
                 { icon: <ClockIcon />, title: "Horários", text: `${BRAND.hours.week}\n${BRAND.hours.sat}`, link: undefined, linkText: undefined },
-                { icon: <PhoneIcon />, title: "Contato", text: "(98) 92005-3606", link: waUrl, linkText: "Falar pelo WhatsApp" },
+                { icon: <PhoneIcon />, title: "Contato", text: BRAND.whatsappDisplay, link: waUrl, linkText: "Falar pelo WhatsApp" },
               ].map((info, i) => (
                 <div key={i} style={{ background: "white", borderRadius: 18, padding: "24px 22px", border: "1px solid var(--vit-gray-100)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12, color: "var(--vit-primary)" }}>
@@ -467,5 +471,30 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
         </a>
       </div>
     </div>
+  );
+}
+
+function ConhecaTambem({ slug }: { slug: string }) {
+  const campanhas = (CAMPANHAS_DA_ESPECIALIDADE[slug] ?? [])
+    .map((c) => getCampanha(c))
+    .filter((c): c is Campanha => Boolean(c));
+  if (campanhas.length === 0) return null;
+  return (
+    <section style={{ padding: "64px 24px", background: "var(--vit-primary-50)" }} aria-labelledby="conheca-tambem">
+      <div style={{ maxWidth: 1080, margin: "0 auto" }}>
+        <h2 id="conheca-tambem" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(24px, 3vw, 34px)", fontWeight: 600, color: "var(--vit-charcoal)", marginBottom: 24, textAlign: "center" }}>
+          Conheça também
+        </h2>
+        <div style={{ display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))" }}>
+          {campanhas.map((c) => (
+            <Link key={c.slug} href={`/campanhas/${c.slug}`} style={{ display: "block", background: "white", borderRadius: 16, padding: "22px 24px", border: "1px solid var(--vit-gray-100)", borderTop: "4px solid var(--vit-primary)" }}>
+              <span style={{ display: "block", fontSize: 13, fontWeight: 600, color: "var(--vit-secondary-dark)", marginBottom: 6 }}>{c.rotulo}</span>
+              <span style={{ display: "block", fontSize: 18, fontWeight: 700, color: "var(--vit-charcoal)", lineHeight: 1.35 }}>{c.titulo}</span>
+              <span style={{ display: "inline-block", marginTop: 10, fontSize: 15, fontWeight: 600, color: "var(--vit-secondary-dark)", textDecoration: "underline" }}>Saiba mais</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

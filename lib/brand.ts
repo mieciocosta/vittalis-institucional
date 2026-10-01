@@ -1,17 +1,21 @@
 // ═══════════════════════════════════════════════════════════════
 // VITTALIS SAÚDE — CONFIGURAÇÃO DA MARCA
-// Altere aqui telefone, WhatsApp, endereço, redes sociais etc.
+// Altere aqui endereço, redes sociais etc.
+// O número de WhatsApp/telefone NÃO mora mais aqui: fonte única em
+// lib/config/contato.ts (variável NEXT_PUBLIC_WHATSAPP_NUMBER).
 // ═══════════════════════════════════════════════════════════════
+
+import { WHATSAPP_NUMERO, WHATSAPP_EXIBICAO, linkWhatsApp } from "./config/contato";
 
 export const BRAND = {
   name: "Vittalis Saúde",
   tagline: "Cuidado completo para você e sua família",
   
   // Contato
-  whatsappNumber: "5598920053606",
-  whatsappDisplay: "(98) 92005-3606",
-  whatsappUrl: "https://wa.me/5598920053606?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20na%20Vittalis%20Saúde.",
-  phone: "(98) 92005-3606",
+  whatsappNumber: WHATSAPP_NUMERO,
+  whatsappDisplay: WHATSAPP_EXIBICAO,
+  whatsappUrl: linkWhatsApp({ mensagem: "Olá! Gostaria de agendar um atendimento na Vittalis Saúde." }),
+  phone: WHATSAPP_EXIBICAO,
   email: "contato@vittalissaude.com.br",
   
   // Endereço
@@ -65,6 +69,5 @@ export const BRAND = {
 
 // Função helper para gerar link de WhatsApp com mensagem personalizada
 export function waLink(message?: string): string {
-  const msg = message || "Olá! Gostaria de agendar um atendimento na Vittalis Saúde.";
-  return `https://wa.me/${BRAND.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+  return linkWhatsApp({ mensagem: message || "Olá! Gostaria de agendar um atendimento na Vittalis Saúde." });
 }

@@ -1,0 +1,351 @@
+/* ═══════════════════════════════════════════════════════════════
+   LANDING PAGES DE CAMPANHA: mobile-first.
+   Cores da marca (globals.css). Contraste conferido (WCAG AA):
+   botão principal = azul-petróleo com texto branco (5,0:1); turquesa
+   fica para detalhes, porque texto branco nele não passa (2,4:1).
+   ═══════════════════════════════════════════════════════════════ */
+
+.pagina {
+  background: var(--vit-white);
+  color: var(--vit-charcoal);
+  /* espaço para a barra fixa do celular não cobrir o rodapé */
+  padding-bottom: 84px;
+}
+
+.pular {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 100;
+  background: var(--vit-secondary-dark);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.pular:focus { top: 12px; }
+
+/* Foco visível em tudo que é clicável */
+.pagina a:focus-visible,
+.pagina button:focus-visible,
+.pagina input:focus-visible,
+.pagina select:focus-visible,
+.pagina summary:focus-visible {
+  outline: 3px solid var(--vit-secondary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ─── Topo ─── */
+.topo {
+  border-bottom: 1px solid var(--vit-gray-100);
+  background: var(--vit-white);
+}
+.topoInterno {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+  gap: 12px;
+}
+.logo { display: block; width: 148px; height: auto; }
+.topoTelefone {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  color: var(--vit-secondary-dark);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 8px 4px;
+}
+
+/* ─── Botões ─── */
+.botoes { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  border: 2px solid transparent;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.botaoPrimario { background: var(--vit-secondary); color: #fff; }
+.botaoPrimario:hover { background: var(--vit-secondary-dark); }
+.botaoSecundario { background: var(--vit-white); color: var(--vit-secondary-dark); border-color: var(--vit-secondary); }
+.botaoSecundario:hover { background: var(--vit-secondary-light); }
+
+/* ─── Hero ─── */
+.hero {
+  background: linear-gradient(180deg, var(--vit-primary-50) 0%, var(--vit-white) 100%);
+  padding: 32px 0 48px;
+}
+.heroGrade { display: grid; gap: 28px; align-items: center; }
+.rotulo {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--vit-secondary-dark);
+  background: var(--vit-primary-light);
+  padding: 6px 12px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+.titulo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(32px, 8vw, 52px);
+  line-height: 1.1;
+  color: var(--vit-charcoal);
+}
+.subtitulo {
+  margin-top: 14px;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--vit-gray-700);
+  max-width: 34em;
+}
+.heroImagem {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(26, 43, 42, 0.12);
+}
+
+/* ─── Seções ─── */
+.secao { padding: 52px 0; }
+.secaoClara { background: var(--vit-cream); }
+.secaoTitulo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(28px, 6vw, 40px);
+  line-height: 1.15;
+  color: var(--vit-charcoal);
+}
+.secaoIntro { margin-top: 10px; font-size: 17px; color: var(--vit-gray-700); max-width: 40em; }
+
+.passos { list-style: none; display: grid; gap: 16px; margin-top: 28px; counter-reset: passo; }
+.passo {
+  position: relative;
+  background: var(--vit-white);
+  border: 1px solid var(--vit-gray-100);
+  border-radius: 16px;
+  padding: 22px 22px 22px 76px;
+  counter-increment: passo;
+}
+.passo::before {
+  content: counter(passo);
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  color: #fff;
+  background: var(--vit-secondary);
+}
+.cardTitulo { font-size: 18px; font-weight: 700; color: var(--vit-charcoal); line-height: 1.3; }
+.cardTexto { margin-top: 6px; font-size: 16px; color: var(--vit-gray-700); line-height: 1.6; }
+
+.cards { display: grid; gap: 16px; margin-top: 28px; }
+.card {
+  background: var(--vit-white);
+  border: 1px solid var(--vit-gray-100);
+  border-top: 4px solid var(--vit-primary);
+  border-radius: 16px;
+  padding: 22px;
+}
+.cardDiferencial { border-top-color: var(--vit-gold); }
+
+.ressalva {
+  margin-top: 24px;
+  padding: 16px 18px;
+  border-left: 4px solid var(--vit-secondary);
+  background: var(--vit-secondary-light);
+  border-radius: 0 12px 12px 0;
+  font-size: 15px;
+  color: var(--vit-gray-700);
+}
+.ressalvaHero { margin-top: 18px; font-size: 14px; color: var(--vit-gray-500); }
+
+/* ─── Perguntas frequentes (accordion) ─── */
+.perguntas { margin-top: 24px; display: grid; gap: 10px; }
+.pergunta { border: 1px solid var(--vit-gray-100); border-radius: 14px; background: var(--vit-white); }
+.perguntaBotao {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 56px;
+  padding: 16px 18px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--vit-charcoal);
+}
+.perguntaIcone { flex-shrink: 0; transition: transform 0.2s ease; color: var(--vit-secondary); }
+.perguntaBotao[aria-expanded="true"] .perguntaIcone { transform: rotate(45deg); }
+.resposta { padding: 0 18px 18px; font-size: 16px; color: var(--vit-gray-700); line-height: 1.65; }
+
+/* ─── Formulário + contato ─── */
+.contatoGrade { display: grid; gap: 28px; margin-top: 28px; }
+.formCartao {
+  background: var(--vit-white);
+  border: 1px solid var(--vit-gray-100);
+  border-radius: 20px;
+  padding: 24px 20px;
+  box-shadow: 0 10px 36px rgba(26, 43, 42, 0.08);
+}
+.formTitulo { font-family: var(--font-display); font-size: 30px; font-weight: 600; line-height: 1.15; }
+.formTexto { margin-top: 6px; color: var(--vit-gray-700); }
+.campos { display: grid; gap: 18px; margin-top: 22px; border: 0; }
+.campo { display: grid; gap: 6px; }
+.rotuloCampo { font-weight: 600; font-size: 15px; color: var(--vit-charcoal); }
+.entrada {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--vit-gray-300);
+  border-radius: 12px;
+  font: inherit;
+  font-size: 16px; /* 16px evita o zoom automático do iPhone */
+  color: var(--vit-charcoal);
+  background: var(--vit-white);
+}
+.entrada:focus { border-color: var(--vit-secondary); }
+.grupo { border: 0; display: grid; gap: 8px; }
+.grupoLegenda { font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+.opcoes { display: grid; gap: 8px; }
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--vit-gray-100);
+  border-radius: 12px;
+  cursor: pointer;
+}
+.opcao:has(input:checked) { border-color: var(--vit-secondary); background: var(--vit-secondary-light); }
+.opcao input { width: 20px; height: 20px; accent-color: var(--vit-secondary); }
+.consentimento { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--vit-gray-700); }
+.consentimento input { width: 22px; height: 22px; margin-top: 2px; flex-shrink: 0; accent-color: var(--vit-secondary); }
+.consentimento a { color: var(--vit-secondary-dark); text-decoration: underline; }
+.mel {
+  /* honeypot: fora da tela para gente, visível para robô */
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.enviar { width: 100%; margin-top: 6px; }
+.enviar:disabled { opacity: 0.7; cursor: wait; }
+.erro {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fdecee;
+  color: #8a1c2b;
+  font-size: 15px;
+}
+.sucesso { text-align: center; padding: 24px 8px; }
+.sucessoIcone {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--vit-primary-light);
+  color: var(--vit-secondary-dark);
+}
+.privacidadeNota { margin-top: 14px; font-size: 13px; color: var(--vit-gray-500); }
+
+.contatoInfo { display: grid; gap: 18px; align-content: start; }
+.contatoItem { display: flex; gap: 14px; align-items: flex-start; }
+.contatoIcone {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--vit-primary-light);
+  color: var(--vit-secondary-dark);
+}
+.contatoRotulo { font-weight: 700; }
+.contatoTexto { color: var(--vit-gray-700); }
+.contatoLink { color: var(--vit-secondary-dark); font-weight: 600; text-decoration: underline; display: inline-block; padding: 4px 0; }
+.mapa { width: 100%; height: 260px; border: 0; border-radius: 16px; background: var(--vit-gray-100); }
+
+/* ─── Rodapé legal ─── */
+.rodape { background: var(--vit-secondary-dark); color: var(--vit-primary-light); padding: 40px 0 28px; font-size: 14px; line-height: 1.7; }
+.rodape a { color: #fff; text-decoration: underline; }
+.rodapeGrade { display: grid; gap: 20px; }
+.rodapeTitulo { color: #fff; font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+.rodapeLista { list-style: none; }
+.rodapePendente { color: #ffd98a; font-style: italic; }
+.rodapeBase { margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.2); }
+
+/* ─── Barra fixa do celular ─── */
+.barraMobile {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 10px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(255, 255, 255, 0.97);
+  border-top: 1px solid var(--vit-gray-100);
+  box-shadow: 0 -6px 24px rgba(26, 43, 42, 0.08);
+}
+.barraMobile .botao { min-height: 50px; padding: 10px 12px; font-size: 15px; }
+
+/* ─── Telas maiores ─── */
+@media (min-width: 640px) {
+  .botoes { flex-direction: row; flex-wrap: wrap; }
+  .opcoes { grid-template-columns: repeat(3, 1fr); }
+  .formCartao { padding: 32px; }
+}
+@media (min-width: 768px) {
+  .pagina { padding-bottom: 0; }
+  .barraMobile { display: none; }
+  .topoTelefone { display: inline-flex; }
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  .passos { grid-template-columns: repeat(3, 1fr); }
+  .rodapeGrade { grid-template-columns: 2fr 1fr; }
+  .secao { padding: 72px 0; }
+}
+@media (min-width: 1024px) {
+  .hero { padding: 56px 0 72px; }
+  .heroGrade { grid-template-columns: 1.05fr 1fr; gap: 48px; }
+  .contatoGrade { grid-template-columns: 1.1fr 1fr; gap: 40px; }
+  .cardsQuatro { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .botao, .perguntaIcone { transition: none; }
+}
