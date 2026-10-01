@@ -1,22 +1,9 @@
 "use client";
 // @ts-nocheck
 
-// ═══ Conversion Tracking — GA4 + GTM ═══
-function trackEvent(eventName: string, params?: Record<string, string>) {
-  try {
-    if (typeof window !== "undefined") {
-      // GA4 gtag
-      if ((window as any).gtag) {
-        (window as any).gtag("event", eventName, params);
-      }
-      // GTM dataLayer
-      if ((window as any).dataLayer) {
-        (window as any).dataLayer.push({ event: eventName, ...params });
-      }
-    }
-  } catch (e) { /* silent */ }
-}
-
+// Eventos GA4 + GTM: função única e tipada em lib/analytics.ts.
+import { trackEvent } from "@/lib/analytics";
+import { WHATSAPP_EXIBICAO, TELEFONE_TEL, linkWhatsApp } from "@/lib/config/contato";
 
 import { useState, useEffect, useRef, ReactNode } from "react";
 import Link from "next/link";
@@ -57,11 +44,11 @@ const SLUG_MAP: Record<string, string> = {
 // DADOS EDITÁVEIS — Altere aqui telefone, WhatsApp, endereço etc.
 // ═══════════════════════════════════════════════════════════════════
 const BRAND = {
-  whatsapp:
-    // Mensagem neutra (sem nome de serviço, vacina ou doença), igual em todo o site.
-    "https://wa.me/5598920053606?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Vittalis%20e%20gostaria%20de%20atendimento.",
-  whatsappNumber: "(98) 92005-3606",
-  phone: "(98) 92005-3606",
+  // Número: fonte única em lib/config/contato.ts (NEXT_PUBLIC_WHATSAPP_NUMBER).
+  // Mensagem neutra (sem nome de serviço, vacina ou doença), igual em todo o site.
+  whatsapp: linkWhatsApp(),
+  whatsappNumber: WHATSAPP_EXIBICAO,
+  phone: WHATSAPP_EXIBICAO,
   email: "atendimento@vittalissaude.com.br",
   address: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37 — Jardim Renascença, São Luís – MA",
   cep: "CEP: 65075-441",
@@ -254,9 +241,8 @@ function useInView() {
     if (!el) return;
     // iOS Safari: fallback timer ensures content shows even if IO fails
     const fallback = setTimeout(() => setVisible(true), 800);
-    if (typeof IntersectionObserver === "undefined") {
-      setVisible(true); clearTimeout(fallback); return;
-    }
+    // Sem IntersectionObserver, o timer acima mostra o conteúdo.
+    if (typeof IntersectionObserver === "undefined") return () => clearTimeout(fallback);
     const obs = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setVisible(true); obs.unobserve(el); clearTimeout(fallback); } },
       { threshold: 0.01, rootMargin: "50px" }
@@ -403,11 +389,11 @@ function Navbar() {
 
               <div style={{ width: 1, height: 24, background: "var(--vit-gray-100)", margin: "0 10px" }} />
 
-              <a href="tel:+5598920053606" onClick={() => trackEvent("click_phone", { source: "navbar", page: "home" })} style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 12px", fontSize: 13, fontWeight: 500, color: "var(--vit-gray-600)", textDecoration: "none", borderRadius: 10, transition: "all 0.2s" }}
+              <a href={TELEFONE_TEL} onClick={() => trackEvent("click_phone", { source: "navbar", page: "home" })} style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 12px", fontSize: 13, fontWeight: 500, color: "var(--vit-gray-600)", textDecoration: "none", borderRadius: 10, transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.color = "var(--vit-primary)"; e.currentTarget.style.background = "var(--vit-primary-50)"; }}
                 onMouseLeave={e => { e.currentTarget.style.color = "var(--vit-gray-600)"; e.currentTarget.style.background = "transparent"; }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                (98) 92005-3606
+                {WHATSAPP_EXIBICAO}
               </a>
 
               <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("click_whatsapp", { source: "navbar", page: "home" })} style={{ fontSize: 13, fontWeight: 600, background: "var(--vit-primary)", color: "white", padding: "10px 22px", borderRadius: 12, textDecoration: "none", boxShadow: "0 2px 12px rgba(0,184,192,0.2)", transition: "all 0.3s", display: "flex", alignItems: "center", gap: 8 }}
@@ -438,7 +424,7 @@ function Navbar() {
               </a>
             ))}
             <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 28, marginBottom: 24 }}>
-              <a href="tel:+5598920053606" style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15, color: "var(--vit-gray-700)", textDecoration: "none" }}>📞 (98) 92005-3606</a>
+              <a href={TELEFONE_TEL} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15, color: "var(--vit-gray-700)", textDecoration: "none" }}>📞 {WHATSAPP_EXIBICAO}</a>
               <a href="https://www.instagram.com/vittalissaudeslz/" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15, color: "var(--vit-gray-700)", textDecoration: "none" }}>📸 @vittalissaudeslz</a>
               <a href="https://maps.app.goo.gl/35Vernq6NtWw9vBLA" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "var(--vit-gray-500)", textDecoration: "none" }}>📍 Jardim Renascença, São Luís</a>
             </div>
@@ -937,7 +923,7 @@ function CTAFinalSection() {
           </p>
           <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
             <CTAButton variant="white" size="lg">Agende pelo WhatsApp</CTAButton>
-            <CTAButton variant="gold" size="lg" href="tel:+5598920053606">
+            <CTAButton variant="gold" size="lg" href={TELEFONE_TEL}>
               {icons.phone} Ligar Agora
             </CTAButton>
           </div>
@@ -1025,7 +1011,7 @@ function Footer() {
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.phone}
-                <a href="tel:+5598920053606" style={{ fontSize: 14, color: corTexto, lineHeight: 1.5, textDecoration: "none" }}>{BRAND.phone}</a>
+                <a href={TELEFONE_TEL} style={{ fontSize: 14, color: corTexto, lineHeight: 1.5, textDecoration: "none" }}>{BRAND.phone}</a>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.mail}

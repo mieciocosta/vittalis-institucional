@@ -1,6 +1,47 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import localFont from "next/font/local";
 import "./globals.css";
+import { WHATSAPP_NUMERO } from "@/lib/config/contato";
+
+// Fontes da marca hospedadas no próprio site (antes vinham do Google Fonts
+// por @import, o que travava a renderização e pesava no Lighthouse).
+// Mesmos arquivos e pesos que o @import carregava (recorte latino do
+// @fontsource), então o visual não muda. O next/font cria uma fonte de
+// reserva com as MEDIDAS da fonte da marca: enquanto ela baixa, o texto
+// já ocupa o mesmo espaço e nada pula na tela (CLS do Lighthouse).
+// Obs.: o circunflexo alto e fino do "ê" é o desenho da Cormorant.
+// (o next/font só aceita caminhos escritos por extenso)
+
+const fonteDisplay = localFont({
+  src: [
+    { path: "../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-normal.woff2", weight: "600", style: "normal" },
+    { path: "../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-700-normal.woff2", weight: "700", style: "normal" },
+    { path: "../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-400-italic.woff2", weight: "400", style: "italic" },
+    { path: "../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-italic.woff2", weight: "500", style: "italic" },
+    { path: "../node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-italic.woff2", weight: "600", style: "italic" },
+  ],
+  variable: "--fonte-display",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: "Times New Roman",
+});
+
+const fonteTexto = localFont({
+  src: [
+    { path: "../node_modules/@fontsource/dm-sans/files/dm-sans-latin-300-normal.woff2", weight: "300", style: "normal" },
+    { path: "../node_modules/@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "../node_modules/@fontsource/dm-sans/files/dm-sans-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "../node_modules/@fontsource/dm-sans/files/dm-sans-latin-600-normal.woff2", weight: "600", style: "normal" },
+    { path: "../node_modules/@fontsource/dm-sans/files/dm-sans-latin-700-normal.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--fonte-texto",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: "Arial",
+});
 
 const GA_ID = "G-1T4S5WGY9W";
 
@@ -51,7 +92,7 @@ const jsonLd = {
   url: "https://www.vittalissaude.com.br",
   logo: "https://www.vittalissaude.com.br/images/logo-horizontal.png",
   image: "https://www.vittalissaude.com.br/images/og-vittalis.jpg",
-  telephone: "+5598920053606",
+  telephone: `+${WHATSAPP_NUMERO}`,
   email: "atendimento@vittalissaude.com.br",
   address: { "@type": "PostalAddress", streetAddress: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37", addressLocality: "São Luís", addressRegion: "MA", postalCode: "65075-441", addressCountry: "BR" },
   geo: { "@type": "GeoCoordinates", latitude: -2.4966, longitude: -44.2826 },
@@ -67,7 +108,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html lang="pt-BR" className={`${fonteDisplay.variable} ${fonteTexto.variable}`} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />

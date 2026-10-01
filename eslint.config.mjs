@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Pasta temporária do simulador da Cloudflare (wrangler pages dev).
+    ".wrangler/**",
   ]),
 ]);
 

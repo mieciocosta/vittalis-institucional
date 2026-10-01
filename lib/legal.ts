@@ -2,18 +2,20 @@
 // IDENTIFICAÇÃO LEGAL DA CLÍNICA
 //
 // A Resolução CFM 2.336/2023 exige a identificação do responsável
-// técnico na divulgação. Aparece no rodapé do site e na Política de
-// Privacidade.
+// técnico em toda divulgação. Este bloco aparece no rodapé das páginas
+// de campanha e na Política de Privacidade.
 //
-// NÃO invente nomes nem números aqui. Enquanto o campo for `null`, a
-// linha não aparece no site (para não publicar "pendente").
+// NÃO invente nomes nem números aqui. Enquanto o campo for `null`,
+// a tela mostra "pendente" e o `npm run check:campanhas` avisa.
 // ═══════════════════════════════════════════════════════════════
+
+import { ENDERECO } from "./config/contato";
 
 export const LEGAL = {
   razaoSocial: "Santos Costa Comércio de Vacinas Ltda",
   nomeFantasia: "Vittalis Saúde",
   cnpj: "35.857.936/0001-18",
-  endereco: "Av. Coronel Colares Moreira, nº 3, Salas 36/37, Jardim Renascença, São Luís/MA",
+  endereco: ENDERECO.completo,
   email: "atendimento@vittalissaude.com.br",
 
   // TODO(pendente): nome completo do responsável técnico.
@@ -24,7 +26,15 @@ export const LEGAL = {
   licencaSanitaria: null as string | null,
 };
 
-/** "Nome, CRM-MA 0000" quando os dois estiverem preenchidos; senão, null. */
+export const PENDENTE = "pendente de preenchimento";
+
+export function responsavelTecnicoTexto(): string {
+  const { responsavelTecnicoNome: nome, responsavelTecnicoRegistro: registro } = LEGAL;
+  if (!nome && !registro) return PENDENTE;
+  return [nome ?? PENDENTE, registro ?? PENDENTE].join(", ");
+}
+
+/** "Nome, CRM-MA 0000" quando os dois estiverem preenchidos; senão, null (o rodapé da home não mostra "pendente"). */
 export function responsavelTecnico(): string | null {
   const { responsavelTecnicoNome: nome, responsavelTecnicoRegistro: registro } = LEGAL;
   return nome && registro ? `${nome}, ${registro}` : null;

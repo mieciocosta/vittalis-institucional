@@ -4,14 +4,21 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "check:campanhas": "node scripts/check-campanhas.mjs",
+    "prebuild": "npm run check:campanhas",
     "build": "next build",
+    "postbuild": "node scripts/check-campanhas.mjs --html",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "imagens:campanhas": "node scripts/gerar-imagens-campanhas.mjs"
   },
   "dependencies": {
+    "@fontsource/cormorant-garamond": "^5.3.0",
+    "@fontsource/dm-sans": "^5.3.0",
     "next": "16.2.4",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
