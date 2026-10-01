@@ -8,10 +8,10 @@ export const BRAND = {
   tagline: "Cuidado completo para você e sua família",
   
   // Contato
-  whatsappNumber: "5598984221002",
-  whatsappDisplay: "(98) 98422-1002",
-  whatsappUrl: "https://wa.me/5598984221002?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20na%20Vittalis%20Saúde.",
-  phone: "(98) 98422-1002",
+  whatsappNumber: "5598981310327",
+  whatsappDisplay: "(98) 98131-0327",
+  whatsappUrl: "https://wa.me/5598981310327?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20na%20Vittalis%20Saúde.",
+  phone: "(98) 98131-0327",
   email: "contato@vittalissaude.com.br",
   
   // Endereço

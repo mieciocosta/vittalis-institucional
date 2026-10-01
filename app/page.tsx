@@ -51,9 +51,9 @@ const SLUG_MAP: Record<string, string> = {
 // ═══════════════════════════════════════════════════════════════════
 const BRAND = {
   whatsapp:
-    "https://wa.me/5598984221002?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20na%20Vittalis%20Saúde.",
-  whatsappNumber: "(98) 98422-1002",
-  phone: "(98) 98422-1002",
+    "https://wa.me/5598981310327?text=Olá!%20Gostaria%20de%20agendar%20um%20atendimento%20na%20Vittalis%20Saúde.",
+  whatsappNumber: "(98) 98131-0327",
+  phone: "(98) 98131-0327",
   email: "contato@vittalissaude.com.br",
   address: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37 — Jardim Renascença, São Luís – MA",
   cep: "CEP: 65075-441",
@@ -395,11 +395,11 @@ function Navbar() {
 
               <div style={{ width: 1, height: 24, background: "var(--vit-gray-100)", margin: "0 10px" }} />
 
-              <a href="tel:5598984221002" onClick={() => trackEvent("click_phone", { source: "navbar", page: "home" })} style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 12px", fontSize: 13, fontWeight: 500, color: "var(--vit-gray-600)", textDecoration: "none", borderRadius: 10, transition: "all 0.2s" }}
+              <a href="tel:5598981310327" onClick={() => trackEvent("click_phone", { source: "navbar", page: "home" })} style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 12px", fontSize: 13, fontWeight: 500, color: "var(--vit-gray-600)", textDecoration: "none", borderRadius: 10, transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.color = "var(--vit-primary)"; e.currentTarget.style.background = "var(--vit-primary-50)"; }}
                 onMouseLeave={e => { e.currentTarget.style.color = "var(--vit-gray-600)"; e.currentTarget.style.background = "transparent"; }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                (98) 98422-1002
+                (98) 98131-0327
               </a>
 
               <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("click_whatsapp", { source: "navbar", page: "home" })} style={{ fontSize: 13, fontWeight: 600, background: "var(--vit-primary)", color: "white", padding: "10px 22px", borderRadius: 12, textDecoration: "none", boxShadow: "0 2px 12px rgba(0,184,192,0.2)", transition: "all 0.3s", display: "flex", alignItems: "center", gap: 8 }}
@@ -430,7 +430,7 @@ function Navbar() {
               </a>
             ))}
             <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 28, marginBottom: 24 }}>
-              <a href="tel:5598984221002" style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15, color: "var(--vit-gray-700)", textDecoration: "none" }}>📞 (98) 98422-1002</a>
+              <a href="tel:5598981310327" style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15, color: "var(--vit-gray-700)", textDecoration: "none" }}>📞 (98) 98131-0327</a>
               <a href="https://www.instagram.com/vittalissaudeslz/" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15, color: "var(--vit-gray-700)", textDecoration: "none" }}>📸 @vittalissaudeslz</a>
               <a href="https://maps.app.goo.gl/35Vernq6NtWw9vBLA" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "var(--vit-gray-500)", textDecoration: "none" }}>📍 Jardim Renascença, São Luís</a>
             </div>
@@ -993,7 +993,7 @@ function Footer() {
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.phone}
-                <a href="tel:5598984221002" style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.5, textDecoration: "none" }}>{BRAND.phone}</a>
+                <a href="tel:5598981310327" style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.5, textDecoration: "none" }}>{BRAND.phone}</a>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.mail}
