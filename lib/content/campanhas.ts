@@ -5,6 +5,10 @@
 // A rota /campanhas/[slug], o sitemap, o formulário e o WhatsApp leem
 // tudo deste arquivo.
 //
+// Estilo (pedido do master, 01/10): leitura em segundos. Frases curtas,
+// um ícone por ideia, o detalhe fica no "Saiba mais" (que também mantém
+// o conteúdo substancial que a Meta exige na revisão da página).
+//
 // Regras de texto (Meta, WhatsApp, RDC Anvisa 96/2008, CFM 2.336/2023):
 // foco no serviço e no cuidado, tom informativo e acolhedor, sem nome
 // comercial de produto, sem condição comercial, sem urgência e sem
@@ -16,23 +20,32 @@
 
 import { ENDERECO, HORARIOS } from "../config/contato";
 
-export type Card = { titulo: string; texto: string };
+export type Icone =
+  | "caderneta" | "calendario" | "sino" | "casa" | "coracao" | "escudo"
+  | "equipe" | "clinica" | "maos" | "info" | "bebe" | "estrela" | "relogio" | "conversa";
+
+export type Item = { icone: Icone; titulo: string; texto: string };
+export type Cartao = Item & { detalhe: string };
 export type Pergunta = { pergunta: string; resposta: string };
 
 export type Campanha = {
   slug: string;
   /** Código que vai na mensagem do WhatsApp e no lead. */
   ref: string;
-  /** Etiqueta pequena acima do título. */
+  /** Selo pequeno acima do título. */
   rotulo: string;
   titulo: string;
+  /** Trecho do título que aparece em turquesa e itálico, como na home. */
+  destaque: string;
   subtitulo: string;
+  /** Os 3 pontos do topo, lidos em 3 segundos. */
+  pontos: [string, string, string];
   meta: { titulo: string; descricao: string };
   imagem: { arquivo: string; alt: string; largura: number; altura: number };
   /** Imagem de compartilhamento (1200×630). */
   imagemOg: string;
-  passos: [Card, Card, Card];
-  saber: { titulo: string; introducao: string; cards: Card[] };
+  passos: [Item, Item, Item];
+  saber: { introducao: string; cartoes: Cartao[] };
   formulario: { titulo: string; texto: string };
   perguntas: Pergunta[];
 };
@@ -41,42 +54,39 @@ export type Campanha = {
 export const RESSALVA =
   "A indicação de cada vacina depende de avaliação profissional e segue o calendário do Ministério da Saúde e as recomendações da SBIm.";
 
-export const DIFERENCIAIS: Card[] = [
-  { titulo: "Atendimento humanizado", texto: "Tempo para ouvir, explicar cada etapa e respeitar o ritmo de cada pessoa." },
-  { titulo: "Equipe especializada", texto: "Profissionais com experiência em imunização de bebês, crianças, adultos e idosos." },
-  { titulo: "Atendimento domiciliar", texto: "A aplicação também pode ser feita em casa, com o mesmo cuidado da clínica." },
-  { titulo: "Clínica multidisciplinar", texto: "Pediatria, terapias e outras especialidades no mesmo lugar, para acompanhar toda a família." },
+/**
+ * Selos de confiança ao lado do formulário. CONFERIR antes de publicar:
+ * a nota do Google precisa ser a nota real do perfil da clínica.
+ */
+export const CONFIANCA: Item[] = [
+  { icone: "estrela", titulo: "Nota 5,0 no Google", texto: "Avaliação das famílias atendidas" },
+  { icone: "equipe", titulo: "Equipe especializada", texto: "Em imunização de todas as idades" },
+  { icone: "casa", titulo: "Atendimento em casa", texto: "Ou na clínica, você escolhe" },
 ];
 
-const PASSO_CONTATO: Card = {
-  titulo: "Você deixa seu contato",
-  texto: "Preencha o formulário com seu nome e telefone. Leva menos de um minuto.",
-};
-const PASSO_AGENDA: Card = {
-  titulo: "Agendamento na clínica ou em casa",
-  texto: "Você escolhe onde prefere ser atendido. A equipe confirma o dia e o horário.",
-};
+export const DIFERENCIAIS: Item[] = [
+  { icone: "coracao", titulo: "Humanizado", texto: "Tempo para ouvir e explicar cada etapa." },
+  { icone: "equipe", titulo: "Equipe especializada", texto: "Experiência com bebês, crianças, adultos e idosos." },
+  { icone: "casa", titulo: "Em casa", texto: "A aplicação também pode ser feita no seu endereço." },
+  { icone: "clinica", titulo: "Multidisciplinar", texto: "Pediatria, terapias e outras especialidades no mesmo lugar." },
+];
+
+const PASSOS_PADRAO = (segundo: string): [Item, Item, Item] => [
+  { icone: "conversa", titulo: "Você deixa o contato", texto: "São 3 perguntas rápidas." },
+  { icone: "caderneta", titulo: "A equipe conversa com você", texto: segundo },
+  { icone: "calendario", titulo: "Você agenda", texto: "Na clínica ou em casa." },
+];
 
 /** Perguntas que valem para todas as campanhas. */
 function perguntasComuns(oQueLevar: string): Pergunta[] {
   return [
-    {
-      pergunta: "Onde fica a clínica?",
-      resposta: `${ENDERECO.completo}. No fim da página há o mapa e o link para abrir no Google Maps.`,
-    },
-    {
-      pergunta: "Qual é o horário de atendimento?",
-      resposta: `${HORARIOS.semana}. ${HORARIOS.sabado}.`,
-    },
-    {
-      pergunta: "Vocês atendem em casa?",
-      resposta: "Sim. A equipe também faz atendimento domiciliar. A disponibilidade para o seu bairro é confirmada no contato.",
-    },
+    { pergunta: "Onde fica a clínica?", resposta: `${ENDERECO.completo}.` },
+    { pergunta: "Qual é o horário?", resposta: `${HORARIOS.semana}. ${HORARIOS.sabado}.` },
+    { pergunta: "Vocês atendem em casa?", resposta: "Sim. A disponibilidade para o seu bairro é confirmada no contato." },
     { pergunta: "O que devo levar?", resposta: oQueLevar },
     {
       pergunta: "Como funciona a avaliação?",
-      resposta:
-        "A equipe confere as doses já registradas, conversa sobre a rotina e o histórico e explica, com calma, o que o calendário indica para aquela fase. A decisão é sempre tomada em conjunto.",
+      resposta: "A equipe confere as doses registradas e explica o que o calendário indica para aquela fase. A decisão é sempre tomada em conjunto.",
     },
     { pergunta: "Quais são as formas de pagamento?", resposta: "As formas de pagamento são informadas no atendimento." },
   ];
@@ -89,7 +99,9 @@ export const CAMPANHAS: Campanha[] = [
     ref: "PV01",
     rotulo: "Do nascimento aos 18 meses",
     titulo: "Planejamento vacinal do seu bebê, com acolhimento em cada fase",
-    subtitulo: "Avaliação da caderneta e um cronograma pensado para a rotina da sua família.",
+    destaque: "com acolhimento",
+    subtitulo: "A equipe avalia a caderneta e organiza o calendário do seu bebê.",
+    pontos: ["Avaliação da caderneta", "Lembrete das próximas doses", "Na clínica ou em casa"],
     meta: {
       titulo: "Planejamento vacinal do bebê em São Luís | Vittalis Saúde",
       descricao:
@@ -102,46 +114,39 @@ export const CAMPANHAS: Campanha[] = [
       altura: 731,
     },
     imagemOg: "/images/campanhas/pv-og.jpg",
-    passos: [
-      PASSO_CONTATO,
-      {
-        titulo: "A equipe avalia a caderneta",
-        texto: "Conferimos as doses já registradas e explicamos o que o calendário indica para cada idade.",
-      },
-      PASSO_AGENDA,
-    ],
+    passos: PASSOS_PADRAO("Avaliamos a caderneta e tiramos as dúvidas."),
     saber: {
-      titulo: "O que é importante saber",
-      introducao: "Nos primeiros 18 meses de vida acontece a maior parte das doses do calendário infantil.",
-      cards: [
+      introducao: "Nos primeiros 18 meses acontece a maior parte das doses do calendário infantil.",
+      cartoes: [
         {
-          titulo: "Um calendário para cada fase",
-          texto:
+          icone: "calendario",
+          titulo: "Um calendário por fase",
+          texto: "Cada idade tem as suas vacinas.",
+          detalhe:
             "O Ministério da Saúde e a Sociedade Brasileira de Imunizações (SBIm) organizam as vacinas por idade. Seguir o calendário ajuda a não perder nenhuma etapa.",
         },
         {
+          icone: "caderneta",
           titulo: "A caderneta é o ponto de partida",
-          texto:
-            "É nela que ficam registradas as doses aplicadas. Com a caderneta em mãos, a equipe monta o planejamento das próximas.",
+          texto: "É nela que ficam as doses aplicadas.",
+          detalhe: "Com a caderneta em mãos, a equipe confere o que já foi feito e monta o planejamento das próximas doses.",
         },
         {
+          icone: "sino",
           titulo: "Lembretes das próximas doses",
-          texto: "Depois do planejamento, a família recebe lembretes perto de cada data, para a rotina ficar mais leve.",
+          texto: "Para a rotina ficar mais leve.",
+          detalhe: "Depois do planejamento, a família recebe um lembrete perto de cada data.",
         },
         {
-          titulo: "Conforto durante a aplicação",
-          texto:
-            "Colo, amamentação quando possível e um ambiente tranquilo ajudam o bebê a passar pelo momento com mais calma.",
+          icone: "bebe",
+          titulo: "Conforto na aplicação",
+          texto: "Colo, calma e um ambiente tranquilo.",
+          detalhe: "Colo, amamentação quando possível e um ambiente tranquilo ajudam o bebê a passar pelo momento com mais calma.",
         },
       ],
     },
-    formulario: {
-      titulo: "Quero ser atendido(a)",
-      texto: "Deixe seu contato. A equipe retorna para conversar sobre a caderneta e combinar o melhor horário.",
-    },
-    perguntas: perguntasComuns(
-      "A caderneta de vacinação do bebê. Se houver registros de vacinas aplicadas em outros lugares, traga também.",
-    ),
+    formulario: { titulo: "Fale com a equipe", texto: "Responda 3 perguntas rápidas. A equipe retorna no período que você escolher." },
+    perguntas: perguntasComuns("A caderneta de vacinação do bebê. Se houver registros de outros lugares, traga também."),
   },
 
   // ─── 2. PRIMEIROS MESES DO BEBÊ (CUIDADO RESPIRATÓRIO) ───
@@ -150,7 +155,9 @@ export const CAMPANHAS: Campanha[] = [
     ref: "PM01",
     rotulo: "Primeiros meses de vida",
     titulo: "Cuidado respiratório nos primeiros meses de vida",
-    subtitulo: "Informação clara e uma conversa com a equipe para entender o que é indicado em cada fase.",
+    destaque: "primeiros meses",
+    subtitulo: "Informação clara e uma conversa com a equipe sobre cada fase do bebê.",
+    pontos: ["Orientação sobre o VSR", "Avaliação da caderneta", "Na clínica ou em casa"],
     meta: {
       titulo: "Cuidado respiratório nos primeiros meses | Vittalis Saúde",
       descricao:
@@ -163,47 +170,40 @@ export const CAMPANHAS: Campanha[] = [
       altura: 853,
     },
     imagemOg: "/images/campanhas/pm-og.jpg",
-    passos: [
-      PASSO_CONTATO,
-      {
-        titulo: "A equipe avalia a caderneta",
-        texto: "Conversamos sobre a fase do bebê e explicamos as estratégias de prevenção indicadas para ela.",
-      },
-      PASSO_AGENDA,
-    ],
+    passos: PASSOS_PADRAO("Explicamos o que é indicado para a fase do bebê."),
     saber: {
-      titulo: "O que é importante saber",
-      introducao: "Nos primeiros meses de vida, o sistema respiratório e as defesas do bebê ainda estão em formação.",
-      cards: [
+      introducao: "Nos primeiros meses, o sistema respiratório e as defesas do bebê ainda estão em formação.",
+      cartoes: [
         {
+          icone: "info",
           titulo: "O que é o VSR",
-          texto:
-            "O vírus sincicial respiratório é um vírus comum, que circula mais em algumas épocas do ano. É uma das principais causas de bronquiolite nos bebês.",
+          texto: "Um vírus respiratório comum nos bebês.",
+          detalhe:
+            "O vírus sincicial respiratório circula mais em algumas épocas do ano e é uma das principais causas de bronquiolite nos bebês.",
         },
         {
+          icone: "escudo",
           titulo: "Existem estratégias de prevenção",
-          texto:
-            "Hoje há estratégias para gestantes e para bebês. A indicação de cada uma depende da idade, da época do ano e de avaliação profissional.",
+          texto: "Para gestantes e para bebês.",
+          detalhe: "A indicação de cada estratégia depende da idade, da época do ano e de avaliação profissional.",
         },
         {
+          icone: "maos",
           titulo: "Cuidados do dia a dia",
-          texto:
-            "Lavar as mãos antes de pegar o bebê, evitar ambientes fechados e cheios e manter a casa livre de fumaça são cuidados simples que fazem parte da rotina.",
+          texto: "Mãos limpas e casa sem fumaça.",
+          detalhe:
+            "Lavar as mãos antes de pegar o bebê, evitar ambientes fechados e cheios e manter a casa livre de fumaça são cuidados simples da rotina.",
         },
         {
+          icone: "conversa",
           titulo: "Acompanhamento com a equipe",
-          texto:
-            "A conversa com a equipe ajuda a família a entender o calendário e a planejar as próximas etapas com tranquilidade.",
+          texto: "Para planejar cada etapa com calma.",
+          detalhe: "A conversa com a equipe ajuda a família a entender o calendário e a planejar as próximas etapas com tranquilidade.",
         },
       ],
     },
-    formulario: {
-      titulo: "Quero ser atendido(a)",
-      texto: "Deixe seu contato. A equipe retorna para conversar sobre os primeiros meses do bebê e combinar a avaliação.",
-    },
-    perguntas: perguntasComuns(
-      "A caderneta de vacinação do bebê e, se houver, o cartão de pré-natal com as vacinas feitas na gestação.",
-    ),
+    formulario: { titulo: "Fale com a equipe", texto: "Responda 3 perguntas rápidas. A equipe retorna no período que você escolher." },
+    perguntas: perguntasComuns("A caderneta de vacinação do bebê e, se houver, o cartão de pré-natal com as vacinas da gestação."),
   },
 
   // ─── 3. VACINAÇÃO DO ADULTO A PARTIR DOS 50 ───
@@ -212,7 +212,9 @@ export const CAMPANHAS: Campanha[] = [
     ref: "AD50",
     rotulo: "Adultos a partir dos 50 anos",
     titulo: "Vacinação do adulto a partir dos 50: saiba o que é indicado para você",
-    subtitulo: "Avaliação da carteira de vacinação e orientação sobre o calendário do adulto e do idoso.",
+    destaque: "a partir dos 50",
+    subtitulo: "A equipe avalia a sua carteira e explica o calendário do adulto.",
+    pontos: ["Avaliação da carteira", "Orientação sobre herpes zóster", "Na clínica ou em casa"],
     meta: {
       titulo: "Vacinação do adulto a partir dos 50 em São Luís | Vittalis Saúde",
       descricao:
@@ -225,46 +227,40 @@ export const CAMPANHAS: Campanha[] = [
       altura: 714,
     },
     imagemOg: "/images/campanhas/ad50-og.jpg",
-    passos: [
-      PASSO_CONTATO,
-      {
-        titulo: "A equipe avalia a carteira de vacinação",
-        texto: "Conferimos as doses já registradas e explicamos o que o calendário do adulto indica para a sua idade.",
-      },
-      PASSO_AGENDA,
-    ],
+    passos: PASSOS_PADRAO("Conferimos a carteira e tiramos as dúvidas."),
     saber: {
-      titulo: "O que é importante saber",
-      introducao: "A vacinação não termina na infância. Com o passar dos anos, o calendário do adulto ganha novas indicações.",
-      cards: [
+      introducao: "A vacinação não termina na infância. Com o passar dos anos, o calendário ganha novas indicações.",
+      cartoes: [
         {
+          icone: "info",
           titulo: "O que é o herpes zóster",
-          texto:
-            "É causado pelo mesmo vírus da catapora, que pode ficar adormecido no organismo e voltar a se manifestar anos depois. A chance aumenta com a idade.",
+          texto: "Vem do mesmo vírus da catapora.",
+          detalhe:
+            "O vírus pode ficar adormecido no organismo e voltar a se manifestar anos depois. A chance aumenta com a idade.",
         },
         {
-          titulo: "Outras vacinas do adulto e do idoso",
-          texto:
+          icone: "escudo",
+          titulo: "Outras vacinas do adulto",
+          texto: "Gripe, tétano e outras.",
+          detalhe:
             "As recomendações incluem, entre outras, vacinas contra a gripe, a doença pneumocócica, o tétano e a difteria. A partir dos 60 anos, também contra o VSR.",
         },
         {
-          titulo: "A carteira de vacinação conta a história",
-          texto:
-            "Muita gente não lembra quais doses já tomou. A avaliação da carteira mostra o que está em dia e o que vale conversar com a equipe.",
+          icone: "caderneta",
+          titulo: "A carteira conta a história",
+          texto: "Mostra o que está em dia.",
+          detalhe: "Muita gente não lembra quais doses já tomou. A avaliação da carteira mostra o que está em dia e o que vale conversar.",
         },
         {
-          titulo: "Atendimento no seu ritmo",
-          texto: "A aplicação pode ser na clínica ou em casa, com tempo para tirar dúvidas antes e depois.",
+          icone: "relogio",
+          titulo: "No seu ritmo",
+          texto: "Tempo para tirar dúvidas.",
+          detalhe: "A aplicação pode ser na clínica ou em casa, com tempo para conversar antes e depois.",
         },
       ],
     },
-    formulario: {
-      titulo: "Quero ser atendido(a)",
-      texto: "Deixe seu contato. A equipe retorna para conversar sobre a carteira de vacinação e combinar o melhor horário.",
-    },
-    perguntas: perguntasComuns(
-      "A carteira de vacinação, mesmo que antiga ou incompleta. Se não encontrar, a equipe orienta como reconstruir o histórico.",
-    ),
+    formulario: { titulo: "Fale com a equipe", texto: "Responda 3 perguntas rápidas. A equipe retorna no período que você escolher." },
+    perguntas: perguntasComuns("A carteira de vacinação, mesmo antiga ou incompleta. Se não encontrar, a equipe orienta como reconstruir o histórico."),
   },
 ];
 

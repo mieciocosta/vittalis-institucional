@@ -16,7 +16,7 @@ export const BRAND = {
   whatsappDisplay: WHATSAPP_EXIBICAO,
   whatsappUrl: linkWhatsApp({ mensagem: "Olá! Gostaria de agendar um atendimento na Vittalis Saúde." }),
   phone: WHATSAPP_EXIBICAO,
-  email: "contato@vittalissaude.com.br",
+  email: "atendimento@vittalissaude.com.br",
   
   // Endereço
   address: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37",

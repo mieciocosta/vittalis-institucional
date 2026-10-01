@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { LEGAL, PENDENTE, responsavelTecnicoTexto } from "@/lib/legal";
 import { RESSALVA } from "@/lib/content/campanhas";
@@ -12,7 +13,7 @@ export function RodapeLegal() {
       <div className={s.container}>
         <div className={s.rodapeGrade}>
           <div>
-            <p className={s.rodapeTitulo}>{LEGAL.nomeFantasia}</p>
+            <Image src="/images/campanhas/logo-rodape.png" alt={LEGAL.nomeFantasia} width={300} height={40} className={s.rodapeLogo} unoptimized loading="lazy" />
             <ul className={s.rodapeLista}>
               <li>Razão social: {LEGAL.razaoSocial}</li>
               <li>CNPJ: {LEGAL.cnpj}</li>

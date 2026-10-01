@@ -1,4 +1,4 @@
-/* Fontes: importadas em app/layout.tsx (@fontsource, hospedadas no site). */
+/* Fontes: definidas em app/layout.tsx (next/font/local, hospedadas no site). */
 
 :root {
   /* ═══ CORES DA MARCA VITTALIS ═══ */
@@ -23,8 +23,8 @@
   --vit-white: #FFFFFF;
 
   /* ═══ TIPOGRAFIA ═══ */
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-display: var(--fonte-display), 'Cormorant Garamond', Georgia, serif;
+  --font-body: var(--fonte-texto), 'DM Sans', system-ui, -apple-system, sans-serif;
 }
 
 /* ═══ RESET & BASE ═══ */

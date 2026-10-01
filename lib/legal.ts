@@ -16,7 +16,7 @@ export const LEGAL = {
   nomeFantasia: "Vittalis Saúde",
   cnpj: "35.857.936/0001-18",
   endereco: ENDERECO.completo,
-  email: "contato@vittalissaude.com.br",
+  email: "atendimento@vittalissaude.com.br",
 
   // TODO(pendente): nome completo do responsável técnico.
   responsavelTecnicoNome: null as string | null,

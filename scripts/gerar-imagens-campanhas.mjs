@@ -32,3 +32,5 @@ for (const [saida, origem] of Object.entries(FOTOS)) {
 // 296 px = 2x a largura exibida (148 px), nítido em tela retina.
 const logo = await sharp("public/images/logo-horizontal.png").resize({ width: 296 }).png({ compressionLevel: 9, palette: true }).toFile("public/images/campanhas/logo-topo.png");
 console.log("logo-topo.png", `${logo.width}x${logo.height}`, `${Math.round(logo.size / 1024)}KB`);
+const rodape = await sharp("public/images/logo-horizontal-branco.png").resize({ width: 300 }).png({ compressionLevel: 9, palette: true }).toFile("public/images/campanhas/logo-rodape.png");
+console.log("logo-rodape.png", `${rodape.width}x${rodape.height}`, `${Math.round(rodape.size / 1024)}KB`);

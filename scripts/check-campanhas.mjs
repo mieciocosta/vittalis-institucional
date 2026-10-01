@@ -61,7 +61,7 @@ function arquivos(dir, filtro) {
 }
 
 async function modoFontes() {
-  const { CAMPANHAS, DIFERENCIAIS, RESSALVA } = await import(join(RAIZ, "lib/content/campanhas.ts"));
+  const { CAMPANHAS, DIFERENCIAIS, RESSALVA, CONFIANCA } = await import(join(RAIZ, "lib/content/campanhas.ts"));
   const { mensagemComReferencia } = await import(join(RAIZ, "lib/config/contato.ts"));
   const { EVENTOS_CAMPANHA, PARAMETROS_CAMPANHA } = await import(join(RAIZ, "lib/analytics.ts"));
   const { LEGAL } = await import(join(RAIZ, "lib/legal.ts"));
@@ -70,13 +70,13 @@ async function modoFontes() {
   for (const c of CAMPANHAS) {
     cadaTexto(c, `campanha ${c.slug}`, (t, onde) => {
       conferirTexto(t, onde);
-      if (!/\.(arquivo|imagemOg|slug|ref)$/.test(onde)) conferirCaixaAlta(t, onde);
+      if (!/\.(arquivo|imagemOg|slug|ref|icone)$/.test(onde)) conferirCaixaAlta(t, onde);
     });
     if (!/^[a-z0-9-]+$/.test(c.slug)) problemas.push(`campanha ${c.slug}: slug fora do padrão`);
     // 2. Mensagem pré-preenchida do WhatsApp
     conferirTexto(mensagemComReferencia(c.ref), `whatsapp ${c.ref}`);
   }
-  cadaTexto({ DIFERENCIAIS, RESSALVA }, "comum", (t, onde) => { conferirTexto(t, onde); conferirCaixaAlta(t, onde); });
+  cadaTexto({ DIFERENCIAIS, RESSALVA, CONFIANCA }, "comum", (t, onde) => { conferirTexto(t, onde); conferirCaixaAlta(t, onde); });
 
   // 3. Arquivos de imagem das campanhas
   for (const f of arquivos(join(RAIZ, "public/images/campanhas"), () => true)) conferirTexto(relative(RAIZ, f), "arquivo de imagem");
@@ -92,7 +92,7 @@ async function modoFontes() {
     const fonte = readFileSync(f, "utf8").replace(/\/\*[\s\S]*?\*\//g, "").replace(/\{\/\*[\s\S]*?\*\/\}/g, "").replace(/(^|[^:"'`])\/\/.*$/gm, "$1");
     const visiveis = [
       ...[...fonte.matchAll(/>([^<>{}]*\p{L}[^<>{}]*)</gu)].map((m) => m[1]),
-      ...[...fonte.matchAll(/"([^"\n]*\p{L}[^"\n]* [^"\n]*)"|'([^'\n]*\p{L}[^'\n]* [^'\n]*)'|`([^`$]*\p{L}[^`$]* [^`$]*)`/gu)].map((m) => m[1] ?? m[2] ?? m[3]),
+      ...[...fonte.matchAll(/"([^"\n]*\p{L}[^"\n]* [^"\n]*)"|'([^'\n]*\p{L}[^'\n]* [^'\n]*)'|`([^`$\n]*\p{L}[^`$\n]* [^`$\n]*)`/gu)].map((m) => m[1] ?? m[2] ?? m[3]),
     ];
     for (const v of visiveis) conferirTexto(v, relative(RAIZ, f));
     for (const m of fonte.matchAll(/trackCampanha\(\s*"([^"]+)"/g)) {

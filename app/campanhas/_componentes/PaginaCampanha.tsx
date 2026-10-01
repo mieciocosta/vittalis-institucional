@@ -1,38 +1,35 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import type { Campanha } from "@/lib/content/campanhas";
-import { DIFERENCIAIS, RESSALVA } from "@/lib/content/campanhas";
+import { CONFIANCA, DIFERENCIAIS, RESSALVA } from "@/lib/content/campanhas";
 import { ENDERECO, HORARIOS, TELEFONE_TEL, WHATSAPP_EXIBICAO, linkWhatsApp } from "@/lib/config/contato";
 import { LinkRastreado } from "./Rastreio";
 import { Perguntas } from "./Perguntas";
 import { Formulario } from "./Formulario";
 import { RodapeLegal } from "./RodapeLegal";
+import { Ico } from "./Icones";
+import { fonteTitulo } from "./fonteTitulo";
 import s from "./campanha.module.css";
 
-// Estrutura fixa de toda campanha. O texto vem de lib/content/campanhas.ts.
-// Ação principal = formulário. WhatsApp é sempre a secundária, com a
-// mensagem neutra e o código de referência da campanha.
+// Estrutura fixa de toda campanha; o texto vem de lib/content/campanhas.ts.
+// Pedido do master (01/10): visual da home, leitura em segundos e o
+// formulário logo no topo. Ação principal = formulário; o WhatsApp é
+// sempre a secundária, com a mensagem neutra e o código da campanha.
 
 const CTA_PRINCIPAL = "Quero ser atendido(a)";
 
-function IconeWhats() {
+/** Título com o trecho de destaque em turquesa e itálico, como na home. */
+function Titulo({ texto, destaque }: { texto: string; destaque: string }) {
+  const i = texto.indexOf(destaque);
+  if (i < 0) return <>{texto}</>;
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
-      <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z" />
-    </svg>
+    <>
+      {texto.slice(0, i)}
+      <em>{destaque}</em>
+      {texto.slice(i + destaque.length)}
+    </>
   );
 }
-
-function Icone({ d }: { d: string }) {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <path d={d} />
-    </svg>
-  );
-}
-const ICONE_LOCAL = "M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21zM12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z";
-const ICONE_RELOGIO = "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2";
-const ICONE_TELEFONE = "M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z";
 
 export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
   const whats = linkWhatsApp({ ref: c.ref });
@@ -42,54 +39,102 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
       <a href="#conteudo" className={s.pular}>Pular para o conteúdo</a>
 
       <header className={s.topo}>
-        <div className={`${s.container} ${s.topoInterno}`}>
+        <div className={s.topoInterno}>
           <Link href="/" aria-label="Vittalis Saúde, página inicial">
-            <Image src="/images/campanhas/logo-topo.png" alt="Vittalis Saúde" width={296} height={40} className={s.logo} unoptimized />
+            <Image src="/images/campanhas/logo-topo.png" alt="Vittalis Saúde" width={296} height={40} className={s.logo} unoptimized loading="eager" />
           </Link>
           <LinkRastreado href={TELEFONE_TEL} evento="click_phone" slug={c.slug} className={s.topoTelefone}>
-            <Icone d={ICONE_TELEFONE} /> {WHATSAPP_EXIBICAO}
+            <Ico nome="telefone" tamanho={18} /> {WHATSAPP_EXIBICAO}
           </LinkRastreado>
         </div>
       </header>
 
       <main id="conteudo">
-        {/* 1. Hero */}
+        {/* 1. Topo: mensagem curta + formulário à vista */}
         <section className={s.hero} aria-labelledby="titulo-campanha">
           <div className={`${s.container} ${s.heroGrade}`}>
             <div>
-              <p className={s.rotulo}>{c.rotulo}</p>
-              <h1 id="titulo-campanha" className={s.titulo}>{c.titulo}</h1>
+              <p className={s.selo}>{c.rotulo}</p>
+              <h1 id="titulo-campanha" className={`${s.titulo} ${fonteTitulo.className}`}>
+                <Titulo texto={c.titulo} destaque={c.destaque} />
+              </h1>
               <p className={s.subtitulo}>{c.subtitulo}</p>
+              <ul className={s.pontos}>
+                {c.pontos.map((p) => (
+                  <li key={p} className={s.ponto}>
+                    <span className={s.pontoIcone}><Ico nome="check" tamanho={18} /></span>
+                    {p}
+                  </li>
+                ))}
+              </ul>
+              {/* No celular estes dois botões ficam na barra fixa de baixo. */}
               <div className={s.botoes}>
                 <a href="#formulario" className={`${s.botao} ${s.botaoPrimario}`}>{CTA_PRINCIPAL}</a>
                 <LinkRastreado href={whats} evento="click_whatsapp" slug={c.slug} externo className={`${s.botao} ${s.botaoSecundario}`}>
-                  <IconeWhats /> Falar no WhatsApp
+                  <Ico nome="whats" tamanho={20} /> Falar no WhatsApp
                 </LinkRastreado>
               </div>
+              <div className={s.imagemCaixa}>
+                <Image
+                  src={`/images/campanhas/${c.imagem.arquivo}.webp`}
+                  alt={c.imagem.alt}
+                  width={c.imagem.largura}
+                  height={c.imagem.altura}
+                  sizes="(min-width: 1024px) 600px, 100vw"
+                  className={s.heroImagem}
+                  fetchPriority="high"
+                  loading="eager"
+                />
+                <div className={s.cartaoFlutuante}>
+                  <span className={s.cartaoFlutuanteIcone}><Ico nome="coracao" tamanho={22} /></span>
+                  <span>
+                    <span className={s.cartaoFlutuanteTitulo} style={{ display: "block" }}>Atendimento acolhedor</span>
+                    <span className={s.cartaoFlutuanteTexto}>Na clínica ou em casa</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className={s.heroLado}>
+              <Formulario slug={c.slug} titulo={c.formulario.titulo} texto={c.formulario.texto} />
               <p className={s.ressalvaHero}>{RESSALVA}</p>
             </div>
-            <Image
-              src={`/images/campanhas/${c.imagem.arquivo}.webp`}
-              alt={c.imagem.alt}
-              width={c.imagem.largura}
-              height={c.imagem.altura}
-              sizes="(min-width: 1024px) 540px, 100vw"
-              className={s.heroImagem}
-              fetchPriority="high"
-              loading="eager"
-            />
           </div>
+        </section>
+
+        {/* Faixa de confiança */}
+        <section className={s.confianca} aria-label="Por que confiar na Vittalis">
+          <ul className={`${s.container} ${s.confiancaLista}`}>
+            {CONFIANCA.map((item) => (
+              <li key={item.titulo} className={s.confiancaItem}>
+                <span className={s.confiancaIcone}><Ico nome={item.icone} /></span>
+                <span>
+                  <span className={s.confiancaTitulo} style={{ display: "block" }}>{item.titulo}</span>
+                  <span className={s.confiancaTexto}>{item.texto}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
         </section>
 
         {/* 2. Como funciona */}
         <section className={s.secao} aria-labelledby="como-funciona">
           <div className={s.container}>
-            <h2 id="como-funciona" className={s.secaoTitulo}>Como funciona</h2>
+            <div className={s.secaoCabeca}>
+              <p className={s.etiqueta}>Simples assim</p>
+              <h2 id="como-funciona" className={s.secaoTitulo}>Como funciona</h2>
+            </div>
             <ol className={s.passos}>
-              {c.passos.map((p) => (
+              {c.passos.map((p, i) => (
                 <li key={p.titulo} className={s.passo}>
-                  <h3 className={s.cardTitulo}>{p.titulo}</h3>
-                  <p className={s.cardTexto}>{p.texto}</p>
+                  <span className={s.passoNumero}>
+                    <Ico nome={p.icone} tamanho={26} />
+                    <b aria-hidden="true">{i + 1}</b>
+                  </span>
+                  <div>
+                    <h3 className={s.cardTitulo}>{p.titulo}</h3>
+                    <p className={s.cardTexto}>{p.texto}</p>
+                  </div>
                 </li>
               ))}
             </ol>
@@ -99,27 +144,43 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
         {/* 3. O que é importante saber */}
         <section className={`${s.secao} ${s.secaoClara}`} aria-labelledby="importante-saber">
           <div className={s.container}>
-            <h2 id="importante-saber" className={s.secaoTitulo}>{c.saber.titulo}</h2>
-            <p className={s.secaoIntro}>{c.saber.introducao}</p>
-            <div className={s.cards}>
-              {c.saber.cards.map((card) => (
-                <article key={card.titulo} className={s.card}>
-                  <h3 className={s.cardTitulo}>{card.titulo}</h3>
-                  <p className={s.cardTexto}>{card.texto}</p>
+            <div className={s.secaoCabeca}>
+              <p className={s.etiqueta}>Leitura de 1 minuto</p>
+              <h2 id="importante-saber" className={s.secaoTitulo}>O que é importante saber</h2>
+              <p className={s.secaoIntro}>{c.saber.introducao}</p>
+            </div>
+            <div className={s.cartoes}>
+              {c.saber.cartoes.map((card) => (
+                <article key={card.titulo} className={s.cartao}>
+                  <div className={s.cartaoTopo}>
+                    <span className={s.cartaoIcone}><Ico nome={card.icone} tamanho={24} /></span>
+                    <div>
+                      <h3 className={s.cardTitulo}>{card.titulo}</h3>
+                      <p className={s.cardTexto}>{card.texto}</p>
+                    </div>
+                  </div>
+                  <details className={s.saibaMais}>
+                    <summary><Ico nome="mais" tamanho={18} /> Saiba mais</summary>
+                    <p>{card.detalhe}</p>
+                  </details>
                 </article>
               ))}
             </div>
-            <p className={s.ressalva}>{RESSALVA}</p>
+            <p className={s.ressalva}><Ico nome="info" tamanho={20} /> {RESSALVA}</p>
           </div>
         </section>
 
         {/* 4. Diferenciais */}
         <section className={s.secao} aria-labelledby="diferenciais">
           <div className={s.container}>
-            <h2 id="diferenciais" className={s.secaoTitulo}>Por que a Vittalis</h2>
-            <div className={`${s.cards} ${s.cardsQuatro}`}>
+            <div className={s.secaoCabeca}>
+              <p className={s.etiqueta}>Diferenciais</p>
+              <h2 id="diferenciais" className={s.secaoTitulo}>Por que a Vittalis</h2>
+            </div>
+            <div className={s.diferenciais}>
               {DIFERENCIAIS.map((d) => (
-                <article key={d.titulo} className={`${s.card} ${s.cardDiferencial}`}>
+                <article key={d.titulo} className={s.diferencial}>
+                  <span className={s.diferencialIcone}><Ico nome={d.icone} tamanho={24} /></span>
                   <h3 className={s.cardTitulo}>{d.titulo}</h3>
                   <p className={s.cardTexto}>{d.texto}</p>
                 </article>
@@ -131,21 +192,39 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
         {/* 5. Perguntas frequentes */}
         <section className={`${s.secao} ${s.secaoClara}`} aria-labelledby="perguntas">
           <div className={s.container}>
-            <h2 id="perguntas" className={s.secaoTitulo}>Perguntas frequentes</h2>
+            <div className={s.secaoCabeca}>
+              <p className={s.etiqueta}>Dúvidas</p>
+              <h2 id="perguntas" className={s.secaoTitulo}>Perguntas frequentes</h2>
+            </div>
             <Perguntas itens={c.perguntas} />
           </div>
         </section>
 
-        {/* 6. Formulário, endereço e telefone */}
-        <section id="formulario" className={s.secao} aria-labelledby="fale-com-a-equipe">
+        {/* Chamada final: leva de volta ao formulário */}
+        <section className={s.chamada} aria-labelledby="chamada-final">
           <div className={s.container}>
-            <h2 id="fale-com-a-equipe" className={s.secaoTitulo}>Fale com a equipe</h2>
-            <div className={s.contatoGrade}>
-              <Formulario slug={c.slug} titulo={c.formulario.titulo} texto={c.formulario.texto} />
+            <h2 id="chamada-final" className={s.chamadaTitulo}>Vamos conversar?</h2>
+            <p className={s.chamadaTexto}>Deixe seu contato e a equipe da Vittalis retorna no período que você escolher.</p>
+            <div className={s.botoesChamada}>
+              <a href="#formulario" className={`${s.botao} ${s.botaoClaro}`}>{CTA_PRINCIPAL}</a>
+              <LinkRastreado href={whats} evento="click_whatsapp" slug={c.slug} externo className={`${s.botao} ${s.botaoContorno}`}>
+                <Ico nome="whats" tamanho={20} /> Falar no WhatsApp
+              </LinkRastreado>
+            </div>
+          </div>
+        </section>
 
+        {/* 6. Endereço, horário e telefone */}
+        <section className={s.secao} aria-labelledby="onde-estamos">
+          <div className={s.container}>
+            <div className={s.secaoCabeca}>
+              <p className={s.etiqueta}>Onde estamos</p>
+              <h2 id="onde-estamos" className={s.secaoTitulo}>Visite a clínica</h2>
+            </div>
+            <div className={s.contatoGrade}>
               <div className={s.contatoInfo}>
                 <div className={s.contatoItem}>
-                  <span className={s.contatoIcone}><Icone d={ICONE_LOCAL} /></span>
+                  <span className={s.contatoIcone}><Ico nome="local" /></span>
                   <div>
                     <p className={s.contatoRotulo}>Endereço</p>
                     <p className={s.contatoTexto}>{ENDERECO.completo}</p>
@@ -155,14 +234,14 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
                   </div>
                 </div>
                 <div className={s.contatoItem}>
-                  <span className={s.contatoIcone}><Icone d={ICONE_RELOGIO} /></span>
+                  <span className={s.contatoIcone}><Ico nome="relogio" /></span>
                   <div>
                     <p className={s.contatoRotulo}>Horário</p>
                     <p className={s.contatoTexto}>{HORARIOS.semana}<br />{HORARIOS.sabado}</p>
                   </div>
                 </div>
                 <div className={s.contatoItem}>
-                  <span className={s.contatoIcone}><Icone d={ICONE_TELEFONE} /></span>
+                  <span className={s.contatoIcone}><Ico nome="telefone" /></span>
                   <div>
                     <p className={s.contatoRotulo}>Telefone e WhatsApp</p>
                     <LinkRastreado href={TELEFONE_TEL} evento="click_phone" slug={c.slug} className={s.contatoLink}>
@@ -170,14 +249,14 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
                     </LinkRastreado>
                   </div>
                 </div>
-                <iframe
-                  className={s.mapa}
-                  src={ENDERECO.mapaEmbed}
-                  title="Mapa com a localização da Vittalis Saúde"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
               </div>
+              <iframe
+                className={s.mapa}
+                src={ENDERECO.mapaEmbed}
+                title="Mapa com a localização da Vittalis Saúde"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </section>
@@ -189,7 +268,7 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
       <nav className={s.barraMobile} aria-label="Ações rápidas">
         <a href="#formulario" className={`${s.botao} ${s.botaoPrimario}`}>{CTA_PRINCIPAL}</a>
         <LinkRastreado href={whats} evento="click_whatsapp" slug={c.slug} externo className={`${s.botao} ${s.botaoSecundario}`}>
-          <IconeWhats /> WhatsApp
+          <Ico nome="whats" tamanho={20} /> WhatsApp
         </LinkRastreado>
       </nav>
     </div>
