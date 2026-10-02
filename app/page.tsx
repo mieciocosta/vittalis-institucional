@@ -47,7 +47,7 @@ const SLUG_MAP: Record<string, string> = {
 // DADOS EDITÁVEIS — Altere aqui telefone, WhatsApp, endereço etc.
 // ═══════════════════════════════════════════════════════════════════
 const BRAND = {
-  // Número: fonte única em lib/config/contato.ts (NEXT_PUBLIC_WHATSAPP_NUMBER).
+  // Número: fonte única em lib/config/contato.ts.
   // Mensagem neutra (sem nome de serviço, vacina ou doença), igual em todo o site.
   whatsapp: linkWhatsApp(),
   whatsappNumber: EMPRESA.whatsappDisplay,
@@ -59,7 +59,7 @@ const BRAND = {
     week: "Segunda a Sexta — 08h às 18h",
     sat: "Sábado — 08h às 12h",
   },
-  instagram: "https://www.instagram.com/vittalissaudeslz/",
+  instagram: EMPRESA.instagramDirect,
   // facebook: removido,
   mapsUrl: "https://maps.app.goo.gl/35Vernq6NtWw9vBLA",
 };
@@ -428,7 +428,7 @@ function Navbar() {
             ))}
             <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 28, marginBottom: 24 }}>
               <a href={EMPRESA.commercialPhoneTel} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15, color: "var(--vit-gray-700)", textDecoration: "none" }}>📞 {EMPRESA.commercialPhone}</a>
-              <a href="https://www.instagram.com/vittalissaudeslz/" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15, color: "var(--vit-gray-700)", textDecoration: "none" }}>📸 @vittalissaudeslz</a>
+              <a href={EMPRESA.instagramDirect} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15, color: "var(--vit-gray-700)", textDecoration: "none" }}>📸 @vittalissaudeslz</a>
               <a href="https://maps.app.goo.gl/35Vernq6NtWw9vBLA" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "var(--vit-gray-500)", textDecoration: "none" }}>📍 Jardim Renascença, São Luís</a>
             </div>
             <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 10, padding: "18px", borderRadius: 16, background: "var(--vit-primary)", color: "white", fontSize: 17, fontWeight: 700, textDecoration: "none", boxShadow: "0 4px 24px rgba(0,184,192,0.25)" }}>
@@ -469,7 +469,7 @@ function WhatsAppFab() {
             <span style={{ background: "white", padding: "8px 16px", borderRadius: 12, fontSize: 13, fontWeight: 600, color: "var(--vit-charcoal)", boxShadow: "0 4px 16px rgba(0,0,0,0.1)", whiteSpace: "nowrap" }}>
               Siga no Instagram
             </span>
-            <a href="https://www.instagram.com/vittalissaudeslz/" target="_blank" rel="noopener noreferrer" aria-label="Instagram da Vittalis" onClick={() => trackEvent("click_instagram", { source: "fab", page: "home" })}
+            <a href={EMPRESA.instagramDirect} target="_blank" rel="noopener noreferrer" aria-label="Instagram da Vittalis" onClick={() => trackEvent("click_instagram", { source: "fab", page: "home" })}
               style={{ width: 52, height: 52, borderRadius: "50%", background: "linear-gradient(135deg, #833AB4, #E1306C, #F77737)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 18px rgba(225,48,108,0.35)", transition: "transform 0.3s", textDecoration: "none" }}
               onMouseEnter={e => e.currentTarget.style.transform = "scale(1.1)"}
               onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}>
@@ -983,7 +983,7 @@ function Footer() {
               Clínica multidisciplinar em São Luís. Consultas médicas, vacinação e terapias para toda a família.
             </p>
             <div style={{ display: "flex", gap: 12 }}>
-              <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram da Vittalis Saúde"
+              <a href={BRAND.instagram} target="_blank" rel="noopener noreferrer" aria-label="Mensagem no Instagram da Vittalis Saúde"
                 style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(255,255,255,0.06)", display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.3s", color: "rgba(255,255,255,0.8)" }}
                 onMouseEnter={e => (e.currentTarget.style.background = "var(--vit-primary)")}
                 onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.06)")}>
