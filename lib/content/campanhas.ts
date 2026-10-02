@@ -49,6 +49,8 @@ export type Campanha = {
   saber: { introducao: string; cartoes: Cartao[] };
   formulario: { titulo: string; texto: string };
   perguntas: Pergunta[];
+  /** Fotos e vídeo próprios desta campanha (senão, usa MIDIA). */
+  midia?: Midia;
 };
 
 /** Ressalva obrigatória em todas as páginas de campanha. */
@@ -56,21 +58,32 @@ export const RESSALVA =
   "A indicação de cada vacina depende de avaliação profissional e segue o calendário do Ministério da Saúde e as recomendações da SBIm.";
 
 /**
- * Selos de confiança ao lado do formulário. CONFERIR antes de publicar:
- * a nota do Google precisa ser a nota real do perfil da clínica.
+ * Por que a Vittalis: faixa curta logo abaixo do topo (antes eram duas
+ * seções repetindo as mesmas ideias). Frases de uma linha, sem números
+ * que não dá para comprovar.
  */
-export const CONFIANCA: Item[] = [
-  { icone: "estrela", titulo: "Nota 5,0 no Google", texto: "Avaliação das famílias atendidas" },
-  { icone: "equipe", titulo: "Equipe especializada", texto: "Em imunização de todas as idades" },
-  { icone: "casa", titulo: "Atendimento em casa", texto: "Ou na clínica, você escolhe" },
+export const DIFERENCIAIS: Item[] = [
+  { icone: "coracao", titulo: "Atendimento humanizado", texto: "Tempo para ouvir e explicar cada etapa." },
+  { icone: "equipe", titulo: "Equipe especializada", texto: "Imunização de bebês, crianças, adultos e idosos." },
+  { icone: "casa", titulo: "Na clínica ou em casa", texto: "Você escolhe onde prefere ser atendido." },
+  { icone: "clinica", titulo: "Clínica multidisciplinar", texto: "Pediatria, terapias e outras especialidades." },
 ];
 
-export const DIFERENCIAIS: Item[] = [
-  { icone: "coracao", titulo: "Humanizado", texto: "Tempo para ouvir e explicar cada etapa." },
-  { icone: "equipe", titulo: "Equipe especializada", texto: "Experiência com bebês, crianças, adultos e idosos." },
-  { icone: "casa", titulo: "Em casa", texto: "A aplicação também pode ser feita no seu endereço." },
-  { icone: "clinica", titulo: "Multidisciplinar", texto: "Pediatria, terapias e outras especialidades no mesmo lugar." },
-];
+/** Foto real da clínica (gerada por scripts/preparar-midia.mjs). */
+export type Foto = { arquivo: string; alt: string; legenda?: string; largura: number; altura: number };
+/** Vídeo curto da clínica: só carrega quando a pessoa toca no play. */
+export type Video = { arquivo: string; poster: string; titulo: string; legenda?: string };
+export type Midia = { fotos: Foto[]; video?: Video };
+
+/**
+ * Fotos e vídeo REAIS da clínica, comuns às campanhas (pedido do master,
+ * 02/10). Vazio = a seção "Conheça a Vittalis" não aparece.
+ * Regras: nada de agulha ou seringa na pele em close, nada de antes/depois
+ * e paciente identificável só com autorização por escrito.
+ */
+export const MIDIA: Midia = {
+  fotos: [],
+};
 
 const PASSOS_PADRAO = (segundo: string): [Item, Item, Item] => [
   { icone: "conversa", titulo: "Você deixa o contato", texto: "São 3 perguntas rápidas." },

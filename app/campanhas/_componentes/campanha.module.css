@@ -553,7 +553,7 @@
   .heroImagem { aspect-ratio: 16 / 9; }
   .formCartao { padding: 32px 30px 26px; }
   .opcoesGrandes { grid-template-columns: 1fr; }
-  .confiancaLista { grid-template-columns: repeat(3, 1fr); }
+  .confiancaLista { grid-template-columns: repeat(2, 1fr); }
   .chamada .botoesChamada { flex-direction: row; justify-content: center; }
 }
 @media (min-width: 768px) {
@@ -565,6 +565,7 @@
   .passo { flex-direction: column; text-align: center; padding: 26px 20px; }
   .cartoes { grid-template-columns: repeat(2, 1fr); }
   .diferenciais { grid-template-columns: repeat(4, 1fr); }
+  .confiancaLista { grid-template-columns: repeat(4, 1fr); }
   .contatoGrade { grid-template-columns: 1fr 1.2fr; gap: 40px; }
   .rodapeGrade { grid-template-columns: 2fr 1fr; }
   .secao { padding: 76px 0; }
@@ -581,4 +582,64 @@
 
 @media (prefers-reduced-motion: reduce) {
   .botao, .perguntaIcone, .opcaoGrande, .progresso span, .saibaMais summary svg { transition: none; }
+}
+
+/* ─── Conheça a Vittalis (fotos e vídeo reais) ─── */
+.video { margin: 28px auto 0; max-width: 820px; }
+.videoCapa {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--vit-charcoal);
+  cursor: pointer;
+  aspect-ratio: 16 / 9;
+}
+.videoPoster { width: 100%; height: 100%; object-fit: cover; opacity: 0.92; }
+.videoPlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 76px;
+  height: 76px;
+  margin: -38px 0 0 -38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  padding-left: 4px;
+  background: var(--cta);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+.videoCapa:hover .videoPlay { transform: scale(1.06); }
+.videoPlayer { display: block; width: 100%; border-radius: 22px; background: #000; aspect-ratio: 16 / 9; }
+.videoLegenda { margin-top: 10px; font-size: 15px; color: var(--vit-gray-700); text-align: center; }
+
+.galeria {
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 80%;
+  gap: 12px;
+  margin-top: 26px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 8px;
+  -webkit-overflow-scrolling: touch;
+}
+.galeriaItem { scroll-snap-align: start; }
+.galeriaFoto { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 18px; }
+.galeriaLegenda { margin-top: 8px; font-size: 14px; color: var(--vit-gray-700); }
+.galeriaDica { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 8px; font-size: 13px; color: var(--vit-gray-500); }
+
+@media (min-width: 768px) {
+  .galeria { grid-auto-flow: row; grid-template-columns: repeat(3, 1fr); overflow: visible; }
+  .galeriaDica { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .videoPlay { transition: none; }
 }

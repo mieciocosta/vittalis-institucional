@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Campanha } from "@/lib/content/campanhas";
-import { CONFIANCA, DIFERENCIAIS, RESSALVA } from "@/lib/content/campanhas";
+import { DIFERENCIAIS, MIDIA, RESSALVA } from "@/lib/content/campanhas";
 import { ENDERECO, HORARIOS, linkWhatsApp } from "@/lib/config/contato";
 import { BRAND } from "@/lib/brand";
 import { LinkRastreado } from "./Rastreio";
@@ -9,6 +9,7 @@ import { Perguntas } from "./Perguntas";
 import { Formulario } from "./Formulario";
 import { RodapeLegal } from "./RodapeLegal";
 import { Ico } from "./Icones";
+import { SecaoMidia } from "./Midia";
 import { fonteTitulo } from "./fonteTitulo";
 import s from "./campanha.module.css";
 
@@ -103,10 +104,10 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
           </div>
         </section>
 
-        {/* Faixa de confiança */}
-        <section className={s.confianca} aria-label="Por que confiar na Vittalis">
+        {/* Por que a Vittalis: uma faixa curta (antes eram duas seções repetidas) */}
+        <section className={s.confianca} aria-label="Por que a Vittalis">
           <ul className={`${s.container} ${s.confiancaLista}`}>
-            {CONFIANCA.map((item) => (
+            {DIFERENCIAIS.map((item) => (
               <li key={item.titulo} className={s.confiancaItem}>
                 <span className={s.confiancaIcone}><Ico nome={item.icone} /></span>
                 <span>
@@ -142,6 +143,9 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
           </div>
         </section>
 
+        {/* Fotos e vídeo reais da clínica (some sozinha enquanto não houver) */}
+        <SecaoMidia midia={c.midia ?? MIDIA} />
+
         {/* 3. O que é importante saber */}
         <section className={`${s.secao} ${s.secaoClara}`} aria-labelledby="importante-saber">
           <div className={s.container}>
@@ -168,25 +172,6 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
               ))}
             </div>
             <p className={s.ressalva}><Ico nome="info" tamanho={20} /> {RESSALVA}</p>
-          </div>
-        </section>
-
-        {/* 4. Diferenciais */}
-        <section className={s.secao} aria-labelledby="diferenciais">
-          <div className={s.container}>
-            <div className={s.secaoCabeca}>
-              <p className={s.etiqueta}>Diferenciais</p>
-              <h2 id="diferenciais" className={s.secaoTitulo}>Por que a Vittalis</h2>
-            </div>
-            <div className={s.diferenciais}>
-              {DIFERENCIAIS.map((d) => (
-                <article key={d.titulo} className={s.diferencial}>
-                  <span className={s.diferencialIcone}><Ico nome={d.icone} tamanho={24} /></span>
-                  <h3 className={s.cardTitulo}>{d.titulo}</h3>
-                  <p className={s.cardTexto}>{d.texto}</p>
-                </article>
-              ))}
-            </div>
           </div>
         </section>
 
