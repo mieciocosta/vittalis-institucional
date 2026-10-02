@@ -39,9 +39,16 @@ function conferirTexto(texto, onde) {
   }
 }
 
+// Dados oficiais da empresa (lib/brand.ts) vêm em maiúsculas de propósito:
+// são cópia letra por letra das Informações da empresa da Meta. Não contam
+// como texto "gritado".
+let DADOS_OFICIAIS = [];
+
 function conferirCaixaAlta(texto, onde) {
   const siglas = new Set(CFG.siglasPermitidas.map((s) => s.toUpperCase()));
-  for (const palavra of String(texto).match(/\p{Lu}{4,}/gu) ?? []) {
+  let t = String(texto);
+  for (const d of DADOS_OFICIAIS) t = t.split(d).join(" ");
+  for (const palavra of t.match(/\p{Lu}{4,}/gu) ?? []) {
     if (!siglas.has(palavra.toUpperCase())) problemas.push(`${onde}: palavra em CAIXA ALTA "${palavra}" (tom gritado)`);
   }
 }
@@ -65,6 +72,8 @@ async function modoFontes() {
   const { mensagemComReferencia } = await import(join(RAIZ, "lib/config/contato.ts"));
   const { EVENTOS_CAMPANHA, PARAMETROS_CAMPANHA } = await import(join(RAIZ, "lib/analytics.ts"));
   const { LEGAL } = await import(join(RAIZ, "lib/legal.ts"));
+  const { BRAND } = await import(join(RAIZ, "lib/brand.ts"));
+  DADOS_OFICIAIS = [BRAND.legalName, BRAND.legalAddress].filter(Boolean);
 
   // 1. Conteúdo, metadados, alt e nomes de imagem de cada campanha
   for (const c of CAMPANHAS) {

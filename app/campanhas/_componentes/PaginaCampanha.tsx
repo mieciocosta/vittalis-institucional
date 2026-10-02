@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Campanha } from "@/lib/content/campanhas";
 import { CONFIANCA, DIFERENCIAIS, RESSALVA } from "@/lib/content/campanhas";
-import { ENDERECO, HORARIOS, TELEFONE_TEL, WHATSAPP_EXIBICAO, linkWhatsApp } from "@/lib/config/contato";
+import { ENDERECO, HORARIOS, linkWhatsApp } from "@/lib/config/contato";
+import { BRAND } from "@/lib/brand";
 import { LinkRastreado } from "./Rastreio";
 import { Perguntas } from "./Perguntas";
 import { Formulario } from "./Formulario";
@@ -43,8 +44,8 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
           <Link href="/" aria-label="Vittalis Saúde, página inicial">
             <Image src="/images/campanhas/logo-topo.png" alt="Vittalis Saúde" width={296} height={40} className={s.logo} unoptimized loading="eager" />
           </Link>
-          <LinkRastreado href={TELEFONE_TEL} evento="click_phone" slug={c.slug} className={s.topoTelefone}>
-            <Ico nome="telefone" tamanho={18} /> {WHATSAPP_EXIBICAO}
+          <LinkRastreado href={BRAND.commercialPhoneTel} evento="click_phone" slug={c.slug} className={s.topoTelefone}>
+            <Ico nome="telefone" tamanho={18} /> {BRAND.commercialPhone}
           </LinkRastreado>
         </div>
       </header>
@@ -227,7 +228,7 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
                   <span className={s.contatoIcone}><Ico nome="local" /></span>
                   <div>
                     <p className={s.contatoRotulo}>Endereço</p>
-                    <p className={s.contatoTexto}>{ENDERECO.completo}</p>
+                    <p className={s.contatoTexto}>{BRAND.legalAddress}</p>
                     <LinkRastreado href={ENDERECO.mapsUrl} evento="click_maps" slug={c.slug} externo className={s.contatoLink}>
                       Abrir no Google Maps
                     </LinkRastreado>
@@ -244,8 +245,8 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
                   <span className={s.contatoIcone}><Ico nome="telefone" /></span>
                   <div>
                     <p className={s.contatoRotulo}>Telefone e WhatsApp</p>
-                    <LinkRastreado href={TELEFONE_TEL} evento="click_phone" slug={c.slug} className={s.contatoLink}>
-                      {WHATSAPP_EXIBICAO}
+                    <LinkRastreado href={BRAND.commercialPhoneTel} evento="click_phone" slug={c.slug} className={s.contatoLink}>
+                      {BRAND.commercialPhone}
                     </LinkRastreado>
                   </div>
                 </div>

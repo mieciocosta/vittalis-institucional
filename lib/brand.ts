@@ -1,31 +1,52 @@
 // ═══════════════════════════════════════════════════════════════
 // VITTALIS SAÚDE — CONFIGURAÇÃO DA MARCA
-// Altere aqui endereço, redes sociais etc.
-// O número de WhatsApp/telefone NÃO mora mais aqui: fonte única em
-// lib/config/contato.ts (variável NEXT_PUBLIC_WHATSAPP_NUMBER).
+// Altere aqui os dados da empresa, endereço, redes sociais etc.
+// O número de WhatsApp mora em lib/config/contato.ts
+// (variável NEXT_PUBLIC_WHATSAPP_NUMBER).
 // ═══════════════════════════════════════════════════════════════
 
 import { WHATSAPP_NUMERO, WHATSAPP_EXIBICAO, linkWhatsApp } from "./config/contato";
 
+// DADOS OFICIAIS DA EMPRESA: copiados LETRA POR LETRA das "Informações da
+// empresa" do portfólio da Meta (inclusive maiúsculas e "Maranhao" sem
+// acento). A 360dialog confere o rodapé do site contra esse cadastro para
+// registrar o WhatsApp na API oficial. Não "arrume" a grafia aqui: se o
+// cadastro mudar, mude aqui e em nenhum outro lugar.
+const LEGAL_NAME = "SANTOS COSTA COMERCIO DE VACINAS LTDA";
+const CNPJ = "35.857.936/0001-18";
+const LEGAL_ADDRESS = "AVENIDA CEL COLARES MOREIRA, ED. BUSINESS CENTER RENASCENCA LOJA 37 3, RENASCENCA, SAO LUIS, Maranhao 65075-441, Brasil";
+const COMMERCIAL_PHONE = "+55 98 98827-8736";
+const COMMERCIAL_PHONE_TEL = "tel:+5598988278736";
+
 export const BRAND = {
   name: "Vittalis Saúde",
   tagline: "Cuidado completo para você e sua família",
-  
+
+  // Dados oficiais (iguais às Informações da empresa da Meta)
+  legalName: LEGAL_NAME,
+  cnpj: CNPJ,
+  legalAddress: LEGAL_ADDRESS,
+  commercialPhone: COMMERCIAL_PHONE,
+  commercialPhoneTel: COMMERCIAL_PHONE_TEL,
+  officialSite: "https://vittalissaude.com.br/",
+
   // Contato
   whatsappNumber: WHATSAPP_NUMERO,
   whatsappDisplay: WHATSAPP_EXIBICAO,
   // Mensagem neutra (sem nome de serviço, vacina ou doença), igual em todo o site.
   whatsappUrl: linkWhatsApp(),
-  phone: WHATSAPP_EXIBICAO,
+  phone: COMMERCIAL_PHONE,
   email: "atendimento@vittalissaude.com.br",
-  
-  // Endereço
-  address: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37",
-  neighborhood: "Jardim Renascença",
-  city: "São Luís",
-  state: "MA",
+
+  // Endereço (o oficial é legalAddress; os campos abaixo servem aos dados
+  // estruturados para o Google)
+  address: LEGAL_ADDRESS,
+  street: "AVENIDA CEL COLARES MOREIRA, ED. BUSINESS CENTER RENASCENCA LOJA 37 3",
+  neighborhood: "RENASCENCA",
+  city: "SAO LUIS",
+  state: "Maranhao",
   cep: "65075-441",
-  fullAddress: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37 — Jardim Renascença, São Luís – MA",
+  fullAddress: LEGAL_ADDRESS,
   mapsUrl: "https://maps.app.goo.gl/35Vernq6NtWw9vBLA",
   lat: -2.4966,
   lng: -44.2826,
