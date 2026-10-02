@@ -1,12 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { LEGAL, PENDENTE, responsavelTecnicoTexto } from "@/lib/legal";
+import { LEGAL, responsavelTecnico } from "@/lib/legal";
 import { RESSALVA } from "@/lib/content/campanhas";
 import s from "./campanha.module.css";
 
 /** Identificação legal (CFM 2.336/2023) + link da Política de Privacidade. */
 export function RodapeLegal() {
-  const rt = responsavelTecnicoTexto();
+  // Só aparece quando preenchido em lib/legal.ts: "pendente" no ar pega mal
+  // na análise da Meta. O check:campanhas continua avisando a pendência.
+  const rt = responsavelTecnico();
   const licenca = LEGAL.licencaSanitaria;
   return (
     <footer className={s.rodape}>
@@ -18,14 +20,8 @@ export function RodapeLegal() {
               <li>Razão social: {LEGAL.razaoSocial}</li>
               <li>CNPJ: {LEGAL.cnpj}</li>
               <li>Endereço: {LEGAL.endereco}</li>
-              <li>
-                Responsável técnico:{" "}
-                <span className={rt.includes(PENDENTE) ? s.rodapePendente : undefined}>{rt}</span>
-              </li>
-              <li>
-                Licença sanitária:{" "}
-                {licenca ? licenca : <span className={s.rodapePendente}>{PENDENTE}</span>}
-              </li>
+              {rt && <li>Responsável técnico: {rt}</li>}
+              {licenca && <li>Licença sanitária: {licenca}</li>}
             </ul>
           </div>
           <div>

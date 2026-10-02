@@ -44,10 +44,14 @@ export function linkWhatsApp(opcoes: { ref?: string; mensagem?: string } = {}): 
 /** Endereço do site em produção, sem barra no fim. */
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.vittalissaude.com.br").replace(/\/+$/, "");
 
+// ENDEREÇO: fonte única do site (rodapé, campanhas, especialidades e dados
+// para o Google). Tem que ser IGUAL ao Business Info da Meta e ao cartão
+// CNPJ, letra por letra (exigência da análise da Meta, 01/10/2026).
 export const ENDERECO = {
   linha: "Av. Coronel Colares Moreira, nº 3, Salas 36/37",
   bairro: "Jardim Renascença",
   cidade: "São Luís/MA",
+  cep: "65075-441",
   completo: "Av. Coronel Colares Moreira, nº 3, Salas 36/37, Jardim Renascença, São Luís/MA",
   mapsUrl: "https://maps.app.goo.gl/35Vernq6NtWw9vBLA",
   // Mapa sem chave de API, carregado só quando a pessoa chega na seção.

@@ -3,7 +3,7 @@
 
 // Eventos GA4 + GTM: função única e tipada em lib/analytics.ts.
 import { trackEvent } from "@/lib/analytics";
-import { WHATSAPP_EXIBICAO, TELEFONE_TEL, linkWhatsApp } from "@/lib/config/contato";
+import { WHATSAPP_EXIBICAO, TELEFONE_TEL, linkWhatsApp, ENDERECO } from "@/lib/config/contato";
 
 import { useState, useEffect, useRef, ReactNode } from "react";
 import Link from "next/link";
@@ -50,8 +50,8 @@ const BRAND = {
   whatsappNumber: WHATSAPP_EXIBICAO,
   phone: WHATSAPP_EXIBICAO,
   email: "atendimento@vittalissaude.com.br",
-  address: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37 — Jardim Renascença, São Luís – MA",
-  cep: "CEP: 65075-441",
+  address: ENDERECO.completo,
+  cep: `CEP: ${ENDERECO.cep}`,
   hours: {
     week: "Segunda a Sexta — 08h às 18h",
     sat: "Sábado — 08h às 12h",
@@ -1042,11 +1042,18 @@ function Footer() {
 
         {/* Identificação legal (CFM 2.336/2023) e privacidade */}
         <div style={{ padding: "24px 0", borderBottom: "1px solid rgba(255,255,255,0.08)", fontSize: 13, color: corTexto, lineHeight: 1.7 }}>
-          <p>
-            {LEGAL.razaoSocial} · CNPJ {LEGAL.cnpj} · {LEGAL.endereco}
-            {rt && <> · Responsável técnico: {rt}</>}
-            {LEGAL.licencaSanitaria && <> · Licença sanitária: {LEGAL.licencaSanitaria}</>}
-          </p>
+          {/* Mesmos dados do Business Info da Meta (pedido na análise de 01/10):
+              razão social, CNPJ e endereço precisam bater com o cadastro. */}
+          <p style={{ fontSize: 14, color: "white", fontWeight: 600 }}>Razão social: {LEGAL.razaoSocial}</p>
+          <p>Nome fantasia: {LEGAL.nomeFantasia} · CNPJ: {LEGAL.cnpj}</p>
+          <p>Endereço: {LEGAL.endereco}</p>
+          {(rt || LEGAL.licencaSanitaria) && (
+            <p>
+              {rt && <>Responsável técnico: {rt}</>}
+              {rt && LEGAL.licencaSanitaria && " · "}
+              {LEGAL.licencaSanitaria && <>Licença sanitária: {LEGAL.licencaSanitaria}</>}
+            </p>
+          )}
           <p style={{ marginTop: 6 }}>
             A indicação de cada vacina, exame ou tratamento depende de avaliação profissional.
           </p>

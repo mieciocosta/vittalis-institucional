@@ -5,7 +5,7 @@
 // lib/config/contato.ts (variável NEXT_PUBLIC_WHATSAPP_NUMBER).
 // ═══════════════════════════════════════════════════════════════
 
-import { WHATSAPP_NUMERO, WHATSAPP_EXIBICAO, linkWhatsApp } from "./config/contato";
+import { WHATSAPP_NUMERO, WHATSAPP_EXIBICAO, linkWhatsApp, ENDERECO } from "./config/contato";
 
 export const BRAND = {
   name: "Vittalis Saúde",
@@ -20,12 +20,13 @@ export const BRAND = {
   email: "atendimento@vittalissaude.com.br",
   
   // Endereço
-  address: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37",
-  neighborhood: "Jardim Renascença",
+  // Endereço: fonte única em lib/config/contato.ts (igual ao Business Info).
+  address: ENDERECO.linha,
+  neighborhood: ENDERECO.bairro,
   city: "São Luís",
   state: "MA",
-  cep: "65075-441",
-  fullAddress: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37 — Jardim Renascença, São Luís – MA",
+  cep: ENDERECO.cep,
+  fullAddress: ENDERECO.completo,
   mapsUrl: "https://maps.app.goo.gl/35Vernq6NtWw9vBLA",
   lat: -2.4966,
   lng: -44.2826,
