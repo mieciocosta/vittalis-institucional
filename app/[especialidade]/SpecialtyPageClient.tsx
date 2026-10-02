@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Specialty } from "@/lib/specialties";
 import { BRAND, waLink } from "@/lib/brand";
 import { trackEvent } from "@/lib/analytics";
+import { DadosEmpresa } from "../_componentes/DadosEmpresa";
 import { getCampanha, type Campanha } from "@/lib/content/campanhas";
 
 // Páginas de campanha ligadas a cada especialidade (bloco "Conheça também").
@@ -142,8 +143,8 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
             <img src="/images/logo-vertical.png" alt="Vittalis Saúde" style={{ height: 32, width: "auto" }} />
           </Link>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <a href={`tel:+${BRAND.whatsappNumber}`} onClick={() => trackEvent("click_phone", { source: "lp" })} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 500, color: "var(--vit-gray-500)", textDecoration: "none" }} className="hide-mobile">
-              <PhoneIcon /> {BRAND.whatsappDisplay}
+            <a href={BRAND.commercialPhoneTel} onClick={() => trackEvent("click_phone", { source: "lp" })} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 500, color: "var(--vit-gray-500)", textDecoration: "none" }} className="hide-mobile">
+              <PhoneIcon /> {BRAND.commercialPhone}
             </a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, fontWeight: 600, background: "var(--vit-primary)", color: "#fff", padding: "9px 22px", borderRadius: 100, textDecoration: "none", transition: "all .3s" }}
               onMouseEnter={e=>e.currentTarget.style.background="var(--vit-primary-dark)"} onMouseLeave={e=>e.currentTarget.style.background="var(--vit-primary)"} onClick={() => trackEvent("click_whatsapp", { source: "navbar" })}>
@@ -192,7 +193,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
 
               <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
                 <CTA href={waUrl} big>{s.ctaText}</CTA>
-                <CTA variant="outline" big href={`tel:+${BRAND.whatsappNumber}`} onClick={() => trackEvent("click_phone", { source: "lp" })}><PhoneIcon /> Ligar agora</CTA>
+                <CTA variant="outline" big href={BRAND.commercialPhoneTel} onClick={() => trackEvent("click_phone", { source: "lp" })}><PhoneIcon /> Ligar agora</CTA>
               </div>
 
               {/* Rating */}
@@ -412,9 +413,9 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
           <Anim>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
               {[
-                { icon: <MapIcon />, title: "Localização", text: BRAND.fullAddress, link: "https://maps.app.goo.gl/35Vernq6NtWw9vBLA", linkText: "Abrir no Google Maps" },
+                { icon: <MapIcon />, title: "Localização", text: BRAND.legalAddress, link: "https://maps.app.goo.gl/35Vernq6NtWw9vBLA", linkText: "Abrir no Google Maps" },
                 { icon: <ClockIcon />, title: "Horários", text: `${BRAND.hours.week}\n${BRAND.hours.sat}`, link: undefined, linkText: undefined },
-                { icon: <PhoneIcon />, title: "Contato", text: BRAND.whatsappDisplay, link: waUrl, linkText: "Falar pelo WhatsApp" },
+                { icon: <PhoneIcon />, title: "Contato", text: BRAND.commercialPhone, link: waUrl, linkText: "Falar pelo WhatsApp" },
               ].map((info, i) => (
                 <div key={i} style={{ background: "white", borderRadius: 18, padding: "24px 22px", border: "1px solid var(--vit-gray-100)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12, color: "var(--vit-primary)" }}>
@@ -443,19 +444,25 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
             </p>
             <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
               <CTA variant="white" big href={waUrl}>{s.ctaText}</CTA>
-              <CTA variant="gold" big href={`tel:+${BRAND.whatsappNumber}`} onClick={() => trackEvent("click_phone", { source: "lp" })}><PhoneIcon /> {BRAND.whatsappDisplay}</CTA>
+              <CTA variant="gold" big href={BRAND.commercialPhoneTel} onClick={() => trackEvent("click_phone", { source: "lp" })}><PhoneIcon /> {BRAND.commercialPhone}</CTA>
             </div>
           </Anim>
         </div>
       </section>
 
       {/* ════ FOOTER ════ */}
-      <footer style={{ padding: "24px", background: "var(--vit-charcoal)", textAlign: "center" }}>
-        <p style={{ fontSize: 12, color: "rgba(255,255,255,.3)" }}>
+      <footer style={{ padding: "32px 24px 24px", background: "var(--vit-charcoal)", textAlign: "center" }}>
+        {/* Dados da empresa (iguais às Informações da empresa da Meta) */}
+        <div style={{ maxWidth: 900, margin: "0 auto 20px" }}>
+          <DadosEmpresa cores={{ texto: "var(--vit-gray-300)", titulo: "white", link: "white" }} centralizado />
+        </div>
+        <p style={{ fontSize: 12, color: "var(--vit-gray-300)" }}>
           © {new Date().getFullYear()} {BRAND.name}. Todos os direitos reservados. •{" "}
           <Link href="/" style={{ color: "var(--vit-primary)", textDecoration: "none" }}>Voltar ao início</Link>
         </p>
-        <p style={{ fontSize: 11, color: "rgba(255,255,255,.15)", marginTop: 6 }}>Este site respeita a sua privacidade conforme a LGPD.</p>
+        <p style={{ fontSize: 12, color: "var(--vit-gray-300)", marginTop: 6 }}>
+          <Link href="/politica-de-privacidade" style={{ color: "white", textDecoration: "underline" }}>Política de Privacidade</Link> · Tratamos seus dados conforme a LGPD.
+        </p>
       </footer>
 
       {/* ════ FABs: Instagram + WhatsApp ════ */}

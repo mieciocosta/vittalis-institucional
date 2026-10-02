@@ -18,7 +18,8 @@
 // TEXTOS EM REVISÃO: aguardam aprovação do Dr. Miécio antes de publicar.
 // ═══════════════════════════════════════════════════════════════
 
-import { ENDERECO, HORARIOS } from "../config/contato";
+import { HORARIOS } from "../config/contato";
+import { BRAND } from "../brand";
 
 export type Icone =
   | "caderneta" | "calendario" | "sino" | "casa" | "coracao" | "escudo"
@@ -80,7 +81,7 @@ const PASSOS_PADRAO = (segundo: string): [Item, Item, Item] => [
 /** Perguntas que valem para todas as campanhas. */
 function perguntasComuns(oQueLevar: string): Pergunta[] {
   return [
-    { pergunta: "Onde fica a clínica?", resposta: `${ENDERECO.completo}.` },
+    { pergunta: "Onde fica a clínica?", resposta: `${BRAND.legalAddress}.` },
     { pergunta: "Qual é o horário?", resposta: `${HORARIOS.semana}. ${HORARIOS.sabado}.` },
     { pergunta: "Vocês atendem em casa?", resposta: "Sim. A disponibilidade para o seu bairro é confirmada no contato." },
     { pergunta: "O que devo levar?", resposta: oQueLevar },

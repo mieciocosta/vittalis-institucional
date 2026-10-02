@@ -9,14 +9,17 @@
 // a tela mostra "pendente" e o `npm run check:campanhas` avisa.
 // ═══════════════════════════════════════════════════════════════
 
-import { ENDERECO } from "./config/contato";
+import { BRAND } from "./brand";
 
 export const LEGAL = {
-  razaoSocial: "Santos Costa Comércio de Vacinas Ltda",
+  // Razão social, CNPJ e endereço: fonte única em lib/brand.ts (iguais à Meta).
+  razaoSocial: BRAND.legalName,
   nomeFantasia: "Vittalis Saúde",
-  cnpj: "35.857.936/0001-18",
-  endereco: ENDERECO.completo,
-  email: "atendimento@vittalissaude.com.br",
+  cnpj: BRAND.cnpj,
+  endereco: BRAND.legalAddress,
+  telefone: BRAND.commercialPhone,
+  telefoneTel: BRAND.commercialPhoneTel,
+  email: BRAND.email,
 
   // TODO(pendente): nome completo do responsável técnico.
   responsavelTecnicoNome: null as string | null,

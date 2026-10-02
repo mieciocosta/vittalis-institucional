@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import localFont from "next/font/local";
 import "./globals.css";
-import { WHATSAPP_NUMERO } from "@/lib/config/contato";
+import { BRAND } from "@/lib/brand";
 
 // Fontes da marca hospedadas no próprio site (antes vinham do Google Fonts
 // por @import, o que travava a renderização e pesava no Lighthouse).
@@ -92,9 +92,11 @@ const jsonLd = {
   url: "https://www.vittalissaude.com.br",
   logo: "https://www.vittalissaude.com.br/images/logo-horizontal.png",
   image: "https://www.vittalissaude.com.br/images/og-vittalis.jpg",
-  telephone: `+${WHATSAPP_NUMERO}`,
-  email: "atendimento@vittalissaude.com.br",
-  address: { "@type": "PostalAddress", streetAddress: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37", addressLocality: "São Luís", addressRegion: "MA", postalCode: "65075-441", addressCountry: "BR" },
+  legalName: BRAND.legalName,
+  taxID: BRAND.cnpj,
+  telephone: BRAND.commercialPhoneTel.replace("tel:", ""),
+  email: BRAND.email,
+  address: { "@type": "PostalAddress", streetAddress: BRAND.street, addressLocality: BRAND.city, addressRegion: BRAND.state, postalCode: BRAND.cep, addressCountry: "BR" },
   geo: { "@type": "GeoCoordinates", latitude: -2.4966, longitude: -44.2826 },
   openingHoursSpecification: [
     { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "08:00", closes: "18:00" },

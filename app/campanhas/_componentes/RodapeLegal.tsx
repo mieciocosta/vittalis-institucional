@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { LEGAL, PENDENTE, responsavelTecnicoTexto } from "@/lib/legal";
 import { RESSALVA } from "@/lib/content/campanhas";
+import { DadosEmpresa } from "../../_componentes/DadosEmpresa";
 import s from "./campanha.module.css";
 
 /** Identificação legal (CFM 2.336/2023) + link da Política de Privacidade. */
@@ -14,10 +15,9 @@ export function RodapeLegal() {
         <div className={s.rodapeGrade}>
           <div>
             <Image src="/images/campanhas/logo-rodape.png" alt={LEGAL.nomeFantasia} width={300} height={40} className={s.rodapeLogo} unoptimized loading="lazy" />
-            <ul className={s.rodapeLista}>
-              <li>Razão social: {LEGAL.razaoSocial}</li>
-              <li>CNPJ: {LEGAL.cnpj}</li>
-              <li>Endereço: {LEGAL.endereco}</li>
+            {/* Dados da empresa: iguais às Informações da empresa da Meta */}
+            <DadosEmpresa cores={{ texto: "var(--vit-primary-light)", titulo: "#fff", link: "#fff" }} />
+            <ul className={s.rodapeLista} style={{ marginTop: 10 }}>
               <li>
                 Responsável técnico:{" "}
                 <span className={rt.includes(PENDENTE) ? s.rodapePendente : undefined}>{rt}</span>

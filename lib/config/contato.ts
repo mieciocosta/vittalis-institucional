@@ -13,16 +13,17 @@
 // `npm run check:campanhas` lê ele direto pelo Node.
 // ═══════════════════════════════════════════════════════════════
 
-const NUMERO_PADRAO = "5598920053606";
+// 01/10: o WhatsApp do site aponta para o telefone comercial oficial (o mesmo
+// das Informações da empresa da Meta). Os números antigos saíram do site e o
+// número novo da API ainda não entra (lista em scripts/campanhas-termos.json).
+const NUMERO_PADRAO = "5598988278736";
 
-/** Só dígitos, com DDI e DDD. Ex.: 5598920053606 */
+/** Só dígitos, com DDI e DDD. Ex.: 5598988278736 */
 export const WHATSAPP_NUMERO = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || NUMERO_PADRAO).replace(/\D/g, "");
 
-/** (98) 92005-3606 */
+/** (98) 98827-8736 */
 export const WHATSAPP_EXIBICAO = formatarNumero(WHATSAPP_NUMERO);
 
-/** Link de ligar no formato internacional, que todo celular entende. */
-export const TELEFONE_TEL = `tel:+${WHATSAPP_NUMERO}`;
 
 /**
  * Mensagem pré-preenchida das páginas de campanha. Neutra de propósito:
@@ -44,11 +45,9 @@ export function linkWhatsApp(opcoes: { ref?: string; mensagem?: string } = {}): 
 /** Endereço do site em produção, sem barra no fim. */
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.vittalissaude.com.br").replace(/\/+$/, "");
 
+// O endereço por extenso é o oficial, em lib/brand.ts (legalAddress).
+// Aqui ficam só os links do mapa.
 export const ENDERECO = {
-  linha: "Av. Coronel Colares Moreira, nº 3, Salas 36/37",
-  bairro: "Jardim Renascença",
-  cidade: "São Luís/MA",
-  completo: "Av. Coronel Colares Moreira, nº 3, Salas 36/37, Jardim Renascença, São Luís/MA",
   mapsUrl: "https://maps.app.goo.gl/35Vernq6NtWw9vBLA",
   // Mapa sem chave de API, carregado só quando a pessoa chega na seção.
   mapaEmbed: "https://www.google.com/maps?q=Av.+Coronel+Colares+Moreira,+3,+Jardim+Renascen%C3%A7a,+S%C3%A3o+Lu%C3%ADs+-+MA&output=embed",

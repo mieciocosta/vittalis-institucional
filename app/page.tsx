@@ -3,7 +3,10 @@
 
 // Eventos GA4 + GTM: função única e tipada em lib/analytics.ts.
 import { trackEvent } from "@/lib/analytics";
-import { WHATSAPP_EXIBICAO, TELEFONE_TEL, linkWhatsApp } from "@/lib/config/contato";
+import { linkWhatsApp } from "@/lib/config/contato";
+// Dados oficiais da empresa (iguais à Meta). O BRAND local abaixo é outro objeto.
+import { BRAND as EMPRESA } from "@/lib/brand";
+import { DadosEmpresa } from "./_componentes/DadosEmpresa";
 
 import { useState, useEffect, useRef, ReactNode } from "react";
 import Link from "next/link";
@@ -47,10 +50,10 @@ const BRAND = {
   // Número: fonte única em lib/config/contato.ts (NEXT_PUBLIC_WHATSAPP_NUMBER).
   // Mensagem neutra (sem nome de serviço, vacina ou doença), igual em todo o site.
   whatsapp: linkWhatsApp(),
-  whatsappNumber: WHATSAPP_EXIBICAO,
-  phone: WHATSAPP_EXIBICAO,
+  whatsappNumber: EMPRESA.whatsappDisplay,
+  phone: EMPRESA.commercialPhone,
   email: "atendimento@vittalissaude.com.br",
-  address: "Business Center — Av. Coronel Colares Moreira, 3, Sala 36 e 37 — Jardim Renascença, São Luís – MA",
+  address: EMPRESA.legalAddress,
   cep: "CEP: 65075-441",
   hours: {
     week: "Segunda a Sexta — 08h às 18h",
@@ -389,11 +392,11 @@ function Navbar() {
 
               <div style={{ width: 1, height: 24, background: "var(--vit-gray-100)", margin: "0 10px" }} />
 
-              <a href={TELEFONE_TEL} onClick={() => trackEvent("click_phone", { source: "navbar", page: "home" })} style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 12px", fontSize: 13, fontWeight: 500, color: "var(--vit-gray-600)", textDecoration: "none", borderRadius: 10, transition: "all 0.2s" }}
+              <a href={EMPRESA.commercialPhoneTel} onClick={() => trackEvent("click_phone", { source: "navbar", page: "home" })} style={{ display: "flex", alignItems: "center", gap: 6, padding: "8px 12px", fontSize: 13, fontWeight: 500, color: "var(--vit-gray-600)", textDecoration: "none", borderRadius: 10, transition: "all 0.2s" }}
                 onMouseEnter={e => { e.currentTarget.style.color = "var(--vit-primary)"; e.currentTarget.style.background = "var(--vit-primary-50)"; }}
                 onMouseLeave={e => { e.currentTarget.style.color = "var(--vit-gray-600)"; e.currentTarget.style.background = "transparent"; }}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                {WHATSAPP_EXIBICAO}
+                {EMPRESA.commercialPhone}
               </a>
 
               <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("click_whatsapp", { source: "navbar", page: "home" })} style={{ fontSize: 13, fontWeight: 600, background: "var(--vit-primary)", color: "white", padding: "10px 22px", borderRadius: 12, textDecoration: "none", boxShadow: "0 2px 12px rgba(0,184,192,0.2)", transition: "all 0.3s", display: "flex", alignItems: "center", gap: 8 }}
@@ -424,7 +427,7 @@ function Navbar() {
               </a>
             ))}
             <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 28, marginBottom: 24 }}>
-              <a href={TELEFONE_TEL} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15, color: "var(--vit-gray-700)", textDecoration: "none" }}>📞 {WHATSAPP_EXIBICAO}</a>
+              <a href={EMPRESA.commercialPhoneTel} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15, color: "var(--vit-gray-700)", textDecoration: "none" }}>📞 {EMPRESA.commercialPhone}</a>
               <a href="https://www.instagram.com/vittalissaudeslz/" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15, color: "var(--vit-gray-700)", textDecoration: "none" }}>📸 @vittalissaudeslz</a>
               <a href="https://maps.app.goo.gl/35Vernq6NtWw9vBLA" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 14, color: "var(--vit-gray-500)", textDecoration: "none" }}>📍 Jardim Renascença, São Luís</a>
             </div>
@@ -923,7 +926,7 @@ function CTAFinalSection() {
           </p>
           <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
             <CTAButton variant="white" size="lg">Agende pelo WhatsApp</CTAButton>
-            <CTAButton variant="gold" size="lg" href={TELEFONE_TEL}>
+            <CTAButton variant="gold" size="lg" href={EMPRESA.commercialPhoneTel}>
               {icons.phone} Ligar Agora
             </CTAButton>
           </div>
@@ -1011,7 +1014,7 @@ function Footer() {
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.phone}
-                <a href={TELEFONE_TEL} style={{ fontSize: 14, color: corTexto, lineHeight: 1.5, textDecoration: "none" }}>{BRAND.phone}</a>
+                <a href={EMPRESA.commercialPhoneTel} style={{ fontSize: 14, color: corTexto, lineHeight: 1.5, textDecoration: "none" }}>{EMPRESA.commercialPhone}</a>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.mail}
@@ -1023,7 +1026,7 @@ function Footer() {
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
                 {icons.mapPin}
                 <div style={{ fontSize: 14, color: corTexto, lineHeight: 1.5 }}>
-                  <div>{LEGAL.endereco}</div>
+                  <div>{EMPRESA.legalAddress}</div>
                   <a href={BRAND.mapsUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--vit-primary)", fontWeight: 600, textDecoration: "underline", display: "inline-block", marginTop: 4 }}>
                     Ver no mapa (Google Maps) ↗
                   </a>
@@ -1040,14 +1043,17 @@ function Footer() {
           </div>
         </div>
 
-        {/* Identificação legal (CFM 2.336/2023) e privacidade */}
+        {/* Dados da empresa (iguais às Informações da empresa da Meta) e identificação (CFM 2.336/2023) */}
         <div style={{ padding: "24px 0", borderBottom: "1px solid rgba(255,255,255,0.08)", fontSize: 13, color: corTexto, lineHeight: 1.7 }}>
-          <p>
-            {LEGAL.razaoSocial} · CNPJ {LEGAL.cnpj} · {LEGAL.endereco}
-            {rt && <> · Responsável técnico: {rt}</>}
-            {LEGAL.licencaSanitaria && <> · Licença sanitária: {LEGAL.licencaSanitaria}</>}
-          </p>
-          <p style={{ marginTop: 6 }}>
+          <DadosEmpresa cores={{ texto: corTexto, titulo: "white", link: "white" }} />
+          {(rt || LEGAL.licencaSanitaria) && (
+            <p style={{ marginTop: 6 }}>
+              {rt && <>Responsável técnico: {rt}</>}
+              {rt && LEGAL.licencaSanitaria && " · "}
+              {LEGAL.licencaSanitaria && <>Licença sanitária: {LEGAL.licencaSanitaria}</>}
+            </p>
+          )}
+          <p style={{ marginTop: 10 }}>
             A indicação de cada vacina, exame ou tratamento depende de avaliação profissional.
           </p>
         </div>
