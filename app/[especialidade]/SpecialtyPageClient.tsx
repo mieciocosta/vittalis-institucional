@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import type { Specialty } from "@/lib/specialties";
 import { BRAND, waLink } from "@/lib/brand";
+import { EXEMPLO_TELEFONE, TAMANHO_TELEFONE, mascararTelefone, telefoneCompleto } from "@/lib/telefone";
 import { trackEvent } from "@/lib/analytics";
 import { DadosEmpresa } from "../_componentes/DadosEmpresa";
 import { getCampanha, type Campanha } from "@/lib/content/campanhas";
@@ -84,8 +85,12 @@ function FAQ({ items }: { items: { q: string; a: string }[] }) {
 function LeadForm({ specialty, waUrl }: { specialty: string; waUrl: string }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  
+  const [erro, setErro] = useState("");
+
   const handleSubmit = () => {
+    if (name.trim().length < 2) return setErro("Digite seu nome.");
+    if (!telefoneCompleto(phone)) return setErro(`Digite o WhatsApp com DDD, por exemplo ${EXEMPLO_TELEFONE}.`);
+    setErro("");
     trackEvent("generate_lead", { source: "form" });
     // Mensagem neutra: sem o nome do serviço (política do WhatsApp Business).
     const msg = `Olá! Meu nome é ${name || "paciente"}. Vim pelo site da Vittalis e gostaria de atendimento.${phone ? ` Meu telefone: ${phone}` : ""}`;
@@ -103,12 +108,13 @@ function LeadForm({ specialty, waUrl }: { specialty: string; waUrl: string }) {
       <h3 style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 600, color: "var(--vit-charcoal)", marginBottom: 6, textAlign: "center" }}>Agende agora</h3>
       <p style={{ fontSize: 14, color: "var(--vit-gray-500)", textAlign: "center", marginBottom: 24 }}>Preencha e fale com a equipe pelo WhatsApp</p>
       <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-        <input type="text" placeholder="Seu nome" value={name} onChange={e=>setName(e.target.value)} style={inputStyle} onFocus={e=>e.currentTarget.style.borderColor="var(--vit-primary)"} onBlur={e=>e.currentTarget.style.borderColor="var(--vit-gray-100)"} />
-        <input type="tel" placeholder="Seu WhatsApp" value={phone} onChange={e=>setPhone(e.target.value)} style={inputStyle} onFocus={e=>e.currentTarget.style.borderColor="var(--vit-primary)"} onBlur={e=>e.currentTarget.style.borderColor="var(--vit-gray-100)"} />
+        <input type="text" placeholder="Seu nome" aria-label="Seu nome" autoComplete="name" maxLength={80} value={name} onChange={e=>setName(e.target.value)} style={inputStyle} onFocus={e=>e.currentTarget.style.borderColor="var(--vit-primary)"} onBlur={e=>e.currentTarget.style.borderColor="var(--vit-gray-100)"} />
+        <input type="tel" inputMode="tel" autoComplete="tel" placeholder={`Seu WhatsApp: ${EXEMPLO_TELEFONE}`} aria-label="Seu WhatsApp com DDD" maxLength={TAMANHO_TELEFONE} value={phone} onChange={e=>setPhone(mascararTelefone(e.target.value))} style={inputStyle} onFocus={e=>e.currentTarget.style.borderColor="var(--vit-primary)"} onBlur={e=>e.currentTarget.style.borderColor="var(--vit-gray-100)"} />
         <button onClick={handleSubmit} style={{ width: "100%", padding: "16px", borderRadius: 100, border: "none", background: "var(--vit-primary)", color: "white", fontSize: 16, fontWeight: 600, fontFamily: "var(--font-body)", cursor: "pointer", boxShadow: "0 4px 20px rgba(0,184,192,.25)", transition: "all .3s", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}
           onMouseEnter={e=>{e.currentTarget.style.background="var(--vit-primary-dark)";e.currentTarget.style.transform="translateY(-1px)"}} onMouseLeave={e=>{e.currentTarget.style.background="var(--vit-primary)";e.currentTarget.style.transform="none"}}>
           Agendar pelo WhatsApp <ArrowR />
         </button>
+        {erro && <p role="alert" style={{ fontSize: 14, color: "#B42318", textAlign: "center", margin: 0 }}>{erro}</p>}
         <p style={{ fontSize: 11, color: "var(--vit-gray-300)", textAlign: "center", lineHeight: 1.5 }}>Ao enviar, você concorda com nossa política de privacidade conforme a LGPD.</p>
       </div>
     </div>
