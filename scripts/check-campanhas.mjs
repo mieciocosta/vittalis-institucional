@@ -68,7 +68,7 @@ function arquivos(dir, filtro) {
 }
 
 async function modoFontes() {
-  const { CAMPANHAS, DIFERENCIAIS, RESSALVA, CONFIANCA } = await import(join(RAIZ, "lib/content/campanhas.ts"));
+  const { CAMPANHAS, DIFERENCIAIS, RESSALVA, MIDIA } = await import(join(RAIZ, "lib/content/campanhas.ts"));
   const { mensagemComReferencia } = await import(join(RAIZ, "lib/config/contato.ts"));
   const { EVENTOS_CAMPANHA, PARAMETROS_CAMPANHA } = await import(join(RAIZ, "lib/analytics.ts"));
   const { LEGAL } = await import(join(RAIZ, "lib/legal.ts"));
@@ -85,10 +85,11 @@ async function modoFontes() {
     // 2. Mensagem pré-preenchida do WhatsApp
     conferirTexto(mensagemComReferencia(c.ref), `whatsapp ${c.ref}`);
   }
-  cadaTexto({ DIFERENCIAIS, RESSALVA, CONFIANCA }, "comum", (t, onde) => { conferirTexto(t, onde); conferirCaixaAlta(t, onde); });
+  cadaTexto({ DIFERENCIAIS, RESSALVA, MIDIA }, "comum", (t, onde) => { conferirTexto(t, onde); if (!/\.(arquivo|poster)$/.test(onde)) conferirCaixaAlta(t, onde); });
 
   // 3. Arquivos de imagem das campanhas
   for (const f of arquivos(join(RAIZ, "public/images/campanhas"), () => true)) conferirTexto(relative(RAIZ, f), "arquivo de imagem");
+  for (const f of arquivos(join(RAIZ, "public/videos/campanhas"), () => true)) conferirTexto(relative(RAIZ, f), "arquivo de vídeo");
 
   // 4. Analytics: só os nomes e parâmetros neutros da lista branca
   for (const e of EVENTOS_CAMPANHA) if (!CFG.eventosPermitidos.includes(e)) problemas.push(`analytics: evento fora da lista "${e}"`);
