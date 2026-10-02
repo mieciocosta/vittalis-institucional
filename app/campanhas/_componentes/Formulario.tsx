@@ -4,6 +4,9 @@ import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { trackCampanha } from "@/lib/analytics";
 import { CHAVES_UTM, capturarUtms } from "@/lib/campanhas/utm";
+import { linkWhatsApp, mensagemComReferencia } from "@/lib/config/contato";
+import { EXEMPLO_TELEFONE, PADRAO_TELEFONE, TAMANHO_TELEFONE, mascararTelefone } from "@/lib/telefone";
+import { LinkRastreado } from "./Rastreio";
 import { Ico, type NomeIcone } from "./Icones";
 import s from "./campanha.module.css";
 
@@ -14,14 +17,26 @@ import s from "./campanha.module.css";
 // LGPD: só o mínimo para a equipe retornar. Nada de dado de saúde,
 // documento, idade exata ou qual vacina. Envio por POST com JSON (nunca
 // na URL) e o sucesso aparece aqui mesmo, sem trocar de página.
+//
+// Se o envio falhar (servidor fora, rede ruim), o contato NÃO se perde: o
+// formulário mostra um botão que abre o WhatsApp com o nome e o período já
+// escritos. O botão precisa do toque da pessoa porque o navegador bloqueia
+// abrir outra janela sozinho depois de uma espera.
 
-type Estado = { tipo: "pronto" } | { tipo: "enviando" } | { tipo: "sucesso" } | { tipo: "erro"; mensagem: string };
+type Estado =
+  | { tipo: "pronto" }
+  | { tipo: "enviando" }
+  | { tipo: "sucesso" }
+  | { tipo: "erro"; mensagem: string }
+  | { tipo: "whatsapp"; link: string };
 
 const PARA_QUEM: { valor: string; rotulo: string; icone: NomeIcone }[] = [
   { valor: "para_mim", rotulo: "Para mim", icone: "coracao" },
   { valor: "para_meu_filho", rotulo: "Para meu filho(a)", icone: "bebe" },
   { valor: "outra_pessoa", rotulo: "Outra pessoa", icone: "equipe" },
 ];
+
+const PERIODO_TEXTO: Record<string, string> = { manha: "pela manhã", tarde: "à tarde", qualquer: "em qualquer horário" };
 
 const PERIODOS = [
   { valor: "manha", rotulo: "Manhã" },
@@ -30,9 +45,8 @@ const PERIODOS = [
 ];
 
 const TOTAL = 3;
-const ERRO_PADRAO = "Não conseguimos enviar agora. Tente de novo em instantes ou fale com a equipe pelo WhatsApp.";
 
-export function Formulario({ slug, titulo, texto }: { slug: string; titulo: string; texto: string }) {
+export function Formulario({ slug, refCampanha, titulo, texto }: { slug: string; refCampanha: string; titulo: string; texto: string }) {
   const [estado, setEstado] = useState<Estado>({ tipo: "pronto" });
   const [etapa, setEtapa] = useState(1);
   const formRef = useRef<HTMLFormElement>(null);
@@ -91,23 +105,56 @@ export function Formulario({ slug, titulo, texto }: { slug: string; titulo: stri
     corpo.consentimento = dados.get("consentimento") === "on";
     corpo.tempo_ms = Date.now() - montadoEm.current;
 
+    // Plano B: a mesma mensagem neutra da campanha + nome e período. Nada
+    // de saúde, vacina ou "para quem" (regra das mensagens de WhatsApp).
+    const nome = String(dados.get("nome") ?? "").trim();
+    const periodo = PERIODO_TEXTO[String(dados.get("periodo"))] ?? "";
+    const planoB = linkWhatsApp({
+      mensagem: `${mensagemComReferencia(refCampanha)} Meu nome é ${nome}.${periodo ? ` Prefiro contato ${periodo}.` : ""}`,
+    });
+
     setEstado({ tipo: "enviando" });
     try {
       const resp = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(corpo),
+        signal: AbortSignal.timeout(8000),
       });
       const json = (await resp.json().catch(() => ({}))) as { ok?: boolean; erro?: string };
-      if (!resp.ok || !json.ok) {
-        setEstado({ tipo: "erro", mensagem: json.erro || ERRO_PADRAO });
+      if (resp.ok && json.ok) {
+        trackCampanha("generate_lead", { campaign_slug: slug, ...capturarUtms() });
+        setEstado({ tipo: "sucesso" });
         return;
       }
-      trackCampanha("generate_lead", { campaign_slug: slug, ...capturarUtms() });
-      setEstado({ tipo: "sucesso" });
+      // 422 = algum campo errado: mostra o motivo para a pessoa corrigir.
+      if (resp.status === 422 && json.erro) {
+        setEstado({ tipo: "erro", mensagem: json.erro });
+        return;
+      }
+      setEstado({ tipo: "whatsapp", link: planoB });
     } catch {
-      setEstado({ tipo: "erro", mensagem: ERRO_PADRAO });
+      setEstado({ tipo: "whatsapp", link: planoB });
     }
+  }
+
+  if (estado.tipo === "whatsapp") {
+    return (
+      <div className={s.formCartao} id="formulario">
+        <div className={s.sucesso} role="status" aria-live="polite">
+          <div className={s.sucessoIcone} aria-hidden="true">
+            <Ico nome="whats" tamanho={34} />
+          </div>
+          <h2 className={s.formTitulo}>Falta só um toque</h2>
+          <p className={s.formTexto}>Toque no botão abaixo e envie a mensagem que já deixamos escrita. A equipe responde por lá.</p>
+          <p className={s.planoB}>
+            <LinkRastreado href={estado.link} evento="click_whatsapp" slug={slug} externo className={`${s.botao} ${s.botaoPrimario}`}>
+              <Ico nome="whats" tamanho={20} /> Enviar pelo WhatsApp
+            </LinkRastreado>
+          </p>
+        </div>
+      </div>
+    );
   }
 
   if (estado.tipo === "sucesso") {
@@ -177,7 +224,7 @@ export function Formulario({ slug, titulo, texto }: { slug: string; titulo: stri
           <div className={s.campos}>
             <div className={s.campo}>
               <label htmlFor="lead-nome" className={s.rotuloCampo}>Seu nome</label>
-              <input id="lead-nome" name="nome" className={s.entrada} type="text" autoComplete="name" required />
+              <input id="lead-nome" name="nome" className={s.entrada} type="text" autoComplete="name" required minLength={2} maxLength={80} />
             </div>
             <div className={s.campo}>
               <label htmlFor="lead-telefone" className={s.rotuloCampo}>WhatsApp com DDD</label>
@@ -189,6 +236,13 @@ export function Formulario({ slug, titulo, texto }: { slug: string; titulo: stri
                 inputMode="tel"
                 autoComplete="tel"
                 required
+                maxLength={TAMANHO_TELEFONE}
+                pattern={PADRAO_TELEFONE}
+                title={`Digite o WhatsApp com DDD, por exemplo ${EXEMPLO_TELEFONE}`}
+                placeholder={EXEMPLO_TELEFONE}
+                onInput={(e) => {
+                  e.currentTarget.value = mascararTelefone(e.currentTarget.value);
+                }}
               />
             </div>
           </div>

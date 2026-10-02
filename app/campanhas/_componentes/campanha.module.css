@@ -643,3 +643,6 @@
 @media (prefers-reduced-motion: reduce) {
   .videoPlay { transition: none; }
 }
+
+/* Plano B do formulário: botão do WhatsApp quando o envio falha. */
+.planoB { margin-top: 22px; display: flex; justify-content: center; }

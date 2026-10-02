@@ -21,15 +21,14 @@ const REF_POR_SLUG = Object.fromEntries(CAMPANHAS.map((c) => [c.slug, c.ref]));
 
 const texto = (max: number) => z.string().trim().max(max).optional().default("");
 
-// Campos livres (02/10, pedido do master): nome e telefone sem limite de
-// caracteres e sem máscara. A pessoa escreve do jeito que quiser e a equipe
-// confere na hora de ligar. Só exige que não venha vazio. O teto de 2000 é
-// só contra robô colando texto gigante: ninguém digita isso de verdade.
-const LIVRE = 2000;
-
+// O formulário manda o telefone com máscara, (98) 98888-7777; aqui fica só
+// o número, com DDD (10 ou 11 dígitos, ou 12/13 se vier com o 55).
 const esquema = z.object({
-  nome: z.string().trim().min(1, "Informe seu nome.").max(LIVRE),
-  telefone: z.string().trim().min(1, "Informe seu WhatsApp.").max(LIVRE),
+  nome: z.string().trim().min(2, "Informe seu nome.").max(80, "Nome muito longo."),
+  telefone: z
+    .string()
+    .transform((t) => t.replace(/\D/g, ""))
+    .pipe(z.string().min(10, "Informe o WhatsApp com DDD.").max(13, "Telefone inválido.")),
   para_quem: z.enum(["para_mim", "para_meu_filho", "outra_pessoa"], { message: "Escolha para quem é o atendimento." }),
   periodo: z.enum(["manha", "tarde", "qualquer"], { message: "Escolha o melhor período." }),
   consentimento: z.literal(true, { message: "É preciso autorizar o contato para enviar." }),
@@ -142,8 +141,7 @@ export async function processarLead(request: Request, env: AmbienteLead): Promis
     campanha: d.campanha,
     ref: REF_POR_SLUG[d.campanha],
     nome: d.nome,
-    telefone: d.telefone, // como a pessoa digitou
-    telefone_digitos: d.telefone.replace(/\D/g, ""),
+    telefone: d.telefone,
     para_quem: d.para_quem,
     periodo: d.periodo,
     consentimento: true,

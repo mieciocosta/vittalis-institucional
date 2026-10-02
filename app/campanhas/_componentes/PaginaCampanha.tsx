@@ -98,7 +98,7 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
             </div>
 
             <div className={s.heroLado}>
-              <Formulario slug={c.slug} titulo={c.formulario.titulo} texto={c.formulario.texto} />
+              <Formulario slug={c.slug} refCampanha={c.ref} titulo={c.formulario.titulo} texto={c.formulario.texto} />
               <p className={s.ressalvaHero}>{RESSALVA}</p>
             </div>
           </div>
