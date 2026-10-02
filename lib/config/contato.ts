@@ -13,21 +13,23 @@
 // `npm run check:campanhas` lê ele direto pelo Node.
 // ═══════════════════════════════════════════════════════════════
 
-// 02/10, pedido do master: o número oficial do site (telefone, WhatsApp e
-// cadastro da empresa) é o 98 97016-3054. O 92005-3606 é pessoal e não pode
-// aparecer em lugar nenhum (lista de banidos em scripts/campanhas-termos.json).
-const NUMERO = "5598970163054";
+// 02/10, pedido do master: o site usa o 98 98827-8736 (telefone, WhatsApp e
+// cadastro da empresa, igual às Informações da empresa da Meta). O 97016-3054
+// fica FORA do site por enquanto: tráfego do site nesse número arrisca o
+// WhatsApp dele ser derrubado. O 92005-3606 também não aparece em lugar
+// nenhum (lista de banidos em scripts/campanhas-termos.json).
+const NUMERO = "5598988278736";
 
-/** Só dígitos, com DDI e DDD. Ex.: 5598970163054 */
+/** Só dígitos, com DDI e DDD. Ex.: 5598988278736 */
 export const WHATSAPP_NUMERO = NUMERO;
 
 /** Telefone para ligar, no formato do link tel: */
 export const TELEFONE_TEL = `tel:+${NUMERO}`;
 
-/** +55 98 97016-3054 (formato do cadastro da Meta) */
+/** +55 98 98827-8736 (formato do cadastro da Meta) */
 export const TELEFONE_EXIBICAO = formatarInternacional(NUMERO);
 
-/** (98) 97016-3054 */
+/** (98) 98827-8736 */
 export const WHATSAPP_EXIBICAO = formatarNumero(WHATSAPP_NUMERO);
 
 

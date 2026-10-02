@@ -177,7 +177,7 @@ export function Formulario({ slug, titulo, texto }: { slug: string; titulo: stri
           <div className={s.campos}>
             <div className={s.campo}>
               <label htmlFor="lead-nome" className={s.rotuloCampo}>Seu nome</label>
-              <input id="lead-nome" name="nome" className={s.entrada} type="text" autoComplete="name" required minLength={2} maxLength={80} />
+              <input id="lead-nome" name="nome" className={s.entrada} type="text" autoComplete="name" required />
             </div>
             <div className={s.campo}>
               <label htmlFor="lead-telefone" className={s.rotuloCampo}>WhatsApp com DDD</label>
@@ -189,9 +189,6 @@ export function Formulario({ slug, titulo, texto }: { slug: string; titulo: stri
                 inputMode="tel"
                 autoComplete="tel"
                 required
-                pattern="[0-9\s\(\)+\-]{10,20}"
-                title="Digite o número com DDD, por exemplo (98) 90000-0000"
-                placeholder="(98) 90000-0000"
               />
             </div>
           </div>
