@@ -1,11 +1,10 @@
 // ═══════════════════════════════════════════════════════════════
 // VITTALIS SAÚDE — CONFIGURAÇÃO DA MARCA
 // Altere aqui os dados da empresa, endereço, redes sociais etc.
-// O número de WhatsApp mora em lib/config/contato.ts
-// (variável NEXT_PUBLIC_WHATSAPP_NUMBER).
+// O número (telefone e WhatsApp) mora em lib/config/contato.ts.
 // ═══════════════════════════════════════════════════════════════
 
-import { WHATSAPP_NUMERO, WHATSAPP_EXIBICAO, linkWhatsApp } from "./config/contato";
+import { WHATSAPP_NUMERO, WHATSAPP_EXIBICAO, TELEFONE_EXIBICAO, TELEFONE_TEL, linkWhatsApp } from "./config/contato";
 
 // DADOS OFICIAIS DA EMPRESA: copiados LETRA POR LETRA das "Informações da
 // empresa" do portfólio da Meta (inclusive maiúsculas e "Maranhao" sem
@@ -15,8 +14,9 @@ import { WHATSAPP_NUMERO, WHATSAPP_EXIBICAO, linkWhatsApp } from "./config/conta
 const LEGAL_NAME = "SANTOS COSTA COMERCIO DE VACINAS LTDA";
 const CNPJ = "35.857.936/0001-18";
 const LEGAL_ADDRESS = "AVENIDA CEL COLARES MOREIRA, ED. BUSINESS CENTER RENASCENCA LOJA 37 3, RENASCENCA, SAO LUIS, Maranhao 65075-441, Brasil";
-const COMMERCIAL_PHONE = "+55 98 98827-8736";
-const COMMERCIAL_PHONE_TEL = "tel:+5598988278736";
+// O telefone é o mesmo número do WhatsApp (02/10, pedido do master).
+const COMMERCIAL_PHONE = TELEFONE_EXIBICAO;
+const COMMERCIAL_PHONE_TEL = TELEFONE_TEL;
 
 export const BRAND = {
   name: "Vittalis Saúde",
@@ -58,7 +58,10 @@ export const BRAND = {
   },
   
   // Redes Sociais
+  // Perfil: só para o Google saber que é nossa conta (sameAs). Todo botão
+  // de Instagram abre o Direct (02/10, pedido do master).
   instagram: "https://www.instagram.com/vittalissaudeslz/",
+  instagramDirect: "https://ig.me/m/vittalissaudeslz",
   // facebook: removido — sem página ativa,
   
   // URLs

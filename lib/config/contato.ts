@@ -5,23 +5,29 @@
 // número estava escrito à mão em 14 lugares. Agora todo link wa.me e
 // todo tel: do site sai daqui.
 //
-// O número vem de NEXT_PUBLIC_WHATSAPP_NUMBER (variável de BUILD no
-// Cloudflare Pages: o site é estático, então o valor é gravado no HTML
-// na hora do build). Sem a variável, vale o número padrão abaixo.
+// O número fica escrito AQUI e só aqui. Não existe mais variável de
+// ambiente para ele (02/10): uma variável esquecida no painel da Cloudflare
+// podia publicar um número antigo sem ninguém perceber pelo código.
 //
 // Este arquivo não importa nada de propósito: o script
 // `npm run check:campanhas` lê ele direto pelo Node.
 // ═══════════════════════════════════════════════════════════════
 
-// 01/10: o WhatsApp do site aponta para o telefone comercial oficial (o mesmo
-// das Informações da empresa da Meta). Os números antigos saíram do site e o
-// número novo da API ainda não entra (lista em scripts/campanhas-termos.json).
-const NUMERO_PADRAO = "5598988278736";
+// 02/10, pedido do master: o número oficial do site (telefone, WhatsApp e
+// cadastro da empresa) é o 98 97016-3054. O 92005-3606 é pessoal e não pode
+// aparecer em lugar nenhum (lista de banidos em scripts/campanhas-termos.json).
+const NUMERO = "5598970163054";
 
-/** Só dígitos, com DDI e DDD. Ex.: 5598988278736 */
-export const WHATSAPP_NUMERO = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || NUMERO_PADRAO).replace(/\D/g, "");
+/** Só dígitos, com DDI e DDD. Ex.: 5598970163054 */
+export const WHATSAPP_NUMERO = NUMERO;
 
-/** (98) 98827-8736 */
+/** Telefone para ligar, no formato do link tel: */
+export const TELEFONE_TEL = `tel:+${NUMERO}`;
+
+/** +55 98 97016-3054 (formato do cadastro da Meta) */
+export const TELEFONE_EXIBICAO = formatarInternacional(NUMERO);
+
+/** (98) 97016-3054 */
 export const WHATSAPP_EXIBICAO = formatarNumero(WHATSAPP_NUMERO);
 
 
@@ -57,6 +63,11 @@ export const HORARIOS = {
   semana: "Segunda a sexta, das 8h às 18h",
   sabado: "Sábado, das 8h às 12h",
 };
+
+function formatarInternacional(numero: string): string {
+  const m = numero.match(/^55(\d{2})(\d{4,5})(\d{4})$/);
+  return m ? `+55 ${m[1]} ${m[2]}-${m[3]}` : `+${numero}`;
+}
 
 function formatarNumero(numero: string): string {
   // 55 + DDD (2) + 9 dígitos
