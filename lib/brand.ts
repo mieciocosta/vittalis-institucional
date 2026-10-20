@@ -9,8 +9,10 @@ import { WHATSAPP_NUMERO, WHATSAPP_EXIBICAO, TELEFONE_EXIBICAO, TELEFONE_TEL, li
 // DADOS OFICIAIS DA EMPRESA. A 360dialog confere o rodapé do site contra as
 // "Informações da empresa" da Meta: se mudar algo aqui, mude lá também.
 // Razão social e CNPJ como estão no cadastro (a razão social em maiúsculas).
-const LEGAL_NAME = "SANTOS COSTA COMERCIO DE VACINAS LTDA";
-const CNPJ = "35.857.936/0001-18";
+// 20/10, pedido do master: a empresa do site passa a ser a VITTALIS SAUDE
+// LTDA (antes era a SANTOS COSTA COMERCIO DE VACINAS LTDA, 35.857.936/0001-18).
+const LEGAL_NAME = "VITTALIS SAUDE LTDA";
+const CNPJ = "54.799.354/0001-77";
 
 // Endereço correto da clínica (20/10, pedido do master). É o que o site
 // tinha antes de 01/10; a cópia da Meta ("LOJA 37 3", tudo em maiúsculas)
