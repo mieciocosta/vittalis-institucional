@@ -17,7 +17,8 @@
 // ═══════════════════════════════════════════════════════════════
 
 /** Endereço do App da Web da planilha (termina em /exec). */
-export const PLANILHA_URL: string = "";
+export const PLANILHA_URL: string =
+  "https://script.google.com/macros/s/AKfycbypk_yTiSfg-tIgxcvaMxNAWE0-zBxgETbiPrXRJDLaWJy_I7QJC6Aa4uvljRFz1ng_ZA/exec";
 
 /**
  * Senha simples que a planilha confere. Não é segredo (fica no código da
