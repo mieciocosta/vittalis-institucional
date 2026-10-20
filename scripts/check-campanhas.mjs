@@ -39,9 +39,8 @@ function conferirTexto(texto, onde) {
   }
 }
 
-// Dados oficiais da empresa (lib/brand.ts) vêm em maiúsculas de propósito:
-// são cópia letra por letra das Informações da empresa da Meta. Não contam
-// como texto "gritado".
+// A razão social (lib/brand.ts) vem em maiúsculas de propósito: é como está
+// no CNPJ e nas Informações da empresa da Meta. Não conta como texto "gritado".
 let DADOS_OFICIAIS = [];
 
 function conferirCaixaAlta(texto, onde) {
@@ -73,7 +72,7 @@ async function modoFontes() {
   const { EVENTOS_CAMPANHA, PARAMETROS_CAMPANHA } = await import(join(RAIZ, "lib/analytics.ts"));
   const { LEGAL } = await import(join(RAIZ, "lib/legal.ts"));
   const { BRAND } = await import(join(RAIZ, "lib/brand.ts"));
-  DADOS_OFICIAIS = [BRAND.legalName, BRAND.legalAddress].filter(Boolean);
+  DADOS_OFICIAIS = [BRAND.legalName].filter(Boolean);
 
   // 1. Conteúdo, metadados, alt e nomes de imagem de cada campanha
   for (const c of CAMPANHAS) {
