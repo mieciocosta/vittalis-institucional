@@ -1024,7 +1024,8 @@ function Footer() {
                 </a>
               </div>
               <div style={{ display: "flex", gap: 10, alignItems: "flex-start", color: "var(--vit-primary)" }}>
-                {icons.mapPin}
+                {/* flexShrink 0: com o endereço longo, o ícone era espremido até virar um ponto. */}
+                <span style={{ display: "inline-flex", flexShrink: 0 }}>{icons.mapPin}</span>
                 <div style={{ fontSize: 14, color: corTexto, lineHeight: 1.5 }}>
                   <div>{EMPRESA.legalAddress}</div>
                   <a href={BRAND.mapsUrl} target="_blank" rel="noopener noreferrer" style={{ color: "var(--vit-primary)", fontWeight: 600, textDecoration: "underline", display: "inline-block", marginTop: 4 }}>

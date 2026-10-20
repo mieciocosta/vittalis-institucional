@@ -6,14 +6,26 @@
 
 import { WHATSAPP_NUMERO, WHATSAPP_EXIBICAO, TELEFONE_EXIBICAO, TELEFONE_TEL, linkWhatsApp } from "./config/contato";
 
-// DADOS OFICIAIS DA EMPRESA: copiados LETRA POR LETRA das "Informações da
-// empresa" do portfólio da Meta (inclusive maiúsculas e "Maranhao" sem
-// acento). A 360dialog confere o rodapé do site contra esse cadastro para
-// registrar o WhatsApp na API oficial. Não "arrume" a grafia aqui: se o
-// cadastro mudar, mude aqui e em nenhum outro lugar.
+// DADOS OFICIAIS DA EMPRESA. A 360dialog confere o rodapé do site contra as
+// "Informações da empresa" da Meta: se mudar algo aqui, mude lá também.
+// Razão social e CNPJ como estão no cadastro (a razão social em maiúsculas).
 const LEGAL_NAME = "SANTOS COSTA COMERCIO DE VACINAS LTDA";
 const CNPJ = "35.857.936/0001-18";
-const LEGAL_ADDRESS = "AVENIDA CEL COLARES MOREIRA, ED. BUSINESS CENTER RENASCENCA LOJA 37 3, RENASCENCA, SAO LUIS, Maranhao 65075-441, Brasil";
+
+// Endereço correto da clínica (20/10, pedido do master). É o que o site
+// tinha antes de 01/10; a cópia da Meta ("LOJA 37 3", tudo em maiúsculas)
+// estava errada. Fonte única: rodapés, landing pages, Política de
+// Privacidade e dados para o Google saem daqui.
+const RUA = "Av. Coronel Colares Moreira, nº 3";
+const COMPLEMENTO = "Ed. Business Center Renascença, Salas 36 e 37";
+const BAIRRO = "Jardim Renascença";
+const CIDADE = "São Luís";
+const UF = "MA";
+const CEP = "65075-441";
+// Espaço que não quebra (\u00a0) em "nº 3", "São Luís" e "CEP 65075-441":
+// no celular a linha não corta esses pedaços no meio.
+const NBSP = "\u00a0";
+const LEGAL_ADDRESS = `${RUA.replace(" 3", NBSP + "3")}, ${COMPLEMENTO}, ${BAIRRO}, ${CIDADE.replace(" ", NBSP)}/${UF}, CEP${NBSP}${CEP}`;
 // O telefone é o mesmo número do WhatsApp (02/10, pedido do master).
 const COMMERCIAL_PHONE = TELEFONE_EXIBICAO;
 const COMMERCIAL_PHONE_TEL = TELEFONE_TEL;
@@ -22,7 +34,7 @@ export const BRAND = {
   name: "Vittalis Saúde",
   tagline: "Cuidado completo para você e sua família",
 
-  // Dados oficiais (iguais às Informações da empresa da Meta)
+  // Dados oficiais (os mesmos das Informações da empresa da Meta)
   legalName: LEGAL_NAME,
   cnpj: CNPJ,
   legalAddress: LEGAL_ADDRESS,
@@ -41,11 +53,11 @@ export const BRAND = {
   // Endereço (o oficial é legalAddress; os campos abaixo servem aos dados
   // estruturados para o Google)
   address: LEGAL_ADDRESS,
-  street: "AVENIDA CEL COLARES MOREIRA, ED. BUSINESS CENTER RENASCENCA LOJA 37 3",
-  neighborhood: "RENASCENCA",
-  city: "SAO LUIS",
-  state: "Maranhao",
-  cep: "65075-441",
+  street: `${RUA}, ${COMPLEMENTO}`,
+  neighborhood: BAIRRO,
+  city: CIDADE,
+  state: UF,
+  cep: CEP,
   fullAddress: LEGAL_ADDRESS,
   mapsUrl: "https://maps.app.goo.gl/35Vernq6NtWw9vBLA",
   lat: -2.4966,
