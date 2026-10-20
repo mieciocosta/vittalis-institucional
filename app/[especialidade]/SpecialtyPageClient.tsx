@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Specialty } from "@/lib/specialties";
 import { BRAND, waLink } from "@/lib/brand";
 import { EXEMPLO_TELEFONE, TAMANHO_TELEFONE, mascararTelefone, telefoneCompleto } from "@/lib/telefone";
+import { guardarLeadSemEsperar } from "@/lib/planilha";
 import { trackEvent } from "@/lib/analytics";
 import { DadosEmpresa } from "../_componentes/DadosEmpresa";
 import { getCampanha, type Campanha } from "@/lib/content/campanhas";
@@ -82,7 +83,7 @@ function FAQ({ items }: { items: { q: string; a: string }[] }) {
 }
 
 /* ─── Lead Capture Form ─── */
-function LeadForm({ specialty, waUrl }: { specialty: string; waUrl: string }) {
+function LeadForm({ specialty, slug, waUrl }: { specialty: string; slug: string; waUrl: string }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [erro, setErro] = useState("");
@@ -92,6 +93,15 @@ function LeadForm({ specialty, waUrl }: { specialty: string; waUrl: string }) {
     if (!telefoneCompleto(phone)) return setErro(`Digite o WhatsApp com DDD, por exemplo ${EXEMPLO_TELEFONE}.`);
     setErro("");
     trackEvent("generate_lead", { source: "form" });
+    // Também vai para a planilha da equipe (lib/planilha.ts), sem atrasar o WhatsApp.
+    guardarLeadSemEsperar({
+      formulario: "especialidade",
+      nome: name.trim(),
+      telefone: phone,
+      campanha: slug,
+      campanha_nome: `Página de ${specialty}`,
+      consentimento: false,
+    });
     // Mensagem neutra: sem o nome do serviço (política do WhatsApp Business).
     const msg = `Olá! Meu nome é ${name || "paciente"}. Vim pelo site da Vittalis e gostaria de atendimento.${phone ? ` Meu telefone: ${phone}` : ""}`;
     window.open(waLink(msg), "_blank");
@@ -211,7 +221,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
           </Anim>
 
           <Anim d={0.2}>
-            <LeadForm specialty={s.shortName} waUrl={waUrl} />
+            <LeadForm specialty={s.shortName} slug={s.slug} waUrl={waUrl} />
           </Anim>
         </div>
 
