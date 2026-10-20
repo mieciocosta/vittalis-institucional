@@ -21,15 +21,20 @@ import s from "./campanha.module.css";
 // URL) para a planilha da equipe (lib/planilha.ts), com a campanha e a
 // origem do anúncio, e o sucesso aparece aqui mesmo, sem trocar de página.
 //
-// Se a planilha não responder (ou ainda não estiver ligada), o contato NÃO
-// se perde: o formulário mostra um botão que abre o WhatsApp com o nome e o
-// período já escritos. O botão precisa do toque da pessoa porque o navegador
-// bloqueia abrir outra janela sozinho depois de uma espera.
+// 20/10, pedido do master: o formulário manda SÓ para a planilha, nunca
+// leva a pessoa para o WhatsApp. Se a planilha não responder, tenta de novo
+// uma vez sozinho e, se ainda falhar, pede para tocar em Enviar de novo
+// (os campos continuam preenchidos).
+//
+// Única exceção: enquanto a planilha não estiver ligada (PLANILHA_URL vazio
+// em lib/config/planilha.ts), o formulário oferece o WhatsApp com o nome e o
+// período já escritos. É só a rede de segurança para nenhum cliente se perder
+// antes de a planilha existir.
 
 type Estado =
   | { tipo: "pronto" }
   | { tipo: "enviando" }
-  | { tipo: "sucesso"; link: string }
+  | { tipo: "sucesso" }
   | { tipo: "erro"; mensagem: string }
   | { tipo: "whatsapp"; link: string };
 
@@ -48,6 +53,7 @@ const PERIODOS = [
 ];
 
 const TOTAL = 3;
+const ERRO_ENVIO = "Não conseguimos enviar agora. Confira sua internet e toque em Enviar de novo.";
 
 type Props = { slug: string; refCampanha: string; nomeCampanha: string; titulo: string; texto: string };
 
@@ -98,23 +104,22 @@ export function Formulario({ slug, refCampanha, nomeCampanha, titulo, texto }: P
     }
     if (!form.reportValidity()) return;
 
-    // Plano B: a mesma mensagem neutra da campanha + nome e período. Nada
-    // de saúde, vacina ou "para quem" (regra das mensagens de WhatsApp).
     const nome = String(dados.get("nome") ?? "").trim();
-    const periodo = PERIODO_TEXTO[String(dados.get("periodo"))] ?? "";
-    const planoB = linkWhatsApp({
-      mensagem: `${mensagemComReferencia(refCampanha)} Meu nome é ${nome}.${periodo ? ` Prefiro contato ${periodo}.` : ""}`,
-    });
 
-    // Planilha ainda não ligada: o contato chega pelo WhatsApp, como antes.
+    // Rede de segurança (só sem a planilha ligada): a mesma mensagem neutra da
+    // campanha + nome e período. Nada de saúde, vacina ou "para quem".
     if (!planilhaLigada) {
-      setEstado({ tipo: "whatsapp", link: planoB });
+      const periodo = PERIODO_TEXTO[String(dados.get("periodo"))] ?? "";
+      const link = linkWhatsApp({
+        mensagem: `${mensagemComReferencia(refCampanha)} Meu nome é ${nome}.${periodo ? ` Prefiro contato ${periodo}.` : ""}`,
+      });
+      setEstado({ tipo: "whatsapp", link });
       return;
     }
 
     setEstado({ tipo: "enviando" });
-    const resposta = await enviarParaPlanilha({
-      formulario: "campanha",
+    const lead = {
+      formulario: "campanha" as const,
       nome,
       telefone: String(dados.get("telefone") ?? ""),
       para_quem: String(dados.get("para_quem") ?? ""),
@@ -125,18 +130,21 @@ export function Formulario({ slug, refCampanha, nomeCampanha, titulo, texto }: P
       consentimento: dados.get("consentimento") === "on",
       empresa: String(dados.get("empresa") ?? ""),
       tempo_ms: Date.now() - montadoEm.current,
-    });
+    };
+    let resposta = await enviarParaPlanilha(lead);
+    // Rede ruim ou planilha lenta: mais uma tentativa sozinho. Se a primeira
+    // chegou a gravar, a planilha reconhece o repetido e não duplica.
+    if (!resposta.ok && !resposta.erro) {
+      await new Promise((pronto) => setTimeout(pronto, 1500));
+      resposta = await enviarParaPlanilha(lead);
+    }
     if (resposta.ok) {
       trackCampanha("generate_lead", { campaign_slug: slug, ...capturarUtms() });
-      setEstado({ tipo: "sucesso", link: planoB });
+      setEstado({ tipo: "sucesso" });
       return;
     }
-    // A planilha recusou algum campo: mostra o motivo para a pessoa corrigir.
-    if (resposta.erro) {
-      setEstado({ tipo: "erro", mensagem: resposta.erro });
-      return;
-    }
-    setEstado({ tipo: "whatsapp", link: planoB });
+    // A planilha recusou algum campo (a pessoa corrige) ou não respondeu.
+    setEstado({ tipo: "erro", mensagem: resposta.erro || ERRO_ENVIO });
   }
 
   if (estado.tipo === "whatsapp") {
@@ -167,12 +175,6 @@ export function Formulario({ slug, refCampanha, nomeCampanha, titulo, texto }: P
           </div>
           <h2 className={s.formTitulo}>Recebemos seu contato!</h2>
           <p className={s.formTexto}>A equipe da Vittalis vai falar com você pelo telefone informado, no período escolhido.</p>
-          <p className={s.sucessoExtra}>
-            Prefere adiantar a conversa?{" "}
-            <LinkRastreado href={estado.link} evento="click_whatsapp" slug={slug} refCampanha={refCampanha} nomeCampanha={nomeCampanha} externo className={s.sucessoLink}>
-              Chame no WhatsApp
-            </LinkRastreado>
-          </p>
         </div>
       </div>
     );

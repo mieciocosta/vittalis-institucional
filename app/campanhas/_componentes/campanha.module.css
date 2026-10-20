@@ -325,8 +325,6 @@
   color: #fff;
 }
 
-.sucessoExtra { margin-top: 18px; font-size: 15px; color: var(--vit-gray-700); }
-.sucessoLink { color: var(--cta); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 
 /* ─── Faixa de confiança ─── */
 .confianca { background: var(--vit-white); border-bottom: 1px solid var(--vit-gray-100); }
