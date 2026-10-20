@@ -53,6 +53,14 @@ export type Campanha = {
   midia?: Midia;
 };
 
+/**
+ * Nome curto da campanha para a planilha de contatos: o título da aba do
+ * navegador sem a marca e sem a cidade ("Planejamento vacinal do bebê").
+ */
+export function nomeDaCampanha(c: Campanha): string {
+  return c.meta.titulo.split("|")[0].replace(/\s+em São Luís\s*$/i, "").trim();
+}
+
 /** Ressalva obrigatória em todas as páginas de campanha. */
 export const RESSALVA =
   "A indicação de cada vacina depende de avaliação profissional e segue o calendário do Ministério da Saúde e as recomendações da SBIm.";

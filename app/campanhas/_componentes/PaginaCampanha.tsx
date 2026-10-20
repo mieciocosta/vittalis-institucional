@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Campanha } from "@/lib/content/campanhas";
-import { DIFERENCIAIS, MIDIA, RESSALVA } from "@/lib/content/campanhas";
+import { DIFERENCIAIS, MIDIA, RESSALVA, nomeDaCampanha } from "@/lib/content/campanhas";
 import { ENDERECO, HORARIOS, linkWhatsApp } from "@/lib/config/contato";
 import { BRAND } from "@/lib/brand";
 import { LinkRastreado } from "./Rastreio";
@@ -35,6 +35,7 @@ function Titulo({ texto, destaque }: { texto: string; destaque: string }) {
 
 export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
   const whats = linkWhatsApp({ ref: c.ref });
+  const nome = nomeDaCampanha(c);
 
   return (
     <div className={s.pagina}>
@@ -45,7 +46,7 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
           <Link href="/" aria-label="Vittalis Saúde, página inicial">
             <Image src="/images/campanhas/logo-topo.png" alt="Vittalis Saúde" width={296} height={40} className={s.logo} unoptimized loading="eager" />
           </Link>
-          <LinkRastreado href={BRAND.commercialPhoneTel} evento="click_phone" slug={c.slug} className={s.topoTelefone}>
+          <LinkRastreado href={BRAND.commercialPhoneTel} evento="click_phone" slug={c.slug} refCampanha={c.ref} nomeCampanha={nome} className={s.topoTelefone}>
             <Ico nome="telefone" tamanho={18} /> {BRAND.commercialPhone}
           </LinkRastreado>
         </div>
@@ -72,7 +73,7 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
               {/* No celular estes dois botões ficam na barra fixa de baixo. */}
               <div className={s.botoes}>
                 <a href="#formulario" className={`${s.botao} ${s.botaoPrimario}`}>{CTA_PRINCIPAL}</a>
-                <LinkRastreado href={whats} evento="click_whatsapp" slug={c.slug} externo className={`${s.botao} ${s.botaoSecundario}`}>
+                <LinkRastreado href={whats} evento="click_whatsapp" slug={c.slug} refCampanha={c.ref} nomeCampanha={nome} externo className={`${s.botao} ${s.botaoSecundario}`}>
                   <Ico nome="whats" tamanho={20} /> Falar no WhatsApp
                 </LinkRastreado>
               </div>
@@ -98,7 +99,7 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
             </div>
 
             <div className={s.heroLado}>
-              <Formulario slug={c.slug} refCampanha={c.ref} titulo={c.formulario.titulo} texto={c.formulario.texto} />
+              <Formulario slug={c.slug} refCampanha={c.ref} nomeCampanha={nome} titulo={c.formulario.titulo} texto={c.formulario.texto} />
               <p className={s.ressalvaHero}>{RESSALVA}</p>
             </div>
           </div>
@@ -193,7 +194,7 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
             <p className={s.chamadaTexto}>Deixe seu contato e a equipe da Vittalis retorna no período que você escolher.</p>
             <div className={s.botoesChamada}>
               <a href="#formulario" className={`${s.botao} ${s.botaoClaro}`}>{CTA_PRINCIPAL}</a>
-              <LinkRastreado href={whats} evento="click_whatsapp" slug={c.slug} externo className={`${s.botao} ${s.botaoContorno}`}>
+              <LinkRastreado href={whats} evento="click_whatsapp" slug={c.slug} refCampanha={c.ref} nomeCampanha={nome} externo className={`${s.botao} ${s.botaoContorno}`}>
                 <Ico nome="whats" tamanho={20} /> Falar no WhatsApp
               </LinkRastreado>
             </div>
@@ -214,7 +215,7 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
                   <div>
                     <p className={s.contatoRotulo}>Endereço</p>
                     <p className={s.contatoTexto}>{BRAND.legalAddress}</p>
-                    <LinkRastreado href={ENDERECO.mapsUrl} evento="click_maps" slug={c.slug} externo className={s.contatoLink}>
+                    <LinkRastreado href={ENDERECO.mapsUrl} evento="click_maps" slug={c.slug} refCampanha={c.ref} nomeCampanha={nome} externo className={s.contatoLink}>
                       Abrir no Google Maps
                     </LinkRastreado>
                   </div>
@@ -230,7 +231,7 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
                   <span className={s.contatoIcone}><Ico nome="telefone" /></span>
                   <div>
                     <p className={s.contatoRotulo}>Telefone e WhatsApp</p>
-                    <LinkRastreado href={BRAND.commercialPhoneTel} evento="click_phone" slug={c.slug} className={s.contatoLink}>
+                    <LinkRastreado href={BRAND.commercialPhoneTel} evento="click_phone" slug={c.slug} refCampanha={c.ref} nomeCampanha={nome} className={s.contatoLink}>
                       {BRAND.commercialPhone}
                     </LinkRastreado>
                   </div>
@@ -253,7 +254,7 @@ export function PaginaCampanha({ campanha: c }: { campanha: Campanha }) {
       {/* Barra fixa do celular: formulário primeiro, WhatsApp depois. */}
       <nav className={s.barraMobile} aria-label="Ações rápidas">
         <a href="#formulario" className={`${s.botao} ${s.botaoPrimario}`}>{CTA_PRINCIPAL}</a>
-        <LinkRastreado href={whats} evento="click_whatsapp" slug={c.slug} externo className={`${s.botao} ${s.botaoSecundario}`}>
+        <LinkRastreado href={whats} evento="click_whatsapp" slug={c.slug} refCampanha={c.ref} nomeCampanha={nome} externo className={`${s.botao} ${s.botaoSecundario}`}>
           <Ico nome="whats" tamanho={20} /> WhatsApp
         </LinkRastreado>
       </nav>

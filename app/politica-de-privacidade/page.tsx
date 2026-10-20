@@ -64,8 +64,8 @@ export default function PoliticaDePrivacidade() {
           <Bloco titulo="5. Com quem compartilhamos">
             <p>
               Não vendemos nem cedemos seus dados. Eles passam apenas pelos serviços que fazem o site funcionar: a hospedagem (Cloudflare),
-              a ferramenta que entrega o contato à nossa equipe e as ferramentas de medição do Google. Esses parceiros tratam os dados
-              seguindo nossas instruções.
+              a planilha da equipe no Google Planilhas, onde o contato fica guardado com acesso só da equipe, o WhatsApp, quando você
+              escolhe falar por lá, e as ferramentas de medição do Google. Esses parceiros tratam os dados seguindo nossas instruções.
             </p>
           </Bloco>
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import localFont from "next/font/local";
 import "./globals.css";
+import { CapturaOrigem } from "./_componentes/CapturaOrigem";
 import { BRAND } from "@/lib/brand";
 
 // Fontes da marca hospedadas no próprio site (antes vinham do Google Fonts
@@ -123,6 +124,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Google Tag Manager (noscript) */}
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MRC6N43D" height="0" width="0" style={{display:"none",visibility:"hidden"}}></iframe></noscript>
         {children}
+        <CapturaOrigem />
 
         {/* ═══════════════════════════════════════════════════════════
             GOOGLE ANALYTICS 4 — ID: G-1T4S5WGY9W

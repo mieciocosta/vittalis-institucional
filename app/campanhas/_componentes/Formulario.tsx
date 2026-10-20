@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { trackCampanha } from "@/lib/analytics";
-import { CHAVES_UTM, capturarUtms } from "@/lib/campanhas/utm";
+import { capturarUtms } from "@/lib/campanhas/utm";
+import { capturarOrigem } from "@/lib/campanhas/origem";
 import { linkWhatsApp, mensagemComReferencia } from "@/lib/config/contato";
+import { enviarParaPlanilha, planilhaLigada } from "@/lib/planilha";
 import { EXEMPLO_TELEFONE, PADRAO_TELEFONE, TAMANHO_TELEFONE, mascararTelefone } from "@/lib/telefone";
 import { LinkRastreado } from "./Rastreio";
 import { Ico, type NomeIcone } from "./Icones";
@@ -15,18 +17,19 @@ import s from "./campanha.module.css";
 // em etapas converte mais que o formulário inteiro de uma vez.
 //
 // LGPD: só o mínimo para a equipe retornar. Nada de dado de saúde,
-// documento, idade exata ou qual vacina. Envio por POST com JSON (nunca
-// na URL) e o sucesso aparece aqui mesmo, sem trocar de página.
+// documento, idade exata ou qual vacina. O contato vai por POST (nunca na
+// URL) para a planilha da equipe (lib/planilha.ts), com a campanha e a
+// origem do anúncio, e o sucesso aparece aqui mesmo, sem trocar de página.
 //
-// Se o envio falhar (servidor fora, rede ruim), o contato NÃO se perde: o
-// formulário mostra um botão que abre o WhatsApp com o nome e o período já
-// escritos. O botão precisa do toque da pessoa porque o navegador bloqueia
-// abrir outra janela sozinho depois de uma espera.
+// Se a planilha não responder (ou ainda não estiver ligada), o contato NÃO
+// se perde: o formulário mostra um botão que abre o WhatsApp com o nome e o
+// período já escritos. O botão precisa do toque da pessoa porque o navegador
+// bloqueia abrir outra janela sozinho depois de uma espera.
 
 type Estado =
   | { tipo: "pronto" }
   | { tipo: "enviando" }
-  | { tipo: "sucesso" }
+  | { tipo: "sucesso"; link: string }
   | { tipo: "erro"; mensagem: string }
   | { tipo: "whatsapp"; link: string };
 
@@ -46,7 +49,9 @@ const PERIODOS = [
 
 const TOTAL = 3;
 
-export function Formulario({ slug, refCampanha, titulo, texto }: { slug: string; refCampanha: string; titulo: string; texto: string }) {
+type Props = { slug: string; refCampanha: string; nomeCampanha: string; titulo: string; texto: string };
+
+export function Formulario({ slug, refCampanha, nomeCampanha, titulo, texto }: Props) {
   const [estado, setEstado] = useState<Estado>({ tipo: "pronto" });
   const [etapa, setEtapa] = useState(1);
   const formRef = useRef<HTMLFormElement>(null);
@@ -54,16 +59,11 @@ export function Formulario({ slug, refCampanha, titulo, texto }: { slug: string;
   const montadoEm = useRef(0);
   const trocouEtapa = useRef(false);
 
-  // Campos ocultos das UTMs: preenchidos direto no DOM ao abrir a página.
+  // Guarda as UTMs e a origem logo ao abrir: elas seguem com o contato.
   useEffect(() => {
     montadoEm.current = Date.now();
-    const utms = capturarUtms();
-    const form = formRef.current;
-    if (!form) return;
-    for (const chave of CHAVES_UTM) {
-      const campo = form.elements.namedItem(chave);
-      if (campo instanceof HTMLInputElement) campo.value = utms[chave] ?? "";
-    }
+    capturarUtms();
+    capturarOrigem();
   }, []);
 
   // Acessibilidade: ao trocar de etapa, o leitor de tela vai para o título
@@ -98,13 +98,6 @@ export function Formulario({ slug, refCampanha, titulo, texto }: { slug: string;
     }
     if (!form.reportValidity()) return;
 
-    const corpo: Record<string, string | number | boolean> = {};
-    dados.forEach((v, k) => {
-      corpo[k] = String(v);
-    });
-    corpo.consentimento = dados.get("consentimento") === "on";
-    corpo.tempo_ms = Date.now() - montadoEm.current;
-
     // Plano B: a mesma mensagem neutra da campanha + nome e período. Nada
     // de saúde, vacina ou "para quem" (regra das mensagens de WhatsApp).
     const nome = String(dados.get("nome") ?? "").trim();
@@ -113,29 +106,37 @@ export function Formulario({ slug, refCampanha, titulo, texto }: { slug: string;
       mensagem: `${mensagemComReferencia(refCampanha)} Meu nome é ${nome}.${periodo ? ` Prefiro contato ${periodo}.` : ""}`,
     });
 
-    setEstado({ tipo: "enviando" });
-    try {
-      const resp = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(corpo),
-        signal: AbortSignal.timeout(8000),
-      });
-      const json = (await resp.json().catch(() => ({}))) as { ok?: boolean; erro?: string };
-      if (resp.ok && json.ok) {
-        trackCampanha("generate_lead", { campaign_slug: slug, ...capturarUtms() });
-        setEstado({ tipo: "sucesso" });
-        return;
-      }
-      // 422 = algum campo errado: mostra o motivo para a pessoa corrigir.
-      if (resp.status === 422 && json.erro) {
-        setEstado({ tipo: "erro", mensagem: json.erro });
-        return;
-      }
+    // Planilha ainda não ligada: o contato chega pelo WhatsApp, como antes.
+    if (!planilhaLigada) {
       setEstado({ tipo: "whatsapp", link: planoB });
-    } catch {
-      setEstado({ tipo: "whatsapp", link: planoB });
+      return;
     }
+
+    setEstado({ tipo: "enviando" });
+    const resposta = await enviarParaPlanilha({
+      formulario: "campanha",
+      nome,
+      telefone: String(dados.get("telefone") ?? ""),
+      para_quem: String(dados.get("para_quem") ?? ""),
+      periodo: String(dados.get("periodo") ?? ""),
+      campanha: slug,
+      campanha_nome: nomeCampanha,
+      ref: refCampanha,
+      consentimento: dados.get("consentimento") === "on",
+      empresa: String(dados.get("empresa") ?? ""),
+      tempo_ms: Date.now() - montadoEm.current,
+    });
+    if (resposta.ok) {
+      trackCampanha("generate_lead", { campaign_slug: slug, ...capturarUtms() });
+      setEstado({ tipo: "sucesso", link: planoB });
+      return;
+    }
+    // A planilha recusou algum campo: mostra o motivo para a pessoa corrigir.
+    if (resposta.erro) {
+      setEstado({ tipo: "erro", mensagem: resposta.erro });
+      return;
+    }
+    setEstado({ tipo: "whatsapp", link: planoB });
   }
 
   if (estado.tipo === "whatsapp") {
@@ -148,7 +149,7 @@ export function Formulario({ slug, refCampanha, titulo, texto }: { slug: string;
           <h2 className={s.formTitulo}>Falta só um toque</h2>
           <p className={s.formTexto}>Toque no botão abaixo e envie a mensagem que já deixamos escrita. A equipe responde por lá.</p>
           <p className={s.planoB}>
-            <LinkRastreado href={estado.link} evento="click_whatsapp" slug={slug} externo className={`${s.botao} ${s.botaoPrimario}`}>
+            <LinkRastreado href={estado.link} evento="click_whatsapp" slug={slug} refCampanha={refCampanha} nomeCampanha={nomeCampanha} externo className={`${s.botao} ${s.botaoPrimario}`}>
               <Ico nome="whats" tamanho={20} /> Enviar pelo WhatsApp
             </LinkRastreado>
           </p>
@@ -166,6 +167,12 @@ export function Formulario({ slug, refCampanha, titulo, texto }: { slug: string;
           </div>
           <h2 className={s.formTitulo}>Recebemos seu contato!</h2>
           <p className={s.formTexto}>A equipe da Vittalis vai falar com você pelo telefone informado, no período escolhido.</p>
+          <p className={s.sucessoExtra}>
+            Prefere adiantar a conversa?{" "}
+            <LinkRastreado href={estado.link} evento="click_whatsapp" slug={slug} refCampanha={refCampanha} nomeCampanha={nomeCampanha} externo className={s.sucessoLink}>
+              Chame no WhatsApp
+            </LinkRastreado>
+          </p>
         </div>
       </div>
     );
@@ -198,7 +205,7 @@ export function Formulario({ slug, refCampanha, titulo, texto }: { slug: string;
       </noscript>
 
       {/* method="post": se o JavaScript ainda não carregou, os dados nunca vão para a URL. */}
-      <form ref={formRef} method="post" action="/api/lead" onSubmit={enviar}>
+      <form ref={formRef} method="post" onSubmit={enviar}>
         {/* Etapa 1: um toque */}
         <fieldset className={oculta(1)}>
           <legend className={s.etapaTitulo}>
@@ -297,10 +304,6 @@ export function Formulario({ slug, refCampanha, titulo, texto }: { slug: string;
           <label htmlFor="lead-empresa">Empresa</label>
           <input id="lead-empresa" name="empresa" type="text" tabIndex={-1} autoComplete="off" />
         </div>
-        <input type="hidden" name="campanha" value={slug} />
-        {CHAVES_UTM.map((k) => (
-          <input key={k} type="hidden" name={k} defaultValue="" />
-        ))}
       </form>
 
       <p className={s.privacidadeNota}>
