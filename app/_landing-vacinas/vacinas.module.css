@@ -1,0 +1,105 @@
+/* ═══════════════════════════════════════════════════════════════
+   LANDING DE VACINAÇÃO: só o que é novo. A base (topo, hero, botões,
+   seções, perguntas, rodapé, barra fixa) vem de campanha.module.css.
+   Mobile-first. Cores com contraste AA (ver o topo de campanha.module.css):
+   botão principal #007F86, texto do valor dourado #7A5C1E.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Topo */
+.botaoGrande {
+  width: 100%;
+  margin-top: 24px;
+  min-height: 60px;
+  font-size: 18px;
+}
+.dicaHero { margin-top: 10px; font-size: 14px; color: var(--vit-gray-500); text-align: center; }
+
+/* Mini-formulário */
+.miniForm { margin-top: 18px; }
+.selecao {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 46px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23185C74' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  cursor: pointer;
+}
+.idade { max-width: 140px; }
+.opcional { font-weight: 500; color: var(--vit-gray-500); }
+.erroCampo { font-size: 14.5px; font-weight: 600; color: #8a1c2b; }
+.miniForm [aria-invalid="true"] { border-color: #b3261e; }
+.enviar { width: 100%; margin-top: 20px; min-height: 58px; font-size: 17.5px; }
+.aviso {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--vit-primary-50);
+  border: 1px solid rgba(0, 184, 192, 0.3);
+  font-size: 15px;
+  color: var(--vit-charcoal);
+}
+.aviso a { color: var(--cta); font-weight: 700; text-decoration: underline; }
+.notaLgpd {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--vit-gray-500);
+}
+.notaLgpd svg { flex-shrink: 0; margin-top: 2px; }
+.notaLgpd a { color: var(--vit-secondary-dark); text-decoration: underline; }
+
+/* Cards dos planos e pacotes */
+.produtos { list-style: none; display: grid; gap: 16px; margin-top: 30px; }
+.produto {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 20px;
+  background: #fff;
+  border: 1px solid var(--vit-gray-100);
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(26, 43, 42, 0.06);
+}
+.produtoTopo { display: flex; align-items: center; gap: 14px; }
+.produtoNome { font-family: var(--font-display); font-size: 24px; font-weight: 600; line-height: 1.15; color: var(--vit-charcoal); }
+.produtoItens { list-style: none; display: grid; gap: 8px; }
+.produtoItens li { display: flex; align-items: center; gap: 10px; font-size: 15.5px; font-weight: 600; color: var(--vit-gray-700); }
+.produtoItens svg { flex-shrink: 0; color: var(--cta); }
+.produtoValor { font-size: 16px; font-weight: 700; color: var(--ouro-texto); }
+/* O botão desce para o fim do card: todos alinhados na mesma linha. */
+.produtoBotao { width: 100%; margin-top: auto; }
+
+/* Onde estamos */
+.onde { display: grid; gap: 24px; margin-top: 28px; align-items: center; }
+.foto { width: 100%; height: auto; border-radius: 22px; box-shadow: 0 16px 40px rgba(26, 43, 42, 0.12); }
+
+/* Depoimentos (só aparecem quando houver depoimentos reais) */
+.depoimentos { list-style: none; display: grid; gap: 16px; margin-top: 28px; }
+.depoimento blockquote {
+  height: 100%;
+  padding: 20px;
+  background: var(--vit-cream);
+  border-left: 4px solid var(--vit-gold);
+  border-radius: 16px;
+}
+.depoimento p { font-size: 16px; line-height: 1.6; color: var(--vit-gray-700); }
+.depoimento footer { margin-top: 10px; font-size: 14.5px; font-weight: 700; color: var(--vit-charcoal); }
+
+/* Barra fixa do celular: um botão só, o do WhatsApp */
+.barraUnica { grid-template-columns: 1fr; }
+
+@media (min-width: 640px) {
+  .produtos { grid-template-columns: repeat(2, 1fr); }
+  .depoimentos { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .botaoGrande { width: auto; padding-left: 34px; padding-right: 34px; }
+  .dicaHero { text-align: left; }
+  .produtos { grid-template-columns: repeat(3, 1fr); }
+  .onde { grid-template-columns: 1.1fr 1fr; gap: 48px; }
+}

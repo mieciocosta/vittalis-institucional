@@ -4,9 +4,15 @@ import { SPECIALTIES, getSpecialty, getAllSlugs } from "@/lib/specialties";
 import { BRAND } from "@/lib/brand";
 import SpecialtyPageClient from "./SpecialtyPageClient";
 
-// Gera rotas estáticas para todas as especialidades
+// Gera rotas estáticas para todas as especialidades. /vacinacao virou a
+// landing de conversão (app/vacinacao, 28/10, pedido do master): ela tem
+// rota própria e sai daqui para as duas não brigarem pelo mesmo endereço.
+const COM_ROTA_PROPRIA = ["vacinacao"];
+
 export function generateStaticParams() {
-  return getAllSlugs().map(slug => ({ especialidade: slug }));
+  return getAllSlugs()
+    .filter((slug) => !COM_ROTA_PROPRIA.includes(slug))
+    .map((slug) => ({ especialidade: slug }));
 }
 
 // Gera metadata SEO dinâmico por especialidade
