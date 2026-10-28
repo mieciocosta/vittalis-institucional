@@ -61,7 +61,14 @@
     "Você tem dúvidas?",
     "compromisso",
     "compreender",
-    "compreensão"
+    "compreensão",
+    "queremos garantir que cada consulta seja sem pressa"
+  ],
+  "liberadosVacinacao": [
+    "R$",
+    "valor",
+    "preço",
+    "parcel"
   ],
   "siglasPermitidas": [
     "LGPD",

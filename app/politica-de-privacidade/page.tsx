@@ -36,8 +36,8 @@ export default function PoliticaDePrivacidade() {
 
           <Bloco titulo="2. Quais dados coletamos no site">
             <ul style={{ paddingLeft: 20 }}>
-              <li>No formulário de contato: nome, telefone ou WhatsApp, para quem é o atendimento e o melhor período para retorno.</li>
-              <li>Informações da campanha que trouxe você ao site, como a origem do anúncio. Elas não identificam você.</li>
+              <li>No formulário de contato: nome, telefone ou WhatsApp, para quem é o atendimento e o melhor período para retorno. Na página de vacinação, também o que você procura e, se quiser informar, a idade do bebê.</li>
+              <li>Informações da campanha que trouxe você ao site, como a origem do anúncio e o código do clique no anúncio. Elas não identificam você.</li>
               <li>Dados de navegação coletados por ferramentas de medição (Google Analytics e Google Tag Manager), como páginas visitadas e tipo de aparelho.</li>
             </ul>
             <p style={{ marginTop: 12 }}>
@@ -86,8 +86,9 @@ export default function PoliticaDePrivacidade() {
 
           <Bloco titulo="8. Cookies e medição">
             <p>
-              O site usa cookies do Google Analytics e do Google Tag Manager para medir visitas. Você pode bloquear ou apagar cookies nas
-              configurações do seu navegador, sem prejuízo para o uso das páginas.
+              O site usa cookies do Google Analytics e do Google Tag Manager para medir visitas. Ele também guarda no seu navegador, por
+              até 30 dias, de onde veio a sua visita (por exemplo, o anúncio clicado), sem identificar você. Você pode bloquear ou apagar
+              cookies e dados do site nas configurações do seu navegador, sem prejuízo para o uso das páginas.
             </p>
           </Bloco>
 

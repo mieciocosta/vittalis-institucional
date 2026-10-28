@@ -15,6 +15,9 @@ const FOTOS = {
   "pv-hero": "public/images/pediatria_01.jpg",
   "pm-hero": "public/images/vittalis_pediatria_2.png",
   "ad50-hero": "public/images/clinica_geral_02.jpg",
+  // Landing de vacinação (/vacinacao, /planos-vacinais, /pacotes-de-vacinas).
+  // Foto sem agulha na pele, como pedem as regras das campanhas.
+  "vac-hero": "public/images/vacinas_01.jpg",
 };
 
 await mkdir("public/images/campanhas", { recursive: true });

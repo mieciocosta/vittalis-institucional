@@ -1,50 +1,27 @@
-// De onde a pessoa chegou ao site, para a planilha de contatos saber a
-// origem mesmo quando o anúncio não tem UTM. Guardado na sessão já na
-// PRIMEIRA página: depois de navegar pelo site, o "veio de" seria o
-// próprio site.
-//
-// LGPD: só o domínio da página anterior (ex.: instagram.com) e se o clique
-// veio de anúncio (fbclid da Meta, gclid do Google). Nada que identifique
-// a pessoa, e nada disso vai para o Analytics.
+// De onde a pessoa chegou ao site (guardado por 30 dias: ver
+// lib/campanhas/atribuicao.ts), para a planilha e o texto do WhatsApp
+// saberem a origem mesmo quando o anúncio não tem UTM.
 
-export type Origem = {
-  /** "meta" ou "google-ads" quando a URL traz a marca de clique de anúncio. */
-  origem: string;
-  /** Domínio da página anterior, sem "www.". Vazio se a pessoa digitou o endereço. */
-  veio_de: string;
-};
+import { capturarAtribuicao } from "./atribuicao";
 
-const CHAVE_SESSAO = "vit_origem";
+export type Origem = { origem: string; veio_de: string; gclid: string; fbclid: string };
 
 export function capturarOrigem(): Origem {
-  if (typeof window === "undefined") return { origem: "", veio_de: "" };
-  try {
-    const salva = sessionStorage.getItem(CHAVE_SESSAO);
-    if (salva) return JSON.parse(salva) as Origem;
-  } catch {
-    // Navegação privada pode bloquear a sessão; segue calculando.
-  }
+  const { origem, veio_de, gclid, fbclid } = capturarAtribuicao();
+  return { origem, veio_de, gclid, fbclid };
+}
 
-  const url = new URLSearchParams(window.location.search);
-  let origem = "";
-  if (url.has("fbclid")) origem = "meta";
-  else if (url.has("gclid") || url.has("gbraid") || url.has("wbraid")) origem = "google-ads";
+/** Origem curta para o texto do WhatsApp: "google/cpc/vacinas", "meta", "instagram.com" ou "site". */
+export function textoOrigem(): string {
+  const a = capturarAtribuicao();
+  const limpo = (t: string) => t.replace(/[[\]\n\r]/g, " ").trim().slice(0, 80);
+  if (a.utms.utm_source) return limpo([a.utms.utm_source, a.utms.utm_medium, a.utms.utm_campaign].filter(Boolean).join("/"));
+  if (a.origem) return a.origem;
+  if (a.veio_de) return limpo(a.veio_de);
+  return "site";
+}
 
-  let veioDe = "";
-  try {
-    if (document.referrer) {
-      const host = new URL(document.referrer).hostname.replace(/^www\./, "");
-      if (host !== window.location.hostname.replace(/^www\./, "")) veioDe = host.slice(0, 100);
-    }
-  } catch {
-    veioDe = "";
-  }
-
-  const resultado = { origem, veio_de: veioDe };
-  try {
-    sessionStorage.setItem(CHAVE_SESSAO, JSON.stringify(resultado));
-  } catch {
-    // Sem sessão, a origem é recalculada na próxima página.
-  }
-  return resultado;
+/** A mensagem com a origem no fim, do jeito que a equipe lê no WhatsApp. */
+export function comOrigem(mensagem: string): string {
+  return `${mensagem} [origem: ${textoOrigem()}]`;
 }

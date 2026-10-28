@@ -8,7 +8,12 @@ import { capturarOrigem } from "./campanhas/origem";
 export const planilhaLigada = PLANILHA_URL !== "";
 
 export type DadosLead = {
-  /** Qual formulário: o das campanhas (com caixa de autorização) ou o das especialidades. */
+  /**
+   * "campanha": formulário com a caixa de autorização (art. 7º, I, da LGPD).
+   * "especialidade": pedido de contato sem a caixa, em que a pessoa mesma
+   * pede o atendimento (art. 7º, V): páginas de especialidade e a landing
+   * de vacinação. Na planilha aparece como "Pediu agendamento".
+   */
   formulario: "campanha" | "especialidade";
   nome: string;
   telefone: string;
@@ -20,6 +25,8 @@ export type DadosLead = {
   campanha_nome: string;
   ref?: string;
   consentimento: boolean;
+  /** Informação extra para a equipe (ex.: "Bebê de 4 meses"). Coluna "Detalhes". */
+  detalhes?: string;
   /** Campo isca do formulário: só robô preenche. */
   empresa?: string;
   tempo_ms?: number;

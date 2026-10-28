@@ -54,6 +54,8 @@ const COLUNAS_LEADS = [
   "Data e hora", "Nome", "WhatsApp", "Chamar", "Para quem", "Melhor período",
   "Campanha", "Código", "Origem", "Campanha do anúncio", "Anúncio", "Mídia",
   "Veio de", "Página", "Autorização", "Situação", "Observações da equipe",
+  // 28/10: no fim, para não mexer nas colunas que a equipe já usa.
+  "Detalhes", "ID do clique",
 ];
 const COLUNAS_CLIQUES = [
   "Data e hora", "Botão", "Campanha", "Código", "Origem", "Campanha do anúncio",
@@ -82,7 +84,7 @@ const LARGURAS = {
   "Data e hora": 130, "Nome": 180, "WhatsApp": 130, "Chamar": 150, "Para quem": 160,
   "Melhor período": 120, "Campanha": 230, "Código": 70, "Origem": 170, "Campanha do anúncio": 190,
   "Anúncio": 170, "Mídia": 100, "Veio de": 150, "Página": 220, "Autorização": 170,
-  "Situação": 130, "Observações da equipe": 280, "Botão": 90,
+  "Situação": 130, "Observações da equipe": 280, "Botão": 90, "Detalhes": 200, "ID do clique": 200,
 };
 
 const COR_MARCA = "#207898";
@@ -175,6 +177,10 @@ function gravarLead(d) {
     d.formulario === "especialidade" ? "Pediu agendamento" : "Marcou a autorização",
     "Novo",
     "",
+    // Ex.: "Bebê de 4 meses", da landing de vacinação.
+    seguro(texto(d.detalhes, 120)),
+    // gclid (Google) ou fbclid (Meta): serve para subir a conversão no anúncio.
+    seguro(texto(d.gclid || d.fbclid, 200)),
   ]);
   // Link de verdade, sem fórmula: funciona em qualquer idioma da planilha.
   aba.getRange(2, 4).setRichTextValue(
@@ -208,6 +214,7 @@ function avisarPorEmail(d) {
       "Melhor período: " + (PERIODO[d.periodo] || "não informado"),
       "Campanha: " + nomeCampanha(d),
       "Origem: " + origemDe(d),
+      ...(texto(d.detalhes) ? ["Detalhes: " + texto(d.detalhes, 120)] : []),
       "",
       "Planilha: " + planilha().getUrl(),
     ].join("\n");
@@ -413,7 +420,10 @@ function garantirAba(nome, colunas) {
     aba = aproveita ? primeira.setName(nome) : ss.insertSheet(nome);
   }
   const props = PropertiesService.getScriptProperties();
-  if (aba.getRange(1, 1).getValue() !== colunas[0] || props.getProperty("formatada_" + nome) !== "sim") {
+  // Cabeçalho velho (sem as colunas novas do fim) também é refeito.
+  const semColunasNovas = aba.getMaxColumns() < colunas.length ||
+    aba.getRange(1, colunas.length).getValue() !== colunas[colunas.length - 1];
+  if (aba.getRange(1, 1).getValue() !== colunas[0] || semColunasNovas || props.getProperty("formatada_" + nome) !== "sim") {
     formatarAba(aba, colunas);
   }
   return aba;

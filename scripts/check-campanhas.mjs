@@ -7,8 +7,13 @@
 //                   WhatsApp, eventos de analytics e o texto dos
 //                   componentes de app/campanhas.
 //   --html          roda no postbuild: confere o HTML final gerado em
-//                   out/campanhas/ (texto, meta tags, alt, links) e
-//                   procura números de WhatsApp banidos em todo o out/.
+//                   out/campanhas/ e nas landings de vacinação (texto, meta
+//                   tags, alt, links) e procura números de WhatsApp banidos
+//                   em todo o out/.
+//
+// Landing de vacinação (/vacinacao, /planos-vacinais, /pacotes-de-vacinas):
+// mesma lista, menos os termos de "liberadosVacinacao" (parcelas e valores),
+// que o master liberou nessas páginas em 28/10.
 //
 // Lista configurável em scripts/campanhas-termos.json.
 // Sai com código 1 se achar qualquer problema.
@@ -30,10 +35,13 @@ const PERMITIDOS = CFG.permitidos.map(normalizar);
 const problemas = [];
 const avisos = [];
 
-function conferirTexto(texto, onde) {
+const LIBERADOS_VACINACAO = (CFG.liberadosVacinacao ?? []).map(normalizar);
+
+function conferirTexto(texto, onde, liberados = []) {
   let t = normalizar(String(texto));
   for (const p of PERMITIDOS) t = t.split(p).join(" ");
   for (const { original, norm } of PROIBIDOS) {
+    if (liberados.includes(norm)) continue;
     const i = t.indexOf(norm);
     if (i >= 0) problemas.push(`${onde}: termo proibido "${original}" em "…${t.slice(Math.max(0, i - 30), i + norm.length + 30).trim()}…"`);
   }
@@ -97,21 +105,32 @@ async function modoFontes() {
   // 5. Texto escrito direto nos componentes: só o que o leitor vê (texto
   // do JSX e frases entre aspas). Nomes de variável e CSS ficam de fora;
   // o HTML final é conferido por inteiro no postbuild (--html).
-  for (const f of arquivos(join(RAIZ, "app/campanhas"), (p) => /\.tsx?$/.test(p))) {
-    const fonte = readFileSync(f, "utf8").replace(/\/\*[\s\S]*?\*\//g, "").replace(/\{\/\*[\s\S]*?\*\/\}/g, "").replace(/(^|[^:"'`])\/\/.*$/gm, "$1");
-    const visiveis = [
-      ...[...fonte.matchAll(/>([^<>{}]*\p{L}[^<>{}]*)</gu)].map((m) => m[1]),
-      ...[...fonte.matchAll(/"([^"\n]*\p{L}[^"\n]* [^"\n]*)"|'([^'\n]*\p{L}[^'\n]* [^'\n]*)'|`([^`$\n]*\p{L}[^`$\n]* [^`$\n]*)`/gu)].map((m) => m[1] ?? m[2] ?? m[3]),
-    ];
-    for (const v of visiveis) conferirTexto(v, relative(RAIZ, f));
-    for (const m of fonte.matchAll(/trackCampanha\(\s*"([^"]+)"/g)) {
-      if (!CFG.eventosPermitidos.includes(m[1])) problemas.push(`${relative(RAIZ, f)}: evento fora da lista "${m[1]}"`);
-    }
-  }
+  for (const f of arquivos(join(RAIZ, "app/campanhas"), (p) => /\.tsx?$/.test(p))) conferirComponente(f);
+
+  // 6. Landing de vacinação: conteúdo e texto dos componentes
+  const vac = await import(join(RAIZ, "lib/content/vacinacao.ts"));
+  const conteudoVac = { VARIANTES: vac.VARIANTES, PRODUTOS: vac.PRODUTOS, INTERESSES: vac.INTERESSES, PASSOS: vac.PASSOS, PERGUNTAS: vac.PERGUNTAS, DEPOIMENTOS: vac.DEPOIMENTOS, FOTO: vac.FOTO };
+  cadaTexto(conteudoVac, "vacinação", (t, onde) => {
+    conferirTexto(t, onde, LIBERADOS_VACINACAO);
+    if (!/\.(arquivo|slug|id|valor|icone|interessePadrao)$|\.ordem\[/.test(onde)) conferirCaixaAlta(t, onde);
+  });
+  for (const f of arquivos(join(RAIZ, "app/_landing-vacinas"), (p) => /\.tsx?$/.test(p))) conferirComponente(f, LIBERADOS_VACINACAO);
 
   // Pendências (avisam, não travam: o Dr. Miécio ainda vai preencher)
   if (!LEGAL.responsavelTecnicoNome || !LEGAL.responsavelTecnicoRegistro) avisos.push("lib/legal.ts: responsável técnico pendente (nome e registro no conselho)");
   if (!LEGAL.licencaSanitaria) avisos.push("lib/legal.ts: número da licença sanitária pendente");
+}
+
+function conferirComponente(f, liberados = []) {
+  const fonte = readFileSync(f, "utf8").replace(/\/\*[\s\S]*?\*\//g, "").replace(/\{\/\*[\s\S]*?\*\/\}/g, "").replace(/(^|[^:"'`])\/\/.*$/gm, "$1");
+  const visiveis = [
+    ...[...fonte.matchAll(/>([^<>{}]*\p{L}[^<>{}]*)</gu)].map((m) => m[1]),
+    ...[...fonte.matchAll(/"([^"\n]*\p{L}[^"\n]* [^"\n]*)"|'([^'\n]*\p{L}[^'\n]* [^'\n]*)'|`([^`$\n]*\p{L}[^`$\n]* [^`$\n]*)`/gu)].map((m) => m[1] ?? m[2] ?? m[3]),
+  ];
+  for (const v of visiveis) conferirTexto(v, relative(RAIZ, f), liberados);
+  for (const m of fonte.matchAll(/trackCampanha\(\s*"([^"]+)"/g)) {
+    if (!CFG.eventosPermitidos.includes(m[1])) problemas.push(`${relative(RAIZ, f)}: evento fora da lista "${m[1]}"`);
+  }
 }
 
 function textoDoHtml(html) {
@@ -145,6 +164,17 @@ async function modoHtml() {
       if (msg !== esperado) problemas.push(`${relative(RAIZ, arquivo)}: WhatsApp com mensagem diferente da neutra: "${msg}"`);
     }
   }
+  // Landing de vacinação: o HTML final de cada variação
+  const { SLUGS_VARIANTES } = await import(join(RAIZ, "lib/content/vacinacao.ts"));
+  for (const slug of SLUGS_VARIANTES) {
+    const arquivo = join(out, `${slug}.html`);
+    if (!existsSync(arquivo)) {
+      problemas.push(`${relative(RAIZ, arquivo)} não foi gerado`);
+      continue;
+    }
+    conferirTexto(textoDoHtml(readFileSync(arquivo, "utf8")), relative(RAIZ, arquivo), LIBERADOS_VACINACAO);
+  }
+
   // Números banidos em qualquer página do site
   for (const f of arquivos(out, (p) => /\.(html|txt|xml|js)$/.test(p))) {
     const conteudo = readFileSync(f, "utf8");
