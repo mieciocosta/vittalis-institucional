@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import type { Specialty } from "@/lib/specialties";
 import { BRAND, waLink } from "@/lib/brand";
+import { WHATSAPP_TERAPIAS } from "@/lib/config/contato";
 import { EXEMPLO_TELEFONE, TAMANHO_TELEFONE, mascararTelefone, telefoneCompleto } from "@/lib/telefone";
 import { guardarLeadSemEsperar } from "@/lib/planilha";
 import { trackEvent } from "@/lib/analytics";
@@ -83,7 +84,7 @@ function FAQ({ items }: { items: { q: string; a: string }[] }) {
 }
 
 /* ─── Lead Capture Form ─── */
-function LeadForm({ specialty, slug, waUrl }: { specialty: string; slug: string; waUrl: string }) {
+function LeadForm({ specialty, slug, waUrl, numeroWa }: { specialty: string; slug: string; waUrl: string; numeroWa?: string }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [erro, setErro] = useState("");
@@ -104,7 +105,7 @@ function LeadForm({ specialty, slug, waUrl }: { specialty: string; slug: string;
     });
     // Mensagem neutra: sem o nome do serviço (política do WhatsApp Business).
     const msg = `Olá! Meu nome é ${name || "paciente"}. Vim pelo site da Vittalis e gostaria de atendimento.${phone ? ` Meu telefone: ${phone}` : ""}`;
-    window.open(waLink(msg), "_blank");
+    window.open(waLink(msg, numeroWa), "_blank");
   };
 
   const inputStyle: React.CSSProperties = {
@@ -145,7 +146,10 @@ function LeadForm({ specialty, slug, waUrl }: { specialty: string; slug: string;
    9. CTA final forte
    ════════════════════════════════════════════════════════════════════ */
 export default function SpecialtyPageClient({ specialty: s }: { specialty: Specialty }) {
-  const waUrl = waLink(s.waMessage);
+  // 04/11, pedido do master: terapias falam com o WhatsApp do setor (92005);
+  // consultas e vacinação seguem na central (7016).
+  const numeroWa = s.category === "terapia" ? WHATSAPP_TERAPIAS : undefined;
+  const waUrl = waLink(s.waMessage, numeroWa);
   const catLabel = s.category === "vacinacao" ? "Vacinação" : s.category === "medica" ? "Especialidade Médica" : "Terapia Especializada";
 
   return (
@@ -221,7 +225,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
           </Anim>
 
           <Anim d={0.2}>
-            <LeadForm specialty={s.shortName} slug={s.slug} waUrl={waUrl} />
+            <LeadForm specialty={s.shortName} slug={s.slug} waUrl={waUrl} numeroWa={numeroWa} />
           </Anim>
         </div>
 

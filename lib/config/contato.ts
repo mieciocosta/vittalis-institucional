@@ -19,8 +19,19 @@
 // scripts/campanhas-termos.json, que trava o build se algum voltar.
 const NUMERO = "5598970163054";
 
+// 04/11, pedido do master (revoga, só nas páginas de terapias, o "92005 sai
+// do site" de 05/10): o WhatsApp das páginas de TERAPIAS (category
+// "terapia" em lib/specialties.ts) leva ao 98 92005-3606, o número do setor
+// de terapias, igual aos anúncios de terapias da Meta. Telefone, rodapé e
+// dados da empresa continuam no 7016. O check:campanhas só aceita este
+// número no HTML dessas páginas.
+const NUMERO_TERAPIAS = "5598920053606";
+
 /** Só dígitos, com DDI e DDD. Ex.: 5598970163054 */
 export const WHATSAPP_NUMERO = NUMERO;
+
+/** WhatsApp do setor de terapias (só nas páginas de terapias). */
+export const WHATSAPP_TERAPIAS = NUMERO_TERAPIAS;
 
 /** Telefone para ligar, no formato do link tel: */
 export const TELEFONE_TEL = `tel:+${NUMERO}`;
@@ -43,10 +54,14 @@ export function mensagemComReferencia(ref?: string): string {
   return ref ? `${MENSAGEM_NEUTRA} (ref: ${ref})` : MENSAGEM_NEUTRA;
 }
 
-/** Link do WhatsApp. Sem `ref`, usa a mensagem livre (ou a neutra). */
-export function linkWhatsApp(opcoes: { ref?: string; mensagem?: string } = {}): string {
+/**
+ * Link do WhatsApp. Sem `ref`, usa a mensagem livre (ou a neutra).
+ * `numero` só serve para o setor de terapias (WHATSAPP_TERAPIAS); sem ele,
+ * vai para a central.
+ */
+export function linkWhatsApp(opcoes: { ref?: string; mensagem?: string; numero?: string } = {}): string {
   const texto = opcoes.mensagem ?? mensagemComReferencia(opcoes.ref);
-  return `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(texto)}`;
+  return `https://wa.me/${opcoes.numero ?? WHATSAPP_NUMERO}?text=${encodeURIComponent(texto)}`;
 }
 
 /** Endereço do site em produção, sem barra no fim. */

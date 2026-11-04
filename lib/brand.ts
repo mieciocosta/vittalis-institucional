@@ -107,6 +107,7 @@ export const BRAND = {
 };
 
 // Função helper para gerar link de WhatsApp com mensagem personalizada
-export function waLink(message?: string): string {
-  return message ? linkWhatsApp({ mensagem: message }) : linkWhatsApp();
+// `numero` só para o setor de terapias (WHATSAPP_TERAPIAS em lib/config/contato.ts).
+export function waLink(message?: string, numero?: string): string {
+  return message ? linkWhatsApp({ mensagem: message, numero }) : linkWhatsApp({ numero });
 }
