@@ -84,13 +84,16 @@
     "5598984221002",
     "98422-1002",
     "984221002",
-    "5598920053606",
-    "92005-3606",
-    "920053606",
     "8422-1002",
     "5598988278736",
     "98827-8736",
     "988278736"
+  ],
+  "_numerosSoTerapias": "04/11, pedido do master: o WhatsApp do setor de terapias só pode aparecer no HTML das páginas de terapias (category 'terapia' em lib/specialties.ts). Em qualquer outra página conta como número banido.",
+  "numerosSoTerapias": [
+    "5598920053606",
+    "92005-3606",
+    "920053606"
   ],
   "eventosPermitidos": [
     "generate_lead",

@@ -180,6 +180,26 @@ async function modoHtml() {
     const conteudo = readFileSync(f, "utf8");
     for (const n of CFG.numerosBanidos) if (conteudo.includes(n)) problemas.push(`${relative(RAIZ, f)}: número banido ${n}`);
   }
+
+  // WhatsApp do setor de terapias (04/11, pedido do master): só no HTML das
+  // páginas de terapias, e TODA página de terapia tem que levar a ele. Os .js
+  // ficam de fora porque o pacote do código é o mesmo para todas as páginas.
+  const { SPECIALTIES } = await import(join(RAIZ, "lib/specialties.ts"));
+  const terapias = new Set(SPECIALTIES.filter((s) => s.category === "terapia").map((s) => s.slug));
+  const SO_TERAPIAS = CFG.numerosSoTerapias ?? [];
+  for (const f of arquivos(out, (p) => /\.(html|txt|xml)$/.test(p))) {
+    const rel = relative(out, f);
+    const slug = rel.split(/[\\/]/)[0].replace(/\.(html|txt)$/, "");
+    if (terapias.has(slug)) continue;
+    const conteudo = readFileSync(f, "utf8");
+    for (const n of SO_TERAPIAS) if (conteudo.includes(n)) problemas.push(`${relative(RAIZ, f)}: número das terapias (${n}) fora de página de terapia`);
+  }
+  for (const slug of terapias) {
+    const arquivo = join(out, `${slug}.html`);
+    if (!existsSync(arquivo)) continue;
+    const html = readFileSync(arquivo, "utf8");
+    if (SO_TERAPIAS.length && !html.includes(`wa.me/${SO_TERAPIAS[0]}`)) problemas.push(`${relative(RAIZ, arquivo)}: página de terapia sem o WhatsApp do setor de terapias`);
+  }
 }
 
 const html = process.argv.includes("--html");
