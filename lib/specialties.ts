@@ -128,7 +128,7 @@ export const SPECIALTIES: Specialty[] = [
     category: "terapia",
     accentColor: "#00B8C0",
     headline: "Autismo, TDAH e atraso no desenvolvimento: toda a equipe num só lugar",
-    subheadline: "Neuropediatra, neuropsicologia, fonoaudiologia, ABA, psicologia, terapia ocupacional e psicopedagogia trabalhando juntos pela sua criança, em São Luís.",
+    subheadline: "Uma equipe que trabalha junta pela sua criança, em São Luís. Toque na especialidade para saber mais:",
     description: "Quando a família percebe que algo no desenvolvimento da criança merece atenção, a primeira dúvida é por onde começar. Na Vittalis Saúde a família encontra a consulta médica, a avaliação e as terapias no mesmo endereço, com profissionais que conversam entre si e um plano de cuidado combinado com os pais e, quando necessário, com a escola.",
     metaTitle: "Autismo, TDAH e Desenvolvimento Infantil em São Luís | Vittalis Saúde",
     metaDescription: "Neuropediatra, neuropsicologia, fono, ABA, terapia ocupacional e psicologia infantil no mesmo lugar em São Luís. Avaliação e acompanhamento de autismo, TDAH e atraso no desenvolvimento.",

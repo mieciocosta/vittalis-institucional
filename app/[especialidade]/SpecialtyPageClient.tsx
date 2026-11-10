@@ -206,6 +206,16 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
                 {s.subheadline}
               </p>
 
+              {/* 10/11, pedido da direção ("falta especialidades"): na página que junta
+                  todas, as especialidades aparecem logo no topo, cada uma levando à sua página. */}
+              {s.slug === "desenvolvimento-infantil" && (
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: -12, marginBottom: 26, maxWidth: 560 }}>
+                  {AREAS_INFANTIS.map((a) => (
+                    <Link key={a.slug} href={`/${a.slug}`} style={{ fontSize: 14, fontWeight: 600, color: "var(--vit-secondary-dark)", background: "white", border: "1px solid rgba(0,184,192,.35)", borderRadius: 100, padding: "8px 14px", textDecoration: "none", boxShadow: "0 2px 8px rgba(0,184,192,.08)" }}>{a.nome}</Link>
+                  ))}
+                </div>
+              )}
+
               {/* Trust signals */}
               <div style={{ display: "flex", flexWrap: "wrap", gap: 20, marginBottom: 28 }}>
                 {[
