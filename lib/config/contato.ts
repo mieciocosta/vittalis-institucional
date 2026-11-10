@@ -33,6 +33,18 @@ export const WHATSAPP_NUMERO = NUMERO;
 /** WhatsApp do setor de terapias (só nas páginas de terapias). */
 export const WHATSAPP_TERAPIAS = NUMERO_TERAPIAS;
 
+
+// 10/11, pedido da direção: a pediatria (e a neuropediatria, quando a página
+// existir) também leva ao WhatsApp do setor de terapias (98 92005-3606), o
+// mesmo das terapias, porque o foco dos anúncios do Google é a criança e
+// essa equipe atende a família inteira. As outras páginas médicas seguem no 7016.
+export const MEDICAS_NO_WA_TERAPIAS = ["pediatria", "neuropediatria"];
+
+/** A página leva ao WhatsApp do setor de terapias (92005-3606)? */
+export function usaWhatsappTerapias(s: { slug: string; category: string }): boolean {
+  return s.category === "terapia" || MEDICAS_NO_WA_TERAPIAS.includes(s.slug);
+}
+
 /** Telefone para ligar, no formato do link tel: */
 export const TELEFONE_TEL = `tel:+${NUMERO}`;
 

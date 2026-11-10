@@ -182,10 +182,11 @@ async function modoHtml() {
   }
 
   // WhatsApp do setor de terapias (04/11, pedido do master): só no HTML das
-  // páginas de terapias, e TODA página de terapia tem que levar a ele. Os .js
+  // páginas de terapias (e da pediatria, 10/11), e TODA uma delas tem que levar a ele. Os .js
   // ficam de fora porque o pacote do código é o mesmo para todas as páginas.
   const { SPECIALTIES } = await import(join(RAIZ, "lib/specialties.ts"));
-  const terapias = new Set(SPECIALTIES.filter((s) => s.category === "terapia").map((s) => s.slug));
+  const { usaWhatsappTerapias } = await import(join(RAIZ, "lib/config/contato.ts"));
+  const terapias = new Set(SPECIALTIES.filter((s) => usaWhatsappTerapias(s)).map((s) => s.slug));
   const SO_TERAPIAS = CFG.numerosSoTerapias ?? [];
   for (const f of arquivos(out, (p) => /\.(html|txt|xml)$/.test(p))) {
     const rel = relative(out, f);

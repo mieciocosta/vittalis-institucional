@@ -110,7 +110,36 @@ export const SPECIALTIES: Specialty[] = [
     ],
     ctaText: "Agendar consulta",
     waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
+  },  // 10/11, pedido da direção: página nova para os anúncios do Google de
+  // neuropediatria. Leva ao WhatsApp do setor de terapias (MEDICAS_NO_WA_TERAPIAS).
+  // Sem promessa de resultado e sem preço (regras do CFM).
+  {
+    slug: "neuropediatria",
+    name: "Neuropediatria",
+    shortName: "Neuropediatria",
+    icon: "🧠",
+    category: "medica",
+    accentColor: "#4A8FC0",
+    headline: "Neuropediatria com escuta, cuidado e olhar atento ao desenvolvimento",
+    subheadline: "Avaliação neurológica da criança e do adolescente, com tempo para ouvir a família e integração com as terapias da clínica.",
+    description: "A neuropediatria cuida do sistema nervoso da criança: desenvolvimento, comportamento, aprendizagem, sono, crises e dores de cabeça. Na Vittalis Saúde, a consulta é feita com calma, ouvindo a história da família, e quando é preciso o acompanhamento segue junto com fonoaudiologia, psicologia, ABA e terapia ocupacional no mesmo lugar.",
+    metaTitle: "Neuropediatra em São Luís | Vittalis Saúde",
+    metaDescription: "Neuropediatra em São Luís. Avaliação do desenvolvimento, comportamento, aprendizagem e sono da criança, com integração às terapias. Agende na Vittalis Saúde.",
+    heroImage: IMG.psicoped,
+    painPoints: ["Dúvidas sobre atraso na fala ou no andar", "Suspeita de autismo ou TDAH sem orientação", "Dificuldade de aprendizagem na escola", "Sono agitado, crises ou dores de cabeça frequentes", "Família sem saber por onde começar"],
+    benefits: ["Consulta com tempo para ouvir a família", "Avaliação do desenvolvimento neuropsicomotor", "Orientação clara sobre os próximos passos", "Pedido e leitura de exames quando necessário", "Integração com fono, psicologia, ABA e terapia ocupacional", "Acompanhamento ao longo do crescimento"],
+    forWhom: ["Bebês com atraso nos marcos do desenvolvimento", "Crianças com suspeita de autismo (TEA) ou TDAH", "Crianças com dificuldade de aprendizagem ou de comportamento", "Crianças com crises, desmaios ou dores de cabeça", "Famílias que buscam uma segunda opinião"],
+    howItWorks: ["Agendamento pelo WhatsApp", "Consulta com a história completa da criança e da família", "Exame neurológico e avaliação do desenvolvimento", "Orientação e plano de cuidado combinado com a família", "Retornos e encaminhamento às terapias da clínica quando indicado"],
+    differentials: ["Ambiente acolhedor pensado para crianças", "Consulta sem pressa", "Terapias integradas no mesmo local", "Comunicação próxima com os pais"],
+    faq: [
+      { q: "Quando procurar um neuropediatra?", a: "Quando há dúvida sobre o desenvolvimento (fala, andar, interação), suspeita de autismo ou TDAH, dificuldade de aprendizagem, crises, desmaios ou dores de cabeça frequentes. Na dúvida, a consulta ajuda a entender o que está acontecendo." },
+      { q: "Preciso de encaminhamento do pediatra?", a: "Não é obrigatório. Se a criança já tem exames ou relatórios da escola e de outros profissionais, leve na consulta." },
+      { q: "A clínica tem as terapias depois da consulta?", a: "Sim. Fonoaudiologia, psicologia infantil, ABA, neuropsicologia e terapia ocupacional ficam na própria Vittalis, o que facilita o acompanhamento." },
+    ],
+    ctaText: "Agendar consulta",
+    waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
   },
+
   {
     slug: "ginecologia",name: "Ginecologia e Obstetrícia",shortName: "Ginecologia",icon: "🌸",category: "medica",accentColor: "#D4A0B9",
     headline: "Saúde da mulher com cuidado, escuta e respeito",

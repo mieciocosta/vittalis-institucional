@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import type { Specialty } from "@/lib/specialties";
 import { BRAND, waLink } from "@/lib/brand";
-import { WHATSAPP_TERAPIAS } from "@/lib/config/contato";
+import { WHATSAPP_TERAPIAS, usaWhatsappTerapias } from "@/lib/config/contato";
 import { EXEMPLO_TELEFONE, TAMANHO_TELEFONE, mascararTelefone, telefoneCompleto } from "@/lib/telefone";
 import { guardarLeadSemEsperar } from "@/lib/planilha";
 import { trackEvent } from "@/lib/analytics";
@@ -147,8 +147,8 @@ function LeadForm({ specialty, slug, waUrl, numeroWa }: { specialty: string; slu
    ════════════════════════════════════════════════════════════════════ */
 export default function SpecialtyPageClient({ specialty: s }: { specialty: Specialty }) {
   // 04/11, pedido do master: terapias falam com o WhatsApp do setor (92005);
-  // consultas e vacinação seguem na central (7016).
-  const numeroWa = s.category === "terapia" ? WHATSAPP_TERAPIAS : undefined;
+  // 10/11, a pediatria também (usaWhatsappTerapias). O resto segue no 7016.
+  const numeroWa = usaWhatsappTerapias(s) ? WHATSAPP_TERAPIAS : undefined;
   const waUrl = waLink(s.waMessage, numeroWa);
   const catLabel = s.category === "vacinacao" ? "Vacinação" : s.category === "medica" ? "Especialidade Médica" : "Terapia Especializada";
 
