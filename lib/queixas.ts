@@ -167,6 +167,19 @@ QUEIXAS_POR_PAGINA["desenvolvimento-infantil"] = [
   { id: "seletividade", comoAjuda: "A nutricionista infantil cuida da seletividade alimentar com um plano de pequenos passos, junto com a TO e a fono quando a origem é sensorial." },
 ];
 
+/** Na página que junta todas, cada queixa mostra as áreas que cuidam dela
+ *  (etiquetas que levam à página da área). As fotos ficam nos cartões das
+ *  áreas, uma por área, para não repetir imagem na mesma página. */
+export const QUEM_CUIDA: Record<QueixaId, string[]> = {
+  autismo: ["neuropediatria", "neuropsicologia", "psicologia-aba", "fonoaudiologia", "terapia-ocupacional-infantil", "nutricao-infantil"],
+  tdah: ["neuropediatria", "neuropsicologia", "psicologia-infantil", "psicopedagogia", "terapia-ocupacional-infantil"],
+  agitacao: ["neuropediatria", "psicologia-infantil", "psicologia-aba", "terapia-ocupacional-infantil"],
+  fala: ["fonoaudiologia", "neuropediatria", "psicologia-aba"],
+  escola: ["neuropsicologia", "psicopedagogia", "fonoaudiologia"],
+  sensorial: ["terapia-ocupacional-infantil", "psicologia-aba", "nutricao-infantil"],
+  seletividade: ["nutricao-infantil", "terapia-ocupacional-infantil", "fonoaudiologia"],
+};
+
 /** Áreas mostradas na página que junta todas (/desenvolvimento-infantil).
  *  A pediatria fica de fora de propósito (10/11, pedido da direção: "faz uma
  *  de pediatria separado"): ela tem a página própria, /pediatria. */

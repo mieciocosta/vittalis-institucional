@@ -10,7 +10,7 @@ import { guardarLeadSemEsperar } from "@/lib/planilha";
 import { trackEvent } from "@/lib/analytics";
 import { DadosEmpresa } from "../_componentes/DadosEmpresa";
 import { getCampanha, type Campanha } from "@/lib/content/campanhas";
-import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, temQueixas, tituloQueixas } from "@/lib/queixas";
+import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, QUEM_CUIDA, temQueixas, tituloQueixas } from "@/lib/queixas";
 
 // Páginas de campanha ligadas a cada especialidade (bloco "Conheça também").
 const CAMPANHAS_DA_ESPECIALIDADE: Record<string, string[]> = {
@@ -532,6 +532,9 @@ function ConhecaTambem({ slug }: { slug: string }) {
 /* ─── Queixas das famílias (lib/queixas.ts) ─── */
 function Queixas({ slug, heroImage, waUrl, ctaText }: { slug: string; heroImage: string; waUrl: string; ctaText: string }) {
   const itens = QUEIXAS_POR_PAGINA[slug] ?? [];
+  // Na página que junta todas as áreas as queixas vêm em cartões compactos,
+  // sem foto (a foto de cada área já está nos cartões de cima).
+  if (slug === "desenvolvimento-infantil") return <QueixasCompactas waUrl={waUrl} />;
   return (
     <section style={{ padding: "80px 24px", background: "linear-gradient(180deg, var(--vit-cream) 0%, var(--vit-white) 100%)" }} aria-labelledby="queixas-titulo">
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -609,14 +612,15 @@ function CaminhoEGaleria({ slug }: { slug: string }) {
             return p.slug === slug ? <div key={p.titulo}>{cartao}</div> : <Link key={p.titulo} href={`/${p.slug}`} style={{ textDecoration: "none" }}>{cartao}</Link>;
           })}
         </div>
-        <div className="vit-galeria" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
+        {/* Na página que junta todas, as fotos já estão nos cartões das áreas. */}
+        {slug !== "desenvolvimento-infantil" && <div className="vit-galeria" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
           {GALERIA_INFANTIL.map((g) => (
             <figure key={g.src} style={{ margin: 0, borderRadius: 16, overflow: "hidden", position: "relative", aspectRatio: "4/3" }}>
               <img src={g.src} alt={g.legenda} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
               <figcaption style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "18px 12px 10px", background: "linear-gradient(transparent, rgba(0,0,0,.6))", color: "#fff", fontSize: 13, fontWeight: 600 }}>{g.legenda}</figcaption>
             </figure>
           ))}
-        </div>
+        </div>}
         {slug !== "desenvolvimento-infantil" && (
           <p style={{ textAlign: "center", marginTop: 28 }}>
             <Link href="/desenvolvimento-infantil" style={{ fontSize: 15, fontWeight: 700, color: "var(--vit-primary-dark)" }}>Conheça toda a equipe de desenvolvimento infantil →</Link>
@@ -652,6 +656,56 @@ function AreasDaEquipe({ waUrl }: { waUrl: string }) {
           ))}
         </div>
         <div style={{ textAlign: "center", marginTop: 36 }}><CTA href={waUrl} variant="whats" big><WhatsIcon /> Não sei por onde começar</CTA></div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Queixas compactas com "quem cuida" (/desenvolvimento-infantil) ─── */
+function QueixasCompactas({ waUrl }: { waUrl: string }) {
+  const nomeDa = (slug: string) => AREAS_INFANTIS.find((a) => a.slug === slug)?.nome ?? slug;
+  const ordem = ["autismo", "tdah", "agitacao", "fala", "seletividade", "sensorial", "escola"] as const;
+  return (
+    <section style={{ padding: "80px 24px", background: "var(--vit-primary-50)" }} aria-labelledby="queixas-titulo">
+      <div style={{ maxWidth: 1180, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: 36 }}>
+          <span style={{ display: "inline-block", fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--vit-gold)", marginBottom: 10 }}>O que traz as famílias até nós</span>
+          <h2 id="queixas-titulo" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(26px, 3.6vw, 40px)", fontWeight: 600, color: "var(--vit-charcoal)", lineHeight: 1.15, marginBottom: 12 }}>
+            Qual é a sua preocupação? Veja quem da equipe cuida
+          </h2>
+          <p style={{ fontSize: 16, color: "var(--vit-gray-500)", maxWidth: 640, margin: "0 auto", lineHeight: 1.7 }}>
+            Os sinais que os pais costumam notar e as áreas que trabalham juntas em cada caso.
+          </p>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 18 }}>
+          {ordem.map((id) => {
+            const q = QUEIXAS[id];
+            return (
+              <article key={id} style={{ background: "white", borderRadius: 20, padding: "24px 22px", border: "1px solid var(--vit-gray-100)", boxShadow: "0 8px 26px rgba(0,0,0,.04)", display: "flex", flexDirection: "column" }}>
+                <h3 style={{ fontSize: 19, fontWeight: 700, color: "var(--vit-charcoal)", marginBottom: 10, display: "flex", gap: 8, alignItems: "center" }}><span aria-hidden="true">{q.emoji}</span>{q.titulo}</h3>
+                <ul style={{ listStyle: "none", padding: 0, margin: "0 0 14px", display: "flex", flexDirection: "column", gap: 5 }}>
+                  {q.sinais.slice(0, 3).map((sinal) => (
+                    <li key={sinal} style={{ display: "flex", gap: 8, fontSize: 14, color: "var(--vit-gray-700)", lineHeight: 1.5 }}>
+                      <span style={{ color: "var(--vit-primary)", flexShrink: 0, marginTop: 2 }}><Check /></span>{sinal}
+                    </li>
+                  ))}
+                </ul>
+                <div style={{ marginTop: "auto" }}>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: "var(--vit-secondary)", textTransform: "uppercase", letterSpacing: ".05em", marginBottom: 8 }}>Quem cuida</div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                    {QUEM_CUIDA[id].map((slug) => (
+                      <Link key={slug} href={`/${slug}`} style={{ fontSize: 13, fontWeight: 600, color: "var(--vit-primary-dark)", background: "var(--vit-primary-light)", borderRadius: 100, padding: "6px 12px", textDecoration: "none" }}>{nomeDa(slug)}</Link>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+        <p style={{ fontSize: 13, color: "var(--vit-gray-500)", textAlign: "center", margin: "26px 0 22px", lineHeight: 1.6 }}>
+          Estes sinais não fecham diagnóstico. Só a avaliação de um profissional pode dizer o que a criança tem e qual o melhor caminho.
+        </p>
+        <div style={{ textAlign: "center" }}><CTA href={waUrl} variant="whats" big><WhatsIcon /> Contar o que está acontecendo</CTA></div>
       </div>
     </section>
   );
