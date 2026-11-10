@@ -12,7 +12,7 @@
 
 const O = (n: string) => `/images/otim/${n}.webp`;
 
-export type QueixaId = "tdah" | "autismo" | "agitacao" | "fala" | "escola" | "sensorial";
+export type QueixaId = "tdah" | "autismo" | "agitacao" | "fala" | "escola" | "sensorial" | "seletividade";
 
 export type Queixa = {
   id: QueixaId;
@@ -27,6 +27,16 @@ export type Queixa = {
 };
 
 export const QUEIXAS: Record<QueixaId, Queixa> = {
+  seletividade: {
+    id: "seletividade",
+    emoji: "🥦",
+    titulo: "Seletividade alimentar",
+    resumo: "Quando a criança aceita poucos alimentos, sempre os mesmos, e recusa o resto pela cor, cheiro ou textura. A refeição vira briga e a família se preocupa com o crescimento. É muito comum em crianças com autismo e merece cuidado, não castigo.",
+    sinais: ["Come menos de 15 a 20 alimentos diferentes", "Recusa grupos inteiros: frutas, verduras ou carnes", "Só aceita uma marca, uma cor ou um jeito de preparo", "Engasga, faz ânsia ou chora diante de comida nova", "Refeição demorada, com briga, tela ou chantagem"],
+    img: O("nutricao_infantil_v2_02"),
+    img2: O("nutricao_infantil_v2_01"),
+    alt: "Nutricionista com criança sorridente em consulta",
+  },
   tdah: {
     id: "tdah",
     emoji: "⚡",
@@ -131,6 +141,12 @@ export const QUEIXAS_POR_PAGINA: Record<string, { id: QueixaId; comoAjuda: strin
     { id: "tdah", comoAjuda: "A TO trabalha regulação do corpo, organização e coordenação, o que ajuda a criança a ficar mais disponível para aprender." },
     { id: "agitacao", comoAjuda: "Muita agitação tem origem sensorial: a TO ajuda a criança a encontrar formas de se acalmar e se organizar." },
   ],
+  "nutricao-infantil": [
+    { id: "seletividade", comoAjuda: "A nutricionista avalia o que a criança come, o crescimento e a rotina e monta com a família um plano de pequenos passos para ampliar o cardápio, sem forçar." },
+    { id: "autismo", comoAjuda: "No TEA a seletividade costuma ter origem sensorial. A nutricionista adapta o plano ao jeito da criança e trabalha junto com a TO e a fono da clínica." },
+    { id: "tdah", comoAjuda: "Na criança com TDAH a alimentação costuma ser desorganizada: a nutricionista ajuda a criar rotina de refeições e escolhas que funcionem para a família." },
+    { id: "sensorial", comoAjuda: "Textura, cheiro e cor pesam muito na aceitação. A nutricionista apresenta os alimentos aos poucos, respeitando o tempo da criança." },
+  ],
   psicopedagogia: [
     { id: "escola", comoAjuda: "A psicopedagoga avalia como a criança aprende e trabalha leitura, escrita, raciocínio e hábitos de estudo, em contato com a escola." },
     { id: "tdah", comoAjuda: "Rotina de estudo, organização do material e estratégias de atenção ajudam a criança com TDAH a acompanhar a turma." },
@@ -148,6 +164,7 @@ QUEIXAS_POR_PAGINA["desenvolvimento-infantil"] = [
   { id: "fala", comoAjuda: "A fonoaudiologia avalia e estimula a fala; quando é preciso, a neuropediatra investiga a causa." },
   { id: "escola", comoAjuda: "Neuropsicologia e psicopedagogia mostram como a criança aprende e o que pode ajudar, em contato com a escola." },
   { id: "sensorial", comoAjuda: "A terapia ocupacional trabalha regulação, coordenação e autonomia nas tarefas do dia a dia." },
+  { id: "seletividade", comoAjuda: "A nutricionista infantil cuida da seletividade alimentar com um plano de pequenos passos, junto com a TO e a fono quando a origem é sensorial." },
 ];
 
 /** Áreas mostradas na página que junta todas (/desenvolvimento-infantil).
@@ -160,6 +177,7 @@ export const AREAS_INFANTIS = [
   { slug: "fonoaudiologia", nome: "Fonoaudiologia", img: O("atendimento_multidisciplinar"), texto: "Fala, linguagem e comunicação, com orientação para casa." },
   { slug: "terapia-ocupacional-infantil", nome: "Terapia Ocupacional", img: O("psicologia_aba_02"), texto: "Questões sensoriais, coordenação e independência." },
   { slug: "psicologia-infantil", nome: "Psicologia Infantil", img: O("psicologia_infantil_01"), texto: "Emoções, comportamento e apoio aos pais pelo brincar." },
+  { slug: "nutricao-infantil", nome: "Nutrição Infantil", img: O("nutricao_infantil_v2_02"), texto: "Seletividade alimentar, sem forçar e com plano para a família." },
   { slug: "psicopedagogia", nome: "Psicopedagogia", img: O("psicopedagogia_01"), texto: "Leitura, escrita e aprendizagem, em contato com a escola." },
 ];
 
@@ -177,6 +195,12 @@ export const GALERIA_INFANTIL = [
   { src: O("psicologia_aba_02"), legenda: "Estímulo com brinquedos e jogos" },
   { src: O("pediatria_02"), legenda: "Consulta sem pressa e com carinho" },
 ];
+
+/** Título da seção de queixas; a nutrição abre pela seletividade. */
+export function tituloQueixas(slug: string): string {
+  if (slug === "nutricao-infantil") return "Seletividade alimentar, autismo e TDAH: sua família não precisa passar por isso sozinha";
+  return "TDAH, autismo, agitação: sua família não precisa passar por isso sozinha";
+}
 
 export function temQueixas(slug: string): boolean {
   return Boolean(QUEIXAS_POR_PAGINA[slug]);

@@ -10,7 +10,7 @@ import { guardarLeadSemEsperar } from "@/lib/planilha";
 import { trackEvent } from "@/lib/analytics";
 import { DadosEmpresa } from "../_componentes/DadosEmpresa";
 import { getCampanha, type Campanha } from "@/lib/content/campanhas";
-import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, temQueixas } from "@/lib/queixas";
+import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, temQueixas, tituloQueixas } from "@/lib/queixas";
 
 // Páginas de campanha ligadas a cada especialidade (bloco "Conheça também").
 const CAMPANHAS_DA_ESPECIALIDADE: Record<string, string[]> = {
@@ -538,7 +538,7 @@ function Queixas({ slug, heroImage, waUrl, ctaText }: { slug: string; heroImage:
         <div style={{ textAlign: "center", marginBottom: 48 }}>
           <span style={{ display: "inline-block", fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--vit-gold)", marginBottom: 10 }}>O que traz as famílias até nós</span>
           <h2 id="queixas-titulo" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(26px, 3.6vw, 40px)", fontWeight: 600, color: "var(--vit-charcoal)", lineHeight: 1.15, marginBottom: 12 }}>
-            TDAH, autismo, agitação: sua família não precisa passar por isso sozinha
+            {tituloQueixas(slug)}
           </h2>
           <p style={{ fontSize: 16, color: "var(--vit-gray-500)", maxWidth: 640, margin: "0 auto", lineHeight: 1.7 }}>
             Veja os sinais que os pais costumam notar e como a nossa equipe cuida de cada situação.

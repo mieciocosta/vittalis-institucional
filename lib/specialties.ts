@@ -342,17 +342,25 @@ export const SPECIALTIES: Specialty[] = [
     ctaText: "Agendar avaliação",waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
   },
   {
+    // 10/11, pedido da direção: a nutrição infantil vira a página da
+    // SELETIVIDADE ALIMENTAR (a queixa que mais traz as famílias, muito comum
+    // no autismo), com fotos e a seção de queixas. Sem promessa (CFN).
     slug: "nutricao-infantil",name: "Nutrição Infantil",shortName: "Nutrição Infantil",icon: "🥦",category: "terapia",accentColor: "#50A868",
-    headline: "Alimentação saudável desde a primeira colherada",
-    subheadline: "Orientação nutricional especializada para crianças — com abordagem acolhedora, respeitosa e sem restrições extremas.",
-    description: "Acompanhamento nutricional para bebês, crianças e adolescentes, com foco em introdução alimentar, seletividade e hábitos saudáveis.",
-    metaTitle: "Nutrição Infantil em São Luís | Vittalis Saúde",metaDescription: "Nutrição infantil em São Luís com abordagem acolhedora. Agende na Vittalis Saúde.",
-    heroImage: IMG.nutriInfantil,painPoints: ["Criança que não come quase nada","Dúvidas sobre introdução alimentar","Seletividade alimentar severa","Baixo peso ou sobrepeso infantil"],
-    benefits: ["Orientação para introdução alimentar BLW e tradicional","Tratamento de seletividade alimentar","Plano alimentar sem restrições extremas","Acompanhamento do crescimento","Orientação prática para o dia a dia"],
-    forWhom: ["Bebês em introdução alimentar","Crianças seletivas","Crianças com baixo peso","Crianças com alergias alimentares","Adolescentes com alimentação desequilibrada"],
-    howItWorks: ["Avaliação nutricional completa","Entendimento dos hábitos da família","Plano alimentar personalizado","Consultas de acompanhamento","Ajustes e novas orientações"],
-    differentials: ["Abordagem sem forçar a criança","Integração com pediatria e fono","Foco no prazer de comer"],
-    faq: [{q:"Meu filho é muito seletivo. A nutricionista pode ajudar?",a:"Sim! Trabalhamos com estratégias graduais e respeitosas para ampliar a aceitação alimentar, sem forçar e sem criar trauma."}],
+    headline: "Seu filho come só meia dúzia de alimentos? A gente cuida da seletividade alimentar",
+    subheadline: "Nutricionista infantil que trabalha a seletividade com calma, sem forçar e junto com a família, inclusive em crianças com autismo e TDAH.",
+    description: "A seletividade alimentar vai além da criança enjoada para comer: é quando o cardápio fica tão pequeno que preocupa a família, deixa a hora da refeição pesada e pode faltar nutriente para o crescimento. Na Vittalis Saúde a nutricionista avalia a alimentação, o crescimento e a rotina, e monta com a família um plano de pequenos passos para a criança ir conhecendo novos alimentos sem pressão. Quando é preciso, o cuidado segue junto com a fono, a terapia ocupacional e a pediatria da clínica.",
+    metaTitle: "Seletividade Alimentar e Nutrição Infantil em São Luís | Vittalis Saúde",metaDescription: "Nutricionista infantil em São Luís para seletividade alimentar, inclusive no autismo e TDAH. Abordagem sem forçar, com plano para a família. Agende na Vittalis Saúde.",
+    heroImage: IMG.nutriInfantil,painPoints: ["Criança que aceita poucos alimentos e sempre os mesmos","Hora da refeição virou briga ou choro","Recusa tudo que é verde, misturado ou de textura diferente","Engasga, vomita ou passa mal ao provar algo novo","Medo de faltar nutriente para o crescimento","Seletividade junto com autismo ou TDAH"],
+    benefits: ["Avaliação da alimentação, do crescimento e da rotina","Plano de pequenos passos para ampliar o cardápio","Estratégias sem forçar, sem chantagem e sem castigo","Ideias práticas de refeições para a família","Acompanhamento do crescimento e dos nutrientes","Integração com fono, terapia ocupacional e pediatria"],
+    forWhom: ["Crianças com seletividade alimentar","Crianças com autismo (TEA) que comem poucos alimentos","Crianças com TDAH e alimentação desorganizada","Bebês em introdução alimentar","Crianças com baixo peso ou sobrepeso","Famílias cansadas da briga na hora de comer"],
+    howItWorks: ["Conversa pelo WhatsApp para entender a rotina de alimentação","Consulta com avaliação nutricional e do crescimento","Mapa dos alimentos que a criança aceita e dos próximos passos","Plano para casa, com combinados simples para a família","Retornos para ajustar e comemorar cada novo alimento"],
+    differentials: ["Abordagem sem forçar a criança","Experiência com seletividade no autismo","Integração com fono, TO e pediatria no mesmo lugar","Foco no prazer de comer, não só no prato limpo"],
+    faq: [
+      {q:"Meu filho é muito seletivo. A nutricionista pode ajudar?",a:"Sim. A nutricionista trabalha com estratégias graduais e respeitosas para a criança ir aceitando novos alimentos, sem forçar e sem transformar a refeição em briga."},
+      {q:"Seletividade alimentar é comum no autismo?",a:"É bem comum. Muitas crianças com TEA têm sensibilidade a texturas, cores e cheiros. Nesses casos a nutricionista costuma trabalhar junto com a terapia ocupacional e a fono."},
+      {q:"Quando a seletividade preocupa?",a:"Quando a criança aceita poucos alimentos, recusa grupos inteiros (frutas, verduras ou carnes), tem dificuldade para ganhar peso ou a hora da refeição gera sofrimento para todos. Na dúvida, vale uma avaliação."},
+      {q:"Vocês atendem por plano de saúde?",a:"O atendimento é particular. Pelo WhatsApp a equipe explica como funciona a consulta."},
+    ],
     ctaText: "Agendar consulta",waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
   },
   {
