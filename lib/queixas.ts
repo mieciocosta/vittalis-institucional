@@ -193,7 +193,7 @@ export const AREAS_INFANTIS = [
   { slug: "neuropediatria", nome: "Neuropediatria", img: O("pediatria_01"), texto: "Avaliação médica do desenvolvimento, do comportamento e do sono." },
   { slug: "neuropsicologia", nome: "Neuropsicologia", img: O("psicologia_infantil_02"), texto: "Avaliação de atenção, memória e comportamento, com laudo." },
   { slug: "psicologia-aba", nome: "Psicologia ABA", img: O("psicologia_aba_01"), texto: "Metas individuais de comunicação, socialização e autonomia." },
-  { slug: "fonoaudiologia", nome: "Fonoaudiologia", img: O("atendimento_multidisciplinar"), texto: "Fala, linguagem e comunicação, com orientação para casa." },
+  { slug: "fonoaudiologia", nome: "Fonoaudiologia", img: O("multidisciplinar_02"), texto: "Fala, linguagem e comunicação, com orientação para casa." },
   { slug: "terapia-ocupacional-infantil", nome: "Terapia Ocupacional", img: O("psicologia_aba_02"), texto: "Questões sensoriais, coordenação e independência." },
   { slug: "psicologia-infantil", nome: "Psicologia Infantil", img: O("psicologia_infantil_01"), texto: "Emoções, comportamento e apoio aos pais pelo brincar." },
   { slug: "musicoterapia", nome: "Musicoterapia", img: O("psicologia_infantil_02"), texto: "Música para comunicar, interagir e se regular." },
@@ -236,8 +236,8 @@ export const FOTO_TOPO: Record<string, string> = {
   psicopedagogia: O("psicopedagogia_02"),
   "nutricao-infantil": O("nutricao_infantil_v2_02"),
   musicoterapia: O("psicologia_aba_02"),
-  // 10/11: a direção testou a fono no consultório e preferiu esta (terapeuta no tapete).
-  "desenvolvimento-infantil": O("psicologia_infantil_01"),
+  // 10/11, pedido da direção (03h02): a página principal abre com a fono e a criança.
+  "desenvolvimento-infantil": O("atendimento_multidisciplinar"),
 };
 
 /** Fotos de reserva para os cartões de queixa quando as próprias já estão na página. */
