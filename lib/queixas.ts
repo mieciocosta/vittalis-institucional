@@ -33,8 +33,8 @@ export const QUEIXAS: Record<QueixaId, Queixa> = {
     titulo: "Seletividade alimentar",
     resumo: "Quando a criança aceita poucos alimentos, sempre os mesmos, e recusa o resto pela cor, cheiro ou textura. A refeição vira briga e a família se preocupa com o crescimento. É muito comum em crianças com autismo e merece cuidado, não castigo.",
     sinais: ["Come menos de 15 a 20 alimentos diferentes", "Recusa grupos inteiros: frutas, verduras ou carnes", "Só aceita uma marca, uma cor ou um jeito de preparo", "Engasga, faz ânsia ou chora diante de comida nova", "Refeição demorada, com briga, tela ou chantagem"],
-    img: O("nutricao_infantil_v2_02"),
-    img2: O("nutricao_infantil_v2_01"),
+    img: O("n_nutricao_infantil"),
+    img2: O("nutricao_infantil_v2_02"),
     alt: "Nutricionista com criança sorridente em consulta",
   },
   tdah: {
@@ -83,7 +83,7 @@ export const QUEIXAS: Record<QueixaId, Queixa> = {
     titulo: "Dificuldade na escola",
     resumo: "Notas que não melhoram, dificuldade para ler, escrever ou fazer contas e uma criança que passa a não gostar da escola. Por trás disso pode haver dislexia, TDAH, ansiedade ou outra questão que a avaliação ajuda a enxergar.",
     sinais: ["Demora para ler ou troca letras com frequência", "Não consegue acompanhar a turma mesmo com reforço", "Esquece o que estudou de um dia para o outro", "Chora ou reclama para ir à escola", "Professores relatam dificuldade de concentração"],
-    img: O("psicopedagogia_01_logo"),
+    img: O("n_psicopedagogia"),
     img2: O("n_neuropsicologia"),
     alt: "Profissional ajudando criança em atividade de leitura",
   },
@@ -93,8 +93,8 @@ export const QUEIXAS: Record<QueixaId, Queixa> = {
     titulo: "Questões sensoriais e coordenação",
     resumo: "Algumas crianças sentem barulhos, roupas, texturas e alimentos de forma muito intensa, ou têm dificuldade com movimentos finos e com tarefas do dia a dia. Isso interfere no brincar, na escola e na autonomia.",
     sinais: ["Tapa os ouvidos com barulhos comuns", "Recusa roupas, etiquetas ou certos alimentos pela textura", "Dificuldade para segurar o lápis, recortar ou se vestir", "Tropeça, cai ou esbarra muito nas coisas", "Busca movimento o tempo todo (pular, girar, se jogar)"],
-    img: O("n_terapia_ocupacional"),
-    img2: O("n_psicologia_aba"),
+    img: O("n_terapia_ocupacional_sensorial"),
+    img2: O("n_terapia_ocupacional"),
     alt: "Terapeuta e criança em atividade de coordenação com brinquedos",
   },
 };
@@ -194,11 +194,11 @@ export const AREAS_INFANTIS = [
   { slug: "neuropsicologia", nome: "Neuropsicologia", img: O("n_neuropsicologia"), texto: "Avaliação de atenção, memória e comportamento, com laudo." },
   { slug: "psicologia-aba", nome: "Psicologia ABA", img: O("n_psicologia_aba"), texto: "Metas individuais de comunicação, socialização e autonomia." },
   { slug: "fonoaudiologia", nome: "Fonoaudiologia", img: O("n_fonoaudiologia"), texto: "Fala, linguagem e comunicação, com orientação para casa." },
-  { slug: "terapia-ocupacional-infantil", nome: "Terapia Ocupacional", img: O("n_terapia_ocupacional"), texto: "Questões sensoriais, coordenação e independência." },
+  { slug: "terapia-ocupacional-infantil", nome: "Terapia Ocupacional", img: O("n_terapia_ocupacional_sensorial"), texto: "Questões sensoriais, coordenação e independência." },
   { slug: "psicologia-infantil", nome: "Psicologia Infantil", img: O("n_psicologia_infantil"), texto: "Emoções, comportamento e apoio aos pais pelo brincar." },
   { slug: "musicoterapia", nome: "Musicoterapia", img: O("n_musicoterapia"), texto: "Música para comunicar, interagir e se regular." },
-  { slug: "nutricao-infantil", nome: "Nutrição Infantil", img: O("nutricao_infantil_v2_02"), texto: "Seletividade alimentar, sem forçar e com plano para a família." },
-  { slug: "psicopedagogia", nome: "Psicopedagogia", img: O("psicopedagogia_01_logo"), texto: "Leitura, escrita e aprendizagem, em contato com a escola." },
+  { slug: "nutricao-infantil", nome: "Nutrição Infantil", img: O("n_nutricao_infantil"), texto: "Seletividade alimentar, sem forçar e com plano para a família." },
+  { slug: "psicopedagogia", nome: "Psicopedagogia", img: O("n_psicopedagogia"), texto: "Leitura, escrita e aprendizagem, em contato com a escola." },
 ];
 
 /** Caminho do cuidado na clínica, mostrado em todas as páginas infantis. */
@@ -259,17 +259,17 @@ export const DIFERENCIAIS_DESTAQUE = [
 export const FOTO_TOPO: Record<string, string> = {
   // 10/11, pedido da direção: nenhuma foto de topo repete entre as páginas,
   // consultório moderno e profissional de jaleco branco com a logo (fotos
-  // enviadas pela direção às 11h11). Psicopedagogia aguarda a foto nova.
+  // enviadas pela direção às 11h11 e 11h17).
   pediatria: O("vittalis_pediatria_2"),
   neuropediatria: O("pediatria_02_logo"),
   neuropsicologia: O("n_neuropsicologia"),
   fonoaudiologia: O("n_fonoaudiologia"),
   "psicologia-aba": O("n_psicologia_aba"),
-  "terapia-ocupacional-infantil": O("n_terapia_ocupacional"),
+  "terapia-ocupacional-infantil": O("n_terapia_ocupacional_sensorial"),
   "psicologia-infantil": O("n_psicologia_infantil"),
   musicoterapia: O("n_musicoterapia"),
-  psicopedagogia: O("psicopedagogia_01_logo"),
-  "nutricao-infantil": O("nutricao_infantil_v2_02"),
+  psicopedagogia: O("n_psicopedagogia"),
+  "nutricao-infantil": O("n_nutricao_infantil"),
   // 10/11, pedido da direção (03h02): a página principal abre com a fono e a criança.
   "desenvolvimento-infantil": O("atendimento_multidisciplinar_logo"),
 };

@@ -49,7 +49,7 @@ const IMG = {
   nutriAdulta: O("clinica_geral_02"),
   fisioInfantil: O("n_terapia_ocupacional"),
   fisioAdulta: O("pneumologia_02"),
-  toInfantil: O("n_psicologia_aba"),
+  toInfantil: O("n_terapia_ocupacional"),
   toAdulta: O("clinica_geral_02"),
   neurofeedback: O("neurofeedback_02"),
   musicoterapia: O("n_psicologia_infantil"),
