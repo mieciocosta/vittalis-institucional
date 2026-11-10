@@ -114,7 +114,40 @@ export const SPECIALTIES: Specialty[] = [
     ],
     ctaText: "Agendar consulta",
     waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
-  },  // 10/11, pedido da direção: página nova para os anúncios do Google de
+  },  // 10/11, pedido da direção ("uma página para todas as áreas"): a página
+  // que junta neuropediatria, neuropsicologia, fono, ABA, psicologia,
+  // terapia ocupacional e psicopedagogia. É a página dos anúncios de busca
+  // ampla (autismo, TDAH, atraso no desenvolvimento); quem busca uma área
+  // específica continua indo para a página dela. category "terapia" = WhatsApp
+  // do setor de terapias (92005-3606).
+  {
+    slug: "desenvolvimento-infantil",
+    name: "Desenvolvimento Infantil",
+    shortName: "Desenvolvimento Infantil",
+    icon: "🧩",
+    category: "terapia",
+    accentColor: "#00B8C0",
+    headline: "Autismo, TDAH e atraso no desenvolvimento: toda a equipe num só lugar",
+    subheadline: "Neuropediatra, neuropsicologia, fonoaudiologia, ABA, psicologia, terapia ocupacional e psicopedagogia trabalhando juntos pela sua criança, em São Luís.",
+    description: "Quando a família percebe que algo no desenvolvimento da criança merece atenção, a primeira dúvida é por onde começar. Na Vittalis Saúde a família encontra a consulta médica, a avaliação e as terapias no mesmo endereço, com profissionais que conversam entre si e um plano de cuidado combinado com os pais e, quando necessário, com a escola.",
+    metaTitle: "Autismo, TDAH e Desenvolvimento Infantil em São Luís | Vittalis Saúde",
+    metaDescription: "Neuropediatra, neuropsicologia, fono, ABA, terapia ocupacional e psicologia infantil no mesmo lugar em São Luís. Avaliação e acompanhamento de autismo, TDAH e atraso no desenvolvimento.",
+    heroImage: IMG.equipe,
+    painPoints: ["Suspeita de autismo ou TDAH e nenhuma resposta clara", "Atraso na fala, no andar ou na interação", "Agitação, birras e comportamento difícil em casa e na escola", "Correr de um consultório para outro sem ninguém conversar", "Listas de espera longas para começar as terapias", "Escola pedindo laudo ou avaliação"],
+    benefits: ["Consulta médica, avaliação e terapias no mesmo endereço", "Profissionais que conversam entre si sobre a sua criança", "Plano de cuidado combinado com a família", "Orientação para os pais continuarem em casa", "Contato com a escola quando necessário", "Ambiente lúdico e acolhedor para crianças"],
+    forWhom: ["Crianças com suspeita ou diagnóstico de autismo (TEA)", "Crianças com suspeita ou diagnóstico de TDAH", "Bebês e crianças com atraso no desenvolvimento", "Crianças com atraso na fala", "Crianças com dificuldade de aprendizagem", "Famílias que buscam uma segunda opinião"],
+    howItWorks: ["Conversa pelo WhatsApp para entender o que a família está vivendo", "Indicação do primeiro passo: consulta médica, avaliação ou terapia", "Avaliação da criança com o profissional indicado", "Plano de cuidado com as terapias necessárias, no mesmo lugar", "Retornos e conversa contínua entre a equipe e os pais"],
+    differentials: ["Neuropediatra e terapias no mesmo endereço", "Equipe que trabalha junto, não em consultórios isolados", "Salas pensadas para crianças", "Comunicação próxima com os pais"],
+    faq: [
+      { q: "Por onde começo se desconfio de autismo ou TDAH?", a: "Fale com a nossa equipe pelo WhatsApp. Pela idade e pelo que vocês estão observando, indicamos o primeiro passo: em geral a consulta com a neuropediatra ou a avaliação neuropsicológica." },
+      { q: "Preciso de laudo para começar as terapias?", a: "Não necessariamente. Muitas famílias começam a estimulação enquanto a avaliação acontece, porque quanto mais cedo a criança recebe apoio, melhor. A equipe orienta em cada caso." },
+      { q: "Os profissionais conversam entre si?", a: "Sim. Neuropediatra, neuropsicologia e terapias ficam na mesma clínica e compartilham o plano de cuidado da criança, com a autorização da família." },
+      { q: "Vocês atendem por plano de saúde?", a: "O atendimento é particular. Pelo WhatsApp a equipe explica como funciona cada atendimento." },
+    ],
+    ctaText: "Falar com a equipe",
+    waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
+  },
+  // 10/11, pedido da direção: página nova para os anúncios do Google de
   // neuropediatria. Leva ao WhatsApp do setor de terapias (usaWhatsappTerapias).
   // Sem promessa de resultado e sem preço (regras do CFM).
   {

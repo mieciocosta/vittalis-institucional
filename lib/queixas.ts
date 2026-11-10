@@ -139,6 +139,29 @@ export const QUEIXAS_POR_PAGINA: Record<string, { id: QueixaId; comoAjuda: strin
   ],
 };
 
+// A página que junta todas as áreas (/desenvolvimento-infantil): cada queixa
+// diz QUEM da equipe cuida dela.
+QUEIXAS_POR_PAGINA["desenvolvimento-infantil"] = [
+  { id: "autismo", comoAjuda: "Neuropediatra e neuropsicologia avaliam; ABA, fono, terapia ocupacional e psicologia acompanham a criança, cada uma com metas próprias e um plano só." },
+  { id: "tdah", comoAjuda: "Neuropediatra e neuropsicologia avaliam a atenção e o comportamento; psicologia, psicopedagogia e terapia ocupacional ajudam na rotina, na escola e na organização." },
+  { id: "agitacao", comoAjuda: "A equipe investiga o que está por trás (sono, sensorial, ansiedade, TDAH ou TEA) e indica a terapia certa, com orientação para os pais." },
+  { id: "fala", comoAjuda: "A fonoaudiologia avalia e estimula a fala; quando é preciso, a neuropediatra investiga a causa." },
+  { id: "escola", comoAjuda: "Neuropsicologia e psicopedagogia mostram como a criança aprende e o que pode ajudar, em contato com a escola." },
+  { id: "sensorial", comoAjuda: "A terapia ocupacional trabalha regulação, coordenação e autonomia nas tarefas do dia a dia." },
+];
+
+/** Áreas mostradas na página que junta todas (/desenvolvimento-infantil). */
+export const AREAS_INFANTIS = [
+  { slug: "neuropediatria", nome: "Neuropediatria", img: O("pediatria_01"), texto: "Avaliação médica do desenvolvimento, do comportamento e do sono." },
+  { slug: "neuropsicologia", nome: "Neuropsicologia", img: O("psicologia_infantil_02"), texto: "Avaliação de atenção, memória e comportamento, com laudo." },
+  { slug: "psicologia-aba", nome: "Psicologia ABA", img: O("psicologia_aba_01"), texto: "Metas individuais de comunicação, socialização e autonomia." },
+  { slug: "fonoaudiologia", nome: "Fonoaudiologia", img: O("atendimento_multidisciplinar"), texto: "Fala, linguagem e comunicação, com orientação para casa." },
+  { slug: "terapia-ocupacional-infantil", nome: "Terapia Ocupacional", img: O("psicologia_aba_02"), texto: "Questões sensoriais, coordenação e independência." },
+  { slug: "psicologia-infantil", nome: "Psicologia Infantil", img: O("psicologia_infantil_01"), texto: "Emoções, comportamento e apoio aos pais pelo brincar." },
+  { slug: "psicopedagogia", nome: "Psicopedagogia", img: O("psicopedagogia_01"), texto: "Leitura, escrita e aprendizagem, em contato com a escola." },
+  { slug: "pediatria", nome: "Pediatria", img: O("pediatria_02"), texto: "Acompanhamento do crescimento e dos marcos do desenvolvimento." },
+];
+
 /** Caminho do cuidado na clínica, mostrado em todas as páginas infantis. */
 export const CAMINHO_DO_CUIDADO = [
   { emoji: "🩺", titulo: "Consulta médica", texto: "Pediatra ou neuropediatra ouvem a história e avaliam a criança.", slug: "neuropediatria" },

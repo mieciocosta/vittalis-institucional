@@ -10,7 +10,7 @@ import { guardarLeadSemEsperar } from "@/lib/planilha";
 import { trackEvent } from "@/lib/analytics";
 import { DadosEmpresa } from "../_componentes/DadosEmpresa";
 import { getCampanha, type Campanha } from "@/lib/content/campanhas";
-import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, temQueixas } from "@/lib/queixas";
+import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, temQueixas } from "@/lib/queixas";
 
 // Páginas de campanha ligadas a cada especialidade (bloco "Conheça também").
 const CAMPANHAS_DA_ESPECIALIDADE: Record<string, string[]> = {
@@ -160,7 +160,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
   // 10/11, todas as especialidades (usaWhatsappTerapias); vacinação segue no 7016.
   const numeroWa = usaWhatsappTerapias(s) ? WHATSAPP_TERAPIAS : undefined;
   const waUrl = waLink(s.waMessage, numeroWa);
-  const catLabel = s.category === "vacinacao" ? "Vacinação" : s.category === "medica" ? "Especialidade Médica" : "Terapia Especializada";
+  const catLabel = s.slug === "desenvolvimento-infantil" ? "Desenvolvimento Infantil" : s.category === "vacinacao" ? "Vacinação" : s.category === "medica" ? "Especialidade Médica" : "Terapia Especializada";
 
   return (
     <div style={{ fontFamily: "var(--font-body)", color: "var(--vit-charcoal)" }}>
@@ -269,6 +269,9 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
           </Anim>
         </div>
       </section>
+
+      {/* ════ Todas as áreas (só na página que junta todas, 10/11) ════ */}
+      {s.slug === "desenvolvimento-infantil" && <AreasDaEquipe waUrl={waUrl} />}
 
       {/* ════ QUEIXAS: TDAH, autismo, agitação… (10/11, páginas infantis) ════ */}
       {temQueixas(s.slug) && <Queixas slug={s.slug} heroImage={s.heroImage} waUrl={waUrl} ctaText={s.ctaText} />}
@@ -614,7 +617,41 @@ function CaminhoEGaleria({ slug }: { slug: string }) {
             </figure>
           ))}
         </div>
+        {slug !== "desenvolvimento-infantil" && (
+          <p style={{ textAlign: "center", marginTop: 28 }}>
+            <Link href="/desenvolvimento-infantil" style={{ fontSize: 15, fontWeight: 700, color: "var(--vit-primary-dark)" }}>Conheça toda a equipe de desenvolvimento infantil →</Link>
+          </p>
+        )}
         <style>{`@media(max-width:800px){.vit-galeria{grid-template-columns:repeat(2,1fr)!important}}`}</style>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Todas as áreas da equipe infantil (/desenvolvimento-infantil) ─── */
+function AreasDaEquipe({ waUrl }: { waUrl: string }) {
+  return (
+    <section style={{ padding: "72px 24px", background: "var(--vit-white)" }} aria-labelledby="areas-titulo">
+      <div style={{ maxWidth: 1180, margin: "0 auto" }}>
+        <h2 id="areas-titulo" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(26px, 3.6vw, 40px)", fontWeight: 600, color: "var(--vit-charcoal)", textAlign: "center", marginBottom: 10 }}>
+          Uma equipe completa para a sua criança
+        </h2>
+        <p style={{ fontSize: 16, color: "var(--vit-gray-500)", textAlign: "center", maxWidth: 640, margin: "0 auto 36px", lineHeight: 1.7 }}>
+          Toque na área para saber mais, ou fale com a equipe que a gente indica o primeiro passo.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 18 }}>
+          {AREAS_INFANTIS.map((a) => (
+            <Link key={a.slug} href={`/${a.slug}`} style={{ display: "flex", flexDirection: "column", background: "white", borderRadius: 20, overflow: "hidden", border: "1px solid var(--vit-gray-100)", boxShadow: "0 8px 28px rgba(0,0,0,.05)", textDecoration: "none" }}>
+              <img src={a.img} alt={a.nome} loading="lazy" style={{ width: "100%", aspectRatio: "16/10", objectFit: "cover", display: "block" }} />
+              <div style={{ padding: "18px 18px 20px" }}>
+                <div style={{ fontSize: 18, fontWeight: 700, color: "var(--vit-charcoal)", marginBottom: 6 }}>{a.nome}</div>
+                <div style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.6, marginBottom: 10 }}>{a.texto}</div>
+                <span style={{ fontSize: 14, fontWeight: 700, color: "var(--vit-primary-dark)" }}>Saiba mais →</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div style={{ textAlign: "center", marginTop: 36 }}><CTA href={waUrl} variant="whats" big><WhatsIcon /> Não sei por onde começar</CTA></div>
       </div>
     </section>
   );
