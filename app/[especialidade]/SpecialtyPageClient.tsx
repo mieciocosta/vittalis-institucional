@@ -10,6 +10,7 @@ import { guardarLeadSemEsperar } from "@/lib/planilha";
 import { trackEvent } from "@/lib/analytics";
 import { DadosEmpresa } from "../_componentes/DadosEmpresa";
 import { getCampanha, type Campanha } from "@/lib/content/campanhas";
+import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, temQueixas } from "@/lib/queixas";
 
 // Páginas de campanha ligadas a cada especialidade (bloco "Conheça também").
 const CAMPANHAS_DA_ESPECIALIDADE: Record<string, string[]> = {
@@ -269,6 +270,9 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
         </div>
       </section>
 
+      {/* ════ QUEIXAS: TDAH, autismo, agitação… (10/11, páginas infantis) ════ */}
+      {temQueixas(s.slug) && <Queixas slug={s.slug} heroImage={s.heroImage} waUrl={waUrl} ctaText={s.ctaText} />}
+
             {/* ════ 2. DESCRIÇÃO + IMAGEM ════ */}
       <section style={{ padding: "80px 24px", background: "var(--vit-white)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
@@ -398,6 +402,9 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
         </div>
       </section>
 
+      {/* ════ Caminho do cuidado + fotos (10/11, páginas infantis) ════ */}
+      {temQueixas(s.slug) && <CaminhoEGaleria slug={s.slug} />}
+
       {/* ════ Conheça também: páginas de campanha relacionadas ════ */}
       <ConhecaTambem slug={s.slug} />
 
@@ -514,6 +521,100 @@ function ConhecaTambem({ slug }: { slug: string }) {
             </Link>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Queixas das famílias (lib/queixas.ts) ─── */
+function Queixas({ slug, heroImage, waUrl, ctaText }: { slug: string; heroImage: string; waUrl: string; ctaText: string }) {
+  const itens = QUEIXAS_POR_PAGINA[slug] ?? [];
+  return (
+    <section style={{ padding: "80px 24px", background: "linear-gradient(180deg, var(--vit-cream) 0%, var(--vit-white) 100%)" }} aria-labelledby="queixas-titulo">
+      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: 48 }}>
+          <span style={{ display: "inline-block", fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--vit-gold)", marginBottom: 10 }}>O que traz as famílias até nós</span>
+          <h2 id="queixas-titulo" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(26px, 3.6vw, 40px)", fontWeight: 600, color: "var(--vit-charcoal)", lineHeight: 1.15, marginBottom: 12 }}>
+            TDAH, autismo, agitação: sua família não precisa passar por isso sozinha
+          </h2>
+          <p style={{ fontSize: 16, color: "var(--vit-gray-500)", maxWidth: 640, margin: "0 auto", lineHeight: 1.7 }}>
+            Veja os sinais que os pais costumam notar e como a nossa equipe cuida de cada situação.
+          </p>
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+          {itens.map(({ id, comoAjuda }, i) => {
+            const q = QUEIXAS[id];
+            const foto = q.img === heroImage ? q.img2 : q.img;
+            return (
+              <article key={id} className={`vit-queixa${i % 2 ? " inv" : ""}`} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, background: "white", borderRadius: 24, overflow: "hidden", border: "1px solid var(--vit-gray-100)", boxShadow: "0 10px 36px rgba(0,0,0,.05)" }}>
+                <div className="vit-queixa-foto" style={{ minHeight: 280, background: `url(${foto}) center/cover no-repeat` }} role="img" aria-label={q.alt} />
+                <div style={{ padding: "32px 30px" }}>
+                  <h3 style={{ fontFamily: "var(--font-display)", fontSize: 26, fontWeight: 600, color: "var(--vit-charcoal)", marginBottom: 10, display: "flex", alignItems: "center", gap: 10 }}>
+                    <span aria-hidden="true">{q.emoji}</span> {q.titulo}
+                  </h3>
+                  <p style={{ fontSize: 15, color: "var(--vit-gray-500)", lineHeight: 1.7, marginBottom: 16 }}>{q.resumo}</p>
+                  <p style={{ fontSize: 13, fontWeight: 700, color: "var(--vit-secondary)", textTransform: "uppercase", letterSpacing: ".05em", marginBottom: 8 }}>Sinais que os pais costumam notar</p>
+                  <ul style={{ listStyle: "none", padding: 0, margin: "0 0 18px", display: "flex", flexDirection: "column", gap: 6 }}>
+                    {q.sinais.map((sinal) => (
+                      <li key={sinal} style={{ display: "flex", gap: 8, fontSize: 14, color: "var(--vit-gray-700)", lineHeight: 1.5 }}>
+                        <span style={{ color: "var(--vit-primary)", flexShrink: 0, marginTop: 2 }}><Check /></span>{sinal}
+                      </li>
+                    ))}
+                  </ul>
+                  <div style={{ background: "var(--vit-primary-50)", borderLeft: "3px solid var(--vit-primary)", borderRadius: 10, padding: "12px 14px", marginBottom: 18 }}>
+                    <p style={{ fontSize: 14, color: "var(--vit-gray-700)", lineHeight: 1.6, margin: 0 }}><strong>Como cuidamos:</strong> {comoAjuda}</p>
+                  </div>
+                  <CTA href={waUrl} variant="whats"><WhatsIcon /> {ctaText}</CTA>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+        <p style={{ fontSize: 13, color: "var(--vit-gray-500)", textAlign: "center", marginTop: 28, lineHeight: 1.6 }}>
+          Estes sinais não fecham diagnóstico. Só a avaliação de um profissional pode dizer o que a criança tem e qual o melhor caminho.
+        </p>
+      </div>
+      <style>{`
+        .vit-queixa.inv .vit-queixa-foto{order:2}
+        @media(max-width:800px){.vit-queixa{grid-template-columns:1fr!important}.vit-queixa.inv .vit-queixa-foto{order:0}.vit-queixa-foto{min-height:210px!important}}
+      `}</style>
+    </section>
+  );
+}
+
+/* ─── Caminho do cuidado + fotos ─── */
+function CaminhoEGaleria({ slug }: { slug: string }) {
+  return (
+    <section style={{ padding: "80px 24px", background: "var(--vit-white)" }} aria-labelledby="caminho-titulo">
+      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+        <h2 id="caminho-titulo" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(24px, 3.2vw, 36px)", fontWeight: 600, color: "var(--vit-charcoal)", textAlign: "center", marginBottom: 10 }}>
+          Tudo no mesmo lugar, do primeiro sinal ao acompanhamento
+        </h2>
+        <p style={{ fontSize: 15, color: "var(--vit-gray-500)", textAlign: "center", maxWidth: 620, margin: "0 auto 36px", lineHeight: 1.7 }}>
+          Sem correr de um consultório para outro: os profissionais conversam entre si e a família recebe um plano só.
+        </p>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16, marginBottom: 48 }}>
+          {CAMINHO_DO_CUIDADO.map((p, i) => {
+            const cartao = (
+              <div style={{ height: "100%", background: p.slug === slug ? "var(--vit-primary-50)" : "var(--vit-cream)", border: `1px solid ${p.slug === slug ? "var(--vit-primary)" : "var(--vit-gray-100)"}`, borderRadius: 18, padding: "22px 20px" }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: "var(--vit-gold)", marginBottom: 6 }}>Passo {i + 1}</div>
+                <div style={{ fontSize: 28, marginBottom: 6 }} aria-hidden="true">{p.emoji}</div>
+                <div style={{ fontSize: 17, fontWeight: 700, color: "var(--vit-charcoal)", marginBottom: 6 }}>{p.titulo}</div>
+                <div style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.6 }}>{p.texto}</div>
+              </div>
+            );
+            return p.slug === slug ? <div key={p.titulo}>{cartao}</div> : <Link key={p.titulo} href={`/${p.slug}`} style={{ textDecoration: "none" }}>{cartao}</Link>;
+          })}
+        </div>
+        <div className="vit-galeria" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12 }}>
+          {GALERIA_INFANTIL.map((g) => (
+            <figure key={g.src} style={{ margin: 0, borderRadius: 16, overflow: "hidden", position: "relative", aspectRatio: "4/3" }}>
+              <img src={g.src} alt={g.legenda} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              <figcaption style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "18px 12px 10px", background: "linear-gradient(transparent, rgba(0,0,0,.6))", color: "#fff", fontSize: 13, fontWeight: 600 }}>{g.legenda}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <style>{`@media(max-width:800px){.vit-galeria{grid-template-columns:repeat(2,1fr)!important}}`}</style>
       </div>
     </section>
   );

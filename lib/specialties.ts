@@ -26,30 +26,34 @@ export interface Specialty {
   accentColor: string;
 }
 
-// Imagens reais de alta qualidade (Unsplash — licença livre)
+// 10/11: as fotos saíram dos JPG de 7 a 8 MB (a página levava segundos para
+// abrir no 4G e o lead do anúncio desistia) para WebP de ~50 KB em
+// /images/otim. Cada especialidade com a foto que combina com ela: antes a
+// fono mostrava a foto de vacina e a neuropsicologia, a de dermatologia.
+const O = (n: string) => `/images/otim/${n}.webp`;
 const IMG = {
-  // Cada especialidade com imagem ÚNICA — sem repetição
   vacinacao: "/images/vittalis_vacinacao_1.png",
-  pediatria: "/images/pediatria_01.jpg",
-  ginecologia: "/images/ginecologia_01.jpg",
-  clinicaGeral: "/images/clinica_geral_01.jpg",
-  dermatologia: "/images/dermatologia_01.jpg",
-  pneumologia: "/images/pneumologia_01.jpg",
-  psicoInfantil: "/images/atendimento_multidisciplinar.png",
-  psicoAba: "/images/multidisciplinar_02.jpg",
-  psicoAdulto: "/images/clinica_geral_02.jpg",
-  neuro: "/images/dermatologia_02.jpg",
-  psicoped: "/images/pediatria_02.jpg",
-  fono: "/images/vacinas_01.jpg",
-  nutriInfantil: "/images/vacinacao_crianca.png",
-  nutriAdulta: "/images/ginecologia_01.jpg",
-  fisioInfantil: "/images/pediatria_01.jpg",
-  fisioAdulta: "/images/pneumologia_01.jpg",
-  toInfantil: "/images/multidisciplinar_02.jpg",
-  toAdulta: "/images/clinica_geral_01.jpg",
-  neurofeedback: "/images/multidisciplinar_01.jpg",
+  pediatria: O("pediatria_02"),
+  neuropediatria: O("pediatria_01"),
+  ginecologia: O("ginecologia_01"),
+  clinicaGeral: O("clinica_geral_01"),
+  dermatologia: O("dermatologia_01"),
+  pneumologia: O("pneumologia_01"),
+  psicoInfantil: O("psicologia_infantil_01"),
+  psicoAba: O("psicologia_aba_01"),
+  psicoAdulto: O("psicologia_adultos_01"),
+  neuro: O("psicologia_infantil_02"),
+  psicoped: O("psicopedagogia_01"),
+  fono: O("atendimento_multidisciplinar"),
+  nutriInfantil: O("nutricao_infantil_v2_01"),
+  nutriAdulta: O("clinica_geral_02"),
+  fisioInfantil: O("multidisciplinar_02"),
+  fisioAdulta: O("pneumologia_02"),
+  toInfantil: O("psicologia_aba_02"),
+  toAdulta: O("clinica_geral_02"),
+  neurofeedback: O("neurofeedback_02"),
   hero: "/images/vittalis_pediatria_2.png",
-  equipe: "/images/multidisciplinar_01.jpg",
+  equipe: O("multidisciplinar_01"),
   clinica: "/images/vittalis_vacinacao_1.png",
   vacinacaoHero: "/images/vacinas_02.jpg",
 };
@@ -125,7 +129,7 @@ export const SPECIALTIES: Specialty[] = [
     description: "A neuropediatria cuida do sistema nervoso da criança: desenvolvimento, comportamento, aprendizagem, sono, crises e dores de cabeça. Na Vittalis Saúde, a consulta é feita com calma, ouvindo a história da família, e quando é preciso o acompanhamento segue junto com fonoaudiologia, psicologia, ABA e terapia ocupacional no mesmo lugar.",
     metaTitle: "Neuropediatra em São Luís | Vittalis Saúde",
     metaDescription: "Neuropediatra em São Luís. Avaliação do desenvolvimento, comportamento, aprendizagem e sono da criança, com integração às terapias. Agende na Vittalis Saúde.",
-    heroImage: IMG.psicoped,
+    heroImage: IMG.neuropediatria,
     painPoints: ["Dúvidas sobre atraso na fala ou no andar", "Suspeita de autismo ou TDAH sem orientação", "Dificuldade de aprendizagem na escola", "Sono agitado, crises ou dores de cabeça frequentes", "Família sem saber por onde começar"],
     benefits: ["Consulta com tempo para ouvir a família", "Avaliação do desenvolvimento neuropsicomotor", "Orientação clara sobre os próximos passos", "Pedido e leitura de exames quando necessário", "Integração com fono, psicologia, ABA e terapia ocupacional", "Acompanhamento ao longo do crescimento"],
     forWhom: ["Bebês com atraso nos marcos do desenvolvimento", "Crianças com suspeita de autismo (TEA) ou TDAH", "Crianças com dificuldade de aprendizagem ou de comportamento", "Crianças com crises, desmaios ou dores de cabeça", "Famílias que buscam uma segunda opinião"],
