@@ -43,8 +43,8 @@ export const QUEIXAS: Record<QueixaId, Queixa> = {
     titulo: "TDAH e falta de atenção",
     resumo: "O Transtorno do Déficit de Atenção e Hiperatividade aparece na dificuldade de manter o foco, no excesso de movimento e na impulsividade, em casa e na escola. Nem toda criança agitada tem TDAH, e é justamente a avaliação que ajuda a família a entender o que está acontecendo.",
     sinais: ["Não consegue terminar tarefas e se distrai com facilidade", "Esquece recados, perde material, parece não escutar", "Não para quieta, levanta da cadeira, fala sem parar", "Age por impulso e tem dificuldade de esperar a vez", "Recados frequentes da escola sobre comportamento ou atenção"],
-    img: O("psicopedagogia_02_logo"),
-    img2: O("psicologia_infantil_02_logo"),
+    img: O("n_neuropsicologia"),
+    img2: O("n_psicologia_infantil"),
     alt: "Criança fazendo atividade de atenção com profissional",
   },
   autismo: {
@@ -53,8 +53,8 @@ export const QUEIXAS: Record<QueixaId, Queixa> = {
     titulo: "Autismo (TEA)",
     resumo: "O Transtorno do Espectro Autista afeta a comunicação, a interação social e o comportamento, de formas muito diferentes em cada criança. Quanto mais cedo a família busca avaliação e estímulo, mais cedo a criança recebe o apoio de que precisa.",
     sinais: ["Pouco contato visual ou não atende quando é chamada pelo nome", "Atraso na fala ou fala que repete frases prontas", "Brinca sozinha, enfileira objetos, interesse muito fixo", "Movimentos repetitivos (balançar, girar, bater as mãos)", "Crises fortes com barulho, mudança de rotina ou texturas"],
-    img: O("psicologia_aba_01_logo"),
-    img2: O("multidisciplinar_02_logo"),
+    img: O("n_psicologia_aba"),
+    img2: O("n_fonoaudiologia"),
     alt: "Criança brincando com quebra-cabeça em sessão de terapia",
   },
   agitacao: {
@@ -63,8 +63,8 @@ export const QUEIXAS: Record<QueixaId, Queixa> = {
     titulo: "Agitação, birras e comportamento",
     resumo: "Agitação constante, birras intensas, agressividade ou sono muito agitado deixam a rotina da família pesada. Às vezes é fase; às vezes é sinal de algo que merece olhar profissional, como ansiedade, questões sensoriais, TDAH ou TEA.",
     sinais: ["Birras longas e frequentes, difíceis de acalmar", "Morde, bate ou se machuca quando contrariada", "Sono agitado, acorda muitas vezes à noite", "Não aceita regras e limites em casa ou na escola", "Muda de humor de repente e sem motivo aparente"],
-    img: O("psicologia_aba_02_logo"),
-    img2: O("multidisciplinar_02_logo"),
+    img: O("n_psicologia_infantil"),
+    img2: O("n_psicologia_aba"),
     alt: "Terapeuta brincando com criança na sala de atendimento",
   },
   fala: {
@@ -73,8 +73,8 @@ export const QUEIXAS: Record<QueixaId, Queixa> = {
     titulo: "Atraso na fala e na linguagem",
     resumo: "Cada criança tem o seu tempo, mas existem marcos esperados para cada idade. Quando a fala demora, troca muitos sons ou a criança não consegue se fazer entender, vale avaliar cedo.",
     sinais: ["Aos 2 anos fala poucas palavras ou nenhuma", "Aos 3 anos não forma frases curtas", "Troca ou omite sons e pessoas de fora não entendem", "Gagueira que não passa ou que incomoda a criança", "Aponta e puxa a mão do adulto em vez de pedir"],
-    img: O("atendimento_multidisciplinar_logo"),
-    img2: O("multidisciplinar_02_logo"),
+    img: O("n_fonoaudiologia"),
+    img2: O("atendimento_multidisciplinar_logo"),
     alt: "Fonoaudióloga brincando com criança usando argolas coloridas",
   },
   escola: {
@@ -84,7 +84,7 @@ export const QUEIXAS: Record<QueixaId, Queixa> = {
     resumo: "Notas que não melhoram, dificuldade para ler, escrever ou fazer contas e uma criança que passa a não gostar da escola. Por trás disso pode haver dislexia, TDAH, ansiedade ou outra questão que a avaliação ajuda a enxergar.",
     sinais: ["Demora para ler ou troca letras com frequência", "Não consegue acompanhar a turma mesmo com reforço", "Esquece o que estudou de um dia para o outro", "Chora ou reclama para ir à escola", "Professores relatam dificuldade de concentração"],
     img: O("psicopedagogia_01_logo"),
-    img2: O("psicopedagogia_02_logo"),
+    img2: O("n_neuropsicologia"),
     alt: "Profissional ajudando criança em atividade de leitura",
   },
   sensorial: {
@@ -93,8 +93,8 @@ export const QUEIXAS: Record<QueixaId, Queixa> = {
     titulo: "Questões sensoriais e coordenação",
     resumo: "Algumas crianças sentem barulhos, roupas, texturas e alimentos de forma muito intensa, ou têm dificuldade com movimentos finos e com tarefas do dia a dia. Isso interfere no brincar, na escola e na autonomia.",
     sinais: ["Tapa os ouvidos com barulhos comuns", "Recusa roupas, etiquetas ou certos alimentos pela textura", "Dificuldade para segurar o lápis, recortar ou se vestir", "Tropeça, cai ou esbarra muito nas coisas", "Busca movimento o tempo todo (pular, girar, se jogar)"],
-    img: O("psicologia_aba_02_logo"),
-    img2: O("multidisciplinar_02_logo"),
+    img: O("n_terapia_ocupacional"),
+    img2: O("n_psicologia_aba"),
     alt: "Terapeuta e criança em atividade de coordenação com brinquedos",
   },
 };
@@ -191,12 +191,12 @@ export const QUEM_CUIDA: Record<QueixaId, string[]> = {
  *  de pediatria separado"): ela tem a página própria, /pediatria. */
 export const AREAS_INFANTIS = [
   { slug: "neuropediatria", nome: "Neuropediatria", img: O("pediatria_01_logo"), texto: "Avaliação médica do desenvolvimento, do comportamento e do sono." },
-  { slug: "neuropsicologia", nome: "Neuropsicologia", img: O("psicologia_infantil_02_logo"), texto: "Avaliação de atenção, memória e comportamento, com laudo." },
-  { slug: "psicologia-aba", nome: "Psicologia ABA", img: O("psicologia_aba_01_logo"), texto: "Metas individuais de comunicação, socialização e autonomia." },
-  { slug: "fonoaudiologia", nome: "Fonoaudiologia", img: O("multidisciplinar_02_logo"), texto: "Fala, linguagem e comunicação, com orientação para casa." },
-  { slug: "terapia-ocupacional-infantil", nome: "Terapia Ocupacional", img: O("psicologia_aba_02_logo"), texto: "Questões sensoriais, coordenação e independência." },
-  { slug: "psicologia-infantil", nome: "Psicologia Infantil", img: O("psicopedagogia_02_logo"), texto: "Emoções, comportamento e apoio aos pais pelo brincar." },
-  { slug: "musicoterapia", nome: "Musicoterapia", img: O("psicologia_infantil_02_logo"), texto: "Música para comunicar, interagir e se regular." },
+  { slug: "neuropsicologia", nome: "Neuropsicologia", img: O("n_neuropsicologia"), texto: "Avaliação de atenção, memória e comportamento, com laudo." },
+  { slug: "psicologia-aba", nome: "Psicologia ABA", img: O("n_psicologia_aba"), texto: "Metas individuais de comunicação, socialização e autonomia." },
+  { slug: "fonoaudiologia", nome: "Fonoaudiologia", img: O("n_fonoaudiologia"), texto: "Fala, linguagem e comunicação, com orientação para casa." },
+  { slug: "terapia-ocupacional-infantil", nome: "Terapia Ocupacional", img: O("n_terapia_ocupacional"), texto: "Questões sensoriais, coordenação e independência." },
+  { slug: "psicologia-infantil", nome: "Psicologia Infantil", img: O("n_psicologia_infantil"), texto: "Emoções, comportamento e apoio aos pais pelo brincar." },
+  { slug: "musicoterapia", nome: "Musicoterapia", img: O("n_musicoterapia"), texto: "Música para comunicar, interagir e se regular." },
   { slug: "nutricao-infantil", nome: "Nutrição Infantil", img: O("nutricao_infantil_v2_02"), texto: "Seletividade alimentar, sem forçar e com plano para a família." },
   { slug: "psicopedagogia", nome: "Psicopedagogia", img: O("psicopedagogia_01_logo"), texto: "Leitura, escrita e aprendizagem, em contato com a escola." },
 ];
@@ -210,9 +210,9 @@ export const CAMINHO_DO_CUIDADO = [
 ];
 
 export const GALERIA_INFANTIL = [
-  { src: O("multidisciplinar_02_logo"), legenda: "Atividades à mesa, no ritmo da criança" },
-  { src: O("psicopedagogia_02_logo"), legenda: "O brincar como caminho do cuidado" },
-  { src: O("psicologia_aba_02_logo"), legenda: "Estímulo com brinquedos e jogos" },
+  { src: O("n_psicologia_aba"), legenda: "Atividades à mesa, no ritmo da criança" },
+  { src: O("n_psicologia_infantil"), legenda: "O brincar como caminho do cuidado" },
+  { src: O("n_terapia_ocupacional"), legenda: "Movimento e coordenação brincando" },
   { src: O("pediatria_02_logo"), legenda: "Consulta sem pressa e com carinho" },
 ];
 
@@ -257,16 +257,17 @@ export const DIFERENCIAIS_DESTAQUE = [
  *  direção: "imagens de impacto na primeira página"). Diferente da foto da
  *  seção "na Vittalis Saúde", para não repetir imagem na mesma página. */
 export const FOTO_TOPO: Record<string, string> = {
-  // 10/11 (09h30), pedido da direção: nenhuma foto de topo repete entre as
-  // páginas e todas parecem consultório. Psicologia infantil e musicoterapia
-  // ficam sem foto no topo até chegarem fotos reais (as que havia ou repetiam
-  // outra página ou não pareciam consultório).
+  // 10/11, pedido da direção: nenhuma foto de topo repete entre as páginas,
+  // consultório moderno e profissional de jaleco branco com a logo (fotos
+  // enviadas pela direção às 11h11). Psicopedagogia aguarda a foto nova.
   pediatria: O("vittalis_pediatria_2"),
   neuropediatria: O("pediatria_02_logo"),
-  neuropsicologia: O("psicopedagogia_02_logo"),
-  fonoaudiologia: O("multidisciplinar_02_logo"),
-  "psicologia-aba": O("psicologia_aba_01_logo"),
-  "terapia-ocupacional-infantil": O("psicologia_aba_02_logo"),
+  neuropsicologia: O("n_neuropsicologia"),
+  fonoaudiologia: O("n_fonoaudiologia"),
+  "psicologia-aba": O("n_psicologia_aba"),
+  "terapia-ocupacional-infantil": O("n_terapia_ocupacional"),
+  "psicologia-infantil": O("n_psicologia_infantil"),
+  musicoterapia: O("n_musicoterapia"),
   psicopedagogia: O("psicopedagogia_01_logo"),
   "nutricao-infantil": O("nutricao_infantil_v2_02"),
   // 10/11, pedido da direção (03h02): a página principal abre com a fono e a criança.
@@ -274,7 +275,7 @@ export const FOTO_TOPO: Record<string, string> = {
 };
 
 /** Fotos de reserva para os cartões de queixa quando as próprias já estão na página. */
-export const FOTOS_RESERVA = [O("multidisciplinar_02_logo"), O("psicologia_infantil_02_logo"), O("psicologia_aba_02_logo"), O("psicopedagogia_01_logo"), O("pediatria_01_logo")];
+export const FOTOS_RESERVA = [O("n_terapia_ocupacional"), O("n_psicologia_infantil"), O("n_psicologia_aba"), O("n_fonoaudiologia"), O("n_musicoterapia"), O("pediatria_01_logo")];
 
 /** Frase persuasiva e botão do formulário de cada página (10/11, pedido da
  *  direção: trocar o "Agende agora" genérico). Sem promessa e sem preço. */
