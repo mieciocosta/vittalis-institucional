@@ -33,6 +33,17 @@ export const WHATSAPP_NUMERO = NUMERO;
 /** WhatsApp do setor de terapias (só nas páginas de terapias). */
 export const WHATSAPP_TERAPIAS = NUMERO_TERAPIAS;
 
+
+// 10/11, pedido da direção ("todas as áreas para esse mesmo telefone"):
+// TODA página de especialidade, consultas e terapias, leva ao WhatsApp do
+// setor de terapias (98 92005-3606), o número dos anúncios do Google.
+// Só a vacinação (category "vacinacao") segue na central (7016), junto com
+// a home, as páginas de vacinas, telefone, rodapé e dados da empresa.
+/** A página de especialidade leva ao WhatsApp do setor de terapias (92005-3606)? */
+export function usaWhatsappTerapias(s: { slug: string; category: string }): boolean {
+  return s.category !== "vacinacao";
+}
+
 /** Telefone para ligar, no formato do link tel: */
 export const TELEFONE_TEL = `tel:+${NUMERO}`;
 

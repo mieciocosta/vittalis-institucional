@@ -26,30 +26,35 @@ export interface Specialty {
   accentColor: string;
 }
 
-// Imagens reais de alta qualidade (Unsplash — licença livre)
+// 10/11: as fotos saíram dos JPG de 7 a 8 MB (a página levava segundos para
+// abrir no 4G e o lead do anúncio desistia) para WebP de ~50 KB em
+// /images/otim. Cada especialidade com a foto que combina com ela: antes a
+// fono mostrava a foto de vacina e a neuropsicologia, a de dermatologia.
+const O = (n: string) => `/images/otim/${n}.webp`;
 const IMG = {
-  // Cada especialidade com imagem ÚNICA — sem repetição
   vacinacao: "/images/vittalis_vacinacao_1.png",
-  pediatria: "/images/pediatria_01.jpg",
-  ginecologia: "/images/ginecologia_01.jpg",
-  clinicaGeral: "/images/clinica_geral_01.jpg",
-  dermatologia: "/images/dermatologia_01.jpg",
-  pneumologia: "/images/pneumologia_01.jpg",
-  psicoInfantil: "/images/atendimento_multidisciplinar.png",
-  psicoAba: "/images/multidisciplinar_02.jpg",
-  psicoAdulto: "/images/clinica_geral_02.jpg",
-  neuro: "/images/dermatologia_02.jpg",
-  psicoped: "/images/pediatria_02.jpg",
-  fono: "/images/vacinas_01.jpg",
-  nutriInfantil: "/images/vacinacao_crianca.png",
-  nutriAdulta: "/images/ginecologia_01.jpg",
-  fisioInfantil: "/images/pediatria_01.jpg",
-  fisioAdulta: "/images/pneumologia_01.jpg",
-  toInfantil: "/images/multidisciplinar_02.jpg",
-  toAdulta: "/images/clinica_geral_01.jpg",
-  neurofeedback: "/images/multidisciplinar_01.jpg",
+  pediatria: O("pediatria_02_logo"),
+  neuropediatria: O("pediatria_02_logo"),
+  ginecologia: O("ginecologia_01"),
+  clinicaGeral: O("clinica_geral_01"),
+  dermatologia: O("dermatologia_01"),
+  pneumologia: O("pneumologia_01"),
+  psicoInfantil: O("n_psicologia_aba"),
+  psicoAba: O("n_psicologia_infantil"),
+  psicoAdulto: O("neuropsicologia_01"),
+  neuro: O("n_psicologia_infantil"),
+  psicoped: O("n_neuropsicologia"),
+  fono: O("atendimento_multidisciplinar_logo"),
+  nutriInfantil: O("nutricao_infantil_v2_01"),
+  nutriAdulta: O("clinica_geral_02"),
+  fisioInfantil: O("n_terapia_ocupacional"),
+  fisioAdulta: O("pneumologia_02"),
+  toInfantil: O("n_terapia_ocupacional"),
+  toAdulta: O("clinica_geral_02"),
+  neurofeedback: O("neurofeedback_02"),
+  musicoterapia: O("n_psicologia_infantil"),
   hero: "/images/vittalis_pediatria_2.png",
-  equipe: "/images/multidisciplinar_01.jpg",
+  equipe: O("multidisciplinar_01"),
   clinica: "/images/vittalis_vacinacao_1.png",
   vacinacaoHero: "/images/vacinas_02.jpg",
 };
@@ -110,7 +115,69 @@ export const SPECIALTIES: Specialty[] = [
     ],
     ctaText: "Agendar consulta",
     waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
+  },  // 10/11, pedido da direção ("uma página para todas as áreas"): a página
+  // que junta neuropediatria, neuropsicologia, fono, ABA, psicologia,
+  // terapia ocupacional e psicopedagogia (a pediatria fica na página dela). É a página dos anúncios de busca
+  // ampla (autismo, TDAH, atraso no desenvolvimento); quem busca uma área
+  // específica continua indo para a página dela. category "terapia" = WhatsApp
+  // do setor de terapias (92005-3606).
+  {
+    slug: "desenvolvimento-infantil",
+    name: "Desenvolvimento Infantil",
+    shortName: "Desenvolvimento Infantil",
+    icon: "🧩",
+    category: "terapia",
+    accentColor: "#00B8C0",
+    headline: "Autismo, TDAH e atraso no desenvolvimento: toda a equipe num só lugar",
+    subheadline: "Uma equipe que trabalha junta pela sua criança, em São Luís. Toque na especialidade para saber mais:",
+    description: "Quando a família percebe que algo no desenvolvimento da criança merece atenção, a primeira dúvida é por onde começar. Na Vittalis Saúde a família encontra a consulta médica, a avaliação e as terapias no mesmo endereço, com profissionais que conversam entre si e um plano de cuidado combinado com os pais e, quando necessário, com a escola.",
+    metaTitle: "Autismo, TDAH e Desenvolvimento Infantil em São Luís | Vittalis Saúde",
+    metaDescription: "Neuropediatra, neuropsicologia, fono, ABA, terapia ocupacional, musicoterapia, nutrição e psicologia infantil no mesmo lugar em São Luís. Avaliação e acompanhamento de autismo, TDAH e atraso no desenvolvimento.",
+    heroImage: IMG.equipe,
+    painPoints: ["Suspeita de autismo ou TDAH e nenhuma resposta clara", "Atraso na fala, no andar ou na interação", "Agitação, birras e comportamento difícil em casa e na escola", "Correr de um consultório para outro sem ninguém conversar", "Listas de espera longas para começar as terapias", "Escola pedindo laudo ou avaliação"],
+    benefits: ["Consulta médica, avaliação e terapias no mesmo endereço", "Profissionais que conversam entre si sobre a sua criança", "Plano de cuidado combinado com a família", "Orientação para os pais continuarem em casa", "Contato com a escola quando necessário", "Ambiente lúdico e acolhedor para crianças"],
+    forWhom: ["Crianças com suspeita ou diagnóstico de autismo (TEA)", "Crianças com suspeita ou diagnóstico de TDAH", "Bebês e crianças com atraso no desenvolvimento", "Crianças com atraso na fala", "Crianças com dificuldade de aprendizagem", "Famílias que buscam uma segunda opinião"],
+    howItWorks: ["Conversa pelo WhatsApp para entender o que a família está vivendo", "Indicação do primeiro passo: consulta médica, avaliação ou terapia", "Avaliação da criança com o profissional indicado", "Plano de cuidado com as terapias necessárias, no mesmo lugar", "Retornos e conversa contínua entre a equipe e os pais"],
+    differentials: ["Neuropediatra e terapias no mesmo endereço", "Equipe que trabalha junto, não em consultórios isolados", "Salas pensadas para crianças", "Comunicação próxima com os pais"],
+    faq: [
+      { q: "Por onde começo se desconfio de autismo ou TDAH?", a: "Fale com a nossa equipe pelo WhatsApp. Pela idade e pelo que vocês estão observando, indicamos o primeiro passo: em geral a consulta com a neuropediatra ou a avaliação neuropsicológica." },
+      { q: "Preciso de laudo para começar as terapias?", a: "Não necessariamente. Muitas famílias começam a estimulação enquanto a avaliação acontece, porque quanto mais cedo a criança recebe apoio, melhor. A equipe orienta em cada caso." },
+      { q: "Os profissionais conversam entre si?", a: "Sim. Neuropediatra, neuropsicologia e terapias ficam na mesma clínica e compartilham o plano de cuidado da criança, com a autorização da família." },
+      { q: "Vocês atendem por plano de saúde?", a: "O atendimento é particular. Pelo WhatsApp a equipe explica como funciona cada atendimento." },
+    ],
+    ctaText: "Falar com a equipe",
+    waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
   },
+  // 10/11, pedido da direção: página nova para os anúncios do Google de
+  // neuropediatria. Leva ao WhatsApp do setor de terapias (usaWhatsappTerapias).
+  // Sem promessa de resultado e sem preço (regras do CFM).
+  {
+    slug: "neuropediatria",
+    name: "Neuropediatria",
+    shortName: "Neuropediatria",
+    icon: "🧠",
+    category: "medica",
+    accentColor: "#4A8FC0",
+    headline: "Neuropediatria com escuta, cuidado e olhar atento ao desenvolvimento",
+    subheadline: "Avaliação neurológica da criança e do adolescente, com tempo para ouvir a família e integração com as terapias da clínica.",
+    description: "A neuropediatria cuida do sistema nervoso da criança: desenvolvimento, comportamento, aprendizagem, sono, crises e dores de cabeça. Na Vittalis Saúde, a consulta é feita com calma, ouvindo a história da família, e quando é preciso o acompanhamento segue junto com fonoaudiologia, psicologia, ABA e terapia ocupacional no mesmo lugar.",
+    metaTitle: "Neuropediatra em São Luís | Vittalis Saúde",
+    metaDescription: "Neuropediatra em São Luís. Avaliação do desenvolvimento, comportamento, aprendizagem e sono da criança, com integração às terapias. Agende na Vittalis Saúde.",
+    heroImage: IMG.neuropediatria,
+    painPoints: ["Dúvidas sobre atraso na fala ou no andar", "Suspeita de autismo ou TDAH sem orientação", "Dificuldade de aprendizagem na escola", "Sono agitado, crises ou dores de cabeça frequentes", "Família sem saber por onde começar"],
+    benefits: ["Consulta com tempo para ouvir a família", "Avaliação do desenvolvimento neuropsicomotor", "Orientação clara sobre os próximos passos", "Pedido e leitura de exames quando necessário", "Integração com fono, psicologia, ABA e terapia ocupacional", "Acompanhamento ao longo do crescimento"],
+    forWhom: ["Bebês com atraso nos marcos do desenvolvimento", "Crianças com suspeita de autismo (TEA) ou TDAH", "Crianças com dificuldade de aprendizagem ou de comportamento", "Crianças com crises, desmaios ou dores de cabeça", "Famílias que buscam uma segunda opinião"],
+    howItWorks: ["Agendamento pelo WhatsApp", "Consulta com a história completa da criança e da família", "Exame neurológico e avaliação do desenvolvimento", "Orientação e plano de cuidado combinado com a família", "Retornos e encaminhamento às terapias da clínica quando indicado"],
+    differentials: ["Ambiente acolhedor pensado para crianças", "Consulta sem pressa", "Terapias integradas no mesmo local", "Comunicação próxima com os pais"],
+    faq: [
+      { q: "Quando procurar um neuropediatra?", a: "Quando há dúvida sobre o desenvolvimento (fala, andar, interação), suspeita de autismo ou TDAH, dificuldade de aprendizagem, crises, desmaios ou dores de cabeça frequentes. Na dúvida, a consulta ajuda a entender o que está acontecendo." },
+      { q: "Preciso de encaminhamento do pediatra?", a: "Não é obrigatório. Se a criança já tem exames ou relatórios da escola e de outros profissionais, leve na consulta." },
+      { q: "A clínica tem as terapias depois da consulta?", a: "Sim. Fonoaudiologia, psicologia infantil, ABA, neuropsicologia e terapia ocupacional ficam na própria Vittalis, o que facilita o acompanhamento." },
+    ],
+    ctaText: "Agendar consulta",
+    waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
+  },
+
   {
     slug: "ginecologia",name: "Ginecologia e Obstetrícia",shortName: "Ginecologia",icon: "🌸",category: "medica",accentColor: "#D4A0B9",
     headline: "Saúde da mulher com cuidado, escuta e respeito",
@@ -276,17 +343,47 @@ export const SPECIALTIES: Specialty[] = [
     ctaText: "Agendar avaliação",waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
   },
   {
+    // 10/11, pedido da direção: página da musicoterapia infantil, no mesmo modelo
+    // das terapias (WhatsApp do setor de terapias). Sem promessa de resultado.
+    // Foto provisória: falta uma foto real de sessão com instrumentos.
+    slug: "musicoterapia",name: "Musicoterapia",shortName: "Musicoterapia",icon: "🎵",category: "terapia",accentColor: "#8A70A8",
+    headline: "Musicoterapia infantil: a música como caminho para se comunicar e se regular",
+    subheadline: "Sessões com instrumentos, canções e ritmo para crianças com autismo, TDAH, atraso no desenvolvimento ou dificuldade de lidar com as emoções.",
+    description: "Na musicoterapia a música vira linguagem. Com instrumentos, canções, ritmo e improviso, a musicoterapeuta cria um espaço em que a criança se expressa, interage, espera a vez, imita e se acalma, muitas vezes de um jeito que as palavras ainda não alcançam. Na Vittalis Saúde a musicoterapia faz parte do plano de cuidado da criança, junto com ABA, fono, terapia ocupacional e psicologia.",
+    metaTitle: "Musicoterapia Infantil em São Luís | Vittalis Saúde",metaDescription: "Musicoterapia infantil em São Luís para crianças com autismo, TDAH e atraso no desenvolvimento, integrada às terapias da clínica. Agende na Vittalis Saúde.",
+    heroImage: IMG.musicoterapia,painPoints: ["Criança que se comunica pouco ou não fala","Dificuldade de interagir e brincar com outras crianças","Agitação, crises e dificuldade de se acalmar","Pouca atenção compartilhada","Criança que responde muito bem à música e a família quer aproveitar isso"],
+    benefits: ["Sessões individuais com instrumentos e canções","Estímulo à comunicação, à interação e à atenção","Trabalho de regulação emocional e sensorial","Objetivos combinados com a família","Integração com ABA, fono e terapia ocupacional","Orientação para usar a música em casa"],
+    forWhom: ["Crianças com autismo (TEA)","Crianças com TDAH","Crianças com atraso na fala ou no desenvolvimento","Crianças com dificuldade de regular emoções","Crianças com questões sensoriais"],
+    howItWorks: ["Conversa pelo WhatsApp para entender a criança","Avaliação musicoterapêutica, com a família","Plano com objetivos de comunicação, interação e regulação","Sessões semanais com instrumentos, canções e improviso","Retornos com a família e troca com a equipe da clínica"],
+    differentials: ["Sala preparada com instrumentos para crianças","Integração com as outras terapias no mesmo lugar","Abordagem lúdica, no ritmo da criança","Comunicação próxima com os pais"],
+    faq: [
+      {q:"A criança precisa saber música?",a:"Não. A musicoterapia usa a música como forma de comunicação, não como aula. Não é preciso nenhum conhecimento musical."},
+      {q:"Musicoterapia ajuda crianças com autismo?",a:"A música costuma ser uma porta de entrada para a comunicação e a interação de muitas crianças com TEA. A musicoterapeuta avalia a criança e define objetivos junto com a família e a equipe."},
+      {q:"Musicoterapia substitui a fono ou a ABA?",a:"Não. Ela complementa as outras terapias. Na Vittalis os profissionais trabalham juntos no plano de cuidado da criança."},
+      {q:"Vocês atendem por plano de saúde?",a:"O atendimento é particular. Pelo WhatsApp a equipe explica como funciona."},
+    ],
+    ctaText: "Agendar avaliação",waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
+  },
+  {
+    // 10/11, pedido da direção: a nutrição infantil vira a página da
+    // SELETIVIDADE ALIMENTAR (a queixa que mais traz as famílias, muito comum
+    // no autismo), com fotos e a seção de queixas. Sem promessa (CFN).
     slug: "nutricao-infantil",name: "Nutrição Infantil",shortName: "Nutrição Infantil",icon: "🥦",category: "terapia",accentColor: "#50A868",
-    headline: "Alimentação saudável desde a primeira colherada",
-    subheadline: "Orientação nutricional especializada para crianças — com abordagem acolhedora, respeitosa e sem restrições extremas.",
-    description: "Acompanhamento nutricional para bebês, crianças e adolescentes, com foco em introdução alimentar, seletividade e hábitos saudáveis.",
-    metaTitle: "Nutrição Infantil em São Luís | Vittalis Saúde",metaDescription: "Nutrição infantil em São Luís com abordagem acolhedora. Agende na Vittalis Saúde.",
-    heroImage: IMG.nutriInfantil,painPoints: ["Criança que não come quase nada","Dúvidas sobre introdução alimentar","Seletividade alimentar severa","Baixo peso ou sobrepeso infantil"],
-    benefits: ["Orientação para introdução alimentar BLW e tradicional","Tratamento de seletividade alimentar","Plano alimentar sem restrições extremas","Acompanhamento do crescimento","Orientação prática para o dia a dia"],
-    forWhom: ["Bebês em introdução alimentar","Crianças seletivas","Crianças com baixo peso","Crianças com alergias alimentares","Adolescentes com alimentação desequilibrada"],
-    howItWorks: ["Avaliação nutricional completa","Entendimento dos hábitos da família","Plano alimentar personalizado","Consultas de acompanhamento","Ajustes e novas orientações"],
-    differentials: ["Abordagem sem forçar a criança","Integração com pediatria e fono","Foco no prazer de comer"],
-    faq: [{q:"Meu filho é muito seletivo. A nutricionista pode ajudar?",a:"Sim! Trabalhamos com estratégias graduais e respeitosas para ampliar a aceitação alimentar, sem forçar e sem criar trauma."}],
+    headline: "Seu filho come só meia dúzia de alimentos? A gente cuida da seletividade alimentar",
+    subheadline: "Nutricionista infantil que trabalha a seletividade com calma, sem forçar e junto com a família, inclusive em crianças com autismo e TDAH.",
+    description: "A seletividade alimentar vai além da criança enjoada para comer: é quando o cardápio fica tão pequeno que preocupa a família, deixa a hora da refeição pesada e pode faltar nutriente para o crescimento. Na Vittalis Saúde a nutricionista avalia a alimentação, o crescimento e a rotina, e monta com a família um plano de pequenos passos para a criança ir conhecendo novos alimentos sem pressão. Quando é preciso, o cuidado segue junto com a fono, a terapia ocupacional e a pediatria da clínica.",
+    metaTitle: "Seletividade Alimentar e Nutrição Infantil em São Luís | Vittalis Saúde",metaDescription: "Nutricionista infantil em São Luís para seletividade alimentar, inclusive no autismo e TDAH. Abordagem sem forçar, com plano para a família. Agende na Vittalis Saúde.",
+    heroImage: IMG.nutriInfantil,painPoints: ["Criança que aceita poucos alimentos e sempre os mesmos","Hora da refeição virou briga ou choro","Recusa tudo que é verde, misturado ou de textura diferente","Engasga, vomita ou passa mal ao provar algo novo","Medo de faltar nutriente para o crescimento","Seletividade junto com autismo ou TDAH"],
+    benefits: ["Avaliação da alimentação, do crescimento e da rotina","Plano de pequenos passos para ampliar o cardápio","Estratégias sem forçar, sem chantagem e sem castigo","Ideias práticas de refeições para a família","Acompanhamento do crescimento e dos nutrientes","Integração com fono, terapia ocupacional e pediatria"],
+    forWhom: ["Crianças com seletividade alimentar","Crianças com autismo (TEA) que comem poucos alimentos","Crianças com TDAH e alimentação desorganizada","Bebês em introdução alimentar","Crianças com baixo peso ou sobrepeso","Famílias cansadas da briga na hora de comer"],
+    howItWorks: ["Conversa pelo WhatsApp para entender a rotina de alimentação","Consulta com avaliação nutricional e do crescimento","Mapa dos alimentos que a criança aceita e dos próximos passos","Plano para casa, com combinados simples para a família","Retornos para ajustar e comemorar cada novo alimento"],
+    differentials: ["Abordagem sem forçar a criança","Experiência com seletividade no autismo","Integração com fono, TO e pediatria no mesmo lugar","Foco no prazer de comer, não só no prato limpo"],
+    faq: [
+      {q:"Meu filho é muito seletivo. A nutricionista pode ajudar?",a:"Sim. A nutricionista trabalha com estratégias graduais e respeitosas para a criança ir aceitando novos alimentos, sem forçar e sem transformar a refeição em briga."},
+      {q:"Seletividade alimentar é comum no autismo?",a:"É bem comum. Muitas crianças com TEA têm sensibilidade a texturas, cores e cheiros. Nesses casos a nutricionista costuma trabalhar junto com a terapia ocupacional e a fono."},
+      {q:"Quando a seletividade preocupa?",a:"Quando a criança aceita poucos alimentos, recusa grupos inteiros (frutas, verduras ou carnes), tem dificuldade para ganhar peso ou a hora da refeição gera sofrimento para todos. Na dúvida, vale uma avaliação."},
+      {q:"Vocês atendem por plano de saúde?",a:"O atendimento é particular. Pelo WhatsApp a equipe explica como funciona a consulta."},
+    ],
     ctaText: "Agendar consulta",waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
   },
   {
