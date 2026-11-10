@@ -243,6 +243,17 @@ export const FOTO_TOPO: Record<string, string> = {
 /** Fotos de reserva para os cartões de queixa quando as próprias já estão na página. */
 export const FOTOS_RESERVA = [O("multidisciplinar_02"), O("psicologia_infantil_02"), O("psicologia_aba_02"), O("psicopedagogia_01"), O("pediatria_01")];
 
+/** Frase persuasiva e botão do formulário de cada página (10/11, pedido da
+ *  direção: trocar o "Agende agora" genérico). Sem promessa e sem preço. */
+export function chamadaDoFormulario(slug: string): { frase: string; botao: string } {
+  if (slug === "desenvolvimento-infantil") return { frase: "Não sabe por onde começar? A gente te orienta.", botao: "Quero orientação" };
+  if (slug === "neuropediatria") return { frase: "Tire suas dúvidas sobre o desenvolvimento do seu filho.", botao: "Quero agendar" };
+  if (slug === "nutricao-infantil") return { frase: "Hora da refeição sem briga começa aqui.", botao: "Quero agendar" };
+  if (slug === "pediatria") return { frase: "Cuidado com carinho para o seu filho, sem pressa.", botao: "Agendar consulta" };
+  if (QUEIXAS_POR_PAGINA[slug]) return { frase: "Quanto antes começar, melhor. Fale com a nossa equipe.", botao: "Quero agendar" };
+  return { frase: "Agende agora", botao: "Agendar" };
+}
+
 export function temQueixas(slug: string): boolean {
   return Boolean(QUEIXAS_POR_PAGINA[slug]);
 }

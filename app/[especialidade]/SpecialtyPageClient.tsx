@@ -10,7 +10,7 @@ import { guardarLeadSemEsperar } from "@/lib/planilha";
 import { trackEvent } from "@/lib/analytics";
 import { DadosEmpresa } from "../_componentes/DadosEmpresa";
 import { getCampanha, type Campanha } from "@/lib/content/campanhas";
-import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, QUEM_CUIDA, FOTO_TOPO, FOTOS_RESERVA, temQueixas, tituloQueixas } from "@/lib/queixas";
+import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, QUEM_CUIDA, FOTO_TOPO, FOTOS_RESERVA, temQueixas, tituloQueixas, chamadaDoFormulario } from "@/lib/queixas";
 
 // Páginas de campanha ligadas a cada especialidade (bloco "Conheça também").
 const CAMPANHAS_DA_ESPECIALIDADE: Record<string, string[]> = {
@@ -128,6 +128,7 @@ function LeadForm({ specialty, slug, waUrl, numeroWa, compacto = false }: { spec
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [erro, setErro] = useState("");
+  const chamada = chamadaDoFormulario(slug);
 
   const handleSubmit = () => {
     if (name.trim().length < 2) return setErro("Digite seu nome.");
@@ -158,11 +159,12 @@ function LeadForm({ specialty, slug, waUrl, numeroWa, compacto = false }: { spec
   // o formulário por cima; a direção achou feio cortar a imagem).
   if (compacto) return (
     <div style={{ background: "white", borderRadius: 20, padding: "18px 18px 14px", boxShadow: "0 10px 34px rgba(0,0,0,.07)", border: "1px solid var(--vit-gray-100)" }}>
-      <div style={{ fontSize: 15, fontWeight: 700, color: "var(--vit-charcoal)", marginBottom: 10 }}>Agende agora <span style={{ fontWeight: 400, color: "var(--vit-gray-500)" }}>· a equipe responde pelo WhatsApp</span></div>
+      <div style={{ fontSize: 16, fontWeight: 700, color: "var(--vit-charcoal)", marginBottom: 2 }}>{chamada.frase}</div>
+      <div style={{ fontSize: 13, color: "var(--vit-gray-500)", marginBottom: 10 }}>Resposta pelo WhatsApp · Atendimento particular</div>
       <div className="vit-form-linha" style={{ display: "grid", gridTemplateColumns: "1fr 1fr auto", gap: 10 }}>
         <input type="text" placeholder="Seu nome" aria-label="Seu nome" autoComplete="name" maxLength={80} value={name} onChange={e=>setName(e.target.value)} style={{ ...inputStyle, padding: "12px 14px" }} />
         <input type="tel" inputMode="tel" autoComplete="tel" placeholder={EXEMPLO_TELEFONE} aria-label="Seu WhatsApp com DDD" maxLength={TAMANHO_TELEFONE} value={phone} onChange={e=>setPhone(mascararTelefone(e.target.value))} style={{ ...inputStyle, padding: "12px 14px" }} />
-        <button onClick={handleSubmit} style={{ padding: "12px 20px", borderRadius: 100, border: "none", background: "var(--vit-primary)", color: "white", fontSize: 15, fontWeight: 600, fontFamily: "var(--font-body)", cursor: "pointer", whiteSpace: "nowrap", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>Agendar <ArrowR /></button>
+        <button onClick={handleSubmit} style={{ padding: "12px 20px", borderRadius: 100, border: "none", background: "var(--vit-primary)", color: "white", fontSize: 15, fontWeight: 600, fontFamily: "var(--font-body)", cursor: "pointer", whiteSpace: "nowrap", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>{chamada.botao} <ArrowR /></button>
       </div>
       {erro && <p role="alert" style={{ fontSize: 14, color: "#B42318", margin: "8px 0 0" }}>{erro}</p>}
       <p style={{ fontSize: 11, color: "var(--vit-gray-300)", margin: "8px 0 0", lineHeight: 1.5 }}>Ao enviar, você concorda com nossa política de privacidade conforme a LGPD.</p>
@@ -172,8 +174,8 @@ function LeadForm({ specialty, slug, waUrl, numeroWa, compacto = false }: { spec
 
   return (
     <div style={{ background: "white", borderRadius: 24, padding: "36px 32px", boxShadow: "0 12px 48px rgba(0,0,0,.08)", border: "1px solid var(--vit-gray-100)", maxWidth: 420 }}>
-      <h3 style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 600, color: "var(--vit-charcoal)", marginBottom: 6, textAlign: "center" }}>Agende agora</h3>
-      <p style={{ fontSize: 14, color: "var(--vit-gray-500)", textAlign: "center", marginBottom: 24 }}>Preencha e fale com a equipe pelo WhatsApp</p>
+      <h3 style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 600, color: "var(--vit-charcoal)", marginBottom: 6, textAlign: "center" }}>{chamada.frase}</h3>
+      <p style={{ fontSize: 14, color: "var(--vit-gray-500)", textAlign: "center", marginBottom: 24 }}>Resposta pelo WhatsApp · Atendimento particular</p>
       <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
         <input type="text" placeholder="Seu nome" aria-label="Seu nome" autoComplete="name" maxLength={80} value={name} onChange={e=>setName(e.target.value)} style={inputStyle} onFocus={e=>e.currentTarget.style.borderColor="var(--vit-primary)"} onBlur={e=>e.currentTarget.style.borderColor="var(--vit-gray-100)"} />
         <input type="tel" inputMode="tel" autoComplete="tel" placeholder={`Seu WhatsApp: ${EXEMPLO_TELEFONE}`} aria-label="Seu WhatsApp com DDD" maxLength={TAMANHO_TELEFONE} value={phone} onChange={e=>setPhone(mascararTelefone(e.target.value))} style={inputStyle} onFocus={e=>e.currentTarget.style.borderColor="var(--vit-primary)"} onBlur={e=>e.currentTarget.style.borderColor="var(--vit-gray-100)"} />
