@@ -10,7 +10,7 @@ import { guardarLeadSemEsperar } from "@/lib/planilha";
 import { trackEvent } from "@/lib/analytics";
 import { DadosEmpresa } from "../_componentes/DadosEmpresa";
 import { getCampanha, type Campanha } from "@/lib/content/campanhas";
-import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, QUEM_CUIDA, temQueixas, tituloQueixas } from "@/lib/queixas";
+import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, QUEM_CUIDA, FOTO_TOPO, FOTOS_RESERVA, temQueixas, tituloQueixas } from "@/lib/queixas";
 
 // Páginas de campanha ligadas a cada especialidade (bloco "Conheça também").
 const CAMPANHAS_DA_ESPECIALIDADE: Record<string, string[]> = {
@@ -160,6 +160,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
   // 10/11, todas as especialidades (usaWhatsappTerapias); vacinação segue no 7016.
   const numeroWa = usaWhatsappTerapias(s) ? WHATSAPP_TERAPIAS : undefined;
   const waUrl = waLink(s.waMessage, numeroWa);
+  const fotoTopo = FOTO_TOPO[s.slug];
   const catLabel = s.slug === "desenvolvimento-infantil" ? "Desenvolvimento Infantil" : s.category === "vacinacao" ? "Vacinação" : s.category === "medica" ? "Especialidade Médica" : "Terapia Especializada";
 
   return (
@@ -191,9 +192,10 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
         </>}
         <div style={{ position: "absolute", bottom: -80, left: -80, width: 300, height: 300, borderRadius: "50%", background: "radial-gradient(circle, rgba(196,151,59,.04), transparent 70%)" }} />
 
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: "1fr 420px", gap: 56, alignItems: "center" }} className="hero-spec-grid">
+        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: fotoTopo ? "1fr 1fr" : "1fr 420px", gap: 56, alignItems: "center" }} className="hero-spec-grid">
           <Anim>
             <div>
+              {fotoTopo && <img className="vit-hero-foto-cel" src={fotoTopo} alt="" fetchPriority="high" style={{ display: "none", width: "100%", aspectRatio: "16/10", objectFit: "cover", borderRadius: 20, marginBottom: 20, boxShadow: "0 12px 34px rgba(0,0,0,.12)" }} />}
               <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--vit-gold-light)", color: "var(--vit-gold)", fontSize: 11, fontWeight: 600, padding: "5px 14px", borderRadius: 100, marginBottom: 20, letterSpacing: ".06em", textTransform: "uppercase", border: "1px solid rgba(196,151,59,.12)" }}>
                 {catLabel} • São Luís — MA
               </div>
@@ -229,12 +231,24 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
           </Anim>
 
           <Anim d={0.2}>
-            <LeadForm specialty={s.shortName} slug={s.slug} waUrl={waUrl} numeroWa={numeroWa} />
+            {/* 10/11: foto de impacto no topo das páginas infantis (pedido da direção).
+                No computador a foto fica à direita e o formulário sobe por cima da
+                parte de baixo dela; no celular a foto vai acima do título. */}
+            {fotoTopo ? (
+              <div style={{ position: "relative" }}>
+                <img className="vit-hero-foto" src={fotoTopo} alt="" fetchPriority="high" style={{ width: "100%", aspectRatio: "16/11", objectFit: "cover", borderRadius: 24, display: "block", boxShadow: "0 18px 50px rgba(0,0,0,.14)" }} />
+                <div className="vit-hero-form" style={{ marginTop: -110, marginLeft: "auto", position: "relative", width: "86%" }}>
+                  <LeadForm specialty={s.shortName} slug={s.slug} waUrl={waUrl} numeroWa={numeroWa} />
+                </div>
+              </div>
+            ) : (
+              <LeadForm specialty={s.shortName} slug={s.slug} waUrl={waUrl} numeroWa={numeroWa} />
+            )}
           </Anim>
         </div>
 
         <style>{`
-          @media(max-width:900px){.hero-spec-grid{grid-template-columns:1fr!important;gap:36px!important}}
+          @media(max-width:900px){.hero-spec-grid{grid-template-columns:1fr!important;gap:36px!important}.vit-hero-foto{display:none!important}.vit-hero-foto-cel{display:block!important}.vit-hero-form{margin-top:0!important;width:100%!important}}
           @media(max-width:600px){.hide-mobile{display:none!important}}
         `}</style>
       </section>
@@ -274,7 +288,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
       {s.slug === "desenvolvimento-infantil" && <AreasDaEquipe waUrl={waUrl} />}
 
       {/* ════ QUEIXAS: TDAH, autismo, agitação… (10/11, páginas infantis) ════ */}
-      {temQueixas(s.slug) && <Queixas slug={s.slug} heroImage={s.heroImage} waUrl={waUrl} ctaText={s.ctaText} />}
+      {temQueixas(s.slug) && <Queixas slug={s.slug} usadas={[s.heroImage, fotoTopo]} waUrl={waUrl} ctaText={s.ctaText} />}
 
             {/* ════ 2. DESCRIÇÃO + IMAGEM ════ */}
       <section style={{ padding: "80px 24px", background: "var(--vit-white)" }}>
@@ -530,7 +544,7 @@ function ConhecaTambem({ slug }: { slug: string }) {
 }
 
 /* ─── Queixas das famílias (lib/queixas.ts) ─── */
-function Queixas({ slug, heroImage, waUrl, ctaText }: { slug: string; heroImage: string; waUrl: string; ctaText: string }) {
+function Queixas({ slug, usadas, waUrl, ctaText }: { slug: string; usadas: (string | undefined)[]; waUrl: string; ctaText: string }) {
   const itens = QUEIXAS_POR_PAGINA[slug] ?? [];
   // Na página que junta todas as áreas as queixas vêm em cartões compactos,
   // sem foto (a foto de cada área já está nos cartões de cima).
@@ -550,7 +564,9 @@ function Queixas({ slug, heroImage, waUrl, ctaText }: { slug: string; heroImage:
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
           {itens.map(({ id, comoAjuda }, i) => {
             const q = QUEIXAS[id];
-            const foto = q.img === heroImage ? q.img2 : q.img;
+            // Primeira foto que ainda não apareceu na página (topo, seção da clínica ou cartão anterior).
+            const foto = [q.img, q.img2, ...FOTOS_RESERVA].find((f) => !usadas.includes(f)) ?? q.img;
+            usadas.push(foto);
             return (
               <article key={id} className={`vit-queixa${i % 2 ? " inv" : ""}`} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 0, background: "white", borderRadius: 24, overflow: "hidden", border: "1px solid var(--vit-gray-100)", boxShadow: "0 10px 36px rgba(0,0,0,.05)" }}>
                 <div className="vit-queixa-foto" style={{ minHeight: 280, background: `url(${foto}) center/cover no-repeat` }} role="img" aria-label={q.alt} />

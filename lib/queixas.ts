@@ -215,6 +215,25 @@ export function tituloQueixas(slug: string): string {
   return "TDAH, autismo, agitação: sua família não precisa passar por isso sozinha";
 }
 
+/** Foto de impacto no topo de cada página infantil (10/11, pedido da
+ *  direção: "imagens de impacto na primeira página"). Diferente da foto da
+ *  seção "na Vittalis Saúde", para não repetir imagem na mesma página. */
+export const FOTO_TOPO: Record<string, string> = {
+  pediatria: O("vittalis_pediatria_2"),
+  neuropediatria: O("pediatria_02"),
+  neuropsicologia: O("psicopedagogia_02"),
+  fonoaudiologia: O("multidisciplinar_02"),
+  "psicologia-aba": O("psicologia_aba_02"),
+  "psicologia-infantil": O("psicologia_infantil_02"),
+  "terapia-ocupacional-infantil": O("multidisciplinar_02"),
+  psicopedagogia: O("psicopedagogia_02"),
+  "nutricao-infantil": O("nutricao_infantil_v2_02"),
+  "desenvolvimento-infantil": O("psicologia_infantil_01"),
+};
+
+/** Fotos de reserva para os cartões de queixa quando as próprias já estão na página. */
+export const FOTOS_RESERVA = [O("multidisciplinar_02"), O("psicologia_infantil_02"), O("psicologia_aba_02"), O("psicopedagogia_01"), O("pediatria_01")];
+
 export function temQueixas(slug: string): boolean {
   return Boolean(QUEIXAS_POR_PAGINA[slug]);
 }
