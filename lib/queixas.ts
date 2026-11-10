@@ -257,16 +257,18 @@ export const DIFERENCIAIS_DESTAQUE = [
  *  direção: "imagens de impacto na primeira página"). Diferente da foto da
  *  seção "na Vittalis Saúde", para não repetir imagem na mesma página. */
 export const FOTO_TOPO: Record<string, string> = {
+  // 10/11 (09h30), pedido da direção: nenhuma foto de topo repete entre as
+  // páginas e todas parecem consultório. Psicologia infantil e musicoterapia
+  // ficam sem foto no topo até chegarem fotos reais (as que havia ou repetiam
+  // outra página ou não pareciam consultório).
   pediatria: O("vittalis_pediatria_2"),
   neuropediatria: O("pediatria_02_logo"),
   neuropsicologia: O("psicopedagogia_02_logo"),
   fonoaudiologia: O("multidisciplinar_02_logo"),
-  "psicologia-aba": O("psicologia_aba_02_logo"),
-  "psicologia-infantil": O("psicologia_infantil_02_logo"),
-  "terapia-ocupacional-infantil": O("multidisciplinar_02_logo"),
-  psicopedagogia: O("psicopedagogia_02_logo"),
+  "psicologia-aba": O("psicologia_aba_01_logo"),
+  "terapia-ocupacional-infantil": O("psicologia_aba_02_logo"),
+  psicopedagogia: O("psicopedagogia_01_logo"),
   "nutricao-infantil": O("nutricao_infantil_v2_02"),
-  musicoterapia: O("psicologia_aba_02_logo"),
   // 10/11, pedido da direção (03h02): a página principal abre com a fono e a criança.
   "desenvolvimento-infantil": O("atendimento_multidisciplinar_logo"),
 };
