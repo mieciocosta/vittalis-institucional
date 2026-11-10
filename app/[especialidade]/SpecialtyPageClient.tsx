@@ -14,7 +14,6 @@ import { getCampanha, type Campanha } from "@/lib/content/campanhas";
 // Páginas de campanha ligadas a cada especialidade (bloco "Conheça também").
 const CAMPANHAS_DA_ESPECIALIDADE: Record<string, string[]> = {
   vacinacao: ["planejamento-vacinal", "primeiros-meses", "adulto-50-mais"],
-  pediatria: ["planejamento-vacinal", "primeiros-meses"],
 };
 
 // Eventos GA4 + GTM: função única e tipada em lib/analytics.ts.
@@ -46,10 +45,11 @@ const ArrowL = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
 const PhoneIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>;
 const MapIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>;
 const ClockIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
-const StarIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
 const ShieldIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>;
 const HeartIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>;
 const UsersIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
+
+const WhatsIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>;
 
 /* ─── CTA Button ─── */
 function CTA({ children, href, variant = "primary", big = false, onClick }: { children: React.ReactNode; href?: string; variant?: string; big?: boolean; onClick?: () => void }) {
@@ -59,8 +59,17 @@ function CTA({ children, href, variant = "primary", big = false, onClick }: { ch
     white: { background: "rgba(255,255,255,.95)", color: "var(--vit-secondary-dark)", boxShadow: "0 4px 16px rgba(0,0,0,.1)" },
     gold: { background: "var(--vit-gold)", color: "#fff", boxShadow: "0 4px 16px rgba(196,151,59,.25)" },
     outline: { background: "transparent", color: "var(--vit-primary)", border: "2px solid var(--vit-primary)" },
+    whats: { background: "#1FAF57", color: "#fff", boxShadow: "0 6px 22px rgba(31,175,87,.32)" },
   };
-  return <a href={href || BRAND.whatsappUrl} target="_blank" rel="noopener noreferrer" onClick={onClick} style={{...base,...(vs[variant]||vs.primary)}} onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-2px)";e.currentTarget.style.filter="brightness(1.08)"}} onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.filter="none"}}>{children} <ArrowR /></a>;
+  // 10/11: todo botão que leva ao WhatsApp conta como conversão (click_whatsapp).
+  // Antes só o botão do topo e o flutuante contavam, e o Google Ads via 0
+  // conversão nas campanhas novas mesmo com gente clicando no "Agendar".
+  const destino = href || BRAND.whatsappUrl;
+  const aoClicar = () => {
+    if (destino.includes("wa.me")) trackEvent("click_whatsapp", { source: "lp_cta" });
+    onClick?.();
+  };
+  return <a href={destino} target="_blank" rel="noopener noreferrer" onClick={aoClicar} style={{...base,...(vs[variant]||vs.primary)}} onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-2px)";e.currentTarget.style.filter="brightness(1.08)"}} onMouseLeave={e=>{e.currentTarget.style.transform="none";e.currentTarget.style.filter="none"}}>{children} <ArrowR /></a>;
 }
 
 /* ─── FAQ Accordion ─── */
@@ -163,9 +172,6 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
             <img src="/images/logo-vertical.png" alt="Vittalis Saúde" style={{ height: 32, width: "auto" }} />
           </Link>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <a href={BRAND.commercialPhoneTel} onClick={() => trackEvent("click_phone", { source: "lp" })} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 500, color: "var(--vit-gray-500)", textDecoration: "none" }} className="hide-mobile">
-              <PhoneIcon /> {BRAND.commercialPhone}
-            </a>
             <a href={waUrl} target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, fontWeight: 600, background: "var(--vit-primary)", color: "#fff", padding: "9px 22px", borderRadius: 100, textDecoration: "none", transition: "all .3s" }}
               onMouseEnter={e=>e.currentTarget.style.background="var(--vit-primary-dark)"} onMouseLeave={e=>e.currentTarget.style.background="var(--vit-primary)"} onClick={() => trackEvent("click_whatsapp", { source: "navbar" })}>
               {s.ctaText}
@@ -211,16 +217,13 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
                 ))}
               </div>
 
+              {/* 10/11: um botão só, verde de WhatsApp, que é onde o lead fecha. */}
               <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-                <CTA href={waUrl} big>{s.ctaText}</CTA>
-                <CTA variant="outline" big href={BRAND.commercialPhoneTel} onClick={() => trackEvent("click_phone", { source: "lp" })}><PhoneIcon /> Ligar agora</CTA>
+                <CTA href={waUrl} variant="whats" big><WhatsIcon /> {s.ctaText} pelo WhatsApp</CTA>
               </div>
-
-              {/* Rating */}
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 24 }}>
-                <div style={{ display: "flex", gap: 2, color: "var(--vit-gold)" }}>{[...Array(5)].map((_,i)=><span key={i}><StarIcon /></span>)}</div>
-                <span style={{ fontSize: 13, color: "var(--vit-gray-500)" }}>Avaliação 5.0 no Google</span>
-              </div>
+              <p style={{ fontSize: 13, color: "var(--vit-gray-500)", marginTop: 14, lineHeight: 1.6 }}>
+                Atendimento particular · Equipe responde pelo WhatsApp em horário comercial
+              </p>
             </div>
           </Anim>
 
@@ -377,7 +380,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
             <p style={{ fontSize: 15, color: "rgba(255,255,255,.7)", textAlign: "center", marginBottom: 40 }}>O que torna nosso atendimento único em São Luís</p>
           </Anim>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 16, marginBottom: 56 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 16, marginBottom: 40 }}>
             {s.differentials.map((d, i) => (
               <Anim key={i} d={i * 0.06}>
                 <div style={{ background: "rgba(255,255,255,.08)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 18, padding: "28px 22px", backdropFilter: "blur(4px)", textAlign: "center" }}>
@@ -388,22 +391,10 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
             ))}
           </div>
 
-          {/* Social proof - Depoimento */}
-          <Anim d={0.2}>
-            <div style={{ background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.1)", borderRadius: 20, padding: "36px 32px", maxWidth: 700, margin: "0 auto", backdropFilter: "blur(4px)" }}>
-              <div style={{ display: "flex", gap: 4, marginBottom: 16, color: "var(--vit-gold)" }}>{[...Array(5)].map((_,i)=><span key={i}><StarIcon /></span>)}</div>
-              <p style={{ fontSize: 17, color: "rgba(255,255,255,.9)", lineHeight: 1.75, fontStyle: "italic", marginBottom: 20 }}>
-                &ldquo;O atendimento na Vittalis Saúde superou todas as minhas expectativas. A equipe é extremamente cuidadosa e o ambiente transmite muita segurança. Me senti acolhida e respeitada em cada momento.&rdquo;
-              </p>
-              <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                <div style={{ width: 44, height: 44, borderRadius: "50%", background: "rgba(255,255,255,.15)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-display)", fontSize: 18, fontWeight: 600, color: "#fff" }}>P</div>
-                <div>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: "#fff" }}>Paciente da Vittalis</div>
-                  <div style={{ fontSize: 12, color: "rgba(255,255,255,.6)" }}>Avaliação no Google</div>
-                </div>
-              </div>
-            </div>
-          </Anim>
+          {/* 10/11: saiu o depoimento genérico ("Paciente da Vittalis"), que não era
+              avaliação real de ninguém. Quando houver avaliação de verdade, com
+              autorização, ela entra aqui. */}
+          <Anim d={0.2}><div style={{ textAlign: "center" }}><CTA href={waUrl} variant="white" big>{s.ctaText}</CTA></div></Anim>
         </div>
       </section>
 
@@ -435,7 +426,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
               {[
                 { icon: <MapIcon />, title: "Localização", text: BRAND.legalAddress, link: "https://maps.app.goo.gl/35Vernq6NtWw9vBLA", linkText: "Abrir no Google Maps" },
                 { icon: <ClockIcon />, title: "Horários", text: `${BRAND.hours.week}\n${BRAND.hours.sat}`, link: undefined, linkText: undefined },
-                { icon: <PhoneIcon />, title: "Contato", text: BRAND.commercialPhone, link: waUrl, linkText: "Falar pelo WhatsApp" },
+                { icon: <PhoneIcon />, title: "Contato", text: "Fale com a equipe pelo WhatsApp", link: waUrl, linkText: "Falar pelo WhatsApp" },
               ].map((info, i) => (
                 <div key={i} style={{ background: "white", borderRadius: 18, padding: "24px 22px", border: "1px solid var(--vit-gray-100)" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12, color: "var(--vit-primary)" }}>
@@ -443,7 +434,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
                     <span style={{ fontSize: 14, fontWeight: 600, color: "var(--vit-charcoal)" }}>{info.title}</span>
                   </div>
                   <p style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.6, whiteSpace: "pre-line" }}>{info.text}</p>
-                  {info.link && <a href={info.link} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 13, fontWeight: 600, color: "var(--vit-primary)", marginTop: 10, textDecoration: "none" }}>{info.linkText} <ArrowR /></a>}
+                  {info.link && <a href={info.link} target="_blank" rel="noopener noreferrer" onClick={() => { if (info.link?.includes("wa.me")) trackEvent("click_whatsapp", { source: "info" }); }} style={{ display: "inline-flex", alignItems: "center", gap: 4, fontSize: 13, fontWeight: 600, color: "var(--vit-primary)", marginTop: 10, textDecoration: "none" }}>{info.linkText} <ArrowR /></a>}
                 </div>
               ))}
             </div>
@@ -457,14 +448,13 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
         <div style={{ maxWidth: 680, margin: "0 auto", position: "relative" }}>
           <Anim>
             <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 4.5vw, 46px)", fontWeight: 600, color: "#fff", lineHeight: 1.12, marginBottom: 18, letterSpacing: "-.02em" }}>
-              Sua saúde merece o melhor cuidado
+              {s.category === "terapia" || ["pediatria", "neuropediatria"].includes(s.slug) ? "O próximo passo é uma conversa com a nossa equipe" : "Sua saúde merece o melhor cuidado"}
             </h2>
             <p style={{ fontSize: 17, color: "rgba(255,255,255,.82)", lineHeight: 1.75, marginBottom: 36 }}>
               Agende agora seu atendimento de {s.shortName.toLowerCase()} e descubra a experiência Vittalis Saúde — com acolhimento, segurança e excelência clínica.
             </p>
             <div style={{ display: "flex", justifyContent: "center", gap: 14, flexWrap: "wrap" }}>
-              <CTA variant="white" big href={waUrl}>{s.ctaText}</CTA>
-              <CTA variant="gold" big href={BRAND.commercialPhoneTel} onClick={() => trackEvent("click_phone", { source: "lp" })}><PhoneIcon /> {BRAND.commercialPhone}</CTA>
+              <CTA variant="whats" big href={waUrl}><WhatsIcon /> {s.ctaText} pelo WhatsApp</CTA>
             </div>
           </Anim>
         </div>
@@ -486,12 +476,14 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
       </footer>
 
       {/* ════ FABs: Instagram + WhatsApp ════ */}
-      <div style={{ position: "fixed", bottom: 20, right: 20, zIndex: 1000, display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-end" }}>
-        <a href={BRAND.instagramDirect} target="_blank" rel="noopener noreferrer" aria-label="Instagram da Vittalis" onClick={() => trackEvent("click_instagram", { source: "fab" })}
-          style={{ width: 48, height: 48, borderRadius: "50%", background: "linear-gradient(135deg, #833AB4, #E1306C, #F77737)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 16px rgba(225,48,108,.3)", transition: "transform .3s", textDecoration: "none" }}
-          onMouseEnter={e=>e.currentTarget.style.transform="scale(1.1)"} onMouseLeave={e=>e.currentTarget.style.transform="scale(1)"}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </a>
+      {/* 10/11: só o WhatsApp (o Instagram tirava a pessoa da página do anúncio).
+          No celular vira uma barra fixa embaixo, sempre à mão do polegar. */}
+      <a href={waUrl} target="_blank" rel="noopener noreferrer" className="vit-barra-wa" onClick={() => trackEvent("click_whatsapp", { source: "barra" })}
+        style={{ position: "fixed", left: 12, right: 12, bottom: 12, zIndex: 1000, display: "none", alignItems: "center", justifyContent: "center", gap: 10, padding: "15px 18px", borderRadius: 100, background: "#1FAF57", color: "#fff", fontWeight: 700, fontSize: 16, textDecoration: "none", boxShadow: "0 8px 26px rgba(0,0,0,.22)" }}>
+        <WhatsIcon /> {s.ctaText} pelo WhatsApp
+      </a>
+      <style>{`@media(max-width:700px){.vit-barra-wa{display:flex!important}.vit-fab-wa{display:none!important}footer{padding-bottom:88px!important}}`}</style>
+      <div className="vit-fab-wa" style={{ position: "fixed", bottom: 20, right: 20, zIndex: 1000, display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-end" }}>
         <a href={waUrl} target="_blank" rel="noopener noreferrer" aria-label="Agendar pelo WhatsApp" onClick={() => trackEvent("click_whatsapp", { source: "fab" })}
           style={{ width: 56, height: 56, borderRadius: "50%", background: "#25D366", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 18px rgba(37,211,102,.4)", transition: "transform .3s", textDecoration: "none" }}
           onMouseEnter={e=>e.currentTarget.style.transform="scale(1.1)"} onMouseLeave={e=>e.currentTarget.style.transform="scale(1)"}>
