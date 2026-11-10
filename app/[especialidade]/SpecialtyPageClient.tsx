@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type CSSProperties } from "react";
 import Link from "next/link";
 import type { Specialty } from "@/lib/specialties";
 import { BRAND, waLink } from "@/lib/brand";
@@ -212,7 +212,11 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
   const catLabel = s.slug === "desenvolvimento-infantil" ? "Desenvolvimento Infantil" : s.category === "vacinacao" ? "Vacinação" : s.category === "medica" ? "Especialidade Médica" : "Terapia Especializada";
 
   return (
-    <div style={{ fontFamily: "var(--font-body)", color: "var(--vit-charcoal)" }}>
+    // 10/11, pedido da direção ("a fonte dos títulos não está legal"): nas páginas
+    // de especialidade os títulos usam a DM Sans (a do texto), firme e moderna,
+    // no lugar da Cormorant serifada. Troca só aqui, pela variável --font-display.
+    <div className="vit-lp" style={{ fontFamily: "var(--font-body)", color: "var(--vit-charcoal)", ["--font-display" as string]: "var(--font-body)" } as CSSProperties}>
+      <style>{`.vit-lp h1,.vit-lp h2,.vit-lp h3{letter-spacing:-.02em;font-weight:700!important}.vit-lp h1{font-size:clamp(30px,4.2vw,46px)!important;line-height:1.12!important}.vit-lp h2{line-height:1.18!important}`}</style>
 
       {/* ════ NAVBAR ════ */}
       <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 900, background: "rgba(255,255,255,.97)", backdropFilter: "blur(14px)", borderBottom: "1px solid rgba(0,184,192,.06)", boxShadow: "0 1px 12px rgba(0,184,192,.06)" }}>
