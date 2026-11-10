@@ -52,6 +52,36 @@ const UsersIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="no
 
 const WhatsIcon = () => <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>;
 
+/* ─── Ícone de cada dor, pelo assunto da frase (10/11) ─── */
+const CORES_DORES = [
+  { fundo: "#E0F6F7", borda: "#00B8C0" },
+  { fundo: "#FBF1DD", borda: "#C4973B" },
+  { fundo: "#EEE8F6", borda: "#8A70A8" },
+  { fundo: "#E3F2E6", borda: "#50A868" },
+];
+function iconeDaDor(t: string): string {
+  const x = t.toLowerCase();
+  if (/espera|demora|fila/.test(x)) return "⏳";
+  if (/seletividade/.test(x)) return "🧩";
+  if (/autis|\btea\b/.test(x)) return "🧩";
+  if (/refei/.test(x)) return "🍽️";
+  if (/verde|misturad|textura/.test(x)) return "🥗";
+  if (/engasga|vomit|passa mal/.test(x)) return "😣";
+  if (/nutriente|cresc|peso/.test(x)) return "📏";
+  if (/\bcome\b|aliment/.test(x)) return "🥦";
+  if (/fala|palavra|comunica/.test(x)) return "🗣️";
+  if (/birra|agita|comporta|crise|humor|acalmar/.test(x)) return "🌪️";
+  if (/escola|nota|leitura|escrita|aprend|laudo|estud/.test(x)) return "🏫";
+  if (/sono|dorm/.test(x)) return "🌙";
+  if (/consult|correr|ningu/.test(x)) return "🔄";
+  if (/andar|motor|coorden/.test(x)) return "🚶";
+  if (/aten|concentr|tdah/.test(x)) return "⚡";
+  if (/dúvida|duvida|onde começar|orienta|sem saber/.test(x)) return "🧭";
+  if (/música|musica/.test(x)) return "🎵";
+  if (/ansiedade|medo|preocupa/.test(x)) return "💭";
+  return "💛";
+}
+
 /* ─── CTA Button ─── */
 function CTA({ children, href, variant = "primary", big = false, onClick }: { children: React.ReactNode; href?: string; variant?: string; big?: boolean; onClick?: () => void }) {
   const base: React.CSSProperties = { fontFamily: "var(--font-body)", fontWeight: 600, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, borderRadius: 100, transition: "all .3s", cursor: "pointer", border: "none", fontSize: big?16:14, padding: big?"16px 36px":"12px 28px" };
@@ -279,35 +309,38 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
         `}</style>
       </section>
 
-      {/* ════ DORES DO PÚBLICO ════ */}
-      <section style={{ padding: "64px 24px", background: "var(--vit-white)" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
+      {/* ════ DORES DO PÚBLICO ════ (10/11, refeita: "aqui achei pobre") */}
+      <section style={{ padding: "80px 24px", background: "linear-gradient(180deg, var(--vit-white) 0%, var(--vit-primary-50) 100%)", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", top: -140, right: -120, width: 380, height: 380, borderRadius: "50%", background: "radial-gradient(circle, rgba(196,151,59,.10), transparent 70%)" }} />
+        <div className="vit-dores" style={{ maxWidth: 1180, margin: "0 auto", display: "grid", gridTemplateColumns: "360px 1fr", gap: 48, alignItems: "center", position: "relative" }}>
           <Anim>
-            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 600, color: "var(--vit-charcoal)", marginBottom: 8 }}>
-              Situações que costumam trazer as famílias até nós
+            <span style={{ display: "inline-block", fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--vit-gold)", marginBottom: 12 }}>Você se identifica?</span>
+            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3.4vw, 40px)", fontWeight: 600, color: "var(--vit-charcoal)", lineHeight: 1.12, marginBottom: 14 }}>
+              {temQueixas(s.slug) ? "Situações que costumam trazer as famílias até nós" : "Situações que costumam trazer nossos pacientes"}
             </h2>
-            <p style={{ fontSize: 14, color: "var(--vit-gray-500)", marginBottom: 32 }}>
-              A equipe orienta em cada uma delas, com calma e sem pressa.
+            <p style={{ fontSize: 16, color: "var(--vit-gray-500)", lineHeight: 1.7, marginBottom: 24 }}>
+              {temQueixas(s.slug)
+                ? "Se alguma delas faz parte da sua rotina, você não está sozinha. A nossa equipe orienta cada família com calma, escuta e sem pressa."
+                : "Se alguma delas faz parte da sua rotina, a nossa equipe está pronta para orientar você com calma, escuta e sem pressa."}
             </p>
+            <CTA href={waUrl} variant="whats" big><WhatsIcon /> Quero conversar</CTA>
+            <p style={{ fontSize: 13, color: "var(--vit-gray-500)", marginTop: 12 }}>Resposta pelo WhatsApp · Atendimento particular</p>
           </Anim>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 14, textAlign: "left" }}>
-            {s.painPoints?.map((pain, i) => (
-              <Anim key={i} d={i * 0.05}>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "18px 16px", borderRadius: 14, background: "var(--vit-cream)", border: "1px solid rgba(196,151,59,.1)" }}>
-                  <span style={{ fontSize: 20, flexShrink: 0, lineHeight: 1 }} aria-hidden="true">💬</span>
-                  <span style={{ fontSize: 14, color: "var(--vit-gray-700)", lineHeight: 1.5 }}>{pain}</span>
-                </div>
-              </Anim>
-            ))}
+          <div className="vit-dores-grade" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 14 }}>
+            {s.painPoints?.map((pain, i) => {
+              const cor = CORES_DORES[i % CORES_DORES.length];
+              return (
+                <Anim key={i} d={i * 0.05}>
+                  <div style={{ height: "100%", display: "flex", alignItems: "center", gap: 14, padding: "18px 18px", borderRadius: 18, background: "white", border: "1px solid var(--vit-gray-100)", borderLeft: `4px solid ${cor.borda}`, boxShadow: "0 8px 24px rgba(0,0,0,.05)" }}>
+                    <span aria-hidden="true" style={{ width: 46, height: 46, borderRadius: 14, background: cor.fundo, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>{iconeDaDor(pain)}</span>
+                    <span style={{ fontSize: 15, fontWeight: 600, color: "var(--vit-charcoal)", lineHeight: 1.45 }}>{pain}</span>
+                  </div>
+                </Anim>
+              );
+            })}
           </div>
-          <Anim d={0.3}>
-            <div style={{ marginTop: 32, padding: "20px 28px", borderRadius: 16, background: "var(--vit-primary-light)", border: "1px solid rgba(0,184,192,.1)", display: "inline-block" }}>
-              <p style={{ fontSize: 15, color: "var(--vit-secondary)", fontWeight: 500 }}>
-                ✨ Na Vittalis Saúde, você encontra o cuidado certo para cada uma dessas situações.
-              </p>
-            </div>
-          </Anim>
         </div>
+        <style>{`@media(max-width:900px){.vit-dores{grid-template-columns:1fr!important;gap:28px!important}}@media(max-width:560px){.vit-dores-grade{grid-template-columns:1fr!important}}`}</style>
       </section>
 
       {/* ════ Todas as áreas (só na página que junta todas, 10/11) ════ */}
