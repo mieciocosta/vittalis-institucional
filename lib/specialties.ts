@@ -111,7 +111,7 @@ export const SPECIALTIES: Specialty[] = [
     ctaText: "Agendar consulta",
     waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
   },  // 10/11, pedido da direção: página nova para os anúncios do Google de
-  // neuropediatria. Leva ao WhatsApp do setor de terapias (MEDICAS_NO_WA_TERAPIAS).
+  // neuropediatria. Leva ao WhatsApp do setor de terapias (usaWhatsappTerapias).
   // Sem promessa de resultado e sem preço (regras do CFM).
   {
     slug: "neuropediatria",
