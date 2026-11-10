@@ -236,6 +236,23 @@ export const DOR_POR_AREA = [
   { slug: "psicopedagogia", area: "Psicopedagogia", icone: "📚", dor: "Notas baixas e dificuldade para ler e escrever" },
 ];
 
+/** Faixa de destaque das páginas infantis (10/11, pedido da direção: "copie o
+ *  que achar melhor e destaca"). Inspirada nos números das concorrentes, mas só
+ *  com o que é verdade hoje: sem anos de casa, famílias atendidas ou nota
+ *  inventados. Quando a clínica mandar os números reais, entram aqui. */
+export const NUMEROS_DESTAQUE = [
+  { n: "9", t: "especialidades infantis" },
+  { n: "1", t: "endereço para tudo" },
+  { n: "1", t: "plano de cuidado para a família" },
+];
+
+export const DIFERENCIAIS_DESTAQUE = [
+  { icone: "🩺", titulo: "Neuropediatra e terapias juntos", texto: "A consulta médica e as terapias no mesmo lugar, com os profissionais conversando sobre a sua criança." },
+  { icone: "🥦", titulo: "Cuidado também com a alimentação", texto: "Nutrição infantil para a seletividade alimentar, tão comum no autismo." },
+  { icone: "🎵", titulo: "Terapias que encantam", texto: "ABA, fono, terapia ocupacional, psicologia e musicoterapia com o brincar no centro." },
+  { icone: "👨‍👩‍👧", titulo: "Família por perto", texto: "Orientação para os pais continuarem em casa e conversa com a escola quando necessário." },
+];
+
 /** Foto de impacto no topo de cada página infantil (10/11, pedido da
  *  direção: "imagens de impacto na primeira página"). Diferente da foto da
  *  seção "na Vittalis Saúde", para não repetir imagem na mesma página. */

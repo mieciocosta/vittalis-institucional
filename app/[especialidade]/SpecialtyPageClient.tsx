@@ -10,7 +10,7 @@ import { guardarLeadSemEsperar } from "@/lib/planilha";
 import { trackEvent } from "@/lib/analytics";
 import { DadosEmpresa } from "../_componentes/DadosEmpresa";
 import { getCampanha, type Campanha } from "@/lib/content/campanhas";
-import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, QUEM_CUIDA, FOTO_TOPO, FOTOS_RESERVA, temQueixas, tituloQueixas, chamadaDoFormulario, DOR_POR_AREA } from "@/lib/queixas";
+import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, QUEM_CUIDA, FOTO_TOPO, FOTOS_RESERVA, temQueixas, tituloQueixas, chamadaDoFormulario, DOR_POR_AREA, NUMEROS_DESTAQUE, DIFERENCIAIS_DESTAQUE } from "@/lib/queixas";
 
 // Páginas de campanha ligadas a cada especialidade (bloco "Conheça também").
 const CAMPANHAS_DA_ESPECIALIDADE: Record<string, string[]> = {
@@ -310,6 +310,9 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
           @media(max-width:600px){.hide-mobile{display:none!important}}
         `}</style>
       </section>
+
+      {/* ════ DESTAQUE: o que a Vittalis reúne (10/11, páginas infantis) ════ */}
+      {temQueixas(s.slug) && <Destaques waUrl={waUrl} />}
 
       {/* ════ DORES DO PÚBLICO ════ (10/11, refeita: "aqui achei pobre") */}
       <section style={{ padding: "80px 24px", background: "linear-gradient(180deg, var(--vit-white) 0%, var(--vit-primary-50) 100%)", position: "relative", overflow: "hidden" }}>
@@ -801,6 +804,47 @@ function QueixasCompactas({ waUrl }: { waUrl: string }) {
         </p>
         <div style={{ textAlign: "center" }}><CTA href={waUrl} variant="whats" big><WhatsIcon /> Contar o que está acontecendo</CTA></div>
       </div>
+    </section>
+  );
+}
+
+/* ─── Faixa de destaque das páginas infantis ─── */
+function Destaques({ waUrl }: { waUrl: string }) {
+  return (
+    <section style={{ padding: "64px 24px", background: "linear-gradient(135deg, var(--vit-secondary-dark) 0%, var(--vit-secondary) 55%, var(--vit-primary-dark) 100%)", position: "relative", overflow: "hidden" }} aria-labelledby="destaque-titulo">
+      <div style={{ position: "absolute", top: -120, right: -80, width: 360, height: 360, borderRadius: "50%", background: "rgba(255,255,255,.05)" }} />
+      <div style={{ maxWidth: 1180, margin: "0 auto", position: "relative" }}>
+        <div className="vit-dest-topo" style={{ display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: 40, alignItems: "center", marginBottom: 36 }}>
+          <div>
+            <span style={{ display: "inline-block", fontSize: 12, fontWeight: 700, letterSpacing: ".08em", textTransform: "uppercase", color: "var(--vit-gold)", marginBottom: 10 }}>Por que a Vittalis</span>
+            <h2 id="destaque-titulo" style={{ fontFamily: "var(--font-display)", fontSize: "clamp(28px, 3.6vw, 42px)", fontWeight: 600, color: "#fff", lineHeight: 1.12, margin: 0 }}>
+              Pare de correr de consultório em consultório
+            </h2>
+            <p style={{ fontSize: 16, color: "rgba(255,255,255,.82)", lineHeight: 1.7, marginTop: 12 }}>
+              Aqui a sua criança tem consulta médica, avaliação e terapias no mesmo endereço, no Renascença, com uma equipe que trabalha junta.
+            </p>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12 }}>
+            {NUMEROS_DESTAQUE.map((x) => (
+              <div key={x.t} style={{ background: "rgba(255,255,255,.1)", border: "1px solid rgba(255,255,255,.18)", borderRadius: 18, padding: "18px 12px", textAlign: "center" }}>
+                <div style={{ fontFamily: "var(--font-body)", fontSize: 42, fontWeight: 800, color: "var(--vit-gold)", lineHeight: 1 }}>{x.n}</div>
+                <div style={{ fontSize: 13, color: "rgba(255,255,255,.9)", marginTop: 6, lineHeight: 1.35 }}>{x.t}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 14 }}>
+          {DIFERENCIAIS_DESTAQUE.map((d) => (
+            <div key={d.titulo} style={{ background: "white", borderRadius: 18, padding: "20px 18px", boxShadow: "0 10px 30px rgba(0,0,0,.12)" }}>
+              <div style={{ fontSize: 28, marginBottom: 8 }} aria-hidden="true">{d.icone}</div>
+              <div style={{ fontSize: 16, fontWeight: 700, color: "var(--vit-charcoal)", marginBottom: 6 }}>{d.titulo}</div>
+              <div style={{ fontSize: 14, color: "var(--vit-gray-500)", lineHeight: 1.6 }}>{d.texto}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{ textAlign: "center", marginTop: 30 }}><CTA href={waUrl} variant="white" big><WhatsIcon /> Quero conhecer a equipe</CTA></div>
+      </div>
+      <style>{`@media(max-width:900px){.vit-dest-topo{grid-template-columns:1fr!important;gap:22px!important}}`}</style>
     </section>
   );
 }
