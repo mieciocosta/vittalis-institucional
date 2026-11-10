@@ -10,7 +10,7 @@ import { guardarLeadSemEsperar } from "@/lib/planilha";
 import { trackEvent } from "@/lib/analytics";
 import { DadosEmpresa } from "../_componentes/DadosEmpresa";
 import { getCampanha, type Campanha } from "@/lib/content/campanhas";
-import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, QUEM_CUIDA, FOTO_TOPO, FOTOS_RESERVA, temQueixas, tituloQueixas, chamadaDoFormulario, DOR_POR_AREA, NUMEROS_DESTAQUE, DIFERENCIAIS_DESTAQUE } from "@/lib/queixas";
+import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, QUEM_CUIDA, FOTO_TOPO, FOTOS_RESERVA, TOPO_PANORAMICO, temQueixas, tituloQueixas, chamadaDoFormulario, DOR_POR_AREA, NUMEROS_DESTAQUE, DIFERENCIAIS_DESTAQUE } from "@/lib/queixas";
 
 // Páginas de campanha ligadas a cada especialidade (bloco "Conheça também").
 const CAMPANHAS_DA_ESPECIALIDADE: Record<string, string[]> = {
@@ -209,6 +209,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
   const numeroWa = usaWhatsappTerapias(s) ? WHATSAPP_TERAPIAS : undefined;
   const waUrl = waLink(s.waMessage, numeroWa);
   const fotoTopo = FOTO_TOPO[s.slug];
+  const topoLargo = TOPO_PANORAMICO.has(s.slug);
   const catLabel = s.slug === "desenvolvimento-infantil" ? "Desenvolvimento Infantil" : s.category === "vacinacao" ? "Vacinação" : s.category === "medica" ? "Especialidade Médica" : "Terapia Especializada";
 
   return (
@@ -247,7 +248,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", display: "grid", gridTemplateColumns: fotoTopo ? "1fr 1fr" : "1fr 420px", gap: 56, alignItems: "center" }} className="hero-spec-grid">
           <Anim>
             <div>
-              {fotoTopo && <img className="vit-hero-foto-cel" src={fotoTopo} alt="" fetchPriority="high" style={{ display: "none", width: "100%", aspectRatio: "16/10", objectFit: "cover", borderRadius: 20, marginBottom: 20, boxShadow: "0 12px 34px rgba(0,0,0,.12)" }} />}
+              {fotoTopo && <img className="vit-hero-foto-cel" src={fotoTopo} alt="" fetchPriority="high" style={{ display: "none", width: "100%", aspectRatio: topoLargo ? "2/1" : "16/10", objectFit: "cover", borderRadius: 20, marginBottom: 20, boxShadow: "0 12px 34px rgba(0,0,0,.12)" }} />}
               <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "var(--vit-gold-light)", color: "var(--vit-gold)", fontSize: 11, fontWeight: 600, padding: "5px 14px", borderRadius: 100, marginBottom: 20, letterSpacing: ".06em", textTransform: "uppercase", border: "1px solid rgba(196,151,59,.12)" }}>
                 {catLabel} • São Luís — MA
               </div>
@@ -298,7 +299,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
                 embaixo (sem cobrir a imagem); no celular a foto vai acima do título. */}
             {fotoTopo ? (
               <div style={{ position: "relative" }}>
-                <img className="vit-hero-foto" src={fotoTopo} alt="" fetchPriority="high" style={{ width: "100%", aspectRatio: "16/11", objectFit: "cover", borderRadius: 24, display: "block", boxShadow: "0 18px 50px rgba(0,0,0,.14)" }} />
+                <img className="vit-hero-foto" src={fotoTopo} alt="" fetchPriority="high" style={{ width: "100%", aspectRatio: topoLargo ? "2/1" : "16/11", objectFit: "cover", borderRadius: 24, display: "block", boxShadow: "0 18px 50px rgba(0,0,0,.14)" }} />
                 <div className="vit-hero-form" style={{ marginTop: 16 }}>
                   <LeadForm specialty={s.shortName} slug={s.slug} waUrl={waUrl} numeroWa={numeroWa} compacto />
                 </div>

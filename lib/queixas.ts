@@ -190,7 +190,7 @@ export const QUEM_CUIDA: Record<QueixaId, string[]> = {
  *  A pediatria fica de fora de propósito (10/11, pedido da direção: "faz uma
  *  de pediatria separado"): ela tem a página própria, /pediatria. */
 export const AREAS_INFANTIS = [
-  { slug: "neuropediatria", nome: "Neuropediatria", img: O("pediatria_01_logo"), texto: "Avaliação médica do desenvolvimento, do comportamento e do sono." },
+  { slug: "neuropediatria", nome: "Neuropediatria", img: O("n_neuropediatria"), texto: "Avaliação médica do desenvolvimento, do comportamento e do sono." },
   { slug: "neuropsicologia", nome: "Neuropsicologia", img: O("n_neuropsicologia"), texto: "Avaliação de atenção, memória e comportamento, com laudo." },
   { slug: "psicologia-aba", nome: "Psicologia ABA", img: O("n_psicologia_aba"), texto: "Metas individuais de comunicação, socialização e autonomia." },
   { slug: "fonoaudiologia", nome: "Fonoaudiologia", img: O("n_fonoaudiologia"), texto: "Fala, linguagem e comunicação, com orientação para casa." },
@@ -261,7 +261,7 @@ export const FOTO_TOPO: Record<string, string> = {
   // consultório moderno e profissional de jaleco branco com a logo (fotos
   // enviadas pela direção às 11h11 e 11h17).
   pediatria: O("vittalis_pediatria_2"),
-  neuropediatria: O("pediatria_02_logo"),
+  neuropediatria: O("n_neuropediatria"),
   neuropsicologia: O("n_neuropsicologia"),
   fonoaudiologia: O("n_fonoaudiologia"),
   "psicologia-aba": O("n_psicologia_aba"),
@@ -271,11 +271,16 @@ export const FOTO_TOPO: Record<string, string> = {
   psicopedagogia: O("n_psicopedagogia"),
   "nutricao-infantil": O("n_nutricao_infantil"),
   // 10/11, pedido da direção (03h02): a página principal abre com a fono e a criança.
-  "desenvolvimento-infantil": O("atendimento_multidisciplinar_logo"),
+  // 10/11 (11h42), pedido da direção: esta é a imagem central do site.
+  "desenvolvimento-infantil": O("n_desenvolvimento_infantil"),
 };
 
+/** Fotos de topo panorâmicas (2:1): mostradas inteiras, sem cortar o
+ *  letreiro da clínica nem a criança. */
+export const TOPO_PANORAMICO = new Set(["desenvolvimento-infantil", "neuropediatria"]);
+
 /** Fotos de reserva para os cartões de queixa quando as próprias já estão na página. */
-export const FOTOS_RESERVA = [O("n_terapia_ocupacional"), O("n_psicologia_infantil"), O("n_psicologia_aba"), O("n_fonoaudiologia"), O("n_musicoterapia"), O("pediatria_01_logo")];
+export const FOTOS_RESERVA = [O("n_terapia_ocupacional"), O("n_psicologia_infantil"), O("n_psicologia_aba"), O("n_fonoaudiologia"), O("n_musicoterapia"), O("n_neuropediatria")];
 
 /** Frase persuasiva e botão do formulário de cada página (10/11, pedido da
  *  direção: trocar o "Agende agora" genérico). Sem promessa e sem preço. */
