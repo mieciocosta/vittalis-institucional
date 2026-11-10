@@ -52,6 +52,7 @@ const IMG = {
   toInfantil: O("psicologia_aba_02"),
   toAdulta: O("clinica_geral_02"),
   neurofeedback: O("neurofeedback_02"),
+  musicoterapia: O("psicologia_infantil_02"),
   hero: "/images/vittalis_pediatria_2.png",
   equipe: O("multidisciplinar_01"),
   clinica: "/images/vittalis_vacinacao_1.png",
@@ -131,7 +132,7 @@ export const SPECIALTIES: Specialty[] = [
     subheadline: "Uma equipe que trabalha junta pela sua criança, em São Luís. Toque na especialidade para saber mais:",
     description: "Quando a família percebe que algo no desenvolvimento da criança merece atenção, a primeira dúvida é por onde começar. Na Vittalis Saúde a família encontra a consulta médica, a avaliação e as terapias no mesmo endereço, com profissionais que conversam entre si e um plano de cuidado combinado com os pais e, quando necessário, com a escola.",
     metaTitle: "Autismo, TDAH e Desenvolvimento Infantil em São Luís | Vittalis Saúde",
-    metaDescription: "Neuropediatra, neuropsicologia, fono, ABA, terapia ocupacional e psicologia infantil no mesmo lugar em São Luís. Avaliação e acompanhamento de autismo, TDAH e atraso no desenvolvimento.",
+    metaDescription: "Neuropediatra, neuropsicologia, fono, ABA, terapia ocupacional, musicoterapia, nutrição e psicologia infantil no mesmo lugar em São Luís. Avaliação e acompanhamento de autismo, TDAH e atraso no desenvolvimento.",
     heroImage: IMG.equipe,
     painPoints: ["Suspeita de autismo ou TDAH e nenhuma resposta clara", "Atraso na fala, no andar ou na interação", "Agitação, birras e comportamento difícil em casa e na escola", "Correr de um consultório para outro sem ninguém conversar", "Listas de espera longas para começar as terapias", "Escola pedindo laudo ou avaliação"],
     benefits: ["Consulta médica, avaliação e terapias no mesmo endereço", "Profissionais que conversam entre si sobre a sua criança", "Plano de cuidado combinado com a família", "Orientação para os pais continuarem em casa", "Contato com a escola quando necessário", "Ambiente lúdico e acolhedor para crianças"],
@@ -339,6 +340,28 @@ export const SPECIALTIES: Specialty[] = [
     howItWorks: ["Avaliação fonoaudiológica completa","Devolutiva e plano terapêutico","Sessões regulares individualizadas","Orientação à família para prática em casa","Reavaliação periódica do progresso"],
     differentials: ["Integração com ABA, T.O. e neuropsicologia","Abordagem lúdica para crianças","Profissionais especializados em linguagem infantil"],
     faq: [{q:"A partir de que idade a criança pode fazer fono?",a:"Desde os primeiros meses de vida, especialmente quando há dificuldades de amamentação ou quando os marcos de comunicação não são atingidos na idade esperada."}],
+    ctaText: "Agendar avaliação",waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
+  },
+  {
+    // 10/11, pedido da direção: página da musicoterapia infantil, no mesmo modelo
+    // das terapias (WhatsApp do setor de terapias). Sem promessa de resultado.
+    // Foto provisória: falta uma foto real de sessão com instrumentos.
+    slug: "musicoterapia",name: "Musicoterapia",shortName: "Musicoterapia",icon: "🎵",category: "terapia",accentColor: "#8A70A8",
+    headline: "Musicoterapia infantil: a música como caminho para se comunicar e se regular",
+    subheadline: "Sessões com instrumentos, canções e ritmo para crianças com autismo, TDAH, atraso no desenvolvimento ou dificuldade de lidar com as emoções.",
+    description: "Na musicoterapia a música vira linguagem. Com instrumentos, canções, ritmo e improviso, a musicoterapeuta cria um espaço em que a criança se expressa, interage, espera a vez, imita e se acalma, muitas vezes de um jeito que as palavras ainda não alcançam. Na Vittalis Saúde a musicoterapia faz parte do plano de cuidado da criança, junto com ABA, fono, terapia ocupacional e psicologia.",
+    metaTitle: "Musicoterapia Infantil em São Luís | Vittalis Saúde",metaDescription: "Musicoterapia infantil em São Luís para crianças com autismo, TDAH e atraso no desenvolvimento, integrada às terapias da clínica. Agende na Vittalis Saúde.",
+    heroImage: IMG.musicoterapia,painPoints: ["Criança que se comunica pouco ou não fala","Dificuldade de interagir e brincar com outras crianças","Agitação, crises e dificuldade de se acalmar","Pouca atenção compartilhada","Criança que responde muito bem à música e a família quer aproveitar isso"],
+    benefits: ["Sessões individuais com instrumentos e canções","Estímulo à comunicação, à interação e à atenção","Trabalho de regulação emocional e sensorial","Objetivos combinados com a família","Integração com ABA, fono e terapia ocupacional","Orientação para usar a música em casa"],
+    forWhom: ["Crianças com autismo (TEA)","Crianças com TDAH","Crianças com atraso na fala ou no desenvolvimento","Crianças com dificuldade de regular emoções","Crianças com questões sensoriais"],
+    howItWorks: ["Conversa pelo WhatsApp para entender a criança","Avaliação musicoterapêutica, com a família","Plano com objetivos de comunicação, interação e regulação","Sessões semanais com instrumentos, canções e improviso","Retornos com a família e troca com a equipe da clínica"],
+    differentials: ["Sala preparada com instrumentos para crianças","Integração com as outras terapias no mesmo lugar","Abordagem lúdica, no ritmo da criança","Comunicação próxima com os pais"],
+    faq: [
+      {q:"A criança precisa saber música?",a:"Não. A musicoterapia usa a música como forma de comunicação, não como aula. Não é preciso nenhum conhecimento musical."},
+      {q:"Musicoterapia ajuda crianças com autismo?",a:"A música costuma ser uma porta de entrada para a comunicação e a interação de muitas crianças com TEA. A musicoterapeuta avalia a criança e define objetivos junto com a família e a equipe."},
+      {q:"Musicoterapia substitui a fono ou a ABA?",a:"Não. Ela complementa as outras terapias. Na Vittalis os profissionais trabalham juntos no plano de cuidado da criança."},
+      {q:"Vocês atendem por plano de saúde?",a:"O atendimento é particular. Pelo WhatsApp a equipe explica como funciona."},
+    ],
     ctaText: "Agendar avaliação",waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
   },
   {

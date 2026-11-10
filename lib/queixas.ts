@@ -147,6 +147,12 @@ export const QUEIXAS_POR_PAGINA: Record<string, { id: QueixaId; comoAjuda: strin
     { id: "tdah", comoAjuda: "Na criança com TDAH a alimentação costuma ser desorganizada: a nutricionista ajuda a criar rotina de refeições e escolhas que funcionem para a família." },
     { id: "sensorial", comoAjuda: "Textura, cheiro e cor pesam muito na aceitação. A nutricionista apresenta os alimentos aos poucos, respeitando o tempo da criança." },
   ],
+  musicoterapia: [
+    { id: "autismo", comoAjuda: "A música abre caminho para a comunicação, a imitação e a interação. A musicoterapeuta define objetivos com a família e a equipe de ABA e fono." },
+    { id: "agitacao", comoAjuda: "Ritmo, canções e instrumentos ajudam a criança a se organizar, a esperar a vez e a encontrar formas de se acalmar." },
+    { id: "tdah", comoAjuda: "As atividades musicais trabalham atenção, escuta, controle do impulso e o seguir combinados, de um jeito lúdico." },
+    { id: "fala", comoAjuda: "Cantar, imitar sons e brincar com ritmo estimulam a intenção de comunicar, em parceria com a fonoaudiologia." },
+  ],
   psicopedagogia: [
     { id: "escola", comoAjuda: "A psicopedagoga avalia como a criança aprende e trabalha leitura, escrita, raciocínio e hábitos de estudo, em contato com a escola." },
     { id: "tdah", comoAjuda: "Rotina de estudo, organização do material e estratégias de atenção ajudam a criança com TDAH a acompanhar a turma." },
@@ -171,10 +177,10 @@ QUEIXAS_POR_PAGINA["desenvolvimento-infantil"] = [
  *  (etiquetas que levam à página da área). As fotos ficam nos cartões das
  *  áreas, uma por área, para não repetir imagem na mesma página. */
 export const QUEM_CUIDA: Record<QueixaId, string[]> = {
-  autismo: ["neuropediatria", "neuropsicologia", "psicologia-aba", "fonoaudiologia", "terapia-ocupacional-infantil", "nutricao-infantil"],
+  autismo: ["neuropediatria", "neuropsicologia", "psicologia-aba", "fonoaudiologia", "terapia-ocupacional-infantil", "musicoterapia", "nutricao-infantil"],
   tdah: ["neuropediatria", "neuropsicologia", "psicologia-infantil", "psicopedagogia", "terapia-ocupacional-infantil"],
-  agitacao: ["neuropediatria", "psicologia-infantil", "psicologia-aba", "terapia-ocupacional-infantil"],
-  fala: ["fonoaudiologia", "neuropediatria", "psicologia-aba"],
+  agitacao: ["neuropediatria", "psicologia-infantil", "psicologia-aba", "terapia-ocupacional-infantil", "musicoterapia"],
+  fala: ["fonoaudiologia", "neuropediatria", "psicologia-aba", "musicoterapia"],
   escola: ["neuropsicologia", "psicopedagogia", "fonoaudiologia"],
   sensorial: ["terapia-ocupacional-infantil", "psicologia-aba", "nutricao-infantil"],
   seletividade: ["nutricao-infantil", "terapia-ocupacional-infantil", "fonoaudiologia"],
@@ -190,6 +196,7 @@ export const AREAS_INFANTIS = [
   { slug: "fonoaudiologia", nome: "Fonoaudiologia", img: O("atendimento_multidisciplinar"), texto: "Fala, linguagem e comunicação, com orientação para casa." },
   { slug: "terapia-ocupacional-infantil", nome: "Terapia Ocupacional", img: O("psicologia_aba_02"), texto: "Questões sensoriais, coordenação e independência." },
   { slug: "psicologia-infantil", nome: "Psicologia Infantil", img: O("psicologia_infantil_01"), texto: "Emoções, comportamento e apoio aos pais pelo brincar." },
+  { slug: "musicoterapia", nome: "Musicoterapia", img: O("psicologia_infantil_02"), texto: "Música para comunicar, interagir e se regular." },
   { slug: "nutricao-infantil", nome: "Nutrição Infantil", img: O("nutricao_infantil_v2_02"), texto: "Seletividade alimentar, sem forçar e com plano para a família." },
   { slug: "psicopedagogia", nome: "Psicopedagogia", img: O("psicopedagogia_01"), texto: "Leitura, escrita e aprendizagem, em contato com a escola." },
 ];
@@ -198,7 +205,7 @@ export const AREAS_INFANTIS = [
 export const CAMINHO_DO_CUIDADO = [
   { emoji: "🩺", titulo: "Consulta médica", texto: "Pediatra ou neuropediatra ouvem a história e avaliam a criança.", slug: "neuropediatria" },
   { emoji: "🔬", titulo: "Avaliação", texto: "Neuropsicologia ajuda a entender atenção, memória e comportamento.", slug: "neuropsicologia" },
-  { emoji: "🧩", titulo: "Terapias", texto: "ABA, fono, terapia ocupacional e psicologia, no mesmo lugar.", slug: "psicologia-aba" },
+  { emoji: "🧩", titulo: "Terapias", texto: "ABA, fono, terapia ocupacional, musicoterapia e psicologia, no mesmo lugar.", slug: "psicologia-aba" },
   { emoji: "👨‍👩‍👧", titulo: "Família e escola", texto: "Orientação aos pais e conversa com a escola quando necessário.", slug: "psicopedagogia" },
 ];
 
@@ -228,6 +235,7 @@ export const FOTO_TOPO: Record<string, string> = {
   "terapia-ocupacional-infantil": O("multidisciplinar_02"),
   psicopedagogia: O("psicopedagogia_02"),
   "nutricao-infantil": O("nutricao_infantil_v2_02"),
+  musicoterapia: O("psicologia_aba_02"),
   // 10/11: a direção testou a fono no consultório e preferiu esta (terapeuta no tapete).
   "desenvolvimento-infantil": O("psicologia_infantil_01"),
 };
