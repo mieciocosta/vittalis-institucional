@@ -222,6 +222,20 @@ export function tituloQueixas(slug: string): string {
   return "TDAH, autismo, agitação: sua família não precisa passar por isso sozinha";
 }
 
+/** Na página principal, a seção "Você se identifica?" mostra UM problema de
+ *  cada área (10/11, pedido da direção), e cada cartão leva à página da área. */
+export const DOR_POR_AREA = [
+  { slug: "neuropediatria", area: "Neuropediatria", icone: "🩺", dor: "Suspeita de autismo ou TDAH e ninguém deu uma resposta clara" },
+  { slug: "neuropsicologia", area: "Neuropsicologia", icone: "🔬", dor: "Escola pedindo laudo ou avaliação da criança" },
+  { slug: "psicologia-aba", area: "Psicologia ABA", icone: "🧩", dor: "Diagnóstico de autismo e não sabe como começar as terapias" },
+  { slug: "fonoaudiologia", area: "Fonoaudiologia", icone: "🗣️", dor: "Já passou dos 2 anos e fala pouco ou quase nada" },
+  { slug: "terapia-ocupacional-infantil", area: "Terapia Ocupacional", icone: "✋", dor: "Não suporta barulho, roupas ou texturas e tem dificuldade para se vestir" },
+  { slug: "psicologia-infantil", area: "Psicologia Infantil", icone: "🌪️", dor: "Birras, agressividade ou ansiedade pesando na rotina da casa" },
+  { slug: "musicoterapia", area: "Musicoterapia", icone: "🎵", dor: "Reage muito à música, mas interage pouco com as pessoas" },
+  { slug: "nutricao-infantil", area: "Nutrição Infantil", icone: "🥦", dor: "Come só meia dúzia de alimentos e a refeição virou briga" },
+  { slug: "psicopedagogia", area: "Psicopedagogia", icone: "📚", dor: "Notas baixas e dificuldade para ler e escrever" },
+];
+
 /** Foto de impacto no topo de cada página infantil (10/11, pedido da
  *  direção: "imagens de impacto na primeira página"). Diferente da foto da
  *  seção "na Vittalis Saúde", para não repetir imagem na mesma página. */

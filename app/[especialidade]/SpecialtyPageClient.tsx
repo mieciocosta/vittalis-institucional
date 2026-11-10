@@ -10,7 +10,7 @@ import { guardarLeadSemEsperar } from "@/lib/planilha";
 import { trackEvent } from "@/lib/analytics";
 import { DadosEmpresa } from "../_componentes/DadosEmpresa";
 import { getCampanha, type Campanha } from "@/lib/content/campanhas";
-import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, QUEM_CUIDA, FOTO_TOPO, FOTOS_RESERVA, temQueixas, tituloQueixas, chamadaDoFormulario } from "@/lib/queixas";
+import { QUEIXAS, QUEIXAS_POR_PAGINA, CAMINHO_DO_CUIDADO, GALERIA_INFANTIL, AREAS_INFANTIS, QUEM_CUIDA, FOTO_TOPO, FOTOS_RESERVA, temQueixas, tituloQueixas, chamadaDoFormulario, DOR_POR_AREA } from "@/lib/queixas";
 
 // Páginas de campanha ligadas a cada especialidade (bloco "Conheça também").
 const CAMPANHAS_DA_ESPECIALIDADE: Record<string, string[]> = {
@@ -328,6 +328,22 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
             <CTA href={waUrl} variant="whats" big><WhatsIcon /> Quero conversar</CTA>
             <p style={{ fontSize: 13, color: "var(--vit-gray-500)", marginTop: 12 }}>Resposta pelo WhatsApp · Atendimento particular</p>
           </Anim>
+          {s.slug === "desenvolvimento-infantil" ? (
+            <div className="vit-dores-grade" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 12 }}>
+              {DOR_POR_AREA.map((d, i) => {
+                const cor = CORES_DORES[i % CORES_DORES.length];
+                return (
+                  <Link key={d.slug} href={`/${d.slug}`} style={{ display: "flex", alignItems: "center", gap: 14, padding: "14px 16px", borderRadius: 18, background: "white", border: "1px solid var(--vit-gray-100)", borderLeft: `4px solid ${cor.borda}`, boxShadow: "0 8px 24px rgba(0,0,0,.05)", textDecoration: "none" }}>
+                    <span aria-hidden="true" style={{ width: 44, height: 44, borderRadius: 14, background: cor.fundo, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 21, flexShrink: 0 }}>{d.icone}</span>
+                    <span style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                      <span style={{ fontSize: 15, fontWeight: 600, color: "var(--vit-charcoal)", lineHeight: 1.4 }}>{d.dor}</span>
+                      <span style={{ fontSize: 12, fontWeight: 700, color: cor.borda, textTransform: "uppercase", letterSpacing: ".05em" }}>{d.area} →</span>
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          ) : (
           <div className="vit-dores-grade" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 14 }}>
             {s.painPoints?.map((pain, i) => {
               const cor = CORES_DORES[i % CORES_DORES.length];
@@ -341,6 +357,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
               );
             })}
           </div>
+          )}
         </div>
         <style>{`@media(max-width:900px){.vit-dores{grid-template-columns:1fr!important;gap:28px!important}}@media(max-width:560px){.vit-dores-grade{grid-template-columns:1fr!important}}`}</style>
       </section>
