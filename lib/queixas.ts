@@ -187,7 +187,7 @@ export const AREAS_INFANTIS = [
   { slug: "neuropediatria", nome: "Neuropediatria", img: O("pediatria_01"), texto: "Avaliação médica do desenvolvimento, do comportamento e do sono." },
   { slug: "neuropsicologia", nome: "Neuropsicologia", img: O("psicologia_infantil_02"), texto: "Avaliação de atenção, memória e comportamento, com laudo." },
   { slug: "psicologia-aba", nome: "Psicologia ABA", img: O("psicologia_aba_01"), texto: "Metas individuais de comunicação, socialização e autonomia." },
-  { slug: "fonoaudiologia", nome: "Fonoaudiologia", img: O("atendimento_multidisciplinar"), texto: "Fala, linguagem e comunicação, com orientação para casa." },
+  { slug: "fonoaudiologia", nome: "Fonoaudiologia", img: O("multidisciplinar_02"), texto: "Fala, linguagem e comunicação, com orientação para casa." },
   { slug: "terapia-ocupacional-infantil", nome: "Terapia Ocupacional", img: O("psicologia_aba_02"), texto: "Questões sensoriais, coordenação e independência." },
   { slug: "psicologia-infantil", nome: "Psicologia Infantil", img: O("psicologia_infantil_01"), texto: "Emoções, comportamento e apoio aos pais pelo brincar." },
   { slug: "nutricao-infantil", nome: "Nutrição Infantil", img: O("nutricao_infantil_v2_02"), texto: "Seletividade alimentar, sem forçar e com plano para a família." },
@@ -228,7 +228,8 @@ export const FOTO_TOPO: Record<string, string> = {
   "terapia-ocupacional-infantil": O("multidisciplinar_02"),
   psicopedagogia: O("psicopedagogia_02"),
   "nutricao-infantil": O("nutricao_infantil_v2_02"),
-  "desenvolvimento-infantil": O("psicologia_infantil_01"),
+  // 10/11, pedido da direção: a fono no consultório, representando toda a equipe.
+  "desenvolvimento-infantil": O("atendimento_multidisciplinar"),
 };
 
 /** Fotos de reserva para os cartões de queixa quando as próprias já estão na página. */
