@@ -94,7 +94,7 @@ function FAQ({ items }: { items: { q: string; a: string }[] }) {
 }
 
 /* ─── Lead Capture Form ─── */
-function LeadForm({ specialty, slug, waUrl, numeroWa }: { specialty: string; slug: string; waUrl: string; numeroWa?: string }) {
+function LeadForm({ specialty, slug, waUrl, numeroWa, compacto = false }: { specialty: string; slug: string; waUrl: string; numeroWa?: string; compacto?: boolean }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [erro, setErro] = useState("");
@@ -123,6 +123,22 @@ function LeadForm({ specialty, slug, waUrl, numeroWa }: { specialty: string; slu
     fontSize: 15, fontFamily: "var(--font-body)", outline: "none", transition: "border-color .3s",
     background: "white", color: "var(--vit-charcoal)",
   };
+
+  // 10/11: versão compacta, embaixo da foto do topo (a foto fica inteira, sem
+  // o formulário por cima; a direção achou feio cortar a imagem).
+  if (compacto) return (
+    <div style={{ background: "white", borderRadius: 20, padding: "18px 18px 14px", boxShadow: "0 10px 34px rgba(0,0,0,.07)", border: "1px solid var(--vit-gray-100)" }}>
+      <div style={{ fontSize: 15, fontWeight: 700, color: "var(--vit-charcoal)", marginBottom: 10 }}>Agende agora <span style={{ fontWeight: 400, color: "var(--vit-gray-500)" }}>· a equipe responde pelo WhatsApp</span></div>
+      <div className="vit-form-linha" style={{ display: "grid", gridTemplateColumns: "1fr 1fr auto", gap: 10 }}>
+        <input type="text" placeholder="Seu nome" aria-label="Seu nome" autoComplete="name" maxLength={80} value={name} onChange={e=>setName(e.target.value)} style={{ ...inputStyle, padding: "12px 14px" }} />
+        <input type="tel" inputMode="tel" autoComplete="tel" placeholder={EXEMPLO_TELEFONE} aria-label="Seu WhatsApp com DDD" maxLength={TAMANHO_TELEFONE} value={phone} onChange={e=>setPhone(mascararTelefone(e.target.value))} style={{ ...inputStyle, padding: "12px 14px" }} />
+        <button onClick={handleSubmit} style={{ padding: "12px 20px", borderRadius: 100, border: "none", background: "var(--vit-primary)", color: "white", fontSize: 15, fontWeight: 600, fontFamily: "var(--font-body)", cursor: "pointer", whiteSpace: "nowrap", display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>Agendar <ArrowR /></button>
+      </div>
+      {erro && <p role="alert" style={{ fontSize: 14, color: "#B42318", margin: "8px 0 0" }}>{erro}</p>}
+      <p style={{ fontSize: 11, color: "var(--vit-gray-300)", margin: "8px 0 0", lineHeight: 1.5 }}>Ao enviar, você concorda com nossa política de privacidade conforme a LGPD.</p>
+      <style>{`@media(max-width:560px){.vit-form-linha{grid-template-columns:1fr!important}}`}</style>
+    </div>
+  );
 
   return (
     <div style={{ background: "white", borderRadius: 24, padding: "36px 32px", boxShadow: "0 12px 48px rgba(0,0,0,.08)", border: "1px solid var(--vit-gray-100)", maxWidth: 420 }}>
@@ -242,13 +258,13 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
 
           <Anim d={0.2}>
             {/* 10/11: foto de impacto no topo das páginas infantis (pedido da direção).
-                No computador a foto fica à direita e o formulário sobe por cima da
-                parte de baixo dela; no celular a foto vai acima do título. */}
+                No computador a foto fica inteira à direita, com o formulário compacto
+                embaixo (sem cobrir a imagem); no celular a foto vai acima do título. */}
             {fotoTopo ? (
               <div style={{ position: "relative" }}>
                 <img className="vit-hero-foto" src={fotoTopo} alt="" fetchPriority="high" style={{ width: "100%", aspectRatio: "16/11", objectFit: "cover", borderRadius: 24, display: "block", boxShadow: "0 18px 50px rgba(0,0,0,.14)" }} />
-                <div className="vit-hero-form" style={{ marginTop: -110, marginLeft: "auto", position: "relative", width: "86%" }}>
-                  <LeadForm specialty={s.shortName} slug={s.slug} waUrl={waUrl} numeroWa={numeroWa} />
+                <div className="vit-hero-form" style={{ marginTop: 16 }}>
+                  <LeadForm specialty={s.shortName} slug={s.slug} waUrl={waUrl} numeroWa={numeroWa} compacto />
                 </div>
               </div>
             ) : (
@@ -258,7 +274,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
         </div>
 
         <style>{`
-          @media(max-width:900px){.hero-spec-grid{grid-template-columns:1fr!important;gap:36px!important}.vit-hero-foto{display:none!important}.vit-hero-foto-cel{display:block!important}.vit-hero-form{margin-top:0!important;width:100%!important}}
+          @media(max-width:900px){.hero-spec-grid{grid-template-columns:1fr!important;gap:36px!important}.vit-hero-foto{display:none!important}.vit-hero-foto-cel{display:block!important}.vit-hero-form{margin-top:0!important}}
           @media(max-width:600px){.hide-mobile{display:none!important}}
         `}</style>
       </section>
