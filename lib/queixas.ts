@@ -150,7 +150,9 @@ QUEIXAS_POR_PAGINA["desenvolvimento-infantil"] = [
   { id: "sensorial", comoAjuda: "A terapia ocupacional trabalha regulação, coordenação e autonomia nas tarefas do dia a dia." },
 ];
 
-/** Áreas mostradas na página que junta todas (/desenvolvimento-infantil). */
+/** Áreas mostradas na página que junta todas (/desenvolvimento-infantil).
+ *  A pediatria fica de fora de propósito (10/11, pedido da direção: "faz uma
+ *  de pediatria separado"): ela tem a página própria, /pediatria. */
 export const AREAS_INFANTIS = [
   { slug: "neuropediatria", nome: "Neuropediatria", img: O("pediatria_01"), texto: "Avaliação médica do desenvolvimento, do comportamento e do sono." },
   { slug: "neuropsicologia", nome: "Neuropsicologia", img: O("psicologia_infantil_02"), texto: "Avaliação de atenção, memória e comportamento, com laudo." },
@@ -159,7 +161,6 @@ export const AREAS_INFANTIS = [
   { slug: "terapia-ocupacional-infantil", nome: "Terapia Ocupacional", img: O("psicologia_aba_02"), texto: "Questões sensoriais, coordenação e independência." },
   { slug: "psicologia-infantil", nome: "Psicologia Infantil", img: O("psicologia_infantil_01"), texto: "Emoções, comportamento e apoio aos pais pelo brincar." },
   { slug: "psicopedagogia", nome: "Psicopedagogia", img: O("psicopedagogia_01"), texto: "Leitura, escrita e aprendizagem, em contato com a escola." },
-  { slug: "pediatria", nome: "Pediatria", img: O("pediatria_02"), texto: "Acompanhamento do crescimento e dos marcos do desenvolvimento." },
 ];
 
 /** Caminho do cuidado na clínica, mostrado em todas as páginas infantis. */

@@ -116,7 +116,7 @@ export const SPECIALTIES: Specialty[] = [
     waMessage: "Olá! Vim pelo site da Vittalis e gostaria de atendimento.",
   },  // 10/11, pedido da direção ("uma página para todas as áreas"): a página
   // que junta neuropediatria, neuropsicologia, fono, ABA, psicologia,
-  // terapia ocupacional e psicopedagogia. É a página dos anúncios de busca
+  // terapia ocupacional e psicopedagogia (a pediatria fica na página dela). É a página dos anúncios de busca
   // ampla (autismo, TDAH, atraso no desenvolvimento); quem busca uma área
   // específica continua indo para a página dela. category "terapia" = WhatsApp
   // do setor de terapias (92005-3606).
