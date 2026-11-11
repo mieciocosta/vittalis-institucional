@@ -164,3 +164,20 @@
   .formatura { flex: 0 0 68%; scroll-snap-align: center; }
   .videosGrade { grid-template-columns: minmax(0, 300px); }
 }
+
+/* Títulos na fonte da marca (Cormorant Garamond), o mesmo serifado
+   elegante do site e das campanhas; destaque em itálico turquesa. */
+.capaTitulo, .secaoTitulo, .faseTitulo, .adultoTitulo, .final h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.capaTitulo { font-size: clamp(40px, 5.6vw, 66px); line-height: 1.02; }
+.capaTitulo em { font-style: italic; font-weight: 600; color: #7ff0f4; }
+.secaoTitulo { font-size: clamp(32px, 4.2vw, 48px); line-height: 1.08; }
+.faseTitulo { font-size: clamp(32px, 3.8vw, 46px); line-height: 1.06; }
+.adultoTitulo { font-size: 27px; line-height: 1.1; }
+.final h2 { font-size: clamp(32px, 4.2vw, 48px); line-height: 1.08; }
+.faixa { font-family: var(--font-display); font-style: italic; font-weight: 600; font-size: 19px; letter-spacing: 0; }
+.adultoImagem { height: 240px; object-position: center 28%; }

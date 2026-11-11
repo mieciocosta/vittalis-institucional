@@ -117,8 +117,8 @@ export const FASES: Fase[] = [
     titulo: "Cuidado em cada fase da vida da mulher",
     faixa: "Adultas de 20 a 59 anos",
     texto: "Vacinas que protegem a mulher hoje e quem ela ama, inclusive antes de engravidar.",
-    imagem: I("vac_enfermeira"),
-    alt: "Profissional da Vittalis de jaleco branco preparando a vacina",
+    imagem: I("vac_hpv"),
+    alt: "Mulher sorrindo com o curativo da Vittalis no braço depois da vacina de HPV",
     vacinas: [
       { nome: "HPV", para: "Até os 45 anos, com avaliação" },
       { nome: "dTpa", para: "Reforço a cada 10 anos" },
