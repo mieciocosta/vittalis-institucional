@@ -137,8 +137,8 @@ export const FASES: Fase[] = [
     titulo: "Homem também se vacina",
     faixa: "Adultos de 20 a 59 anos",
     texto: "Muitos homens adultos estão com as vacinas atrasadas. Uma conversa rápida mostra o que falta.",
-    imagem: I("vac_crianca_pai"),
-    alt: "Pai acompanhando a vacinação da filha na clínica",
+    imagem: I("vac_homem"),
+    alt: "Homem sorrindo e apontando o curativo da Vittalis no braço depois da vacina",
     vacinas: [
       { nome: "HPV", para: "Com avaliação da idade" },
       { nome: "Hepatites A e B", para: "Para quem não tem o esquema" },
