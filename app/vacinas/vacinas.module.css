@@ -489,3 +489,10 @@
   .capaFundo { object-position: center 40%; }
   .capaVideo { top: 150px; width: 100px; right: 12px; }
 }
+/* Celular: foto da capa com a mesma altura de antes (300 px), família de perto. */
+@media (max-width: 760px) {
+  .capaFoto { height: 300px; aspect-ratio: auto; }
+  .capaFundo { object-position: center 30%; }
+  .capaVideo { top: 196px; width: 112px; right: 16px; }
+}
+@media (max-width: 760px) { .capaFundo { object-position: 68% 30%; } }
