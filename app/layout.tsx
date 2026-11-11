@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { CapturaOrigem } from "./_componentes/CapturaOrigem";
 import { BRAND } from "@/lib/brand";
+import { GOOGLE_ADS_ID } from "@/lib/analytics";
 
 // Fontes da marca hospedadas no próprio site (antes vinham do Google Fonts
 // por @import, o que travava a renderização e pesava no Lighthouse).
@@ -158,6 +159,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               page_path: window.location.pathname,
               send_page_view: true
             });
+            // Google Ads: guarda o clique do anúncio (gclid) para contar a
+            // conversão quando a pessoa chamar no WhatsApp.
+            gtag('config', '${GOOGLE_ADS_ID}');
           `}
         </Script>
       </body>
