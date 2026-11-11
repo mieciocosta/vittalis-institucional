@@ -19,6 +19,8 @@ export type Fase = {
   video?: { src: string; poster: string; titulo: string; legenda: string };
   vacinas: Vacina[];
   mensagem: string;
+  /** Texto curto do botão (pedido da direção, 10/11: "frases curtas"). */
+  botao: string;
   icone: string;
 };
 
@@ -42,6 +44,7 @@ export const FASES: Fase[] = [
       { nome: "Covid-19", para: "Conforme calendário vigente" },
     ],
     mensagem: "Olá! Estou grávida e quero saber sobre as vacinas da gestante.",
+    botao: "Quero me proteger na gravidez",
     icone: "🤰",
   },
   {
@@ -66,6 +69,7 @@ export const FASES: Fase[] = [
       { nome: "VSR (nirsevimabe)", para: "Proteção contra bronquiolite nos primeiros meses" },
     ],
     mensagem: "Olá! Quero saber sobre as vacinas do meu bebê.",
+    botao: "Quero o plano do meu bebê",
     icone: "👶",
   },
   {
@@ -89,6 +93,7 @@ export const FASES: Fase[] = [
       { nome: "Dengue", para: "A partir dos 4 anos, com avaliação" },
     ],
     mensagem: "Olá! Quero colocar a caderneta do meu filho em dia.",
+    botao: "Quero vacinar meu filho",
     icone: "🧒",
   },
   {
@@ -110,6 +115,7 @@ export const FASES: Fase[] = [
       { nome: "Dengue", para: "Com avaliação" },
     ],
     mensagem: "Olá! Quero saber sobre as vacinas para adolescente (HPV e meningite).",
+    botao: "Quero vacinar contra o HPV",
     icone: "🧑‍🎓",
   },
   {
@@ -130,6 +136,7 @@ export const FASES: Fase[] = [
       { nome: "Dengue", para: "Com avaliação" },
     ],
     mensagem: "Olá! Quero saber sobre as vacinas para mulher.",
+    botao: "Quero me vacinar",
     icone: "👩",
   },
   {
@@ -150,6 +157,7 @@ export const FASES: Fase[] = [
       { nome: "Dengue", para: "Com avaliação" },
     ],
     mensagem: "Olá! Quero saber sobre as vacinas para homem.",
+    botao: "Quero me vacinar",
     icone: "👨",
   },
   {
@@ -170,6 +178,7 @@ export const FASES: Fase[] = [
       { nome: "Hepatite B", para: "Para quem não tem o esquema" },
     ],
     mensagem: "Olá! Quero saber sobre as vacinas para idoso (herpes zóster, pneumonia).",
+    botao: "Quero vacinar contra zóster",
     icone: "👵",
   },
 ];

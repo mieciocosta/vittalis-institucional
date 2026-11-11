@@ -64,7 +64,7 @@ function SecaoFase({ f, i }: { f: Fase; i: number }) {
             </li>
           ))}
         </ul>
-        <Whats mensagem={f.mensagem} nome={f.rotulo}>Quero saber sobre {f.rotulo.replace("Saúde d", "as vacinas d").toLowerCase()}</Whats>
+        <Whats mensagem={f.mensagem} nome={f.rotulo}>{f.botao}</Whats>
       </div>
     </section>
   );
@@ -100,7 +100,7 @@ export function VacinasFamilia() {
               Da gestação aos avós: a equipe da Vittalis organiza o calendário de cada um e vacina na clínica ou na sua casa.
             </p>
             <div className={s.capaAcoes}>
-              <Whats mensagem={MENSAGEM_GERAL} nome="capa">Montar o calendário da minha família</Whats>
+              <Whats mensagem={MENSAGEM_GERAL} nome="capa">Quero montar um plano vacinal</Whats>
             </div>
             <ul className={s.capaSelos}>
               <li>🏠 Vacinação em casa</li>
@@ -151,7 +151,7 @@ export function VacinasFamilia() {
             ))}
           </div>
           <div className={s.formaturasAcao}>
-            <Whats mensagem="Olá! Quero saber sobre o planejamento vacinal do meu bebê." nome="formatura">Quero o planejamento vacinal do meu bebê</Whats>
+            <Whats mensagem="Olá! Quero saber sobre o planejamento vacinal do meu bebê." nome="formatura">Quero montar um plano vacinal</Whats>
           </div>
         </section>
 
@@ -185,7 +185,7 @@ export function VacinasFamilia() {
                       </li>
                     ))}
                   </ul>
-                  <Whats mensagem={f.mensagem} nome={f.rotulo} className={s.botaoWhatsPequeno}>Quero saber sobre {f.rotulo.replace("Saúde d", "as vacinas d").toLowerCase()}</Whats>
+                  <Whats mensagem={f.mensagem} nome={f.rotulo} className={s.botaoWhatsPequeno}>{f.botao}</Whats>
                 </div>
               </article>
             ))}
@@ -218,7 +218,7 @@ export function VacinasFamilia() {
             <p className={s.faseDescricao}>
               Sem fila e sem sair de casa: a equipe leva as vacinas em caixa térmica com temperatura controlada, no dia e horário que você escolher. Para o bebê, a criança, o adulto e o idoso.
             </p>
-            <Whats mensagem="Olá! Quero agendar vacinação em casa." nome="domicílio">Agendar vacinação em casa</Whats>
+            <Whats mensagem="Olá! Quero agendar vacinação em casa." nome="domicílio">Quero vacinar em casa</Whats>
           </div>
         </section>
 
@@ -232,7 +232,7 @@ export function VacinasFamilia() {
         <section className={s.final} aria-labelledby="t-final">
           <h2 id="t-final">Vamos colocar a família toda em dia?</h2>
           <p>Mande uma foto da caderneta pelo WhatsApp. A equipe confere e explica o que falta para cada um.</p>
-          <Whats mensagem={MENSAGEM_GERAL} nome="final" className={s.botaoBranco}>Falar com a equipe no WhatsApp</Whats>
+          <Whats mensagem={MENSAGEM_GERAL} nome="final" className={s.botaoBranco}>Quero falar com a equipe</Whats>
           <small className={s.ressalva}>
             A indicação de cada vacina depende de avaliação profissional e segue os calendários da SBIm e do Ministério da Saúde.
           </small>
@@ -252,7 +252,7 @@ export function VacinasFamilia() {
       />
 
       <div className={s.barraWhats}>
-        <Whats mensagem={MENSAGEM_GERAL} nome="barra" className={s.barraBotao}>Falar com a equipe no WhatsApp</Whats>
+        <Whats mensagem={MENSAGEM_GERAL} nome="barra" className={s.barraBotao}>Quero montar meu plano vacinal</Whats>
       </div>
     </div>
   );
