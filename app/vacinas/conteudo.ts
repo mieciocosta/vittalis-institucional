@@ -75,8 +75,7 @@ export const FASES: Fase[] = [
     faixa: "De 2 a 9 anos",
     texto:
       "Depois dos dois anos vêm os reforços, que mantêm a proteção alta na escola e nas brincadeiras. A gente confere a caderneta e completa o que faltar.",
-    imagem: I("vac_menino"),
-    alt: "Menino mostrando o braço depois da vacina, ao lado da profissional da Vittalis de jaleco branco",
+    video: { src: V("vacinacao-crianca.mp4"), poster: V("vacinacao-crianca.jpg"), titulo: "Vacinação humanizada", legenda: "Óculos de realidade virtual e certificado de coragem" },
     vacinas: [
       { nome: "DTPa ou Tetra", para: "Reforço de difteria, tétano e coqueluche" },
       { nome: "Pólio", para: "Reforço" },
