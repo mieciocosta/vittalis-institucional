@@ -482,3 +482,10 @@
   .capa { grid-template-columns: 1fr 1fr; gap: 32px; }
   .capaVideo { width: 120px; margin-left: -24px; }
 }
+@media (min-width: 761px) { .capaFoto { aspect-ratio: 16 / 10; } }
+/* Celular: a foto nova é larga; mostra a largura inteira (os 3 rostos). */
+@media (max-width: 760px) {
+  .capaFoto { height: auto; aspect-ratio: 16 / 9.4; }
+  .capaFundo { object-position: center 40%; }
+  .capaVideo { top: 150px; width: 100px; right: 12px; }
+}

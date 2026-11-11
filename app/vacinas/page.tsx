@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     url: `${SITE_URL}/vacinas`,
     title: TITULO,
     description: DESCRICAO,
-    images: [{ url: `${SITE_URL}/images/otim/vac_familia.webp`, width: 1448, height: 1086, alt: "Família sorrindo junto" }],
+    images: [{ url: `${SITE_URL}/images/otim/vac_familia.webp`, width: 1672, height: 941, alt: "Família sorrindo junto" }],
   },
 };
 
