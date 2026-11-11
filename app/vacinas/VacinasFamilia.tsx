@@ -150,6 +150,7 @@ export function VacinasFamilia() {
           <h2 id="t-videos" className={s.secaoTitulo}>Veja como é vacinar na Vittalis</h2>
           <p className={s.secaoSub}>Gente de verdade, na nossa clínica, com a nossa equipe.</p>
           <div className={s.videosGrade}>
+            <VideoVacina src="/videos/vacinacao-depoimento-zoster.mp4" poster="/videos/vacinacao-depoimento-zoster.jpg" titulo="Depoimento: herpes zóster aos 50" legenda="Vandelúcia conta por que se vacinou na Vittalis" />
             <VideoVacina src="/videos/vacinacao-planejamento.mp4" poster="/videos/vacinacao-planejamento.jpg" titulo="Planejamento vacinal" legenda="A equipe explica como organiza as doses" />
             <VideoVacina src="/videos/vacinacao-rotavirus.mp4" poster="/videos/vacinacao-rotavirus.jpg" titulo="Rotavírus, em 1 minuto" legenda="O que é e por que vacinar o bebê" />
           </div>
