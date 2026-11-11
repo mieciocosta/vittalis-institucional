@@ -184,7 +184,7 @@ export function VacinasFamilia() {
             <VideoVacina src="/videos/vacinacao-depoimento-zoster.mp4" poster="/videos/vacinacao-depoimento-zoster.jpg" titulo="Depoimento: herpes zóster aos 50" legenda="Vandelúcia conta por que se vacinou na Vittalis" />
             <VideoVacina src="/videos/vacinacao-depoimento-familia.mp4" poster="/videos/vacinacao-depoimento-familia.jpg" titulo="Depoimento: a família do Samuel" legenda="Os pais contam por que vacinam o bebê aqui" />
             <VideoVacina src="/videos/vacinacao-planejamento.mp4" poster="/videos/vacinacao-planejamento.jpg" titulo="Planejamento vacinal" legenda="A equipe explica como organiza as doses" />
-            <VideoVacina src="/videos/vacinacao-rotavirus.mp4" poster="/videos/vacinacao-rotavirus.jpg" titulo="Rotavírus, em 1 minuto" legenda="O que é e por que vacinar o bebê" />
+            <VideoVacina src="/videos/vacinacao-rotavirus.mp4" poster="/videos/vacinacao-rotavirus.jpg" titulo="Vacinação Domiciliar" legenda="A equipe da Vittalis vai até a sua casa" />
           </div>
         </section>
 
