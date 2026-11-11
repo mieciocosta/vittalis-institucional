@@ -38,6 +38,7 @@ export function VideoVacina({ src, poster, titulo, legenda }: { src: string; pos
             <span className={s.videoPlayIcone} aria-hidden>
               <svg width="26" height="26" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor" /></svg>
             </span>
+            <span className={s.videoPlayRotulo} aria-hidden>Assistir</span>
           </button>
         )}
       </div>

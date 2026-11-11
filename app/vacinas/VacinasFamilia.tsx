@@ -4,7 +4,8 @@ import { BRAND } from "@/lib/brand";
 import { Perguntas } from "../campanhas/_componentes/Perguntas";
 import { LinkWhatsOrigem } from "../_landing-vacinas/LinkWhatsOrigem";
 import { VideoVacina } from "./VideoVacina";
-import { FASES, MENSAGEM_GERAL, PERGUNTAS, type Fase } from "./conteudo";
+import { Flutuantes } from "./Flutuantes";
+import { CIDADES, FASES, MAIS_PROCURADAS, MENSAGEM_GERAL, PERGUNTAS, type Fase } from "./conteudo";
 import s from "./vacinas.module.css";
 
 const SLUG = "vacinas-familia";
@@ -32,17 +33,30 @@ function SecaoFase({ f, i }: { f: Fase; i: number }) {
   return (
     <section id={f.id} className={`${s.fase} ${invertida ? s.faseInvertida : ""}`} aria-labelledby={`t-${f.id}`}>
       <div className={s.faseMidia}>
-        {f.video ? (
+        {f.video && f.imagem ? (
+          // Foto grande + o vídeo da clínica num cartão flutuando no canto.
+          <div className={s.faseCombo}>
+            <Image src={f.imagem} alt={f.alt ?? ""} width={1400} height={933} className={s.faseImagem} sizes="(max-width: 900px) 100vw, 560px" />
+            <div className={s.faseComboVideo}><VideoVacina {...f.video} /></div>
+          </div>
+        ) : f.video ? (
           <VideoVacina {...f.video} />
         ) : f.imagem ? (
           <Image src={f.imagem} alt={f.alt ?? ""} width={1200} height={900} className={s.faseImagem} sizes="(max-width: 900px) 100vw, 520px" />
         ) : (
           <div className={s.faseIcone} aria-hidden>{f.icone}</div>
         )}
+        <p className={s.faseFrase}>
+          <span className={s.faseFraseIcone} aria-hidden>{f.frase.icone}</span>
+          <span>{f.frase.texto}</span>
+        </p>
       </div>
       <div className={s.faseTexto}>
-        <span className={s.rotulo}>{f.icone} {f.rotulo}</span>
-        <h2 id={`t-${f.id}`} className={s.faseTitulo}>{f.titulo}</h2>
+        <h2 id={`t-${f.id}`} className={s.faseNome}>
+          <span className={s.faseNomeIcone} aria-hidden>{f.icone}</span>
+          {f.rotulo}
+        </h2>
+        <p className={s.faseChamada}>{f.titulo}</p>
         <p className={s.faixa}>{f.faixa}</p>
         <p className={s.faseDescricao}>{f.texto}</p>
         <h3 className={s.listaTitulo}>Vacinas desta fase</h3>
@@ -54,7 +68,7 @@ function SecaoFase({ f, i }: { f: Fase; i: number }) {
             </li>
           ))}
         </ul>
-        <Whats mensagem={f.mensagem} nome={f.rotulo}>Quero saber sobre {f.rotulo.replace("Saúde d", "as vacinas d")}</Whats>
+        <Whats mensagem={f.mensagem} nome={f.rotulo}>{f.botao}</Whats>
       </div>
     </section>
   );
@@ -64,10 +78,11 @@ export function VacinasFamilia() {
   const [gestante, bebe, crianca, adolescente, mulher, homem, idoso] = FASES;
   return (
     <div className={s.pagina}>
+      <meta name="color-scheme" content="only light" />
       <header className={s.topo}>
         <div className={s.topoInterno}>
           <Link href="/" aria-label="Vittalis Saúde, página inicial">
-            <Image src="/images/campanhas/logo-topo.png" alt="Vittalis Saúde" width={296} height={40} className={s.logo} unoptimized priority />
+            <Image src="/images/otim/logo-vertical.webp" alt="Vittalis Saúde" width={900} height={273} className={s.logo} unoptimized priority />
           </Link>
           <Whats mensagem={MENSAGEM_GERAL} nome="topo" className={s.topoBotao}>Falar no WhatsApp</Whats>
         </div>
@@ -76,10 +91,12 @@ export function VacinasFamilia() {
       <main>
         {/* CAPA: FAMÍLIA */}
         <section className={s.capa} aria-labelledby="titulo-capa">
-          <Image src="/images/otim/vac_familia.webp" alt="Pai, mãe e bebê sorrindo juntos" fill priority sizes="100vw" className={s.capaFundo} />
-          <div className={s.capaVeu} />
+          <div className={s.capaFoto}>
+            <Image src="/images/otim/vac_familia.webp" alt="Pai, mãe e bebê sorrindo juntos" fill priority sizes="100vw" className={s.capaFundo} />
+            <div className={s.capaVeu} />
+          </div>
           <div className={s.capaConteudo}>
-            <span className={s.capaSelo}>💉 Vacinação particular em São Luís</span>
+            <span className={s.capaSelo}>💉 Vacinação Particular</span>
             <h1 id="titulo-capa" className={s.capaTitulo}>
               Vacinas para <em>toda a família</em>, em cada fase da vida
             </h1>
@@ -87,7 +104,7 @@ export function VacinasFamilia() {
               Da gestação aos avós: a equipe da Vittalis organiza o calendário de cada um e vacina na clínica ou na sua casa.
             </p>
             <div className={s.capaAcoes}>
-              <Whats mensagem={MENSAGEM_GERAL} nome="capa">Montar o calendário da minha família</Whats>
+              <Whats mensagem={MENSAGEM_GERAL} nome="capa">Quero montar um plano vacinal</Whats>
             </div>
             <ul className={s.capaSelos}>
               <li>🏠 Vacinação em casa</li>
@@ -138,43 +155,21 @@ export function VacinasFamilia() {
             ))}
           </div>
           <div className={s.formaturasAcao}>
-            <Whats mensagem="Olá! Quero saber sobre o planejamento vacinal do meu bebê." nome="formatura">Quero o planejamento vacinal do meu bebê</Whats>
+            <Whats mensagem="Olá! Quero saber sobre o planejamento vacinal do meu bebê." nome="formatura">Quero montar um plano vacinal</Whats>
           </div>
         </section>
 
         <SecaoFase f={crianca} i={2} />
         <SecaoFase f={adolescente} i={3} />
 
-        {/* ADULTOS: MULHER, HOMEM E IDOSO */}
-        <section className={s.adultos} aria-labelledby="t-adultos">
-          <h2 id="t-adultos" className={s.secaoTitulo}>Adulto também precisa de vacina</h2>
+        {/* ADULTOS: MULHER, HOMEM E IDOSO, cada um com a sua seção, como os demais públicos */}
+        <div className={s.adultosAbertura}>
+          <h2 className={s.secaoTitulo}>Adulto também precisa de vacina</h2>
           <p className={s.secaoSub}>A maioria dos adultos está com alguma vacina atrasada. Veja o que é indicado para cada um.</p>
-          <div className={s.adultosGrade}>
-            {[mulher, homem, idoso].map((f) => (
-              <article key={f.id} id={f.id} className={s.adultoCard}>
-                {f.imagem ? (
-                  <Image src={f.imagem} alt={f.alt ?? ""} width={864} height={800} className={s.adultoImagem} sizes="(max-width: 900px) 100vw, 360px" />
-                ) : (
-                  <div className={s.adultoIcone} aria-hidden>{f.icone}</div>
-                )}
-                <div className={s.adultoCorpo}>
-                  <span className={s.rotulo}>{f.rotulo}</span>
-                  <h3 className={s.adultoTitulo}>{f.titulo}</h3>
-                  <p className={s.faixa}>{f.faixa}</p>
-                  <ul className={s.vacinas}>
-                    {f.vacinas.map((v) => (
-                      <li key={v.nome}>
-                        <strong>{v.nome}</strong>
-                        <span>{v.para}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Whats mensagem={f.mensagem} nome={f.rotulo} className={s.botaoWhatsPequeno}>Quero saber sobre {f.rotulo.replace("Saúde d", "as vacinas d")}</Whats>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
+        </div>
+        <SecaoFase f={mulher} i={4} />
+        <SecaoFase f={homem} i={5} />
+        <SecaoFase f={idoso} i={6} />
 
         {/* VÍDEOS */}
         <section className={s.videos} aria-labelledby="t-videos">
@@ -183,6 +178,7 @@ export function VacinasFamilia() {
           <div className={s.videosGrade}>
             <VideoVacina src="/videos/vacinacao-depoimento-zoster.mp4" poster="/videos/vacinacao-depoimento-zoster.jpg" titulo="Depoimento: herpes zóster aos 50" legenda="Vandelúcia conta por que se vacinou na Vittalis" />
             <VideoVacina src="/videos/vacinacao-depoimento-familia.mp4" poster="/videos/vacinacao-depoimento-familia.jpg" titulo="Depoimento: a família do Samuel" legenda="Os pais contam por que vacinam o bebê aqui" />
+            <VideoVacina src="/videos/vacinacao-plano-vacinal.mp4" poster="/videos/vacinacao-plano-vacinal.jpg" titulo="Tudo planejado desde o começo" legenda="Como a equipe organiza as vacinas da família" />
             <VideoVacina src="/videos/vacinacao-planejamento.mp4" poster="/videos/vacinacao-planejamento.jpg" titulo="Planejamento vacinal" legenda="A equipe explica como organiza as doses" />
             <VideoVacina src="/videos/vacinacao-rotavirus.mp4" poster="/videos/vacinacao-rotavirus.jpg" titulo="Vacinação Domiciliar" legenda="A equipe da Vittalis vai até a sua casa" />
           </div>
@@ -190,15 +186,41 @@ export function VacinasFamilia() {
 
         {/* EM CASA */}
         <section className={s.casa} aria-labelledby="t-casa">
-          <Image src="/images/otim/vac_mae_bebe.webp" alt="Mãe segurando o bebê no colo, em casa" width={1200} height={1064} className={s.casaImagem} sizes="(max-width: 900px) 100vw, 520px" />
-          <div>
-            <span className={s.rotulo}>🏠 Vacinação em domicílio</span>
-            <h2 id="t-casa" className={s.faseTitulo}>A gente vai até você</h2>
-            <p className={s.faseDescricao}>
-              Sem fila, sem sair de casa e no conforto do colo de quem o bebê conhece. A equipe leva as vacinas em caixa térmica com temperatura controlada, no dia e horário que você escolher.
-            </p>
-            <Whats mensagem="Olá! Quero agendar vacinação em casa." nome="domicílio">Agendar vacinação em casa</Whats>
+          <div className={s.casaVideo}>
+            <VideoVacina src="/videos/vacinacao-em-casa.mp4" poster="/videos/vacinacao-em-casa.jpg" titulo="Vacinação a domicílio" legenda="Um dia de vacina em casa, do começo ao fim" />
           </div>
+          <div>
+            <h2 id="t-casa" className={s.faseNome}>
+              <span className={s.faseNomeIcone} aria-hidden>🏠</span>
+              Vacinação Domiciliar
+            </h2>
+            <p className={s.faseChamada}>A gente vai até você</p>
+            <p className={s.faseDescricao}>
+              Sem fila e sem sair de casa: a equipe leva as vacinas em caixa térmica com temperatura controlada, no dia e horário que você escolher. Para o bebê, a criança, o adulto e o idoso.
+            </p>
+            <Whats mensagem="Olá! Quero agendar vacinação em casa." nome="domicílio">Quero vacinar em casa</Whats>
+          </div>
+        </section>
+
+        {/* MAIS PROCURADAS (palavras-chave que o pessoal busca no Google em São Luís) */}
+        <section className={s.procuradas} aria-labelledby="t-procuradas">
+          <h2 id="t-procuradas" className={s.secaoTitulo}>Vacinas mais procuradas em São Luís</h2>
+          <p className={s.secaoSub}>
+            Clínica de vacinação particular no Jardim Renascença, com vacinação em casa em {CIDADES.slice(0, -1).join(", ")} e {CIDADES[CIDADES.length - 1]}.
+          </p>
+          <ul className={s.procuradasGrade}>
+            {MAIS_PROCURADAS.map((v) => (
+              <li key={v.nome}>
+                <a href={`#${v.ancora}`} className={s.procurada}>
+                  <span className={s.procuradaIcone} aria-hidden>{v.icone}</span>
+                  <span>
+                    <strong>{v.nome} em São Luís</strong>
+                    <small>{v.para}</small>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </section>
 
         {/* PERGUNTAS */}
@@ -211,7 +233,7 @@ export function VacinasFamilia() {
         <section className={s.final} aria-labelledby="t-final">
           <h2 id="t-final">Vamos colocar a família toda em dia?</h2>
           <p>Mande uma foto da caderneta pelo WhatsApp. A equipe confere e explica o que falta para cada um.</p>
-          <Whats mensagem={MENSAGEM_GERAL} nome="final" className={s.botaoBranco}>Falar com a equipe no WhatsApp</Whats>
+          <Whats mensagem={MENSAGEM_GERAL} nome="final" className={s.botaoBranco}>Quero falar com a equipe</Whats>
           <small className={s.ressalva}>
             A indicação de cada vacina depende de avaliação profissional e segue os calendários da SBIm e do Ministério da Saúde.
           </small>
@@ -223,8 +245,15 @@ export function VacinasFamilia() {
         <p><Link href="/politica-de-privacidade">Política de privacidade</Link> · <Link href="/">Site da Vittalis</Link></p>
       </footer>
 
+      <Flutuantes
+        fases={FASES.map((f) => ({ id: f.id, rotulo: f.rotulo, icone: f.icone }))}
+        mensagem={MENSAGEM_GERAL}
+        slug={SLUG}
+        nomeCampanha={`${NOME}: botão flutuante`}
+      />
+
       <div className={s.barraWhats}>
-        <Whats mensagem={MENSAGEM_GERAL} nome="barra" className={s.barraBotao}>Falar com a equipe no WhatsApp</Whats>
+        <Whats mensagem={MENSAGEM_GERAL} nome="barra" className={s.barraBotao}>Quero montar meu plano vacinal</Whats>
       </div>
     </div>
   );

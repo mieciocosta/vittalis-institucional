@@ -14,6 +14,13 @@ export const metadata: Metadata = {
   title: TITULO,
   description: DESCRICAO,
   alternates: { canonical: `${SITE_URL}/vacinas` },
+  keywords: [
+    "vacina São Luís", "clínica de vacinação São Luís", "vacinação particular São Luís", "vacina em casa São Luís",
+    "vacina HPV São Luís", "vacina herpes zóster São Luís", "vacina dengue São Luís", "vacina meningite B São Luís",
+    "vacina meningite ACWY", "vacina da gripe São Luís", "vacina VSR gestante", "vacina pneumonia idoso",
+    "vacinas para bebê São Luís", "plano vacinal bebê", "vacina gestante São Luís", "vacinação domiciliar",
+    "São José de Ribamar", "Paço do Lumiar",
+  ],
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
@@ -22,7 +29,7 @@ export const metadata: Metadata = {
     url: `${SITE_URL}/vacinas`,
     title: TITULO,
     description: DESCRICAO,
-    images: [{ url: `${SITE_URL}/images/otim/vac_familia.webp`, width: 1664, height: 930, alt: "Família sorrindo junto" }],
+    images: [{ url: `${SITE_URL}/images/otim/vac_familia.webp`, width: 1672, height: 941, alt: "Família sorrindo junto" }],
   },
 };
 

@@ -19,6 +19,10 @@ export type Fase = {
   video?: { src: string; poster: string; titulo: string; legenda: string };
   vacinas: Vacina[];
   mensagem: string;
+  /** Texto curto do botão (pedido da direção, 10/11: "frases curtas"). */
+  botao: string;
+  /** Frase que flutua embaixo da foto/vídeo (pedido da direção, 10/11). */
+  frase: { icone: string; texto: string };
   icone: string;
 };
 
@@ -28,12 +32,13 @@ const I = (n: string) => `/images/otim/${n}.webp`;
 export const FASES: Fase[] = [
   {
     id: "gestante",
-    rotulo: "Saúde da gestante",
+    rotulo: "Saúde da Gestante",
     titulo: "Proteção que começa na barriga",
     faixa: "Durante a gestação",
     texto:
       "Algumas vacinas tomadas na gravidez passam anticorpos para o bebê, que nasce mais protegido nos primeiros meses, quando ainda não pode ser vacinado contra tudo. Tudo combinado com o seu obstetra.",
-    video: { src: V("vacinacao-plano-vacinal.mp4"), poster: V("vacinacao-plano-vacinal.jpg"), titulo: "Tudo planejado desde o começo", legenda: "Como a equipe organiza as vacinas da família" },
+    imagem: I("vac_gestante"),
+    alt: "Gestante sorrindo com a carteira de vacinação enquanto recebe a vacina de uma profissional da Vittalis",
     vacinas: [
       { nome: "dTpa", para: "Coqueluche, difteria e tétano" },
       { nome: "Influenza", para: "Gripe" },
@@ -42,11 +47,13 @@ export const FASES: Fase[] = [
       { nome: "Covid-19", para: "Conforme calendário vigente" },
     ],
     mensagem: "Olá! Estou grávida e quero saber sobre as vacinas da gestante.",
+    botao: "Quero me proteger na gravidez",
+    frase: { icone: "💙", texto: "Vacinar na gravidez protege dois de uma vez: você e o seu bebê." },
     icone: "🤰",
   },
   {
     id: "bebe",
-    rotulo: "Saúde do bebê",
+    rotulo: "Saúde do Bebê",
     titulo: "Os primeiros dois anos, com calma e cuidado",
     faixa: "Do nascimento aos 2 anos",
     texto:
@@ -66,17 +73,18 @@ export const FASES: Fase[] = [
       { nome: "VSR (nirsevimabe)", para: "Proteção contra bronquiolite nos primeiros meses" },
     ],
     mensagem: "Olá! Quero saber sobre as vacinas do meu bebê.",
+    botao: "Quero o plano do meu bebê",
+    frase: { icone: "📋", texto: "A gente avisa cada dose. Você só cuida do sorriso." },
     icone: "👶",
   },
   {
     id: "crianca",
-    rotulo: "Saúde da criança",
+    rotulo: "Saúde da Criança",
     titulo: "Reforços na idade certa",
     faixa: "De 2 a 9 anos",
     texto:
       "Depois dos dois anos vêm os reforços, que mantêm a proteção alta na escola e nas brincadeiras. A gente confere a caderneta e completa o que faltar.",
-    imagem: I("vac_menino"),
-    alt: "Menino mostrando o braço depois da vacina, ao lado da profissional da Vittalis de jaleco branco",
+    video: { src: V("vacinacao-crianca.mp4"), poster: V("vacinacao-crianca.jpg"), titulo: "Vacinação humanizada", legenda: "Óculos de realidade virtual e certificado de coragem" },
     vacinas: [
       { nome: "DTPa ou Tetra", para: "Reforço de difteria, tétano e coqueluche" },
       { nome: "Pólio", para: "Reforço" },
@@ -88,17 +96,19 @@ export const FASES: Fase[] = [
       { nome: "Dengue", para: "A partir dos 4 anos, com avaliação" },
     ],
     mensagem: "Olá! Quero colocar a caderneta do meu filho em dia.",
+    botao: "Quero vacinar meu filho",
+    frase: { icone: "🌟", texto: "Vacina sem medo: a gente transforma a picadinha em aventura." },
     icone: "🧒",
   },
   {
     id: "adolescente",
-    rotulo: "Saúde do adolescente",
+    rotulo: "Saúde do Adolescente",
     titulo: "A fase em que a caderneta costuma ficar esquecida",
     faixa: "De 10 a 19 anos",
     texto:
       "É a idade ideal para o HPV e para os reforços das meningites. Muitos adolescentes chegam com a caderneta atrasada, e dá para colocar tudo em dia.",
-    imagem: I("vac_adulto"),
-    alt: "Jovem sendo vacinada no braço por profissional de saúde",
+    imagem: I("vac_adolescente"),
+    alt: "Adolescente sorrindo enquanto recebe a vacina de uma profissional da Vittalis",
     vacinas: [
       { nome: "HPV", para: "Previne cânceres e verrugas causados pelo HPV" },
       { nome: "Meningocócica ACWY", para: "Reforço na adolescência" },
@@ -109,14 +119,17 @@ export const FASES: Fase[] = [
       { nome: "Dengue", para: "Com avaliação" },
     ],
     mensagem: "Olá! Quero saber sobre as vacinas para adolescente (HPV e meningite).",
+    botao: "Quero vacinar contra o HPV",
+    frase: { icone: "🛡️", texto: "A adolescência é a melhor fase para a vacina de HPV." },
     icone: "🧑‍🎓",
   },
   {
     id: "mulher",
-    rotulo: "Saúde da mulher",
+    rotulo: "Saúde da Mulher",
     titulo: "Cuidado em cada fase da vida da mulher",
     faixa: "Adultas de 20 a 59 anos",
-    texto: "Vacinas que protegem a mulher hoje e quem ela ama, inclusive antes de engravidar.",
+    texto:
+      "Vacinas que protegem a mulher hoje e quem ela ama. O HPV previne cânceres, a dTpa e a tríplice viral preparam o corpo antes de engravidar, e a gripe todo ano mantém a família protegida.",
     imagem: I("vac_hpv"),
     alt: "Mulher sorrindo com o curativo da Vittalis no braço depois da vacina de HPV",
     vacinas: [
@@ -129,16 +142,19 @@ export const FASES: Fase[] = [
       { nome: "Dengue", para: "Com avaliação" },
     ],
     mensagem: "Olá! Quero saber sobre as vacinas para mulher.",
+    botao: "Quero me vacinar",
+    frase: { icone: "🌸", texto: "Cuidar de você também é cuidar de quem você ama." },
     icone: "👩",
   },
   {
     id: "homem",
-    rotulo: "Saúde do homem",
+    rotulo: "Saúde do Homem",
     titulo: "Homem também se vacina",
     faixa: "Adultos de 20 a 59 anos",
-    texto: "Muitos homens adultos estão com as vacinas atrasadas. Uma conversa rápida mostra o que falta.",
-    imagem: I("vac_crianca_pai"),
-    alt: "Pai acompanhando a vacinação da filha na clínica",
+    texto:
+      "Muitos homens adultos estão com as vacinas atrasadas desde a adolescência. Mande uma foto da caderneta: a equipe confere o que falta e vacina na clínica ou na sua casa.",
+    imagem: I("vac_homem"),
+    alt: "Homem sorrindo e apontando o curativo da Vittalis no braço depois da vacina",
     vacinas: [
       { nome: "HPV", para: "Com avaliação da idade" },
       { nome: "Hepatites A e B", para: "Para quem não tem o esquema" },
@@ -149,11 +165,13 @@ export const FASES: Fase[] = [
       { nome: "Dengue", para: "Com avaliação" },
     ],
     mensagem: "Olá! Quero saber sobre as vacinas para homem.",
+    botao: "Quero me vacinar",
+    frase: { icone: "📲", texto: "Mande uma foto da caderneta no WhatsApp e a equipe diz o que falta." },
     icone: "👨",
   },
   {
     id: "idoso",
-    rotulo: "Saúde do idoso",
+    rotulo: "Saúde do Idoso",
     titulo: "Mais saúde para viver os melhores anos",
     faixa: "A partir dos 50 anos",
     texto:
@@ -169,6 +187,8 @@ export const FASES: Fase[] = [
       { nome: "Hepatite B", para: "Para quem não tem o esquema" },
     ],
     mensagem: "Olá! Quero saber sobre as vacinas para idoso (herpes zóster, pneumonia).",
+    botao: "Quero vacinar contra zóster",
+    frase: { icone: "🌿", texto: "Mais saúde e independência para viver os melhores anos." },
     icone: "👵",
   },
 ];
@@ -182,3 +202,22 @@ export const PERGUNTAS = [
   { pergunta: "Atendem plano de saúde?", resposta: "Nós atendemos somente de forma particular." },
   { pergunta: "Quem decide quais vacinas tomar?", resposta: "A indicação de cada vacina depende de avaliação da equipe e segue os calendários da SBIm e do Ministério da Saúde." },
 ];
+
+/**
+ * Vacinas mais procuradas no Google em São Luís (pesquisa de volume, nov/2026:
+ * "vacina", HPV, dengue, herpes zóster, meningite, gripe…). Cada atalho leva
+ * à seção do público certo. Sem preço e sem promessa.
+ */
+export const MAIS_PROCURADAS: { nome: string; para: string; ancora: string; icone: string }[] = [
+  { nome: "Vacina HPV", para: "Adolescentes, mulheres e homens", ancora: "adolescente", icone: "🛡️" },
+  { nome: "Vacina herpes zóster", para: "A partir dos 50 anos", ancora: "idoso", icone: "🌿" },
+  { nome: "Vacina da dengue", para: "Crianças, adolescentes e adultos, com avaliação", ancora: "crianca", icone: "🦟" },
+  { nome: "Vacina meningite B e ACWY", para: "Bebês, crianças e adolescentes", ancora: "bebe", icone: "👶" },
+  { nome: "Vacina da gripe", para: "Toda a família, todo ano", ancora: "mulher", icone: "🤧" },
+  { nome: "Vacina VSR", para: "Gestantes, bebês e idosos", ancora: "gestante", icone: "🤰" },
+  { nome: "Vacina pneumonia", para: "Bebês e adultos a partir dos 60", ancora: "idoso", icone: "🫁" },
+  { nome: "Hexavalente e rotavírus", para: "Bebês nos primeiros meses", ancora: "bebe", icone: "💉" },
+];
+
+/** Onde atendemos, inclusive em casa (mesma área dos anúncios do Google). */
+export const CIDADES = ["São Luís", "São José de Ribamar", "Paço do Lumiar"];
