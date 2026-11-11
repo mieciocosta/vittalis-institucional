@@ -415,3 +415,11 @@
   .capaSelos { color: var(--pt); }
 }
 @media (max-width: 760px) { .capaSelo { font-size: 12px; padding: 6px 11px; } }
+/* Vídeo mais baixo, pendurado na parte de baixo da foto, para não cobrir rostos. */
+.faseCombo { padding-bottom: 240px; }
+@media (max-width: 760px) { .faseCombo { padding-bottom: 190px; } }
+@media (max-width: 760px) {
+  .faseCombo { padding-bottom: 210px; }
+  .faseComboVideo { width: 96px; left: 6px; }
+  .faseComboVideo figcaption span { display: none; }
+}

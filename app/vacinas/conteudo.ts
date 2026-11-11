@@ -35,6 +35,8 @@ export const FASES: Fase[] = [
     faixa: "Durante a gestação",
     texto:
       "Algumas vacinas tomadas na gravidez passam anticorpos para o bebê, que nasce mais protegido nos primeiros meses, quando ainda não pode ser vacinado contra tudo. Tudo combinado com o seu obstetra.",
+    imagem: I("vac_gestante"),
+    alt: "Gestante sorrindo com a carteira de vacinação enquanto recebe a vacina de uma profissional da Vittalis",
     video: { src: V("vacinacao-plano-vacinal.mp4"), poster: V("vacinacao-plano-vacinal.jpg"), titulo: "Tudo planejado desde o começo", legenda: "Como a equipe organiza as vacinas da família" },
     vacinas: [
       { nome: "dTpa", para: "Coqueluche, difteria e tétano" },
