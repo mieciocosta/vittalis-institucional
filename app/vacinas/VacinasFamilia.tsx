@@ -92,7 +92,7 @@ export function VacinasFamilia() {
             <div className={s.capaVeu} />
           </div>
           <div className={s.capaConteudo}>
-            <span className={s.capaSelo}>💉 Vacinação particular em São Luís</span>
+            <span className={s.capaSelo}>💉 Vacinação Particular</span>
             <h1 id="titulo-capa" className={s.capaTitulo}>
               Vacinas para <em>toda a família</em>, em cada fase da vida
             </h1>
