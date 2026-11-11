@@ -158,8 +158,8 @@ export const FASES: Fase[] = [
     faixa: "A partir dos 50 anos",
     texto:
       "Com a idade, algumas doenças ficam mais graves. As vacinas do adulto maduro ajudam a evitar internações e a manter a independência.",
-    imagem: I("vac_geracoes"),
-    alt: "Avó, mãe e bebê juntos, três gerações da mesma família",
+    imagem: I("vac_zoster"),
+    alt: "Mulher de mais de 50 anos sorrindo com o curativo da Vittalis no braço depois da vacina de herpes zóster",
     vacinas: [
       { nome: "Herpes zóster", para: "A partir dos 50 anos" },
       { nome: "Pneumocócicas", para: "Pneumonia, a partir dos 60 anos" },
