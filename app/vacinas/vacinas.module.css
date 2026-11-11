@@ -224,3 +224,48 @@
   .fase .faseDescricao { font-size: 17.5px; }
 }
 .fase .faixa { font-size: 22px; margin-bottom: 14px; }
+
+/* ── Layout das fases, versão 2 (pedido da direção, 10/11: "melhora título,
+   texto e layout"). Cada fase vira um cartão próprio, alternando o fundo,
+   com o nome do público em cima, a faixa etária em selo e a lista de
+   vacinas num quadro. ── */
+.fase {
+  background: #fff;
+  border: 1px solid #e3eef1;
+  border-radius: 32px;
+  box-shadow: 0 24px 60px rgba(18, 87, 110, .08);
+  padding: 56px;
+  margin: 40px auto;
+  max-width: 1148px;
+  gap: 64px;
+}
+.faseInvertida { background: linear-gradient(135deg, #f2fbfc 0%, #fdf8ee 100%); }
+.faseNome { font-weight: 600; }
+.faseChamada { margin-bottom: 14px; }
+.fase .faixa {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-body); font-style: normal; font-weight: 700; font-size: 14px;
+  color: #8a6420; background: #fbf1dc; border: 1px solid #f0dfb8;
+  padding: 7px 14px; border-radius: 999px; margin: 0 0 18px;
+}
+.fase .faixa::before { content: "🗓"; }
+.fase .faseDescricao { border-left: 4px solid var(--tq); padding-left: 18px; margin-bottom: 26px; }
+.fase .listaTitulo { display: flex; align-items: center; gap: 10px; }
+.fase .listaTitulo::after { content: ""; flex: 1; height: 1px; background: #dcebef; }
+.fase .vacinas li { background: #fff; box-shadow: 0 2px 8px rgba(18,87,110,.05); }
+.faseMidia { position: relative; }
+.faseMidia::before {
+  content: ""; position: absolute; inset: 8% 4%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,184,192,.22), rgba(196,151,59,.12) 55%, transparent 72%);
+  filter: blur(8px); z-index: 0;
+}
+.faseMidia > * { position: relative; z-index: 1; }
+
+@media (max-width: 960px) {
+  .fase, .faseInvertida { padding: 32px 22px; margin: 20px 12px; border-radius: 24px; gap: 28px; }
+}
+@media (max-width: 760px) {
+  .fase, .faseInvertida { padding: 26px 18px; margin: 16px 10px; }
+  .faseNome { gap: 12px; }
+  .fase .faseDescricao { padding-left: 14px; }
+}
