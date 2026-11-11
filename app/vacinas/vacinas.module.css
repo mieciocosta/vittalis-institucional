@@ -389,3 +389,29 @@
 .faseCombo { padding-bottom: 110px; }
 .faseComboVideo { right: auto; left: -14px; bottom: 0; width: 140px; }
 @media (max-width: 760px) { .faseCombo { padding-bottom: 120px; } .faseComboVideo { left: 8px; width: 112px; } }
+
+/* Sempre clara (10/11): no celular com modo escuro, o navegador escurecia a
+   página inteira e os botões verdes ficavam quase pretos. */
+.pagina { color-scheme: only light; }
+
+/* Capa: foto num quadro próprio (no computador ocupa o fundo todo). */
+.capaFoto { position: absolute; inset: 0; }
+
+/* Capa no celular (10/11, "muito escuro" e "o vídeo não apareceu"):
+   foto clara em cima, vídeo pequeno flutuando no canto da foto e o texto
+   embaixo em fundo claro. */
+@media (max-width: 760px) {
+  .capa { display: flex; flex-direction: column; padding: 0 0 36px; color: var(--tinta); background: linear-gradient(180deg, #ffffff 0%, #eef9fa 100%); gap: 0; overflow: visible; }
+  .capaFoto { position: relative; inset: auto; height: 300px; width: 100%; overflow: hidden; border-radius: 0 0 28px 28px; }
+  .capaVeu { background: linear-gradient(180deg, rgba(8,40,52,0) 55%, rgba(8,40,52,.25) 100%); }
+  .capaFundo { object-position: center 35%; }
+  .capaVideo { display: block; position: absolute; top: 196px; right: 16px; width: 112px; border-width: 3px; border-radius: 18px; z-index: 2; }
+  .capaVideo span { left: 6px; bottom: 6px; font-size: 10px; padding: 3px 7px; color: #fff; }
+  .capaConteudo { padding: 22px 16px 0; max-width: none; }
+  .capaSelo { color: var(--pt); background: rgba(0,184,192,.1); border-color: rgba(0,184,192,.3); margin-right: 120px; }
+  .capaTitulo { color: var(--tinta); }
+  .capaTitulo em { color: var(--tq); }
+  .capaTexto { color: #2c3e46; }
+  .capaSelos { color: var(--pt); }
+}
+@media (max-width: 760px) { .capaSelo { font-size: 12px; padding: 6px 11px; } }

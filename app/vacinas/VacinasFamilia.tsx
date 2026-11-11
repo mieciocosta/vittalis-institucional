@@ -74,6 +74,7 @@ export function VacinasFamilia() {
   const [gestante, bebe, crianca, adolescente, mulher, homem, idoso] = FASES;
   return (
     <div className={s.pagina}>
+      <meta name="color-scheme" content="only light" />
       <header className={s.topo}>
         <div className={s.topoInterno}>
           <Link href="/" aria-label="Vittalis Saúde, página inicial">
@@ -86,8 +87,10 @@ export function VacinasFamilia() {
       <main>
         {/* CAPA: FAMÍLIA */}
         <section className={s.capa} aria-labelledby="titulo-capa">
-          <Image src="/images/otim/vac_familia.webp" alt="Pai, mãe e bebê sorrindo juntos" fill priority sizes="100vw" className={s.capaFundo} />
-          <div className={s.capaVeu} />
+          <div className={s.capaFoto}>
+            <Image src="/images/otim/vac_familia.webp" alt="Pai, mãe e bebê sorrindo juntos" fill priority sizes="100vw" className={s.capaFundo} />
+            <div className={s.capaVeu} />
+          </div>
           <div className={s.capaConteudo}>
             <span className={s.capaSelo}>💉 Vacinação particular em São Luís</span>
             <h1 id="titulo-capa" className={s.capaTitulo}>
