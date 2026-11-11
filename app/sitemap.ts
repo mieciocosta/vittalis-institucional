@@ -14,6 +14,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...CAMPANHAS.map((c) => ({ url: `${SITE_URL}/campanhas/${c.slug}`, changeFrequency: "monthly" as const, priority: 0.8 })),
     // /vacinacao já vem das especialidades; as outras duas variações da landing:
     ...SLUGS_VARIANTES.filter((slug) => slug !== "vacinacao").map((slug) => ({ url: `${SITE_URL}/${slug}`, changeFrequency: "monthly" as const, priority: 0.9 })),
+    // Landing "Vacinas para toda a família" (10/11), destino dos anúncios de vacina.
+    { url: `${SITE_URL}/vacinas`, changeFrequency: "monthly" as const, priority: 0.9 },
     { url: `${SITE_URL}/politica-de-privacidade`, changeFrequency: "yearly", priority: 0.3 },
   ];
 }
