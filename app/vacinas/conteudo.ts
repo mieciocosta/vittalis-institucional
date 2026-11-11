@@ -28,7 +28,7 @@ const I = (n: string) => `/images/otim/${n}.webp`;
 export const FASES: Fase[] = [
   {
     id: "gestante",
-    rotulo: "Saúde da gestante",
+    rotulo: "Saúde da Gestante",
     titulo: "Proteção que começa na barriga",
     faixa: "Durante a gestação",
     texto:
@@ -46,7 +46,7 @@ export const FASES: Fase[] = [
   },
   {
     id: "bebe",
-    rotulo: "Saúde do bebê",
+    rotulo: "Saúde do Bebê",
     titulo: "Os primeiros dois anos, com calma e cuidado",
     faixa: "Do nascimento aos 2 anos",
     texto:
@@ -70,7 +70,7 @@ export const FASES: Fase[] = [
   },
   {
     id: "crianca",
-    rotulo: "Saúde da criança",
+    rotulo: "Saúde da Criança",
     titulo: "Reforços na idade certa",
     faixa: "De 2 a 9 anos",
     texto:
@@ -92,7 +92,7 @@ export const FASES: Fase[] = [
   },
   {
     id: "adolescente",
-    rotulo: "Saúde do adolescente",
+    rotulo: "Saúde do Adolescente",
     titulo: "A fase em que a caderneta costuma ficar esquecida",
     faixa: "De 10 a 19 anos",
     texto:
@@ -113,7 +113,7 @@ export const FASES: Fase[] = [
   },
   {
     id: "mulher",
-    rotulo: "Saúde da mulher",
+    rotulo: "Saúde da Mulher",
     titulo: "Cuidado em cada fase da vida da mulher",
     faixa: "Adultas de 20 a 59 anos",
     texto: "Vacinas que protegem a mulher hoje e quem ela ama, inclusive antes de engravidar.",
@@ -133,7 +133,7 @@ export const FASES: Fase[] = [
   },
   {
     id: "homem",
-    rotulo: "Saúde do homem",
+    rotulo: "Saúde do Homem",
     titulo: "Homem também se vacina",
     faixa: "Adultos de 20 a 59 anos",
     texto: "Muitos homens adultos estão com as vacinas atrasadas. Uma conversa rápida mostra o que falta.",
@@ -153,7 +153,7 @@ export const FASES: Fase[] = [
   },
   {
     id: "idoso",
-    rotulo: "Saúde do idoso",
+    rotulo: "Saúde do Idoso",
     titulo: "Mais saúde para viver os melhores anos",
     faixa: "A partir dos 50 anos",
     texto:
