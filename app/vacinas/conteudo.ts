@@ -21,6 +21,8 @@ export type Fase = {
   mensagem: string;
   /** Texto curto do botão (pedido da direção, 10/11: "frases curtas"). */
   botao: string;
+  /** Frase que flutua embaixo da foto/vídeo (pedido da direção, 10/11). */
+  frase: { icone: string; texto: string };
   icone: string;
 };
 
@@ -46,6 +48,7 @@ export const FASES: Fase[] = [
     ],
     mensagem: "Olá! Estou grávida e quero saber sobre as vacinas da gestante.",
     botao: "Quero me proteger na gravidez",
+    frase: { icone: "💙", texto: "Vacinar na gravidez protege dois de uma vez: você e o seu bebê." },
     icone: "🤰",
   },
   {
@@ -71,6 +74,7 @@ export const FASES: Fase[] = [
     ],
     mensagem: "Olá! Quero saber sobre as vacinas do meu bebê.",
     botao: "Quero o plano do meu bebê",
+    frase: { icone: "📋", texto: "A gente avisa cada dose. Você só cuida do sorriso." },
     icone: "👶",
   },
   {
@@ -93,6 +97,7 @@ export const FASES: Fase[] = [
     ],
     mensagem: "Olá! Quero colocar a caderneta do meu filho em dia.",
     botao: "Quero vacinar meu filho",
+    frase: { icone: "🌟", texto: "Vacina sem medo: a gente transforma a picadinha em aventura." },
     icone: "🧒",
   },
   {
@@ -115,6 +120,7 @@ export const FASES: Fase[] = [
     ],
     mensagem: "Olá! Quero saber sobre as vacinas para adolescente (HPV e meningite).",
     botao: "Quero vacinar contra o HPV",
+    frase: { icone: "🛡️", texto: "A adolescência é a melhor fase para a vacina de HPV." },
     icone: "🧑‍🎓",
   },
   {
@@ -137,6 +143,7 @@ export const FASES: Fase[] = [
     ],
     mensagem: "Olá! Quero saber sobre as vacinas para mulher.",
     botao: "Quero me vacinar",
+    frase: { icone: "🌸", texto: "Cuidar de você também é cuidar de quem você ama." },
     icone: "👩",
   },
   {
@@ -159,6 +166,7 @@ export const FASES: Fase[] = [
     ],
     mensagem: "Olá! Quero saber sobre as vacinas para homem.",
     botao: "Quero me vacinar",
+    frase: { icone: "📲", texto: "Mande uma foto da caderneta no WhatsApp e a equipe diz o que falta." },
     icone: "👨",
   },
   {
@@ -180,6 +188,7 @@ export const FASES: Fase[] = [
     ],
     mensagem: "Olá! Quero saber sobre as vacinas para idoso (herpes zóster, pneumonia).",
     botao: "Quero vacinar contra zóster",
+    frase: { icone: "🌿", texto: "Mais saúde e independência para viver os melhores anos." },
     icone: "👵",
   },
 ];

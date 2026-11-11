@@ -46,6 +46,10 @@ function SecaoFase({ f, i }: { f: Fase; i: number }) {
         ) : (
           <div className={s.faseIcone} aria-hidden>{f.icone}</div>
         )}
+        <p className={s.faseFrase}>
+          <span className={s.faseFraseIcone} aria-hidden>{f.frase.icone}</span>
+          <span>{f.frase.texto}</span>
+        </p>
       </div>
       <div className={s.faseTexto}>
         <h2 id={`t-${f.id}`} className={s.faseNome}>
