@@ -145,3 +145,22 @@
 @media (prefers-reduced-motion: reduce) {
   .botaoWhats, .faseAtalho, .videoPlayIcone { transition: none; }
 }
+
+/* Formaturas do Planejamento Vacinal (posts reais da clínica) */
+.formaturas { background: linear-gradient(180deg, #f6fafb, #eaf7f8); padding: 64px 16px; text-align: center; }
+.formaturasGrade { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.formatura { margin: 0; }
+.formatura img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 18px; box-shadow: 0 14px 34px rgba(18,87,110,.16); display: block; }
+.formatura figcaption { margin-top: 10px; font-size: 14px; font-weight: 700; color: var(--pt); }
+.formaturasAcao { margin-top: 28px; display: flex; justify-content: center; }
+.formaturas .rotulo { margin-bottom: 14px; }
+
+/* Três vídeos lado a lado no computador; no celular ficam em fila */
+.videosGrade { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 260px)); justify-content: center; }
+.videosGrade .videoCard { max-width: none; }
+
+@media (max-width: 760px) {
+  .formaturasGrade { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; margin: 0 -16px; padding: 4px 16px 12px; -webkit-overflow-scrolling: touch; }
+  .formatura { flex: 0 0 68%; scroll-snap-align: center; }
+  .videosGrade { grid-template-columns: minmax(0, 300px); }
+}

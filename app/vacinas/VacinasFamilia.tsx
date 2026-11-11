@@ -10,6 +10,14 @@ import s from "./vacinas.module.css";
 const SLUG = "vacinas-familia";
 const NOME = "Vacinas para toda a família";
 
+const FORMATURAS = [
+  { nome: "Laura Maria", arquivo: "laura" },
+  { nome: "Aurora", arquivo: "aurora" },
+  { nome: "José", arquivo: "jose" },
+  { nome: "Cecília", arquivo: "cecilia" },
+  { nome: "Liz", arquivo: "liz" },
+];
+
 function Whats({ mensagem, nome, children, className }: { mensagem: string; nome: string; children: React.ReactNode; className?: string }) {
   return (
     <LinkWhatsOrigem mensagem={mensagem} slug={SLUG} nomeCampanha={`${NOME}: ${nome}`} className={className ?? s.botaoWhats}>
@@ -110,9 +118,32 @@ export function VacinasFamilia() {
           </div>
         </nav>
 
-        {[gestante, bebe, crianca, adolescente].map((f, i) => (
-          <SecaoFase key={f.id} f={f} i={i} />
-        ))}
+        <SecaoFase f={gestante} i={0} />
+        <SecaoFase f={bebe} i={1} />
+
+        {/* FORMATURAS: o bebê que completa o planejamento vacinal ganha a festa
+            (posts reais do Instagram da clínica, sem a moldura do app). */}
+        <section className={s.formaturas} aria-labelledby="t-formaturas">
+          <span className={s.rotulo}>🎓 Formatura do Planejamento Vacinal</span>
+          <h2 id="t-formaturas" className={s.secaoTitulo}>Completou as vacinas? É dia de formatura!</h2>
+          <p className={s.secaoSub}>
+            Quando o bebê termina o planejamento vacinal, a gente comemora junto com a família. Cada dose foi um passo de amor e proteção.
+          </p>
+          <div className={s.formaturasGrade}>
+            {FORMATURAS.map((f) => (
+              <figure key={f.nome} className={s.formatura}>
+                <Image src={`/images/otim/formatura_${f.arquivo}.webp`} alt={`Formatura do Planejamento Vacinal de ${f.nome}, de beca e capelo`} width={720} height={900} sizes="(max-width: 760px) 70vw, 230px" />
+                <figcaption>🎓 {f.nome}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <div className={s.formaturasAcao}>
+            <Whats mensagem="Olá! Quero saber sobre o planejamento vacinal do meu bebê." nome="formatura">Quero o planejamento vacinal do meu bebê</Whats>
+          </div>
+        </section>
+
+        <SecaoFase f={crianca} i={2} />
+        <SecaoFase f={adolescente} i={3} />
 
         {/* ADULTOS: MULHER, HOMEM E IDOSO */}
         <section className={s.adultos} aria-labelledby="t-adultos">
@@ -151,6 +182,7 @@ export function VacinasFamilia() {
           <p className={s.secaoSub}>Gente de verdade, na nossa clínica, com a nossa equipe.</p>
           <div className={s.videosGrade}>
             <VideoVacina src="/videos/vacinacao-depoimento-zoster.mp4" poster="/videos/vacinacao-depoimento-zoster.jpg" titulo="Depoimento: herpes zóster aos 50" legenda="Vandelúcia conta por que se vacinou na Vittalis" />
+            <VideoVacina src="/videos/vacinacao-depoimento-familia.mp4" poster="/videos/vacinacao-depoimento-familia.jpg" titulo="Depoimento: a família do Samuel" legenda="Os pais contam por que vacinam o bebê aqui" />
             <VideoVacina src="/videos/vacinacao-planejamento.mp4" poster="/videos/vacinacao-planejamento.jpg" titulo="Planejamento vacinal" legenda="A equipe explica como organiza as doses" />
             <VideoVacina src="/videos/vacinacao-rotavirus.mp4" poster="/videos/vacinacao-rotavirus.jpg" titulo="Rotavírus, em 1 minuto" legenda="O que é e por que vacinar o bebê" />
           </div>
