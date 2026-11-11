@@ -206,7 +206,12 @@ export function VacinasFamilia() {
 
         {/* EM CASA */}
         <section className={s.casa} aria-labelledby="t-casa">
-          <Image src="/images/otim/vac_casa.webp" alt="Profissional da Vittalis vacinando uma mulher no sofá de casa, com a caixa térmica da clínica ao lado" width={1400} height={934} className={s.casaImagem} sizes="(max-width: 900px) 100vw, 520px" />
+          <div className={s.faseCombo}>
+            <Image src="/images/otim/vac_casa.webp" alt="Profissional da Vittalis vacinando uma mulher no sofá de casa, com a caixa térmica da clínica ao lado" width={1400} height={934} className={s.casaImagem} sizes="(max-width: 900px) 100vw, 520px" />
+            <div className={s.faseComboVideo}>
+              <VideoVacina src="/videos/vacinacao-em-casa.mp4" poster="/videos/vacinacao-em-casa.jpg" titulo="Vacinação a domicílio" legenda="Um dia de vacina em casa" />
+            </div>
+          </div>
           <div>
             <span className={s.rotulo}>🏠 Vacinação em domicílio</span>
             <h2 id="t-casa" className={s.faseTitulo}>A gente vai até você</h2>
