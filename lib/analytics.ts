@@ -15,6 +15,11 @@ type Janela = Window & {
   dataLayer?: Record<string, unknown>[];
 };
 
+/** Conta do Google Ads da clínica (Clínica Vittalis Saúde São Luis). */
+export const GOOGLE_ADS_ID = "AW-17464183746";
+/** Ação de conversão "Clique Whatsapp" do Google Ads (meta Contato). */
+const CONVERSAO_WHATSAPP = `${GOOGLE_ADS_ID}/PebTCNWl5IkbEMKXyYdB`;
+
 /** Disparo genérico, usado pelas páginas antigas (home e especialidades). */
 export function trackEvent(eventName: string, params?: Record<string, string>) {
   try {
@@ -22,6 +27,10 @@ export function trackEvent(eventName: string, params?: Record<string, string>) {
     const w = window as Janela;
     w.gtag?.("event", eventName, params);
     w.dataLayer?.push({ event: eventName, ...params });
+    // 10/11, pedido da direção: saber quantas pessoas chamaram no WhatsApp
+    // vindas do anúncio. Todo clique no WhatsApp (de qualquer página) conta
+    // como conversão no Google Ads; sem dado pessoal, só o evento.
+    if (eventName === "click_whatsapp") w.gtag?.("event", "conversion", { send_to: CONVERSAO_WHATSAPP });
   } catch {
     // Analytics nunca pode quebrar a página.
   }
