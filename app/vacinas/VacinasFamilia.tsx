@@ -41,8 +41,11 @@ function SecaoFase({ f, i }: { f: Fase; i: number }) {
         )}
       </div>
       <div className={s.faseTexto}>
-        <span className={s.rotulo}>{f.icone} {f.rotulo}</span>
-        <h2 id={`t-${f.id}`} className={s.faseTitulo}>{f.titulo}</h2>
+        <h2 id={`t-${f.id}`} className={s.faseNome}>
+          <span className={s.faseNomeIcone} aria-hidden>{f.icone}</span>
+          {f.rotulo}
+        </h2>
+        <p className={s.faseChamada}>{f.titulo}</p>
         <p className={s.faixa}>{f.faixa}</p>
         <p className={s.faseDescricao}>{f.texto}</p>
         <h3 className={s.listaTitulo}>Vacinas desta fase</h3>
