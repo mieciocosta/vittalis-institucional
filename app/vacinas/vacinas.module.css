@@ -181,3 +181,19 @@
 .final h2 { font-size: clamp(32px, 4.2vw, 48px); line-height: 1.08; }
 .faixa { font-family: var(--font-display); font-style: italic; font-weight: 600; font-size: 19px; letter-spacing: 0; }
 .adultoImagem { height: 240px; object-position: center 28%; }
+
+/* Saúde da Mulher / do Homem / do Idoso em destaque (pedido da direção, 10/11):
+   o nome do público vira o título grande do cartão. */
+.adultoNome {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(30px, 2.8vw, 36px); line-height: 1.05; letter-spacing: -0.01em;
+  color: var(--pt); margin: 2px 0 10px; padding-bottom: 12px;
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(90deg, var(--tq), var(--ouro)) 1;
+}
+.adultoNomeIcone {
+  flex: none; width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
+  font-size: 24px; background: linear-gradient(135deg, rgba(0,184,192,.16), rgba(196,151,59,.18));
+}
+.adultoCorpo .adultoTitulo { font-family: var(--font-body); font-weight: 600; font-size: 16px; line-height: 1.4; color: var(--tinta); margin: 4px 0 2px; letter-spacing: 0; }

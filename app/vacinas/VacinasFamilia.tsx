@@ -54,7 +54,7 @@ function SecaoFase({ f, i }: { f: Fase; i: number }) {
             </li>
           ))}
         </ul>
-        <Whats mensagem={f.mensagem} nome={f.rotulo}>Quero saber sobre {f.rotulo.replace("Saúde d", "as vacinas d")}</Whats>
+        <Whats mensagem={f.mensagem} nome={f.rotulo}>Quero saber sobre {f.rotulo.replace("Saúde d", "as vacinas d").toLowerCase()}</Whats>
       </div>
     </section>
   );
@@ -158,8 +158,11 @@ export function VacinasFamilia() {
                   <div className={s.adultoIcone} aria-hidden>{f.icone}</div>
                 )}
                 <div className={s.adultoCorpo}>
-                  <span className={s.rotulo}>{f.rotulo}</span>
-                  <h3 className={s.adultoTitulo}>{f.titulo}</h3>
+                  <h3 className={s.adultoNome}>
+                    <span className={s.adultoNomeIcone} aria-hidden>{f.icone}</span>
+                    {f.rotulo}
+                  </h3>
+                  <p className={s.adultoTitulo}>{f.titulo}</p>
                   <p className={s.faixa}>{f.faixa}</p>
                   <ul className={s.vacinas}>
                     {f.vacinas.map((v) => (
@@ -169,7 +172,7 @@ export function VacinasFamilia() {
                       </li>
                     ))}
                   </ul>
-                  <Whats mensagem={f.mensagem} nome={f.rotulo} className={s.botaoWhatsPequeno}>Quero saber sobre {f.rotulo.replace("Saúde d", "as vacinas d")}</Whats>
+                  <Whats mensagem={f.mensagem} nome={f.rotulo} className={s.botaoWhatsPequeno}>Quero saber sobre {f.rotulo.replace("Saúde d", "as vacinas d").toLowerCase()}</Whats>
                 </div>
               </article>
             ))}
