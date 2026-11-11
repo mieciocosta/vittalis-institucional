@@ -496,3 +496,5 @@
   .capaVideo { top: 196px; width: 112px; right: 16px; }
 }
 @media (max-width: 760px) { .capaFundo { object-position: 68% 30%; } }
+/* Computador: vídeo no lado direito da foto (pedido da direção, 10/11). */
+@media (min-width: 761px) { .capaVideo { justify-self: end; margin: 0 -36px -36px 0; } }
