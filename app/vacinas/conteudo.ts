@@ -75,6 +75,8 @@ export const FASES: Fase[] = [
     faixa: "De 2 a 9 anos",
     texto:
       "Depois dos dois anos vêm os reforços, que mantêm a proteção alta na escola e nas brincadeiras. A gente confere a caderneta e completa o que faltar.",
+    imagem: I("vac_menina"),
+    alt: "Menina sorrindo enquanto recebe a vacina de uma profissional da Vittalis de jaleco branco",
     video: { src: V("vacinacao-crianca.mp4"), poster: V("vacinacao-crianca.jpg"), titulo: "Vacinação humanizada", legenda: "Óculos de realidade virtual e certificado de coragem" },
     vacinas: [
       { nome: "DTPa ou Tetra", para: "Reforço de difteria, tétano e coqueluche" },
@@ -96,8 +98,8 @@ export const FASES: Fase[] = [
     faixa: "De 10 a 19 anos",
     texto:
       "É a idade ideal para o HPV e para os reforços das meningites. Muitos adolescentes chegam com a caderneta atrasada, e dá para colocar tudo em dia.",
-    imagem: I("vac_adulto"),
-    alt: "Jovem sendo vacinada no braço por profissional de saúde",
+    imagem: I("vac_adolescente"),
+    alt: "Adolescente sorrindo enquanto recebe a vacina de uma profissional da Vittalis",
     vacinas: [
       { nome: "HPV", para: "Previne cânceres e verrugas causados pelo HPV" },
       { nome: "Meningocócica ACWY", para: "Reforço na adolescência" },

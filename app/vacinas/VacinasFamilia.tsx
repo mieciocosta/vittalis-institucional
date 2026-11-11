@@ -33,7 +33,13 @@ function SecaoFase({ f, i }: { f: Fase; i: number }) {
   return (
     <section id={f.id} className={`${s.fase} ${invertida ? s.faseInvertida : ""}`} aria-labelledby={`t-${f.id}`}>
       <div className={s.faseMidia}>
-        {f.video ? (
+        {f.video && f.imagem ? (
+          // Foto grande + o vídeo da clínica num cartão flutuando no canto.
+          <div className={s.faseCombo}>
+            <Image src={f.imagem} alt={f.alt ?? ""} width={1400} height={933} className={s.faseImagem} sizes="(max-width: 900px) 100vw, 560px" />
+            <div className={s.faseComboVideo}><VideoVacina {...f.video} /></div>
+          </div>
+        ) : f.video ? (
           <VideoVacina {...f.video} />
         ) : f.imagem ? (
           <Image src={f.imagem} alt={f.alt ?? ""} width={1200} height={900} className={s.faseImagem} sizes="(max-width: 900px) 100vw, 520px" />
@@ -197,12 +203,12 @@ export function VacinasFamilia() {
 
         {/* EM CASA */}
         <section className={s.casa} aria-labelledby="t-casa">
-          <Image src="/images/otim/vac_mae_bebe.webp" alt="Mãe segurando o bebê no colo, em casa" width={1200} height={1064} className={s.casaImagem} sizes="(max-width: 900px) 100vw, 520px" />
+          <Image src="/images/otim/vac_casa.webp" alt="Profissional da Vittalis vacinando uma mulher no sofá de casa, com a caixa térmica da clínica ao lado" width={1400} height={934} className={s.casaImagem} sizes="(max-width: 900px) 100vw, 520px" />
           <div>
             <span className={s.rotulo}>🏠 Vacinação em domicílio</span>
             <h2 id="t-casa" className={s.faseTitulo}>A gente vai até você</h2>
             <p className={s.faseDescricao}>
-              Sem fila, sem sair de casa e no conforto do colo de quem o bebê conhece. A equipe leva as vacinas em caixa térmica com temperatura controlada, no dia e horário que você escolher.
+              Sem fila e sem sair de casa: a equipe leva as vacinas em caixa térmica com temperatura controlada, no dia e horário que você escolher. Para o bebê, a criança, o adulto e o idoso.
             </p>
             <Whats mensagem="Olá! Quero agendar vacinação em casa." nome="domicílio">Agendar vacinação em casa</Whats>
           </div>
