@@ -423,3 +423,31 @@
   .faseComboVideo { width: 96px; left: 6px; }
   .faseComboVideo figcaption span { display: none; }
 }
+
+/* Abertura do bloco dos adultos (as 3 seções vêm logo abaixo) */
+.adultosAbertura { max-width: 820px; margin: 72px auto 0; padding: 0 16px; }
+.adultosAbertura .secaoSub { margin-bottom: 8px; }
+.fase .faseImagem { object-position: center 30%; }
+/* Vacinação Domiciliar com o mesmo destaque das fases */
+.casa .faseNome { font-size: clamp(36px, 4.4vw, 54px); }
+.casa .faseChamada { margin-bottom: 12px; }
+.casa .faseDescricao { font-size: 18px; color: #2c3e46; border-left: 4px solid var(--tq); padding-left: 18px; }
+
+/* Barra do celular: escondida na capa, sobe depois (sem botão verde duplicado) */
+@media (max-width: 760px) {
+  .barraWhats { display: block; transform: translateY(120%); transition: transform .4s cubic-bezier(.2,.8,.2,1); }
+  :global(html[data-vac-capa="passou"]) .barraWhats { transform: none; }
+  .pagina { padding-bottom: 0; }
+  :global(html[data-vac-capa="passou"]) .pagina { padding-bottom: 84px; }
+
+  /* Vídeos em carrossel de lado no celular (antes eram 4 vídeos enormes um embaixo do outro) */
+  .videosGrade { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin: 0 -16px; padding: 4px 16px 14px; justify-content: flex-start; scrollbar-width: none; }
+  .videosGrade::-webkit-scrollbar { display: none; }
+  .videosGrade .videoCard { flex: 0 0 62%; scroll-snap-align: center; }
+}
+.casaVideo { display: flex; justify-content: center; }
+.casaVideo .videoCard { max-width: 320px; }
+@media (max-width: 760px) { .casaVideo .videoCard { max-width: 280px; } }
+/* 5 vídeos numa fileira no computador */
+@media (min-width: 761px) { .videosGrade { grid-template-columns: repeat(auto-fit, minmax(180px, 208px)); gap: 20px; } }
+@media (max-width: 760px) { .videosGrade { flex-wrap: nowrap; } }

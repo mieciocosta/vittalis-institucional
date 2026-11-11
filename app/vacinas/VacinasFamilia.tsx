@@ -158,39 +158,14 @@ export function VacinasFamilia() {
         <SecaoFase f={crianca} i={2} />
         <SecaoFase f={adolescente} i={3} />
 
-        {/* ADULTOS: MULHER, HOMEM E IDOSO */}
-        <section className={s.adultos} aria-labelledby="t-adultos">
-          <h2 id="t-adultos" className={s.secaoTitulo}>Adulto também precisa de vacina</h2>
+        {/* ADULTOS: MULHER, HOMEM E IDOSO, cada um com a sua seção, como os demais públicos */}
+        <div className={s.adultosAbertura}>
+          <h2 className={s.secaoTitulo}>Adulto também precisa de vacina</h2>
           <p className={s.secaoSub}>A maioria dos adultos está com alguma vacina atrasada. Veja o que é indicado para cada um.</p>
-          <div className={s.adultosGrade}>
-            {[mulher, homem, idoso].map((f) => (
-              <article key={f.id} id={f.id} className={s.adultoCard}>
-                {f.imagem ? (
-                  <Image src={f.imagem} alt={f.alt ?? ""} width={864} height={800} className={s.adultoImagem} sizes="(max-width: 900px) 100vw, 360px" />
-                ) : (
-                  <div className={s.adultoIcone} aria-hidden>{f.icone}</div>
-                )}
-                <div className={s.adultoCorpo}>
-                  <h3 className={s.adultoNome}>
-                    <span className={s.adultoNomeIcone} aria-hidden>{f.icone}</span>
-                    {f.rotulo}
-                  </h3>
-                  <p className={s.adultoTitulo}>{f.titulo}</p>
-                  <p className={s.faixa}>{f.faixa}</p>
-                  <ul className={s.vacinas}>
-                    {f.vacinas.map((v) => (
-                      <li key={v.nome}>
-                        <strong>{v.nome}</strong>
-                        <span>{v.para}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Whats mensagem={f.mensagem} nome={f.rotulo} className={s.botaoWhatsPequeno}>{f.botao}</Whats>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
+        </div>
+        <SecaoFase f={mulher} i={4} />
+        <SecaoFase f={homem} i={5} />
+        <SecaoFase f={idoso} i={6} />
 
         {/* VÍDEOS */}
         <section className={s.videos} aria-labelledby="t-videos">
@@ -199,6 +174,7 @@ export function VacinasFamilia() {
           <div className={s.videosGrade}>
             <VideoVacina src="/videos/vacinacao-depoimento-zoster.mp4" poster="/videos/vacinacao-depoimento-zoster.jpg" titulo="Depoimento: herpes zóster aos 50" legenda="Vandelúcia conta por que se vacinou na Vittalis" />
             <VideoVacina src="/videos/vacinacao-depoimento-familia.mp4" poster="/videos/vacinacao-depoimento-familia.jpg" titulo="Depoimento: a família do Samuel" legenda="Os pais contam por que vacinam o bebê aqui" />
+            <VideoVacina src="/videos/vacinacao-plano-vacinal.mp4" poster="/videos/vacinacao-plano-vacinal.jpg" titulo="Tudo planejado desde o começo" legenda="Como a equipe organiza as vacinas da família" />
             <VideoVacina src="/videos/vacinacao-planejamento.mp4" poster="/videos/vacinacao-planejamento.jpg" titulo="Planejamento vacinal" legenda="A equipe explica como organiza as doses" />
             <VideoVacina src="/videos/vacinacao-rotavirus.mp4" poster="/videos/vacinacao-rotavirus.jpg" titulo="Vacinação Domiciliar" legenda="A equipe da Vittalis vai até a sua casa" />
           </div>
@@ -206,15 +182,15 @@ export function VacinasFamilia() {
 
         {/* EM CASA */}
         <section className={s.casa} aria-labelledby="t-casa">
-          <div className={s.faseCombo}>
-            <Image src="/images/otim/vac_casa.webp" alt="Profissional da Vittalis vacinando uma mulher no sofá de casa, com a caixa térmica da clínica ao lado" width={1400} height={934} className={s.casaImagem} sizes="(max-width: 900px) 100vw, 520px" />
-            <div className={s.faseComboVideo}>
-              <VideoVacina src="/videos/vacinacao-em-casa.mp4" poster="/videos/vacinacao-em-casa.jpg" titulo="Vacinação a domicílio" legenda="Um dia de vacina em casa" />
-            </div>
+          <div className={s.casaVideo}>
+            <VideoVacina src="/videos/vacinacao-em-casa.mp4" poster="/videos/vacinacao-em-casa.jpg" titulo="Vacinação a domicílio" legenda="Um dia de vacina em casa, do começo ao fim" />
           </div>
           <div>
-            <span className={s.rotulo}>🏠 Vacinação em domicílio</span>
-            <h2 id="t-casa" className={s.faseTitulo}>A gente vai até você</h2>
+            <h2 id="t-casa" className={s.faseNome}>
+              <span className={s.faseNomeIcone} aria-hidden>🏠</span>
+              Vacinação Domiciliar
+            </h2>
+            <p className={s.faseChamada}>A gente vai até você</p>
             <p className={s.faseDescricao}>
               Sem fila e sem sair de casa: a equipe leva as vacinas em caixa térmica com temperatura controlada, no dia e horário que você escolher. Para o bebê, a criança, o adulto e o idoso.
             </p>

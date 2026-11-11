@@ -37,7 +37,6 @@ export const FASES: Fase[] = [
       "Algumas vacinas tomadas na gravidez passam anticorpos para o bebê, que nasce mais protegido nos primeiros meses, quando ainda não pode ser vacinado contra tudo. Tudo combinado com o seu obstetra.",
     imagem: I("vac_gestante"),
     alt: "Gestante sorrindo com a carteira de vacinação enquanto recebe a vacina de uma profissional da Vittalis",
-    video: { src: V("vacinacao-plano-vacinal.mp4"), poster: V("vacinacao-plano-vacinal.jpg"), titulo: "Tudo planejado desde o começo", legenda: "Como a equipe organiza as vacinas da família" },
     vacinas: [
       { nome: "dTpa", para: "Coqueluche, difteria e tétano" },
       { nome: "Influenza", para: "Gripe" },
@@ -81,8 +80,6 @@ export const FASES: Fase[] = [
     faixa: "De 2 a 9 anos",
     texto:
       "Depois dos dois anos vêm os reforços, que mantêm a proteção alta na escola e nas brincadeiras. A gente confere a caderneta e completa o que faltar.",
-    imagem: I("vac_menina"),
-    alt: "Menina sorrindo enquanto recebe a vacina de uma profissional da Vittalis de jaleco branco",
     video: { src: V("vacinacao-crianca.mp4"), poster: V("vacinacao-crianca.jpg"), titulo: "Vacinação humanizada", legenda: "Óculos de realidade virtual e certificado de coragem" },
     vacinas: [
       { nome: "DTPa ou Tetra", para: "Reforço de difteria, tétano e coqueluche" },
@@ -125,7 +122,8 @@ export const FASES: Fase[] = [
     rotulo: "Saúde da Mulher",
     titulo: "Cuidado em cada fase da vida da mulher",
     faixa: "Adultas de 20 a 59 anos",
-    texto: "Vacinas que protegem a mulher hoje e quem ela ama, inclusive antes de engravidar.",
+    texto:
+      "Vacinas que protegem a mulher hoje e quem ela ama. O HPV previne cânceres, a dTpa e a tríplice viral preparam o corpo antes de engravidar, e a gripe todo ano mantém a família protegida.",
     imagem: I("vac_hpv"),
     alt: "Mulher sorrindo com o curativo da Vittalis no braço depois da vacina de HPV",
     vacinas: [
@@ -146,7 +144,8 @@ export const FASES: Fase[] = [
     rotulo: "Saúde do Homem",
     titulo: "Homem também se vacina",
     faixa: "Adultos de 20 a 59 anos",
-    texto: "Muitos homens adultos estão com as vacinas atrasadas. Uma conversa rápida mostra o que falta.",
+    texto:
+      "Muitos homens adultos estão com as vacinas atrasadas desde a adolescência. Mande uma foto da caderneta: a equipe confere o que falta e vacina na clínica ou na sua casa.",
     imagem: I("vac_homem"),
     alt: "Homem sorrindo e apontando o curativo da Vittalis no braço depois da vacina",
     vacinas: [

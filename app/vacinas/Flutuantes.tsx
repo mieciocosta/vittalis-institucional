@@ -39,6 +39,13 @@ export function Flutuantes({ fases, mensagem, slug, nomeCampanha }: { fases: Ata
     };
   }, [fases]);
 
+  // A barra verde fixa do celular só sobe depois da capa (a capa já tem o botão;
+  // antes apareciam dois botões verdes iguais na primeira tela).
+  useEffect(() => {
+    document.documentElement.dataset.vacCapa = visivel ? "passou" : "";
+    return () => { delete document.documentElement.dataset.vacCapa; };
+  }, [visivel]);
+
   // Mantém o chip da fase ativa à vista na barra (no celular ela rola de lado).
   useEffect(() => {
     if (!ativa) return;
