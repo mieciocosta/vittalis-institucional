@@ -71,7 +71,7 @@ export function VacinasFamilia() {
       <header className={s.topo}>
         <div className={s.topoInterno}>
           <Link href="/" aria-label="Vittalis Saúde, página inicial">
-            <Image src="/images/otim/logo-vertical.webp" alt="Vittalis Saúde" width={520} height={157} className={s.logo} unoptimized priority />
+            <Image src="/images/otim/logo-vertical.webp" alt="Vittalis Saúde" width={900} height={273} className={s.logo} unoptimized priority />
           </Link>
           <Whats mensagem={MENSAGEM_GERAL} nome="topo" className={s.topoBotao}>Falar no WhatsApp</Whats>
         </div>
