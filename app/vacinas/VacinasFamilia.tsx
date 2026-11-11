@@ -4,6 +4,7 @@ import { BRAND } from "@/lib/brand";
 import { Perguntas } from "../campanhas/_componentes/Perguntas";
 import { LinkWhatsOrigem } from "../_landing-vacinas/LinkWhatsOrigem";
 import { VideoVacina } from "./VideoVacina";
+import { Flutuantes } from "./Flutuantes";
 import { FASES, MENSAGEM_GERAL, PERGUNTAS, type Fase } from "./conteudo";
 import s from "./vacinas.module.css";
 
@@ -228,6 +229,13 @@ export function VacinasFamilia() {
         <p><strong>{BRAND.name}</strong> · {BRAND.street}, {BRAND.city}/{BRAND.state}</p>
         <p><Link href="/politica-de-privacidade">Política de privacidade</Link> · <Link href="/">Site da Vittalis</Link></p>
       </footer>
+
+      <Flutuantes
+        fases={FASES.map((f) => ({ id: f.id, rotulo: f.rotulo, icone: f.icone }))}
+        mensagem={MENSAGEM_GERAL}
+        slug={SLUG}
+        nomeCampanha={`${NOME}: botão flutuante`}
+      />
 
       <div className={s.barraWhats}>
         <Whats mensagem={MENSAGEM_GERAL} nome="barra" className={s.barraBotao}>Falar com a equipe no WhatsApp</Whats>

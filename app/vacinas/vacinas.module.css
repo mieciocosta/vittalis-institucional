@@ -240,7 +240,7 @@
   gap: 64px;
 }
 .faseInvertida { background: linear-gradient(135deg, #f2fbfc 0%, #fdf8ee 100%); }
-.faseNome { font-weight: 600; }
+.faseNome { font-weight: 700; }
 .faseChamada { margin-bottom: 14px; }
 .fase .faixa {
   display: inline-flex; align-items: center; gap: 8px;
@@ -269,3 +269,101 @@
   .faseNome { gap: 12px; }
   .fase .faseDescricao { padding-left: 14px; }
 }
+
+/* ═══ ACABAMENTO PREMIUM + BOTÕES FLUTUANTES (pedido da direção, 10/11) ═══ */
+
+/* Topo de vidro */
+.topo { background: rgba(255,255,255,.78); backdrop-filter: saturate(160%) blur(14px); -webkit-backdrop-filter: saturate(160%) blur(14px); box-shadow: 0 1px 0 rgba(18,87,110,.06), 0 8px 24px rgba(18,87,110,.05); }
+.topoBotao { background: linear-gradient(135deg, #25d366, #128c4a); box-shadow: 0 8px 20px rgba(31,175,87,.3); }
+
+/* Botões verdes com brilho que passa no hover */
+.botaoWhats { position: relative; overflow: hidden; background: linear-gradient(135deg, #25d366 0%, #1faf57 50%, #128c4a 100%); letter-spacing: .01em; }
+.botaoWhats::after {
+  content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent);
+  transform: skewX(-20deg); transition: left .7s ease;
+}
+.botaoWhats:hover::after { left: 130%; }
+.botaoBranco { background: #fff; }
+.botaoBranco::after { background: linear-gradient(100deg, transparent, rgba(0,184,192,.18), transparent); }
+
+/* Barra de fases que gruda no topo */
+.chips {
+  position: fixed; top: 64px; left: 50%; z-index: 35; max-width: calc(100vw - 24px);
+  transform: translate(-50%, -140%); opacity: 0; pointer-events: none;
+  transition: transform .45s cubic-bezier(.2,.8,.2,1), opacity .3s;
+}
+.chipsVisivel { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
+.chipsTrilho {
+  display: flex; gap: 6px; padding: 6px; border-radius: 999px; overflow-x: auto; scrollbar-width: none;
+  background: rgba(255,255,255,.82); backdrop-filter: saturate(160%) blur(14px); -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border: 1px solid rgba(0,184,192,.2); box-shadow: 0 12px 34px rgba(18,87,110,.16);
+}
+.chipsTrilho::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  font-size: 13.5px; font-weight: 700; color: var(--pt); text-decoration: none; text-transform: capitalize;
+  padding: 8px 14px; border-radius: 999px; transition: background .25s, color .25s, box-shadow .25s;
+}
+.chip:hover { background: rgba(0,184,192,.1); }
+.chipAtivo { background: linear-gradient(135deg, var(--tq), var(--pt2)); color: #fff; box-shadow: 0 6px 16px rgba(0,150,170,.35); }
+
+/* WhatsApp flutuante (computador) */
+.fab {
+  position: fixed; right: 28px; bottom: 28px; z-index: 45; display: flex; align-items: center; gap: 14px;
+  transform: translateY(140%); opacity: 0; transition: transform .5s cubic-bezier(.2,.8,.2,1), opacity .3s;
+}
+.fabVisivel { transform: none; opacity: 1; }
+.fabBotao {
+  position: relative; width: 66px; height: 66px; border-radius: 50%; display: grid; place-items: center; color: #fff;
+  background: linear-gradient(135deg, #25d366, #128c4a); box-shadow: 0 14px 34px rgba(18,140,74,.45), inset 0 1px 0 rgba(255,255,255,.35);
+  transition: transform .25s;
+}
+.fabBotao:hover { transform: scale(1.07); }
+.fabBotao::before {
+  content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid rgba(37,211,102,.55);
+  animation: vacPulso 2.4s ease-out infinite;
+}
+@keyframes vacPulso { 0% { transform: scale(.9); opacity: 1; } 100% { transform: scale(1.35); opacity: 0; } }
+.fabBalao {
+  display: flex; flex-direction: column; font-size: 13px; color: var(--cinza); line-height: 1.35;
+  background: #fff; padding: 12px 16px; border-radius: 16px 16px 4px 16px;
+  box-shadow: 0 14px 34px rgba(18,87,110,.16); border: 1px solid #e3eef1;
+}
+.fabBalao strong { color: var(--tinta); font-size: 14px; }
+
+/* Voltar ao topo */
+.topoFlutuante {
+  position: fixed; left: 28px; bottom: 28px; z-index: 44; width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid rgba(0,184,192,.25); color: var(--pt); cursor: pointer; display: grid; place-items: center;
+  background: rgba(255,255,255,.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 26px rgba(18,87,110,.16);
+  transform: translateY(140%); opacity: 0; transition: transform .45s cubic-bezier(.2,.8,.2,1), opacity .3s;
+}
+.topoFlutuanteVisivel { transform: none; opacity: 1; }
+
+/* Barra fixa do celular, de vidro */
+.barraWhats { background: rgba(255,255,255,.82); backdrop-filter: saturate(160%) blur(14px); -webkit-backdrop-filter: saturate(160%) blur(14px); box-shadow: 0 -8px 24px rgba(18,87,110,.08); }
+
+/* Entrada suave dos blocos ao rolar (só nos navegadores que suportam) */
+@supports (animation-timeline: view()) {
+  .fase, .adultoCard, .formatura, .videoCard, .faseAtalho {
+    animation: vacSobe linear both; animation-timeline: view(); animation-range: entry 0% entry 35%;
+  }
+  @keyframes vacSobe { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+}
+
+@media (max-width: 760px) {
+  .chips { top: 58px; left: 0; right: 0; max-width: none; transform: translateY(-140%); padding: 0 10px; }
+  .chipsVisivel { transform: none; }
+  .chipsTrilho { border-radius: 16px; }
+  .chip { font-size: 13px; padding: 8px 12px; }
+  .fab { display: none; }
+  .topoFlutuante { left: auto; right: 14px; bottom: 86px; width: 42px; height: 42px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fabBotao::before { animation: none; }
+  .fase, .adultoCard, .formatura, .videoCard, .faseAtalho { animation: none !important; }
+  .chips, .fab, .topoFlutuante, .botaoWhats::after { transition: none; }
+}
+.faseNome, .adultoNome, .capaTitulo, .secaoTitulo, .faseTitulo, .adultoTitulo, .final h2, .faseChamada { letter-spacing: normal; font-feature-settings: "kern" 1; }
