@@ -367,3 +367,7 @@
   .chips, .fab, .topoFlutuante, .botaoWhats::after { transition: none; }
 }
 .faseNome, .adultoNome, .capaTitulo, .secaoTitulo, .faseTitulo, .adultoTitulo, .final h2, .faseChamada { letter-spacing: normal; font-feature-settings: "kern" 1; }
+.logo { height: 46px; width: auto; display: block; }
+@media (max-width: 760px) { .logo { height: 40px; } }
+.chips { top: 76px; }
+@media (max-width: 760px) { .chips { top: 66px; } }
