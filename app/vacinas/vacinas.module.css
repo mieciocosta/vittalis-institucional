@@ -498,3 +498,12 @@
 @media (max-width: 760px) { .capaFundo { object-position: 68% 30%; } }
 /* Computador: vídeo no lado direito da foto (pedido da direção, 10/11). */
 @media (min-width: 761px) { .capaVideo { justify-self: end; margin: 0 -36px -36px 0; } }
+
+/* Fases: foto/vídeo alinhados com o título (antes ficavam no meio da altura
+   da lista de vacinas) e acompanhando a leitura ao rolar. */
+@media (min-width: 961px) {
+  .fase { align-items: start; }
+  .faseMidia { position: sticky; top: 140px; padding-top: 8px; }
+  .faseMidia > .faseImagem { aspect-ratio: 4 / 4.4; object-position: center 30%; }
+  .faseMidia > .videoCard { max-width: 320px; }
+}
