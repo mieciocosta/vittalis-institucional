@@ -262,10 +262,26 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
               {/* 10/11, pedido da direção ("falta especialidades"): na página que junta
                   todas, as especialidades aparecem logo no topo, cada uma levando à sua página. */}
               {s.slug === "desenvolvimento-infantil" && (
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: -12, marginBottom: 26, maxWidth: 560 }}>
+                // 10/11 (11h46), pedido da direção: botões das áreas premium; o toque
+                // leva direto à página da área, que sempre convida para o WhatsApp.
+                <div className="vit-areas-btn" style={{ marginTop: -12, marginBottom: 26, maxWidth: 600 }}>
                   {AREAS_INFANTIS.map((a) => (
-                    <Link key={a.slug} href={`/${a.slug}`} style={{ fontSize: 14, fontWeight: 600, color: "var(--vit-secondary-dark)", background: "white", border: "1px solid rgba(0,184,192,.35)", borderRadius: 100, padding: "8px 14px", textDecoration: "none", boxShadow: "0 2px 8px rgba(0,184,192,.08)" }}>{a.nome}</Link>
+                    <Link key={a.slug} href={`/${a.slug}`} className="vit-area-btn" onClick={() => trackEvent("click_area", { area: a.slug })}>
+                      <span className="vit-area-ico" aria-hidden>{DOR_POR_AREA.find((d) => d.slug === a.slug)?.icone ?? "✨"}</span>
+                      <span className="vit-area-txt"><span className="vit-area-nome">{a.nome}</span><span className="vit-area-mais">Saiba mais <span className="vit-area-seta" aria-hidden>→</span></span></span>
+                    </Link>
                   ))}
+                  <style>{`.vit-areas-btn{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.vit-area-btn{display:flex;align-items:center;gap:9px;padding:10px 10px;background:linear-gradient(180deg,#fff,#f7fcfd);border:1px solid rgba(0,184,192,.22);border-radius:16px;text-decoration:none;color:var(--vit-secondary-dark);box-shadow:0 1px 2px rgba(15,40,60,.04),0 6px 18px rgba(0,120,140,.07);transition:transform .25s,box-shadow .25s,border-color .25s}
+.vit-area-btn:hover{transform:translateY(-2px);border-color:rgba(0,184,192,.6);box-shadow:0 2px 4px rgba(15,40,60,.05),0 14px 30px rgba(0,120,140,.16)}
+.vit-area-ico{flex:none;width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:17px;background:linear-gradient(135deg,rgba(0,184,192,.16),rgba(196,151,59,.16));box-shadow:inset 0 0 0 1px rgba(255,255,255,.8)}
+.vit-area-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.vit-area-nome{font-size:13.5px;font-weight:700;line-height:1.2;letter-spacing:-.01em;overflow-wrap:anywhere}
+.vit-area-mais{font-size:11px;font-weight:600;color:var(--vit-primary)}
+.vit-area-seta{display:inline-block;transition:transform .25s}
+.vit-area-btn:hover .vit-area-seta{transform:translateX(3px)}
+@media(max-width:900px){.vit-areas-btn{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.vit-area-nome{font-size:13px}.vit-area-btn{padding:9px 8px;gap:8px}.vit-area-ico{width:30px;height:30px;font-size:15px}}`}</style>
                 </div>
               )}
 
@@ -395,7 +411,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
               <p style={{ fontSize: 15, color: "var(--vit-gray-700)", lineHeight: 1.8, marginBottom: 28, paddingLeft: 16, borderLeft: "3px solid var(--vit-primary)" }}>
                 Na Vittalis Saúde, cada atendimento é conduzido com <strong>segurança clínica</strong>, <strong>acolhimento humano</strong> e <strong>orientação clara</strong>, em uma estrutura moderna preparada para cuidar de você por inteiro.
               </p>
-              <CTA href={waUrl}>{s.ctaText}</CTA>
+              <CTA href={waUrl} variant="whats"><WhatsIcon /> {s.ctaText} pelo WhatsApp</CTA>
             </Anim>
           </div>
         </div>
@@ -425,7 +441,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
               </Anim>
             ))}
           </div>
-          <Anim d={0.3}><div style={{ textAlign: "center", marginTop: 40 }}><CTA href={waUrl} big>{s.ctaText}</CTA></div></Anim>
+          <Anim d={0.3}><div style={{ textAlign: "center", marginTop: 40 }}><CTA href={waUrl} variant="whats" big><WhatsIcon /> {s.ctaText} pelo WhatsApp</CTA></div></Anim>
         </div>
       </section>
 
@@ -474,7 +490,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
               </Anim>
             ))}
           </div>
-          <Anim d={0.3}><div style={{ textAlign: "center", marginTop: 32 }}><CTA href={waUrl} big>Começar agora</CTA></div></Anim>
+          <Anim d={0.3}><div style={{ textAlign: "center", marginTop: 32 }}><CTA href={waUrl} variant="whats" big><WhatsIcon /> Começar agora pelo WhatsApp</CTA></div></Anim>
         </div>
       </section>
 
@@ -501,7 +517,7 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
           {/* 10/11: saiu o depoimento genérico ("Paciente da Vittalis"), que não era
               avaliação real de ninguém. Quando houver avaliação de verdade, com
               autorização, ela entra aqui. */}
-          <Anim d={0.2}><div style={{ textAlign: "center" }}><CTA href={waUrl} variant="white" big>{s.ctaText}</CTA></div></Anim>
+          <Anim d={0.2}><div style={{ textAlign: "center" }}><CTA href={waUrl} variant="whats" big><WhatsIcon /> {s.ctaText} pelo WhatsApp</CTA></div></Anim>
         </div>
       </section>
 
@@ -595,9 +611,10 @@ export default function SpecialtyPageClient({ specialty: s }: { specialty: Speci
       <style>{`@media(max-width:700px){.vit-barra-wa{display:flex!important}.vit-fab-wa{display:none!important}footer{padding-bottom:88px!important}}`}</style>
       <div className="vit-fab-wa" style={{ position: "fixed", bottom: 20, right: 20, zIndex: 1000, display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-end" }}>
         <a href={waUrl} target="_blank" rel="noopener noreferrer" aria-label="Agendar pelo WhatsApp" onClick={() => trackEvent("click_whatsapp", { source: "fab" })}
-          style={{ width: 56, height: 56, borderRadius: "50%", background: "#25D366", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 18px rgba(37,211,102,.4)", transition: "transform .3s", textDecoration: "none" }}
-          onMouseEnter={e=>e.currentTarget.style.transform="scale(1.1)"} onMouseLeave={e=>e.currentTarget.style.transform="scale(1)"}>
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          style={{ height: 56, padding: "0 22px 0 16px", gap: 10, borderRadius: 100, background: "#1FAF57", color: "#fff", fontWeight: 700, fontSize: 15, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 6px 22px rgba(31,175,87,.4)", transition: "transform .3s", textDecoration: "none" }}
+          onMouseEnter={e=>e.currentTarget.style.transform="scale(1.05)"} onMouseLeave={e=>e.currentTarget.style.transform="scale(1)"}>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Fale com a equipe no WhatsApp
         </a>
       </div>
     </div>
