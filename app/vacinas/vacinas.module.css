@@ -558,3 +558,15 @@
 @media (prefers-reduced-motion: reduce) {
   .videoPlayIcone, .videoPlayIcone::before, .videoPlayIcone::after, .videoPlayRotulo { animation: none; }
 }
+
+/* Vacinas mais procuradas (atalhos com as palavras que o pessoal busca) */
+.procuradas { max-width: 1180px; margin: 0 auto; padding: 64px 16px 24px; }
+.procuradasGrade { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.procurada { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 18px; text-decoration: none; color: var(--tinta);
+  background: #fff; border: 1px solid #e3eef1; box-shadow: 0 8px 22px rgba(18,87,110,.07); transition: transform .2s, box-shadow .2s, border-color .2s; height: 100%; }
+.procurada:hover { transform: translateY(-2px); border-color: rgba(0,184,192,.5); box-shadow: 0 14px 30px rgba(18,87,110,.14); }
+.procuradaIcone { flex: none; width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; font-size: 21px; background: linear-gradient(135deg, rgba(0,184,192,.16), rgba(196,151,59,.18)); }
+.procurada strong { display: block; font-size: 14.5px; color: var(--pt); }
+.procurada small { display: block; font-size: 12.5px; color: var(--cinza); margin-top: 2px; }
+@media (max-width: 960px) { .procuradasGrade { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .procuradasGrade { grid-template-columns: 1fr; } }

@@ -5,7 +5,7 @@ import { Perguntas } from "../campanhas/_componentes/Perguntas";
 import { LinkWhatsOrigem } from "../_landing-vacinas/LinkWhatsOrigem";
 import { VideoVacina } from "./VideoVacina";
 import { Flutuantes } from "./Flutuantes";
-import { FASES, MENSAGEM_GERAL, PERGUNTAS, type Fase } from "./conteudo";
+import { CIDADES, FASES, MAIS_PROCURADAS, MENSAGEM_GERAL, PERGUNTAS, type Fase } from "./conteudo";
 import s from "./vacinas.module.css";
 
 const SLUG = "vacinas-familia";
@@ -200,6 +200,27 @@ export function VacinasFamilia() {
             </p>
             <Whats mensagem="Olá! Quero agendar vacinação em casa." nome="domicílio">Quero vacinar em casa</Whats>
           </div>
+        </section>
+
+        {/* MAIS PROCURADAS (palavras-chave que o pessoal busca no Google em São Luís) */}
+        <section className={s.procuradas} aria-labelledby="t-procuradas">
+          <h2 id="t-procuradas" className={s.secaoTitulo}>Vacinas mais procuradas em São Luís</h2>
+          <p className={s.secaoSub}>
+            Clínica de vacinação particular no Jardim Renascença, com vacinação em casa em {CIDADES.slice(0, -1).join(", ")} e {CIDADES[CIDADES.length - 1]}.
+          </p>
+          <ul className={s.procuradasGrade}>
+            {MAIS_PROCURADAS.map((v) => (
+              <li key={v.nome}>
+                <a href={`#${v.ancora}`} className={s.procurada}>
+                  <span className={s.procuradaIcone} aria-hidden>{v.icone}</span>
+                  <span>
+                    <strong>{v.nome} em São Luís</strong>
+                    <small>{v.para}</small>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </section>
 
         {/* PERGUNTAS */}

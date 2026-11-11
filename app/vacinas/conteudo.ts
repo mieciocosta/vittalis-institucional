@@ -202,3 +202,22 @@ export const PERGUNTAS = [
   { pergunta: "Atendem plano de saúde?", resposta: "Nós atendemos somente de forma particular." },
   { pergunta: "Quem decide quais vacinas tomar?", resposta: "A indicação de cada vacina depende de avaliação da equipe e segue os calendários da SBIm e do Ministério da Saúde." },
 ];
+
+/**
+ * Vacinas mais procuradas no Google em São Luís (pesquisa de volume, nov/2026:
+ * "vacina", HPV, dengue, herpes zóster, meningite, gripe…). Cada atalho leva
+ * à seção do público certo. Sem preço e sem promessa.
+ */
+export const MAIS_PROCURADAS: { nome: string; para: string; ancora: string; icone: string }[] = [
+  { nome: "Vacina HPV", para: "Adolescentes, mulheres e homens", ancora: "adolescente", icone: "🛡️" },
+  { nome: "Vacina herpes zóster", para: "A partir dos 50 anos", ancora: "idoso", icone: "🌿" },
+  { nome: "Vacina da dengue", para: "Crianças, adolescentes e adultos, com avaliação", ancora: "crianca", icone: "🦟" },
+  { nome: "Vacina meningite B e ACWY", para: "Bebês, crianças e adolescentes", ancora: "bebe", icone: "👶" },
+  { nome: "Vacina da gripe", para: "Toda a família, todo ano", ancora: "mulher", icone: "🤧" },
+  { nome: "Vacina VSR", para: "Gestantes, bebês e idosos", ancora: "gestante", icone: "🤰" },
+  { nome: "Vacina pneumonia", para: "Bebês e adultos a partir dos 60", ancora: "idoso", icone: "🫁" },
+  { nome: "Hexavalente e rotavírus", para: "Bebês nos primeiros meses", ancora: "bebe", icone: "💉" },
+];
+
+/** Onde atendemos, inclusive em casa (mesma área dos anúncios do Google). */
+export const CIDADES = ["São Luís", "São José de Ribamar", "Paço do Lumiar"];
