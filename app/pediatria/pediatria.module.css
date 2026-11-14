@@ -4,12 +4,15 @@
    coral #F78581 nos destaques e laranja #FE9800 nos rótulos pequenos.
    Títulos em Plus Jakarta Sans, texto em DM Sans. */
 .pagina {
-  --verde: #03847e;
-  --verde-escuro: #026a65;
-  --coral: #f78581;
-  --laranja: #e88a00;
-  --rose: #e7dad5;
-  --rose-claro: #f3ece9;
+  /* Paleta 2, escolhida na conversa com a direção (14/11): o turquesa do logo
+     da Vittalis com creme e pêssego. Os nomes das variáveis ficaram da
+     paleta anterior (verde = cor principal, coral = destaque, rose = fundo). */
+  --verde: #0e8a91;
+  --verde-escuro: #0a6f75;
+  --coral: #f2a07b;
+  --laranja: #b88a33;
+  --rose: #fbf1e6;
+  --rose-claro: #fdf7f0;
   --tinta: #1a1a1a;
   --cinza: #5f5a58;
   --titulos: var(--fonte-ped), "Plus Jakarta Sans", var(--font-body), system-ui, sans-serif;
@@ -21,7 +24,7 @@
 .pagina h1, .pagina h2, .pagina h3 { font-family: var(--titulos); letter-spacing: -0.025em; }
 
 /* Topo */
-.topo { position: sticky; top: 0; z-index: 30; background: var(--verde); box-shadow: 0 6px 20px rgba(3,132,126,.18); }
+.topo { position: sticky; top: 0; z-index: 30; background: var(--verde); box-shadow: 0 6px 20px rgba(14,138,145,.18); }
 .topoInterno { max-width: 1200px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .logo { height: 36px; width: auto; filter: brightness(0) invert(1); }
 .menu { display: flex; gap: 26px; font-size: 15px; font-weight: 500; }
@@ -30,17 +33,17 @@
 .topoBotao { display: inline-flex; align-items: center; gap: 8px; background: var(--coral); color: #fff; font-weight: 700; font-size: 14.5px; padding: 11px 20px; border-radius: 999px; text-decoration: none; white-space: nowrap; box-shadow: 0 8px 20px rgba(0,0,0,.12); }
 
 /* Botões */
-.botaoWhats { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--verde); color: #fff; font-weight: 700; font-size: 16px; padding: 16px 28px; border-radius: 999px; text-decoration: none; box-shadow: 0 12px 26px rgba(3,132,126,.28); transition: transform .2s, box-shadow .2s, background .2s; }
-.botaoWhats:hover { transform: translateY(-2px); background: var(--verde-escuro); box-shadow: 0 16px 32px rgba(3,132,126,.34); }
+.botaoWhats { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--verde); color: #fff; font-weight: 700; font-size: 16px; padding: 16px 28px; border-radius: 999px; text-decoration: none; box-shadow: 0 12px 26px rgba(14,138,145,.28); transition: transform .2s, box-shadow .2s, background .2s; }
+.botaoWhats:hover { transform: translateY(-2px); background: var(--verde-escuro); box-shadow: 0 16px 32px rgba(14,138,145,.34); }
 .botaoSecundario { display: inline-flex; align-items: center; justify-content: center; padding: 16px 26px; border-radius: 999px; border: 2px solid var(--coral); color: var(--tinta); font-weight: 700; font-size: 15px; text-decoration: none; background: transparent; }
 .botaoSecundario:hover { background: var(--coral); color: #fff; }
 .botaoCartao { composes: botaoWhats; width: 100%; font-size: 15px; padding: 14px 18px; margin-top: auto; }
 .botaoBranco { composes: botaoWhats; background: var(--coral); color: #fff; box-shadow: 0 12px 26px rgba(0,0,0,.18); }
-.botaoBranco:hover { background: #f26f6a; }
+.botaoBranco:hover { background: #ec8c63; }
 
 /* Capa */
 .capaFundo { background: var(--rose); position: relative; overflow: hidden; }
-.capaFundo::before { content: ""; position: absolute; width: 420px; height: 420px; left: -160px; top: -160px; border-radius: 50%; border: 1.5px solid rgba(247,133,129,.35); }
+.capaFundo::before { content: ""; position: absolute; width: 420px; height: 420px; left: -160px; top: -160px; border-radius: 50%; border: 1.5px solid rgba(242,160,123,.35); }
 .capa { position: relative; max-width: 1200px; margin: 0 auto; padding: 64px 20px 80px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
 .selo { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: var(--cinza); background: rgba(255,255,255,.7); padding: 9px 16px; border-radius: 999px; }
 .capaTitulo { font-size: clamp(36px, 4.8vw, 58px); line-height: 1.06; font-weight: 800; margin: 20px 0 18px; color: var(--verde); }

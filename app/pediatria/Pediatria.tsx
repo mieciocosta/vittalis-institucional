@@ -66,10 +66,11 @@ export function Pediatria() {
           <div className={s.capaTexto}>
             <span className={s.selo}>👶 Pediatria em São Luís · Jardim Renascença</span>
             <h1 id="t-capa" className={s.capaTitulo}>
-              Pediatra em São Luís com <em>tempo para ouvir</em> a sua família
+              {/* Texto da direção (14/11), palavra por palavra. */}
+              A saúde do seu filho merece <em>tempo, atenção</em> e um olhar completo.
             </h1>
             <p className={s.capaResumo}>
-              Consulta pediátrica sem pressa, puericultura do recém-nascido ao adolescente e vacinação no mesmo lugar. Atendimento particular, pertinho de você.
+              Consulta Particular com todo cuidado que seu filho merece.
             </p>
             <div className={s.capaAcoes}>
               <Whats mensagem={MENSAGEM_GERAL} nome="capa">Agendar pelo WhatsApp</Whats>
