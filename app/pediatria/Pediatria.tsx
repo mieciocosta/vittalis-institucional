@@ -21,6 +21,11 @@ const fonteTitulos = localFont({
 });
 
 const SLUG = "pediatria";
+
+// Retratos ilustrativos da equipe (14/11, a direção mandou as imagens; só o
+// rosto e os ombros, sem os personagens dos jalecos, que têm direito autoral).
+const EQUIPE = ["/images/otim/ped_equipe_b1.webp", "/images/otim/ped_equipe_b2.webp", "/images/otim/ped_equipe_b3.webp"];
+const EQUIPE_MINI = ["/images/otim/ped_equipe_a1.webp", "/images/otim/ped_equipe_a2.webp", "/images/otim/ped_equipe_a3.webp"];
 const NOME = "Pediatria";
 
 // Toda especialidade leva ao WhatsApp do setor de terapias (10/11, pedido da
@@ -79,8 +84,13 @@ export function Pediatria() {
           <div className={s.capaFoto}>
             <Image src={FOTOS.capa} alt={FOTOS.capaAlt} width={1200} height={900} priority sizes="(max-width: 900px) 100vw, 560px" />
             <div className={s.capaCartao}>
-              <strong>Consulta com calma</strong>
-              <span>A gente ouve antes de examinar</span>
+              <div className={s.avatares} aria-hidden>
+                {EQUIPE_MINI.map((src) => <Image key={src} src={src} alt="" width={330} height={330} sizes="44px" />)}
+              </div>
+              <div>
+                <strong>Consulta com calma</strong>
+                <span>A gente ouve antes de examinar</span>
+              </div>
             </div>
           </div>
         </section>
@@ -126,8 +136,13 @@ export function Pediatria() {
 
         {/* COMO TRABALHAM */}
         <section id="como-trabalham" className={s.como} aria-labelledby="t-como">
-          <div className={s.comoFoto}>
-            <Image src={FOTOS.comoTrabalha} alt={FOTOS.comoTrabalhaAlt} width={1200} height={800} sizes="(max-width: 900px) 100vw, 520px" />
+          <div className={s.equipe}>
+            {EQUIPE.map((src, i) => (
+              <div key={src} className={`${s.equipeFoto} ${s[`equipeFoto${i + 1}`]}`}>
+                <Image src={src} alt="Pediatra da equipe Vittalis sorrindo, de jaleco" width={330} height={330} sizes="(max-width: 900px) 40vw, 230px" />
+              </div>
+            ))}
+            <p className={s.equipeLegenda}>Equipe de pediatria Vittalis</p>
           </div>
           <div>
             <span className={s.rotulo}>Pediatria Vittalis</span>

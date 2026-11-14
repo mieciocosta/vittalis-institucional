@@ -16,7 +16,7 @@ export const FOTOS = {
   consultorio: [
     { src: "/images/otim/pediatria_02.webp", alt: "Consulta pediátrica com estetoscópio em menino sorridente" },
     { src: "/images/otim/pediatria_01_logo.webp", alt: "Mãe e bebê em consulta no consultório infantil da Vittalis" },
-    { src: "/images/otim/vac_mae_bebe.webp", alt: "Mãe com o bebê no colo na clínica" },
+    { src: "/images/otim/vittalis_pediatria_2.webp", alt: "Pediatra sorrindo para um bebê durante a consulta" },
   ],
 };
 
