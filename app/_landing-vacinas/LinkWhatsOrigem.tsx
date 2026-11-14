@@ -21,6 +21,7 @@ export function LinkWhatsOrigem({
   className,
   children,
   ariaLabel,
+  numero,
 }: {
   mensagem: string;
   slug: string;
@@ -29,16 +30,18 @@ export function LinkWhatsOrigem({
   className?: string;
   children: ReactNode;
   ariaLabel?: string;
+  /** Outro WhatsApp (ex.: setor de terapias nas páginas de especialidade). */
+  numero?: string;
 }) {
   return (
     <a
-      href={linkWhatsApp({ mensagem })}
+      href={linkWhatsApp({ mensagem, numero })}
       target="_blank"
       rel="noopener noreferrer"
       className={className}
       aria-label={ariaLabel}
       onClick={(e) => {
-        e.currentTarget.href = linkWhatsApp({ mensagem: comOrigem(mensagem) });
+        e.currentTarget.href = linkWhatsApp({ mensagem: comOrigem(mensagem), numero });
         trackCampanha("click_whatsapp", { campaign_slug: slug, ...capturarUtms() });
         registrarCliquePlanilha("whatsapp", { slug, nome: nomeCampanha });
       }}

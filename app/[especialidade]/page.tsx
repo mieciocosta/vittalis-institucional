@@ -7,7 +7,9 @@ import SpecialtyPageClient from "./SpecialtyPageClient";
 // Gera rotas estáticas para todas as especialidades. /vacinacao virou a
 // landing de conversão (app/vacinacao, 28/10, pedido do master): ela tem
 // rota própria e sai daqui para as duas não brigarem pelo mesmo endereço.
-const COM_ROTA_PROPRIA = ["vacinacao"];
+// /pediatria também (14/11, pedido da direção: página própria no modelo das
+// clínicas pediátricas que ranqueiam bem no Google, em app/pediatria).
+const COM_ROTA_PROPRIA = ["vacinacao", "pediatria"];
 
 export function generateStaticParams() {
   return getAllSlugs()

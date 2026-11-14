@@ -60,6 +60,7 @@ export const FASES: Fase[] = [
       "É a fase com mais vacinas. A equipe organiza o calendário a partir da caderneta, avisa cada dose e aplica na clínica ou na sua casa.",
     video: { src: V("vacinacao-clinica.mp4"), poster: V("vacinacao-clinica.jpg"), titulo: "Um dia de vacina na Vittalis", legenda: "Da recepção ao sorriso no colo da mãe" },
     vacinas: [
+      { nome: "Hepatite B infantil", para: "Para o recém-nascido, logo nos primeiros dias" },
       { nome: "Hexavalente acelular", para: "Difteria, tétano, coqueluche, pólio, Hib e hepatite B" },
       { nome: "Pneumocócica conjugada", para: "Pneumonia, otite e meningite por pneumococo" },
       { nome: "Meningocócica B", para: "Meningite B" },
@@ -216,6 +217,7 @@ export const MAIS_PROCURADAS: { nome: string; para: string; ancora: string; icon
   { nome: "Vacina da gripe", para: "Toda a família, todo ano", ancora: "mulher", icone: "🤧" },
   { nome: "Vacina VSR", para: "Gestantes, bebês e idosos", ancora: "gestante", icone: "🤰" },
   { nome: "Vacina pneumonia", para: "Bebês e adultos a partir dos 60", ancora: "idoso", icone: "🫁" },
+  { nome: "Vacinas do recém-nascido", para: "Hepatite B infantil. Dúvidas sobre a BCG? A equipe orienta", ancora: "bebe", icone: "🍼" },
   { nome: "Hexavalente e rotavírus", para: "Bebês nos primeiros meses", ancora: "bebe", icone: "💉" },
 ];
 
