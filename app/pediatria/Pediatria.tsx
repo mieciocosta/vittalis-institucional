@@ -7,7 +7,7 @@ import { VideoVacina } from "../vacinas/VideoVacina";
 import { Bebe } from "./Bebe";
 import { Perguntas } from "../campanhas/_componentes/Perguntas";
 import { LinkWhatsOrigem } from "../_landing-vacinas/LinkWhatsOrigem";
-import { ATENDIMENTOS, AVALIACOES, BUSCAS, DESTAQUES_PEDIATRA, NOTA_GOOGLE, PEDIATRA_REAL, BAIRROS, COMO_TRABALHAM, DORES, FOTOS, MENSAGEM_GERAL, PERGUNTAS, CONSULTAS_ROTINA, MARCOS, PRECISA, QUANDO_LEVAR } from "./conteudo";
+import { ATENDIMENTOS, AVALIACOES, BUSCAS, DESTAQUES_PEDIATRA, NOTA_GOOGLE, PEDIATRA_REAL, BAIRROS, COMO_TRABALHAM, DORES, FOTOS, MENSAGEM_GERAL, PERGUNTAS, CONSULTAS_ROTINA, IDADES_BEBE, LEVA_DA_CONSULTA, MARCOS, PUER_DEPOIS, PRECISA, QUANDO_LEVAR } from "./conteudo";
 import s from "./pediatria.module.css";
 
 // Títulos em Plus Jakarta Sans (14/11, pedido da direção: "quero até a paleta
@@ -222,9 +222,14 @@ export function Pediatria() {
             do bebê" mandado pela direção: um bebê desenhado em cada marco) */}
         <div className={s.puerFundo}>
         <section id="puericultura" className={s.puer} aria-labelledby="t-puer">
-          <span className={s.rotulo}>Puericultura</span>
-          <h2 id="t-puer" className={s.puerTitulo}>Desenvolvimento do bebê <em>fase a fase</em></h2>
-          <p className={s.puerSub}>Na puericultura, a pediatra acompanha cada conquista do seu filho e orienta o que estimular em casa.</p>
+          <span className={s.rotulo}>Consultas de rotina</span>
+          <h2 id="t-puer" className={s.puerTitulo}>Puericultura <em>do bebê ao adolescente</em></h2>
+          <p className={s.puerSub}>
+            <strong>Puericultura</strong> é o acompanhamento de rotina da saúde do seu filho, mesmo quando ele está bem.
+            Consulta a consulta, a pediatra confere crescimento, desenvolvimento, alimentação, sono, vacinas e comportamento,
+            e orienta a família antes que uma dúvida vire preocupação.
+          </p>
+          <h3 className={s.marcosTitulo}>Os marcos dos dois primeiros anos</h3>
           <ol className={s.marcos}>
             {MARCOS.map((m) => (
               <li key={m.idade} className={s.marco}>
@@ -236,11 +241,53 @@ export function Pediatria() {
             ))}
           </ol>
           <p className={s.puerTempo}>💛 Cada bebê tem o seu tempo. As idades são aproximadas, e é na consulta que a pediatra avalia o seu filho.</p>
-          <div className={s.rotina}>
-            <strong>📅 Consultas de rotina recomendadas pelo Ministério da Saúde</strong>
-            <ul>{CONSULTAS_ROTINA.map((c) => <li key={c}>{c}</li>)}</ul>
-            <Whats mensagem="Olá! Vim pelo site e quero saber sobre o acompanhamento de puericultura do meu bebê." nome="puericultura">Quero acompanhar meu bebê</Whats>
+
+          <h3 className={s.marcosTitulo}>E depois dos 2 anos, a puericultura continua</h3>
+          <div className={s.depois}>
+            {PUER_DEPOIS.map((d) => (
+              <div key={d.idade} className={s.depoisCartao}>
+                <span className={s.depoisIcone} aria-hidden>{d.icone}</span>
+                <strong>{d.idade}</strong>
+                <ul>{d.itens.map((it) => <li key={it}>{it}</li>)}</ul>
+              </div>
+            ))}
           </div>
+
+          {/* Conversão (14/11): idade em um toque, recém-nascido em destaque,
+              uma avaliação real e o que a família leva da consulta. */}
+          <div className={s.converte}>
+            <div className={s.idadeCartao}>
+              <h3>Qual a idade do seu filho?</h3>
+              <p>Toque na idade e fale com a equipe no WhatsApp. A mensagem já vai pronta.</p>
+              <div className={s.idades}>
+                {IDADES_BEBE.map((d) => (
+                  <LinkWhatsOrigem key={d.rotulo} mensagem={d.msg} slug={SLUG} nomeCampanha={`${NOME}: idade ${d.rotulo}`} numero={WHATSAPP_TERAPIAS} className={s.idade}>
+                    {d.rotulo}
+                  </LinkWhatsOrigem>
+                ))}
+              </div>
+              <p className={s.idadesNota}>📅 Calendário do Ministério da Saúde: {CONSULTAS_ROTINA.slice(0, -1).join(", ")} e {CONSULTAS_ROTINA[CONSULTAS_ROTINA.length - 1]}.</p>
+            </div>
+            <div className={s.converteLado}>
+              <div className={s.recem}>
+                <span className={s.recemSelo}>🍼 Recém-nascido</span>
+                <h3>Seu bebê acabou de nascer?</h3>
+                <p>A primeira consulta é na <strong>primeira semana de vida</strong>: peso, amamentação, amarelão, teste do pezinho e vacinas.</p>
+                <Whats mensagem={IDADES_BEBE[0].msg} nome="recem-nascido" className={s.botaoRecem}>Agendar a 1ª consulta do meu bebê</Whats>
+              </div>
+              <figure className={s.puerAval}>
+                <span className={s.estrelas} aria-label="5 estrelas">★★★★★</span>
+                <blockquote>“{AVALIACOES[0].texto}”</blockquote>
+                <figcaption>{AVALIACOES[0].nome} · avaliação no Google</figcaption>
+              </figure>
+            </div>
+          </div>
+          <h3 className={s.levaTitulo}>O que você leva de cada consulta</h3>
+          <ul className={s.leva}>
+            {LEVA_DA_CONSULTA.map((l) => (
+              <li key={l.titulo}><span aria-hidden>{l.icone}</span><strong>{l.titulo}</strong>{l.texto}</li>
+            ))}
+          </ul>
         </section>
         </div>
 

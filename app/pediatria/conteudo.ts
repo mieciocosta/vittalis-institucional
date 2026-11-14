@@ -203,7 +203,6 @@ export const AVALIACOES = [
   { nome: "Ana A.", texto: "Atendimento muito humanizado! Profissionais muito educadas e qualificadas" },
 ];
 
-// Calendário de consultas de rotina (puericultura) do Ministério da Saúde.
 // Marcos do desenvolvimento (14/11, no modelo do quadro "Desenvolvimento do
 // bebê no 1º ano" mandado pela direção). Idades aproximadas, na linha da
 // Caderneta da Criança do Ministério da Saúde; cada bebê tem seu tempo.
@@ -216,6 +215,39 @@ export const MARCOS = [
   { pose: 6, idade: "9-12", unidade: "meses", texto: "Fica em pé com apoio, primeiros passos" },
   { pose: 7, idade: "12-18", unidade: "meses", texto: "Anda sozinho" },
   { pose: 8, idade: "18-24", unidade: "meses", texto: "Corre, chuta bola e junta palavras" },
+];
+
+// Puericultura depois dos 2 anos (14/11, direção: "as consultas incluem
+// bebês, crianças e adolescentes").
+export const PUER_DEPOIS = [
+  { icone: "🧒", idade: "2 a 5 anos", itens: ["Fala e linguagem", "Alimentação e seletividade", "Sono e desfralde", "Comportamento e birras"] },
+  { icone: "🎒", idade: "6 a 11 anos", itens: ["Escola e aprendizagem", "Peso, altura e postura", "Visão e audição", "Esportes e telas"] },
+  { icone: "🧑", idade: "12 a 18 anos", itens: ["Puberdade", "Saúde emocional", "Alimentação e acne", "Vacinas da adolescência"] },
+];
+
+// "Qual a idade do seu filho?" (14/11, pra converter: a família toca na idade
+// e o WhatsApp já abre com a mensagem pronta, a recepção já sabe a fase).
+const msgIdade = (quem: string) => `Olá! Vim pelo site. ${quem} e quero agendar a consulta de puericultura com a pediatra.`;
+export const IDADES_BEBE = [
+  { rotulo: "🍼 Recém-nascido", msg: "Olá! Vim pelo site. Meu bebê acabou de nascer e quero agendar a primeira consulta com a pediatra." },
+  { rotulo: "1 mês", msg: msgIdade("Meu bebê tem 1 mês") },
+  { rotulo: "2 meses", msg: msgIdade("Meu bebê tem 2 meses") },
+  { rotulo: "4 meses", msg: msgIdade("Meu bebê tem 4 meses") },
+  { rotulo: "6 meses", msg: msgIdade("Meu bebê tem 6 meses") },
+  { rotulo: "9 meses", msg: msgIdade("Meu bebê tem 9 meses") },
+  { rotulo: "1 ano", msg: msgIdade("Meu filho tem 1 ano") },
+  { rotulo: "1 a 2 anos", msg: msgIdade("Meu filho tem entre 1 e 2 anos") },
+  { rotulo: "2 a 5 anos", msg: msgIdade("Meu filho tem entre 2 e 5 anos") },
+  { rotulo: "6 a 11 anos", msg: msgIdade("Meu filho tem entre 6 e 11 anos") },
+  { rotulo: "🧑 Adolescente (12 a 18 anos)", msg: msgIdade("Meu filho é adolescente") },
+];
+
+// O que a família leva de cada consulta (só o que a consulta já faz).
+export const LEVA_DA_CONSULTA = [
+  { icone: "📈", titulo: "Curva de crescimento", texto: "Peso, altura e desenvolvimento conferidos e anotados." },
+  { icone: "💉", titulo: "Caderneta em dia", texto: "Vacinas conferidas e aplicadas aqui mesmo ou em casa." },
+  { icone: "🧭", titulo: "Orientação da fase", texto: "Sono, alimentação, escola e comportamento de cada idade." },
+  { icone: "📅", titulo: "Retorno combinado", texto: "Você sai sabendo quando voltar, e a gente lembra pelo WhatsApp." },
 ];
 
 // Calendário de consultas de rotina (puericultura) do Ministério da Saúde.
