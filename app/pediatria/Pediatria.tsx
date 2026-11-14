@@ -126,7 +126,7 @@ export function Pediatria() {
         <section id="pediatra" className={s.luisa} aria-labelledby="t-luisa">
           <div className={s.luisaInterno}>
             <div className={s.luisaFoto}>
-              <Image src={PEDIATRA_REAL.foto} alt={PEDIATRA_REAL.alt} width={795} height={1005} sizes="(max-width: 900px) 90vw, 420px" />
+              <Image src={PEDIATRA_REAL.foto} alt={PEDIATRA_REAL.alt} width={1000} height={1053} sizes="(max-width: 900px) 90vw, 420px" />
             </div>
             <div className={s.luisaTexto}>
               <span className={s.rotulo}>Conheça a pediatra</span>
