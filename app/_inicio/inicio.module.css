@@ -1,0 +1,37 @@
+/* Só o que é da página inicial; o resto vem de pediatria.module.css (14/11). */
+.capaFoto { position: relative; isolation: isolate; }
+.capaFoto::before { content: ""; position: absolute; z-index: -1; border-radius: 50%; background: #f0a3b6; width: 70%; aspect-ratio: 1; right: -8%; top: -14%; opacity: .55; }
+.capaFoto img { width: 100%; height: auto; display: block; border-radius: 32px; box-shadow: 0 24px 60px rgba(26,26,26,.14); }
+.capaCartao { position: absolute; left: -18px; bottom: 24px; background: #fff; border-radius: 16px; padding: 12px 18px; font-size: 13px; color: #5f5a58; box-shadow: 0 12px 30px rgba(0,0,0,.14); line-height: 1.35; }
+.capaCartao strong { display: block; font-size: 16px; color: #1a1a1a; }
+.comoFoto img { width: 100%; height: auto; display: block; border-radius: 32px; box-shadow: 0 20px 50px rgba(26,26,26,.12); }
+
+.grupo { font-family: var(--titulos); font-size: 22px; color: var(--verde-escuro); margin: 40px 0 18px; text-align: left; max-width: 1200px; }
+.esps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; text-align: left; }
+.esp { display: flex; flex-direction: column; background: #fff; border-radius: 22px; overflow: hidden; text-decoration: none; color: inherit; border: 1px solid #f1e6da; box-shadow: 0 10px 28px rgba(26,26,26,.06); transition: transform .2s, box-shadow .2s; }
+.esp:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(26,26,26,.10); }
+.espFoto { display: block; aspect-ratio: 16 / 10; overflow: hidden; background: #f3ebe4; }
+.espFoto img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+.esp:hover .espFoto img { transform: scale(1.04); }
+.espCorpo { display: flex; flex-direction: column; gap: 8px; padding: 16px 18px 18px; flex: 1; }
+.espCorpo strong { font-family: var(--titulos); font-size: 17px; color: var(--tinta); }
+.espTexto { font-size: 14px; line-height: 1.55; color: var(--cinza); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.espLink { margin-top: auto; font-weight: 800; font-size: 14px; color: var(--verde-escuro); }
+
+.vacAcoes { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.linkVac { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 5px; }
+.vacFoto { position: relative; }
+.vacFoto img { width: 100%; height: auto; display: block; border-radius: 28px; box-shadow: 0 20px 50px rgba(0,0,0,.2); }
+.publicos { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.publicos li { font-size: 14px; padding: 7px 14px; border-radius: 999px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); }
+
+.precisa { list-style: none; padding: 0; margin: 28px auto 0; max-width: 1000px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; text-align: left; }
+.precisa li { background: #fff; border-radius: 18px; padding: 16px 18px; font-size: 14.5px; line-height: 1.5; color: var(--cinza); box-shadow: 0 8px 22px rgba(26,26,26,.05); }
+.precisa strong { display: block; font-family: var(--titulos); font-size: 17px; color: var(--verde); margin-bottom: 4px; }
+
+.legal { max-width: 1200px; margin: 0 auto; padding: 0 0 20px; font-size: 13px; line-height: 1.7; }
+.legal p { margin: 6px 0 0; }
+
+@media (max-width: 1000px) { .esps { grid-template-columns: repeat(2, 1fr); } .precisa { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 900px) { .capaCartao { left: 12px; bottom: 12px; } .grupo { text-align: center; } }
+@media (max-width: 560px) { .esps { grid-template-columns: 1fr; } .precisa { grid-template-columns: 1fr; } }

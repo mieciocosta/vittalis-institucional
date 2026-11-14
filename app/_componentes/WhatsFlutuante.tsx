@@ -16,7 +16,7 @@ import s from "./whatsFlutuante.module.css";
 // No celular, as páginas que já têm a barra fixa de WhatsApp embaixo não
 // mostram este botão (pra não ter dois); nas outras ele aparece redondo.
 
-const PAGINAS_COM_BARRA = ["vacinas", "vacinacao", "planos-vacinais", "pacotes-de-vacinas", "campanhas", "pediatria"];
+const PAGINAS_COM_BARRA = ["", "vacinas", "vacinacao", "planos-vacinais", "pacotes-de-vacinas", "campanhas", "pediatria"];
 
 function destino(caminho: string) {
   const slug = caminho.split("/").filter(Boolean)[0] ?? "";
