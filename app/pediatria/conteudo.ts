@@ -9,7 +9,8 @@ export const MENSAGEM_GERAL = "Olá! Vim pelo site da Vittalis e gostaria de age
 // Fotos. Quando chegarem as fotos novas da pediatra (mesma pessoa em todas),
 // troque só os caminhos aqui.
 export const FOTOS = {
-  capa: "/images/otim/ped_capa.webp",
+  // Recortada (sem o fundo da foto) para casar com o rosé da capa, como no modelo.
+  capa: "/images/otim/ped_capa_recorte.webp",
   capaAlt: "Pediatra sorridente de jaleco com estetoscópio, sentada numa poltrona verde",
   comoTrabalha: "/images/otim/vittalis_pediatria_2.webp",
   comoTrabalhaAlt: "Pediatra sorrindo para um bebê durante a consulta",

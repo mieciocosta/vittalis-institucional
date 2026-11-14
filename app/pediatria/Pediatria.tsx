@@ -82,7 +82,7 @@ export function Pediatria() {
             </ul>
           </div>
           <div className={s.capaFoto}>
-            <Image src={FOTOS.capa} alt={FOTOS.capaAlt} width={1062} height={1068} priority sizes="(max-width: 900px) 100vw, 560px" />
+            <Image src={FOTOS.capa} alt={FOTOS.capaAlt} width={1030} height={1055} priority sizes="(max-width: 900px) 100vw, 560px" />
             <div className={s.capaCartao}>
               <div className={s.avatares} aria-hidden>
                 {EQUIPE_MINI.map((src) => <Image key={src} src={src} alt="" width={330} height={330} sizes="44px" />)}
