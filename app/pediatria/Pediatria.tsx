@@ -6,7 +6,7 @@ import { ENDERECO, HORARIOS, WHATSAPP_TERAPIAS } from "@/lib/config/contato";
 import { VideoVacina } from "../vacinas/VideoVacina";
 import { Perguntas } from "../campanhas/_componentes/Perguntas";
 import { LinkWhatsOrigem } from "../_landing-vacinas/LinkWhatsOrigem";
-import { ATENDIMENTOS, BAIRROS, COMO_TRABALHAM, DORES, FOTOS, MENSAGEM_GERAL, PERGUNTAS, PRECISA, PUERICULTURA, QUANDO_LEVAR } from "./conteudo";
+import { ATENDIMENTOS, AVALIACOES, NOTA_GOOGLE, BAIRROS, COMO_TRABALHAM, DORES, FOTOS, MENSAGEM_GERAL, PERGUNTAS, PRECISA, PUERICULTURA, QUANDO_LEVAR } from "./conteudo";
 import s from "./pediatria.module.css";
 
 // Títulos em Plus Jakarta Sans (14/11, pedido da direção: "quero até a paleta
@@ -234,6 +234,28 @@ export function Pediatria() {
             <span className={s.rotulo}>Depoimentos</span>
             <h2 id="t-depo" className={s.secaoTitulo}>O que as <em>famílias</em> dizem sobre a Vittalis</h2>
             <p className={s.secaoSub}>Gente de verdade, na nossa clínica, com a nossa equipe.</p>
+            <a href={BRAND.mapsUrl} target="_blank" rel="noopener noreferrer" className={s.notaGoogle}>
+              <span className={s.notaG} aria-hidden="true">G</span>
+              <strong>{NOTA_GOOGLE.nota}</strong>
+              <span className={s.estrelas} aria-label="5 estrelas">★★★★★</span>
+              <span>{NOTA_GOOGLE.total} avaliações no Google</span>
+            </a>
+            <div className={s.avalGrade}>
+              {AVALIACOES.map((a) => (
+                <figure key={a.nome} className={s.aval}>
+                  <div className={s.avalTopo}>
+                    <span className={s.avalIni} aria-hidden="true">{a.nome.split(" ").map((p) => p[0]).join("")}</span>
+                    <div>
+                      <strong>{a.nome}</strong>
+                      <span className={s.estrelas} aria-label="5 estrelas">★★★★★</span>
+                    </div>
+                    <span className={s.avalG} aria-label="Avaliação do Google">G</span>
+                  </div>
+                  <blockquote>“{a.texto}”</blockquote>
+                </figure>
+              ))}
+            </div>
+            <h3 className={s.depoVideos}>Em vídeo</h3>
             <div className={s.depoGrade}>
               <VideoVacina src="/videos/vacinacao-depoimento-familia.mp4" poster="/videos/vacinacao-depoimento-familia.jpg" titulo="A família do Samuel" legenda="Os pais contam por que cuidam do bebê aqui" />
               <VideoVacina src="/videos/vacinacao-plano-vacinal.mp4" poster="/videos/vacinacao-plano-vacinal.jpg" titulo="Mãe e filha" legenda="Uma mãe conta como é o cuidado com a filha na Vittalis" />

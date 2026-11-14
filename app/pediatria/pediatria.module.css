@@ -162,6 +162,21 @@
 .depoGrade { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
 .depoGrade > figure { width: 250px; }
 @media (max-width: 600px) { .depoGrade > figure { width: calc(50% - 12px); } }
+/* Avaliações reais do Google (14/11) */
+.notaGoogle { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 4px auto 32px; padding: 10px 20px; border-radius: 999px; background: #fff; box-shadow: 0 6px 20px rgba(14,138,145,.10); color: var(--tinta); text-decoration: none; font-size: 15px; }
+.notaGoogle strong { font-size: 20px; }
+.notaG, .avalG { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; font-weight: 800; font-size: 14px; color: #fff; background: conic-gradient(#ea4335 0 25%, #fbbc05 0 50%, #34a853 0 75%, #4285f4 0); }
+.estrelas { color: #f5a623; letter-spacing: 2px; font-size: 16px; }
+.avalGrade { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 980px; margin: 0 auto 56px; text-align: left; }
+.aval { margin: 0; background: #fff; border-radius: 18px; padding: 24px 26px; box-shadow: 0 8px 28px rgba(26,26,26,.06); border: 1px solid #f1e6da; }
+.avalTopo { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.avalTopo > div { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.avalTopo strong { font-size: 16px; color: var(--tinta); }
+.avalIni { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--verde); color: #fff; font-weight: 800; font-size: 17px; }
+.avalG { width: 22px; height: 22px; font-size: 12px; opacity: .9; }
+.aval blockquote { margin: 0; color: var(--cinza); font-size: 15.5px; line-height: 1.65; }
+.depoVideos { font-size: 20px; color: var(--verde-escuro); margin: 0 0 24px; }
+@media (max-width: 700px) { .avalGrade { grid-template-columns: 1fr; } .aval { padding: 20px; } }
 
 /* Localização: horários e contatos */
 .localInfo { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 6px; font-size: 15.5px; }
