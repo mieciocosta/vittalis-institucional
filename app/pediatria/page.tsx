@@ -8,9 +8,9 @@ import { FOTOS, PERGUNTAS } from "./conteudo";
 // muito parecida com a neuropediatria", com uma clínica pediátrica que
 // ranqueia bem no Google como modelo). Os anúncios de pediatria do Google
 // levam para cá. Sai do app/[especialidade] (COM_ROTA_PROPRIA).
-const TITULO = "Pediatra em São Luís | Consulta Pediátrica e Puericultura | Vittalis Saúde";
+const TITULO = "Pediatra em São Luís - MA | Consulta Pediátrica Particular e Puericultura | Vittalis Saúde";
 const DESCRICAO =
-  "Pediatra em São Luís no Jardim Renascença: consulta pediátrica sem pressa, puericultura do recém-nascido ao adolescente e vacinação no mesmo lugar. Agende pelo WhatsApp.";
+  "Pediatra em São Luís (MA) no Jardim Renascença: consulta pediátrica particular de 1 hora, puericultura do recém-nascido ao adolescente, atendimento aos sábados e vacinação no mesmo lugar. Agende pelo WhatsApp.";
 
 export const metadata: Metadata = {
   title: TITULO,
@@ -20,6 +20,11 @@ export const metadata: Metadata = {
     "pediatra São Luís", "pediatra em São Luís", "clínica pediátrica São Luís", "consulta pediátrica São Luís",
     "puericultura São Luís", "pediatra particular São Luís", "pediatra Renascença", "pediatra Cohama",
     "pediatra Calhau", "pediatra recém-nascido São Luís", "clínica infantil São Luís",
+    "pediatra São Luís MA", "pediatra Maranhão", "pediatra perto de mim", "pediatra que atende sábado São Luís",
+    "consulta pediatra São Luís", "médico pediatra São Luís", "pediatra infantil São Luís", "pediatra para bebê São Luís",
+    "pediatra Turu", "pediatra Ponta d'Areia", "pediatra Cohab", "pediatra Olho d'Água", "pediatra São José de Ribamar",
+    "pediatra Paço do Lumiar", "pediatra Raposa", "pediatra TDAH São Luís", "pediatra autismo São Luís",
+    "check-up infantil São Luís", "clínica pediátrica Renascença",
   ],
   robots: { index: true, follow: true },
   openGraph: {
@@ -51,6 +56,12 @@ export default function Pagina() {
       addressCountry: "BR",
     },
     geo: { "@type": "GeoCoordinates", latitude: BRAND.lat, longitude: BRAND.lng },
+    priceRange: "$$",
+    openingHoursSpecification: [
+      { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "08:00", closes: "18:00" },
+      { "@type": "OpeningHoursSpecification", dayOfWeek: "Saturday", opens: "08:00", closes: "12:00" },
+    ],
+    areaServed: [...["São Luís", "São José de Ribamar", "Paço do Lumiar", "Raposa"].map((n) => ({ "@type": "City", name: n })), { "@type": "State", name: "Maranhão" }],
   };
   const faq = {
     "@context": "https://schema.org",

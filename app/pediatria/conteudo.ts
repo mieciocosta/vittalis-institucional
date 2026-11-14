@@ -73,7 +73,35 @@ export const QUANDO_LEVAR = [
   "Check-up para escola, esportes ou adolescência",
 ];
 
-export const BAIRROS = ["Renascença", "Cohama", "Calhau", "Cohab", "Turu", "Ponta d'Areia", "Vinhais", "São José de Ribamar", "Paço do Lumiar"];
+export const BAIRROS = [
+  "Renascença", "Jardim Renascença", "Cohama", "Calhau", "Ponta d'Areia", "Ponta do Farol", "São Francisco",
+  "Olho d'Água", "Turu", "Vinhais", "Cohab", "Cohatrac", "Angelim", "Bequimão", "Jardim Eldorado",
+  "Araçagi", "Maiobão", "São José de Ribamar", "Paço do Lumiar", "Raposa",
+];
+
+// O que as famílias do Maranhão mais pesquisam quando procuram pediatra
+// (14/11, pedido da direção: "coloque no site as palavras-chave que a
+// população do Maranhão pesquisa"). Cada linha responde uma busca de verdade,
+// sem prometer o que a clínica não faz (não é pronto-socorro, não é 24 horas).
+export const BUSCAS = [
+  { busca: "Pediatra em São Luís", resposta: "Consultório de pediatria no Jardim Renascença, perto da Cohama, do Calhau e da Ponta d'Areia." },
+  { busca: "Pediatra particular", resposta: "Consulta particular de 1 hora, com retorno combinado com a família." },
+  { busca: "Pediatra para recém-nascido", resposta: "Primeira consulta do bebê logo na primeira semana de vida e puericultura no primeiro ano." },
+  { busca: "Pediatra que atende sábado", resposta: "Atendimento de segunda a sexta, das 8h às 18h, e aos sábados, das 8h às 12h." },
+  { busca: "Clínica pediátrica e infantil", resposta: "Pediatria, neuropediatria, fono, psicologia infantil, nutrição e terapia ocupacional no mesmo endereço." },
+  { busca: "Pediatra e vacinação infantil", resposta: "A caderneta é conferida na consulta e as vacinas são aplicadas na clínica ou em casa." },
+  { busca: "Pediatra para TDAH e autismo", resposta: "Avaliação do desenvolvimento e encaminhamento para neuropediatria e terapias da própria Vittalis." },
+  { busca: "Check-up infantil e do adolescente", resposta: "Consulta de rotina para escola, esportes, crescimento e puberdade." },
+];
+
+export const DESTAQUES_PEDIATRA = [
+  "Consulta de 1 hora, sem pressa",
+  "Do recém-nascido ao adolescente",
+  "Puericultura e consultas de rotina",
+  "Vacinação na clínica e em casa",
+  "Neuropediatria e terapias no mesmo endereço",
+  "Atendimento particular, também aos sábados",
+];
 
 export const PERGUNTAS = [
   {
@@ -107,6 +135,22 @@ export const PERGUNTAS = [
   {
     pergunta: "Qual é o horário de atendimento?",
     resposta: "De segunda a sexta, das 8h às 18h, e aos sábados, das 8h às 12h.",
+  },
+  {
+    pergunta: "A pediatria atende aos sábados?",
+    resposta: "Sim. Aos sábados o atendimento é das 8h às 12h. De segunda a sexta, das 8h às 18h.",
+  },
+  {
+    pergunta: "Onde fica a clínica? Atendem famílias de outros bairros e cidades?",
+    resposta: "A Vittalis fica na Av. Coronel Colares Moreira, no Jardim Renascença, em São Luís, perto da Cohama, do Calhau e da Ponta d'Areia. Recebemos famílias de toda a Ilha (São José de Ribamar, Paço do Lumiar e Raposa), e famílias do interior do Maranhão também podem agendar pelo WhatsApp.",
+  },
+  {
+    pergunta: "Quanto custa a consulta com a pediatra?",
+    resposta: "O valor e os horários disponíveis são informados pelo WhatsApp, junto com como funciona a consulta.",
+  },
+  {
+    pergunta: "A Vittalis é pronto-socorro ou atende 24 horas?",
+    resposta: "Não. A pediatria atende com hora marcada. Em urgência (falta de ar, convulsão, desmaio ou criança muito prostrada) procure o pronto-socorro mais próximo.",
   },
   {
     pergunta: "Como agendar?",

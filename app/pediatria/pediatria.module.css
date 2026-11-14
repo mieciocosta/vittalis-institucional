@@ -178,6 +178,19 @@
   .luisaFoto { max-width: 340px; margin: 0 auto; width: 100%; }
   .luisaFoto::before { inset: 14px -10px -14px 10px; }
 }
+.luisaDestaques { list-style: none; padding: 0; margin: 4px 0 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; }
+.luisaDestaques li { position: relative; padding-left: 26px; font-size: 15px; color: var(--tinta); font-weight: 600; }
+.luisaDestaques li::before { content: "✓"; position: absolute; left: 0; top: -1px; width: 19px; height: 19px; border-radius: 50%; background: var(--verde); color: #fff; font-size: 11px; display: grid; place-items: center; }
+@media (max-width: 600px) { .luisaDestaques { grid-template-columns: 1fr; } }
+/* Palavras-chave do Maranhão (14/11) */
+.buscas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1200px; margin: 0 auto; text-align: left; }
+.busca { background: #fff; border: 1px solid #f1e6da; border-radius: 18px; padding: 20px 20px 18px; box-shadow: 0 6px 22px rgba(26,26,26,.05); }
+.busca h3 { font-size: 16px; margin: 0 0 8px; color: var(--verde-escuro); }
+.busca p { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--cinza); }
+.buscasBairros { max-width: 900px; margin: 28px auto 28px; font-size: 14.5px; line-height: 1.8; color: var(--cinza); text-align: center; }
+.buscasBairros strong { color: var(--tinta); }
+@media (max-width: 1000px) { .buscas { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .buscas { grid-template-columns: 1fr; } }
 /* Avaliações reais do Google (14/11) */
 .notaGoogle { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 4px auto 32px; padding: 10px 20px; border-radius: 999px; background: #fff; box-shadow: 0 6px 20px rgba(14,138,145,.10); color: var(--tinta); text-decoration: none; font-size: 15px; }
 .notaGoogle strong { font-size: 20px; }

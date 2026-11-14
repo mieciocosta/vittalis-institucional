@@ -6,7 +6,7 @@ import { ENDERECO, HORARIOS, WHATSAPP_TERAPIAS } from "@/lib/config/contato";
 import { VideoVacina } from "../vacinas/VideoVacina";
 import { Perguntas } from "../campanhas/_componentes/Perguntas";
 import { LinkWhatsOrigem } from "../_landing-vacinas/LinkWhatsOrigem";
-import { ATENDIMENTOS, AVALIACOES, NOTA_GOOGLE, PEDIATRA_REAL, BAIRROS, COMO_TRABALHAM, DORES, FOTOS, MENSAGEM_GERAL, PERGUNTAS, PRECISA, PUERICULTURA, QUANDO_LEVAR } from "./conteudo";
+import { ATENDIMENTOS, AVALIACOES, BUSCAS, DESTAQUES_PEDIATRA, NOTA_GOOGLE, PEDIATRA_REAL, BAIRROS, COMO_TRABALHAM, DORES, FOTOS, MENSAGEM_GERAL, PERGUNTAS, PRECISA, PUERICULTURA, QUANDO_LEVAR } from "./conteudo";
 import s from "./pediatria.module.css";
 
 // Títulos em Plus Jakarta Sans (14/11, pedido da direção: "quero até a paleta
@@ -80,7 +80,7 @@ export function Pediatria() {
               <a href="#programas" className={s.botaoSecundario}>Conheça os atendimentos</a>
             </div>
             <ul className={s.capaSelos}>
-              <li>⏱️ Consulta de 40 a 50 min</li>
+              <li>⏱️ Consulta de 1 hora</li>
               <li>🍼 Do recém-nascido ao adolescente</li>
               <li>💉 Vacinas na mesma clínica</li>
             </ul>
@@ -134,6 +134,9 @@ export function Pediatria() {
               {PEDIATRA_REAL.registro && <p className={s.luisaReg}>{PEDIATRA_REAL.registro}</p>}
               <p className={s.luisaLegenda}>{PEDIATRA_REAL.legenda}</p>
               {PEDIATRA_REAL.texto.map((t) => <p key={t}>{t}</p>)}
+              <ul className={s.luisaDestaques}>
+                {DESTAQUES_PEDIATRA.map((d) => <li key={d}>{d}</li>)}
+              </ul>
               <Whats mensagem={PEDIATRA_REAL.mensagem} nome="pediatra real">Agendar com a {PEDIATRA_REAL.nome}</Whats>
             </div>
           </div>
@@ -301,7 +304,7 @@ export function Pediatria() {
               <li>📸 <a href={BRAND.instagramDirect} target="_blank" rel="noopener noreferrer">@vittalissaudeslz</a></li>
               <li>✉️ <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a></li>
             </ul>
-            <p className={s.localBairros}>Famílias de toda a Ilha consultam aqui: {BAIRROS.slice(0, -1).join(", ")} e {BAIRROS[BAIRROS.length - 1]}.</p>
+            <p className={s.localBairros}>Fácil de chegar de toda a Ilha: Cohama, Calhau, Ponta d'Areia, Turu, Cohab, São José de Ribamar, Paço do Lumiar e Raposa.</p>
             <div className={s.capaAcoes}>
               <Whats mensagem={MENSAGEM_GERAL} nome="localização">Falar no WhatsApp</Whats>
               <a href={ENDERECO.mapsUrl} target="_blank" rel="noopener noreferrer" className={s.botaoSecundario}>Abrir no Google Maps</a>
@@ -312,6 +315,27 @@ export function Pediatria() {
           </div>
         </section>
         </div>
+
+        {/* O QUE AS FAMÍLIAS PROCURAM (palavras-chave do Maranhão, 14/11) */}
+        <section className={s.secao} aria-labelledby="t-buscas">
+          <span className={s.rotulo}>Pediatra em São Luís – MA</span>
+          <h2 id="t-buscas" className={s.secaoTitulo}>Procurando <em>pediatra em São Luís</em>?</h2>
+          <p className={s.secaoSub}>O que as famílias do Maranhão mais procuram, e o que encontram na Vittalis.</p>
+          <div className={s.buscas}>
+            {BUSCAS.map((b) => (
+              <div key={b.busca} className={s.busca}>
+                <h3>🔎 {b.busca}</h3>
+                <p>{b.resposta}</p>
+              </div>
+            ))}
+          </div>
+          <p className={s.buscasBairros}>
+            <strong>Pediatra perto de você:</strong> {BAIRROS.join(" · ")}.
+          </p>
+          <div className={s.centro}>
+            <Whats mensagem={MENSAGEM_GERAL} nome="buscas">Agendar consulta pediátrica</Whats>
+          </div>
+        </section>
 
         {/* DÚVIDAS */}
         <section id="duvidas" className={s.secao} aria-labelledby="t-duvidas">
@@ -355,7 +379,7 @@ export function Pediatria() {
             <p><a href={BRAND.instagramDirect} target="_blank" rel="noopener noreferrer">Instagram</a> · <a href={`mailto:${BRAND.email}`}>E-mail</a></p>
           </div>
         </div>
-        <p className={s.rodapeFim}>© {BRAND.name} · Imagens ilustrativas · Atendimento particular · <Link href="/politica-de-privacidade">Política de privacidade</Link> · <Link href="/">Site da Vittalis</Link></p>
+        <p className={s.rodapeFim}>© {BRAND.name} · Imagem da capa ilustrativa · Atendimento particular · <Link href="/politica-de-privacidade">Política de privacidade</Link> · <Link href="/">Site da Vittalis</Link></p>
       </footer>
 
       <div className={s.barraWhats}>
