@@ -236,7 +236,9 @@ export function Pediatria() {
             <p className={s.secaoSub}>Gente de verdade, na nossa clínica, com a nossa equipe.</p>
             <div className={s.depoGrade}>
               <VideoVacina src="/videos/vacinacao-depoimento-familia.mp4" poster="/videos/vacinacao-depoimento-familia.jpg" titulo="A família do Samuel" legenda="Os pais contam por que cuidam do bebê aqui" />
-              <VideoVacina src="/videos/vacinacao-plano-vacinal.mp4" poster="/videos/vacinacao-plano-vacinal.jpg" titulo="Tudo planejado desde o começo" legenda="Como a equipe organiza o cuidado da família" />
+              <VideoVacina src="/videos/vacinacao-plano-vacinal.mp4" poster="/videos/vacinacao-plano-vacinal.jpg" titulo="Mãe e filha" legenda="Uma mãe conta como é o cuidado com a filha na Vittalis" />
+              <VideoVacina src="/videos/vacinacao-depoimento-zoster.mp4" poster="/videos/vacinacao-depoimento-zoster.jpg" titulo="Paciente da Vittalis" legenda="Ela conta por que confia na nossa equipe" />
+              <VideoVacina src="/videos/vacinacao-clinica.mp4" poster="/videos/vacinacao-clinica.jpg" titulo="Um dia na clínica" legenda="O bebê no colo da mãe, com calma e carinho" />
             </div>
             <div className={s.centro}>
               <a href={BRAND.mapsUrl} target="_blank" rel="noopener noreferrer" className={s.botaoSecundario}>⭐ Ver as avaliações no Google</a>

@@ -160,7 +160,8 @@
 .depo { background: var(--rose-claro); }
 .depoInterno { max-width: 1200px; margin: 0 auto; padding: 88px 20px; text-align: center; scroll-margin-top: 70px; }
 .depoGrade { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
-.depoGrade > figure { width: 260px; }
+.depoGrade > figure { width: 250px; }
+@media (max-width: 600px) { .depoGrade > figure { width: calc(50% - 12px); } }
 
 /* Localização: horários e contatos */
 .localInfo { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 6px; font-size: 15.5px; }
