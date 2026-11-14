@@ -24,6 +24,7 @@ const SLUG = "pediatria";
 
 // Retratos ilustrativos da equipe (14/11, a direção mandou as imagens; só o
 // rosto e os ombros, sem os personagens dos jalecos, que têm direito autoral).
+const TIME = ["/images/otim/ped_time_a1.webp", "/images/otim/ped_time_a2.webp", "/images/otim/ped_time_a3.webp"];
 const EQUIPE = ["/images/otim/ped_equipe_b1.webp", "/images/otim/ped_equipe_b2.webp", "/images/otim/ped_equipe_b3.webp"];
 const NOME = "Pediatria";
 
@@ -163,6 +164,23 @@ export function Pediatria() {
           <p className={s.emergencia}>🚑 Falta de ar, convulsão, desmaio ou criança muito prostrada: procure o pronto-socorro mais próximo.</p>
           <div className={s.centro}>
             <Whats mensagem={MENSAGEM_GERAL} nome="quando levar">Agendar pelo WhatsApp</Whats>
+          </div>
+        </section>
+
+        {/* EQUIPE (14/11, pedido da direção; retratos ilustrativos, só rosto e ombros) */}
+        <section className={s.secao} aria-labelledby="t-time">
+          <span className={s.rotulo}>Nossa equipe</span>
+          <h2 id="t-time" className={s.secaoTitulo}>Pediatras que <em>acolhem</em> cada família</h2>
+          <p className={s.secaoSub}>Atendem com calma, explicam com carinho e acompanham o crescimento do seu filho de perto.</p>
+          <div className={s.time}>
+            {TIME.map((src, i) => (
+              <figure key={src} className={`${s.timeFoto} ${s[`timeFoto${i + 1}`]}`}>
+                <Image src={src} alt="Pediatra da equipe Vittalis sorrindo, de jaleco e estetoscópio" width={528} height={632} sizes="(max-width: 760px) 80vw, 340px" />
+              </figure>
+            ))}
+          </div>
+          <div className={s.centro}>
+            <Whats mensagem={MENSAGEM_GERAL} nome="equipe">Agendar com a nossa pediatria</Whats>
           </div>
         </section>
 
