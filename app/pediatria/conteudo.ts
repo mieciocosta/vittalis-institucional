@@ -38,6 +38,13 @@ export const ATENDIMENTOS: Atendimento[] = [
     itens: ["Volta às aulas e esportes", "Crescimento e puberdade", "Orientação para os pais"],
     mensagem: "Olá! Vim pelo site e quero agendar um check-up pediátrico.",
   },
+  {
+    icone: "🧩",
+    titulo: "Desenvolvimento: TDAH e TEA",
+    texto: "Quando a fala, o comportamento ou a aprendizagem preocupam: a pediatra avalia e a criança segue com neuropediatria e terapias no mesmo endereço.",
+    itens: ["Atraso na fala ou no andar", "Suspeita de TDAH ou autismo", "Equipe que conversa entre si"],
+    mensagem: "Olá! Vim pelo site e quero falar sobre o desenvolvimento do meu filho.",
+  },
 ];
 
 export const DORES = [
@@ -94,7 +101,33 @@ export const PERGUNTAS = [
     resposta: "Neuropediatria, fonoaudiologia, psicologia infantil, nutrição infantil e terapia ocupacional ficam na própria clínica, o que facilita o acompanhamento.",
   },
   {
+    pergunta: "A pediatria atende TDAH e autismo (TEA)?",
+    resposta: "A pediatra avalia o desenvolvimento e, quando é preciso, a criança segue com a neuropediatria, a neuropsicologia e as terapias da própria Vittalis.",
+  },
+  {
+    pergunta: "Qual é o horário de atendimento?",
+    resposta: "De segunda a sexta, das 8h às 18h, e aos sábados, das 8h às 12h.",
+  },
+  {
     pergunta: "Como agendar?",
     resposta: "Pelo WhatsApp. É só tocar em qualquer botão desta página e a equipe responde com os horários disponíveis.",
   },
+];
+
+// "O que você realmente procura" (no lugar das frases de mães do modelo: aqui
+// não inventamos depoimento, falamos do que a família encontra).
+export const PRECISA = [
+  { titulo: "Tempo", texto: "Consulta de 40 a 50 minutos, sem olhar para o relógio." },
+  { titulo: "Escuta", texto: "A história da criança contada com calma e ouvida até o fim." },
+  { titulo: "Um plano claro", texto: "Você sai sabendo o que fazer em casa e quando voltar." },
+  { titulo: "Tudo perto", texto: "Vacinas, exames e terapias organizados no mesmo lugar." },
+];
+
+// Calendário de consultas de rotina (puericultura) do Ministério da Saúde.
+export const PUERICULTURA = [
+  { quando: "1ª semana", oque: "Primeira consulta: peso, amamentação, icterícia, teste do pezinho e vacinas ao nascer." },
+  { quando: "1, 2, 4 e 6 meses", oque: "Crescimento, desenvolvimento, sono, amamentação e as vacinas de cada mês." },
+  { quando: "9 e 12 meses", oque: "Introdução alimentar, primeiros passos e as primeiras palavras." },
+  { quando: "18 e 24 meses", oque: "Fala, comportamento, alimentação da família e vacinas de reforço." },
+  { quando: "A partir dos 2 anos", oque: "Uma consulta por ano, acompanhando escola, visão, peso e puberdade." },
 ];

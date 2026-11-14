@@ -2,10 +2,11 @@ import Image from "next/image";
 import localFont from "next/font/local";
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
-import { ENDERECO, WHATSAPP_TERAPIAS } from "@/lib/config/contato";
+import { ENDERECO, HORARIOS, WHATSAPP_TERAPIAS } from "@/lib/config/contato";
+import { VideoVacina } from "../vacinas/VideoVacina";
 import { Perguntas } from "../campanhas/_componentes/Perguntas";
 import { LinkWhatsOrigem } from "../_landing-vacinas/LinkWhatsOrigem";
-import { ATENDIMENTOS, BAIRROS, COMO_TRABALHAM, DORES, FOTOS, MENSAGEM_GERAL, PERGUNTAS, QUANDO_LEVAR } from "./conteudo";
+import { ATENDIMENTOS, BAIRROS, COMO_TRABALHAM, DORES, FOTOS, MENSAGEM_GERAL, PERGUNTAS, PRECISA, PUERICULTURA, QUANDO_LEVAR } from "./conteudo";
 import s from "./pediatria.module.css";
 
 // Títulos em Plus Jakarta Sans (14/11, pedido da direção: "quero até a paleta
@@ -50,10 +51,12 @@ export function Pediatria() {
             <Image src="/images/otim/logo-vertical.webp" alt="Vittalis Saúde" width={900} height={273} className={s.logo} unoptimized priority />
           </Link>
           <nav className={s.menu} aria-label="Seções da página">
-            <a href="#atendimentos">Atendimentos</a>
-            <a href="#como-trabalham">Como trabalhamos</a>
+            <a href="#programas">Programas</a>
+            <a href="#puericultura">Puericultura</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#depoimentos">Depoimentos</a>
             <a href="#localizacao">Localização</a>
-            <a href="#duvidas">Dúvidas</a>
+            <a href="#contato">Contato</a>
           </nav>
           <Whats mensagem={MENSAGEM_GERAL} nome="topo" className={s.topoBotao}>Agendar consulta</Whats>
         </div>
@@ -74,7 +77,7 @@ export function Pediatria() {
             </p>
             <div className={s.capaAcoes}>
               <Whats mensagem={MENSAGEM_GERAL} nome="capa">Agendar pelo WhatsApp</Whats>
-              <a href="#como-trabalham" className={s.botaoSecundario}>Como trabalhamos</a>
+              <a href="#programas" className={s.botaoSecundario}>Conheça os atendimentos</a>
             </div>
             <ul className={s.capaSelos}>
               <li>⏱️ Consulta de 40 a 50 min</li>
@@ -89,11 +92,11 @@ export function Pediatria() {
         </div>
 
         {/* ATENDIMENTOS */}
-        <section id="atendimentos" className={s.secao} aria-labelledby="t-atendimentos">
+        <section id="programas" className={s.secao} aria-labelledby="t-atendimentos">
           <span className={s.rotulo}>Nossos atendimentos</span>
           <h2 id="t-atendimentos" className={s.secaoTitulo}>Pediatria para cada <em>fase</em> do seu filho</h2>
           <p className={s.secaoSub}>Da primeira semana de vida à adolescência, com a mesma equipe acompanhando o crescimento.</p>
-          <div className={s.cartoes}>
+          <div className={`${s.cartoes} ${s.cartoes4}`}>
             {ATENDIMENTOS.map((a) => (
               <article key={a.titulo} className={s.cartao}>
                 <span className={s.cartaoIcone} aria-hidden>{a.icone}</span>
@@ -126,8 +129,28 @@ export function Pediatria() {
           </div>
         </section>
 
+        {/* O QUE VOCÊ PROCURA */}
+        <section className={s.precisa} aria-labelledby="t-precisa">
+          <div className={s.precisaInterno}>
+            <div className={s.precisaTexto}>
+              <span className={s.rotuloClaro}>O que a família procura</span>
+              <h2 id="t-precisa">Não é só uma consulta. É <em>alguém que acompanha</em> o seu filho.</h2>
+              <p>Mãe e pai querem respostas claras, tempo para perguntar e a segurança de saber quem cuida da criança a cada fase. É assim que a pediatria da Vittalis funciona.</p>
+              <a href="#sobre" className={s.linkClaro}>Conheça como trabalhamos →</a>
+            </div>
+            <ul className={s.precisaGrade}>
+              {PRECISA.map((p) => (
+                <li key={p.titulo}>
+                  <strong>{p.titulo}</strong>
+                  <span>{p.texto}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
         {/* COMO TRABALHAM */}
-        <section id="como-trabalham" className={s.como} aria-labelledby="t-como">
+        <section id="sobre" className={s.como} aria-labelledby="t-como">
           <div className={s.equipe}>
             {EQUIPE.map((src, i) => (
               <div key={src} className={`${s.equipeFoto} ${s[`equipeFoto${i + 1}`]}`}>
@@ -154,19 +177,6 @@ export function Pediatria() {
           </div>
         </section>
 
-        {/* QUANDO LEVAR */}
-        <section className={s.quando} aria-labelledby="t-quando">
-          <h2 id="t-quando" className={s.secaoTitulo}>Quando levar seu filho ao pediatra?</h2>
-          <p className={s.secaoSub}>Se você se identificou com algum destes itens, vale marcar uma consulta.</p>
-          <ul className={s.checklist}>
-            {QUANDO_LEVAR.map((q) => <li key={q}>{q}</li>)}
-          </ul>
-          <p className={s.emergencia}>🚑 Falta de ar, convulsão, desmaio ou criança muito prostrada: procure o pronto-socorro mais próximo.</p>
-          <div className={s.centro}>
-            <Whats mensagem={MENSAGEM_GERAL} nome="quando levar">Agendar pelo WhatsApp</Whats>
-          </div>
-        </section>
-
         {/* EQUIPE (14/11, pedido da direção; retratos ilustrativos, só rosto e ombros) */}
         <section className={s.secao} aria-labelledby="t-time">
           <span className={s.rotulo}>Nossa equipe</span>
@@ -184,6 +194,55 @@ export function Pediatria() {
           </div>
         </section>
 
+        {/* PUERICULTURA */}
+        <section id="puericultura" className={s.secao} aria-labelledby="t-puer">
+          <span className={s.rotulo}>Puericultura</span>
+          <h2 id="t-puer" className={s.secaoTitulo}>O <em>acompanhamento</em> do bebê, consulta a consulta</h2>
+          <p className={s.secaoSub}>As consultas de rotina mostram se o seu filho está crescendo e se desenvolvendo bem, e antecipam dúvidas de cada fase.</p>
+          <ol className={s.linha}>
+            {PUERICULTURA.map((p, i) => (
+              <li key={p.quando}>
+                <span className={s.linhaPonto} aria-hidden>{i + 1}</span>
+                <strong>{p.quando}</strong>
+                <span>{p.oque}</span>
+              </li>
+            ))}
+          </ol>
+          <p className={s.notaPequena}>Calendário de consultas de rotina do Ministério da Saúde. A pediatra ajusta para cada criança.</p>
+          <div className={s.centro}>
+            <Whats mensagem="Olá! Vim pelo site e quero saber sobre o acompanhamento de puericultura do meu bebê." nome="puericultura">Quero acompanhar meu bebê</Whats>
+          </div>
+        </section>
+
+        {/* QUANDO LEVAR */}
+        <section className={s.quando} aria-labelledby="t-quando">
+          <h2 id="t-quando" className={s.secaoTitulo}>Quando levar seu filho ao pediatra?</h2>
+          <p className={s.secaoSub}>Se você se identificou com algum destes itens, vale marcar uma consulta.</p>
+          <ul className={s.checklist}>
+            {QUANDO_LEVAR.map((q) => <li key={q}>{q}</li>)}
+          </ul>
+          <p className={s.emergencia}>🚑 Falta de ar, convulsão, desmaio ou criança muito prostrada: procure o pronto-socorro mais próximo.</p>
+          <div className={s.centro}>
+            <Whats mensagem={MENSAGEM_GERAL} nome="quando levar">Agendar pelo WhatsApp</Whats>
+          </div>
+        </section>
+
+        {/* DEPOIMENTOS: vídeos reais da clínica (nada inventado) */}
+        <section id="depoimentos" className={s.depo} aria-labelledby="t-depo">
+          <div className={s.depoInterno}>
+            <span className={s.rotulo}>Depoimentos</span>
+            <h2 id="t-depo" className={s.secaoTitulo}>O que as <em>famílias</em> dizem sobre a Vittalis</h2>
+            <p className={s.secaoSub}>Gente de verdade, na nossa clínica, com a nossa equipe.</p>
+            <div className={s.depoGrade}>
+              <VideoVacina src="/videos/vacinacao-depoimento-familia.mp4" poster="/videos/vacinacao-depoimento-familia.jpg" titulo="A família do Samuel" legenda="Os pais contam por que cuidam do bebê aqui" />
+              <VideoVacina src="/videos/vacinacao-plano-vacinal.mp4" poster="/videos/vacinacao-plano-vacinal.jpg" titulo="Tudo planejado desde o começo" legenda="Como a equipe organiza o cuidado da família" />
+            </div>
+            <div className={s.centro}>
+              <a href={BRAND.mapsUrl} target="_blank" rel="noopener noreferrer" className={s.botaoSecundario}>⭐ Ver as avaliações no Google</a>
+            </div>
+          </div>
+        </section>
+
         {/* LOCALIZAÇÃO */}
         <div className={s.localFundo}>
         <section id="localizacao" className={s.local} aria-labelledby="t-local">
@@ -191,6 +250,13 @@ export function Pediatria() {
             <span className={s.rotulo}>Venha nos visitar</span>
             <h2 id="t-local" className={s.comoTitulo}>Pediatria no Jardim Renascença, São Luís</h2>
             <p className={s.localEndereco}>📍 {BRAND.legalAddress}</p>
+            <ul className={s.localInfo}>
+              <li>🕗 {HORARIOS.semana}</li>
+              <li>🕗 {HORARIOS.sabado}</li>
+              <li>💬 WhatsApp da pediatria pelos botões desta página</li>
+              <li>📸 <a href={BRAND.instagramDirect} target="_blank" rel="noopener noreferrer">@vittalissaudeslz</a></li>
+              <li>✉️ <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a></li>
+            </ul>
             <p className={s.localBairros}>Famílias de toda a Ilha consultam aqui: {BAIRROS.slice(0, -1).join(", ")} e {BAIRROS[BAIRROS.length - 1]}.</p>
             <div className={s.capaAcoes}>
               <Whats mensagem={MENSAGEM_GERAL} nome="localização">Falar no WhatsApp</Whats>
@@ -212,17 +278,40 @@ export function Pediatria() {
         </section>
 
         {/* CHAMADA FINAL */}
-        <section className={s.final} aria-labelledby="t-final">
-          <h2 id="t-final">Vamos cuidar juntos do seu filho?</h2>
-          <p>Fale com a equipe pelo WhatsApp e escolha o horário que fica bom para vocês.</p>
-          <Whats mensagem={MENSAGEM_GERAL} nome="final" className={s.botaoBranco}>Agendar consulta pediátrica</Whats>
+        <section id="contato" className={s.final} aria-labelledby="t-final">
+          <div className={s.finalTexto}>
+            <h2 id="t-final">Agende hoje e dê ao seu filho o cuidado que ele merece.</h2>
+            <p>Fale com a equipe pelo WhatsApp e escolha o horário que fica bom para vocês.</p>
+            <Whats mensagem={MENSAGEM_GERAL} nome="final" className={s.botaoBranco}>Agendar consulta pediátrica</Whats>
+          </div>
+          <div className={s.finalFoto} aria-hidden>
+            <Image src={FOTOS.capa} alt="" width={1030} height={1055} sizes="(max-width: 900px) 70vw, 380px" />
+          </div>
         </section>
       </main>
 
       <footer className={s.rodape}>
-        <p><strong>{BRAND.name}</strong> · {BRAND.street}, {BRAND.city}/{BRAND.state}</p>
-        <p>Imagens ilustrativas. Atendimento particular.</p>
-        <p><Link href="/politica-de-privacidade">Política de privacidade</Link> · <Link href="/">Site da Vittalis</Link></p>
+        <div className={s.rodapeInterno}>
+          <div>
+            <Image src="/images/otim/logo-vertical.webp" alt="Vittalis Saúde" width={900} height={273} className={s.rodapeLogo} unoptimized />
+            <p>Pediatria particular em São Luís, no Jardim Renascença.</p>
+          </div>
+          <nav aria-label="Links rápidos">
+            <strong>Links rápidos</strong>
+            <a href="#programas">Programas</a>
+            <a href="#puericultura">Puericultura</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#depoimentos">Depoimentos</a>
+            <a href="#duvidas">Dúvidas</a>
+          </nav>
+          <div>
+            <strong>Contato</strong>
+            <p>{BRAND.street}, {BRAND.city}/{BRAND.state}</p>
+            <p>{HORARIOS.semana}<br />{HORARIOS.sabado}</p>
+            <p><a href={BRAND.instagramDirect} target="_blank" rel="noopener noreferrer">Instagram</a> · <a href={`mailto:${BRAND.email}`}>E-mail</a></p>
+          </div>
+        </div>
+        <p className={s.rodapeFim}>© {BRAND.name} · Imagens ilustrativas · Atendimento particular · <Link href="/politica-de-privacidade">Política de privacidade</Link> · <Link href="/">Site da Vittalis</Link></p>
       </footer>
 
       <div className={s.barraWhats}>
