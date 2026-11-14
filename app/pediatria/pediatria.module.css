@@ -56,13 +56,6 @@
 .capaFoto::before { content: ""; position: absolute; z-index: -1; border-radius: 50%; background: var(--coral); width: 78%; aspect-ratio: 1; left: 50%; bottom: 4%; transform: translateX(-50%); }
 .capaFoto::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; background: var(--coral); opacity: .35; width: 34%; aspect-ratio: 1; right: -4%; top: 6%; }
 .capaFoto img { width: 100%; max-width: 560px; height: auto; display: block; filter: drop-shadow(0 24px 30px rgba(26,26,26,.12)); }
-.capaCartao { position: absolute; left: -10px; bottom: 110px; background: #fff; border-radius: 20px; padding: 12px 18px 12px 12px; box-shadow: 0 18px 40px rgba(26,26,26,.14); display: flex; align-items: center; gap: 12px; }
-.capaCartao > div:last-child { display: flex; flex-direction: column; }
-.avatares { display: flex; }
-.avatares img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 3px solid #fff; margin-left: -12px; }
-.avatares img:first-child { margin-left: 0; }
-.capaCartao strong { font-family: var(--titulos); font-size: 15.5px; color: var(--verde); }
-.capaCartao span { font-size: 13px; color: var(--cinza); }
 
 /* Seções */
 .secao { max-width: 1200px; margin: 0 auto; padding: 88px 20px; text-align: center; }
@@ -160,7 +153,6 @@
   .capa { grid-template-columns: 1fr; padding: 32px 20px 56px; gap: 36px; }
   .capaFoto { order: 2; margin: 0 0 -56px; }
   .capaFoto img { max-width: 420px; }
-  .capaCartao { left: 0; bottom: 80px; }
   .cartoes { grid-template-columns: 1fr; }
   .doresGrade { grid-template-columns: 1fr; }
   .como { grid-template-columns: 1fr; gap: 40px; padding: 64px 20px; }

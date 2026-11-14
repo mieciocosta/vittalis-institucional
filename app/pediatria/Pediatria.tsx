@@ -25,7 +25,6 @@ const SLUG = "pediatria";
 // Retratos ilustrativos da equipe (14/11, a direção mandou as imagens; só o
 // rosto e os ombros, sem os personagens dos jalecos, que têm direito autoral).
 const EQUIPE = ["/images/otim/ped_equipe_b1.webp", "/images/otim/ped_equipe_b2.webp", "/images/otim/ped_equipe_b3.webp"];
-const EQUIPE_MINI = ["/images/otim/ped_equipe_a1.webp", "/images/otim/ped_equipe_a2.webp", "/images/otim/ped_equipe_a3.webp"];
 const NOME = "Pediatria";
 
 // Toda especialidade leva ao WhatsApp do setor de terapias (10/11, pedido da
@@ -84,15 +83,6 @@ export function Pediatria() {
           </div>
           <div className={s.capaFoto}>
             <Image src={FOTOS.capa} alt={FOTOS.capaAlt} width={1030} height={1055} priority sizes="(max-width: 900px) 100vw, 560px" />
-            <div className={s.capaCartao}>
-              <div className={s.avatares} aria-hidden>
-                {EQUIPE_MINI.map((src) => <Image key={src} src={src} alt="" width={330} height={330} sizes="44px" />)}
-              </div>
-              <div>
-                <strong>Consulta com calma</strong>
-                <span>A gente ouve antes de examinar</span>
-              </div>
-            </div>
           </div>
         </section>
         </div>
