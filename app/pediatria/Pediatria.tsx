@@ -346,16 +346,31 @@ export function Pediatria() {
         </section>
 
         {/* CHAMADA FINAL */}
+        {/* DESFECHO (14/11, no modelo da referência e um passo além: foto
+            real da pediatra, prova do Google e horário ao lado do botão) */}
+        <div className={s.finalFundo}>
         <section id="contato" className={s.final} aria-labelledby="t-final">
           <div className={s.finalTexto}>
-            <h2 id="t-final">Agende hoje e dê ao seu filho o cuidado que ele merece.</h2>
-            <p>Fale com a equipe pelo WhatsApp e escolha o horário que fica bom para vocês.</p>
-            <Whats mensagem={MENSAGEM_GERAL} nome="final" className={s.botaoBranco}>Agendar consulta pediátrica</Whats>
+            <h2 id="t-final">Agende hoje.<span>A saúde do seu filho não pode esperar.</span></h2>
+            <p>Consulta de 1 hora, escuta de verdade e acompanhamento em cada fase, do recém-nascido ao adolescente. Com vacinas e terapias no mesmo endereço, no Jardim Renascença.</p>
+            <div className={s.finalAcao}>
+              <Whats mensagem={PEDIATRA_REAL.mensagem} nome="final" className={s.botaoFinal}>Falar com a {PEDIATRA_REAL.nome} pelo WhatsApp</Whats>
+            </div>
+            <ul className={s.finalSelos}>
+              <li>⭐ {NOTA_GOOGLE.nota} no Google</li>
+              <li>🕗 Seg a sex 8h às 18h · Sáb 8h às 12h</li>
+              <li>📍 Jardim Renascença, São Luís</li>
+            </ul>
           </div>
-          <div className={s.finalFoto} aria-hidden>
-            <Image src={FOTOS.capa} alt="" width={1030} height={1055} sizes="(max-width: 900px) 70vw, 380px" />
+          <div className={s.finalFoto}>
+            <Image src={PEDIATRA_REAL.foto} alt={PEDIATRA_REAL.alt} width={1600} height={1686} sizes="(max-width: 900px) 80vw, 430px" />
+            <span className={s.finalCartao}>
+              <strong>{PEDIATRA_REAL.nome}</strong>
+              Pediatra da Vittalis
+            </span>
           </div>
         </section>
+        </div>
       </main>
 
       <footer className={s.rodape}>

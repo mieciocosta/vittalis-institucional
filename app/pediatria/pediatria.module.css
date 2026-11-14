@@ -223,14 +223,25 @@
 .duvidas { max-width: 800px; margin: 0 auto; text-align: left; }
 
 /* Final */
-.final { max-width: 1200px; margin: 0 auto 56px; border-radius: 40px; padding: 56px 56px 0; color: #fff; background: var(--verde); position: relative; overflow: hidden; isolation: isolate; display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items: end; scroll-margin-top: 70px; }
-.finalTexto { padding-bottom: 56px; }
-.finalFoto { display: flex; justify-content: center; }
-.finalFoto img { width: 100%; max-width: 380px; height: auto; display: block; }
-.final::before { content: ""; position: absolute; width: 320px; height: 320px; right: -80px; bottom: -140px; border-radius: 50%; background: var(--coral); opacity: .9; z-index: -1; }
-.final::after { content: ""; position: absolute; width: 200px; height: 200px; left: -60px; top: -80px; border-radius: 50%; border: 2px solid rgba(255,255,255,.25); z-index: -1; }
-.final h2 { font-size: clamp(28px, 3.2vw, 40px); line-height: 1.12; margin: 0 0 12px; }
-.final p { font-size: 17.5px; margin: 0 0 30px; opacity: .92; }
+.finalFundo { background: var(--verde); position: relative; overflow: hidden; isolation: isolate; }
+.finalFundo::before { content: ""; position: absolute; width: 520px; height: 520px; right: -160px; top: -220px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.10), transparent 70%); z-index: -1; }
+.finalFundo::after { content: ""; position: absolute; width: 260px; height: 260px; left: -90px; bottom: -110px; border-radius: 50%; border: 2px solid rgba(255,255,255,.18); z-index: -1; }
+.final { max-width: 1200px; margin: 0 auto; padding: 96px 20px; color: #fff; display: grid; grid-template-columns: 1.25fr 1fr; gap: 64px; align-items: center; scroll-margin-top: 70px; }
+.final h2 { font-size: clamp(38px, 5.2vw, 70px); line-height: 1.04; letter-spacing: -.02em; margin: 0 0 24px; color: #fff; }
+.final h2 span { display: block; color: #ffd0dc; }
+.final p { font-size: 19px; line-height: 1.65; margin: 0 0 34px; color: rgba(255,255,255,.9); max-width: 560px; }
+.finalAcao { position: relative; display: inline-block; }
+.finalAcao::before { content: ""; position: absolute; inset: -12px; border-radius: 999px; background: rgba(255,255,255,.10); animation: pulsoFinal 2.4s ease-out infinite; }
+@keyframes pulsoFinal { 0% { transform: scale(.94); opacity: 1; } 100% { transform: scale(1.08); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .finalAcao::before { animation: none; } }
+.botaoFinal { composes: botaoWhats; position: relative; background: #d9668a; color: #fff; font-size: 18px; padding: 20px 34px; box-shadow: 0 16px 34px rgba(0,0,0,.20); }
+.botaoFinal:hover { background: #c95479; }
+.finalSelos { list-style: none; padding: 0; margin: 30px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.finalSelos li { font-size: 14px; padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,.12); color: #fff; }
+.finalFoto { position: relative; justify-self: end; width: 100%; max-width: 430px; }
+.finalFoto img { width: 100%; height: auto; display: block; border-radius: 32px; box-shadow: 0 24px 60px rgba(0,0,0,.25); }
+.finalCartao { position: absolute; left: -26px; bottom: 28px; background: #fff; color: var(--cinza); border-radius: 16px; padding: 12px 18px; font-size: 13px; line-height: 1.35; box-shadow: 0 12px 30px rgba(0,0,0,.18); }
+.finalCartao strong { display: block; color: var(--tinta); font-size: 16px; }
 
 /* Rodapé */
 .rodape { font-size: 14px; color: var(--cinza); padding: 8px 20px 32px; }
@@ -266,9 +277,12 @@
   .linha li { padding: 18px 18px 18px 70px; }
   .linhaPonto { top: 16px; left: 18px; }
   .depoInterno { padding: 64px 20px; }
-  .final { grid-template-columns: 1fr; padding: 48px 24px 0; margin: 0 16px 48px; text-align: center; }
-  .finalTexto { padding-bottom: 8px; }
-  .finalFoto img { max-width: 280px; }
+  .final { grid-template-columns: 1fr; gap: 40px; padding: 64px 20px 72px; text-align: center; }
+  .final p { margin-left: auto; margin-right: auto; font-size: 17px; }
+  .finalSelos { justify-content: center; }
+  .botaoFinal { font-size: 16px; padding: 18px 24px; }
+  .finalFoto { justify-self: center; max-width: 280px; order: -1; margin-bottom: 8px; }
+  .finalCartao { left: 50%; transform: translateX(-50%); bottom: -18px; white-space: nowrap; }
   .rodapeInterno { grid-template-columns: 1fr; text-align: center; }
   .rodapeInterno nav { align-items: center; }
   .time { grid-template-columns: 1fr; max-width: 320px; }
