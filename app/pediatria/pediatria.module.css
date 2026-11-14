@@ -162,6 +162,21 @@
 .depoGrade { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
 .depoGrade > figure { width: 250px; }
 @media (max-width: 600px) { .depoGrade > figure { width: calc(50% - 12px); } }
+/* Conheça a pediatra (foto real, 14/11) */
+.luisa { background: var(--rose); }
+.luisaInterno { max-width: 1100px; margin: 0 auto; padding: 88px 20px; display: grid; grid-template-columns: 420px 1fr; gap: 64px; align-items: center; }
+.luisaFoto { position: relative; }
+.luisaFoto::before { content: ""; position: absolute; inset: 24px -24px -24px 24px; border-radius: 28px; background: var(--coral); opacity: .55; }
+.luisaFoto img { position: relative; display: block; width: 100%; height: auto; border-radius: 28px; box-shadow: 0 18px 48px rgba(26,26,26,.16); }
+.luisaTexto { text-align: left; }
+.luisaTexto .secaoTitulo { text-align: left; margin-left: 0; }
+.luisaTexto p { color: var(--cinza); font-size: 17px; line-height: 1.7; margin: 0 0 16px; }
+.luisaTexto .luisaReg { font-size: 14px; color: var(--verde-escuro); font-weight: 700; margin-top: -6px; }
+@media (max-width: 900px) {
+  .luisaInterno { grid-template-columns: 1fr; gap: 44px; padding: 64px 20px; }
+  .luisaFoto { max-width: 340px; margin: 0 auto; width: 100%; }
+  .luisaFoto::before { inset: 14px -10px -14px 10px; }
+}
 /* Avaliações reais do Google (14/11) */
 .notaGoogle { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; margin: 4px auto 32px; padding: 10px 20px; border-radius: 999px; background: #fff; box-shadow: 0 6px 20px rgba(14,138,145,.10); color: var(--tinta); text-decoration: none; font-size: 15px; }
 .notaGoogle strong { font-size: 20px; }

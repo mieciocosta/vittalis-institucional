@@ -123,6 +123,22 @@ export const PRECISA = [
   { titulo: "Tudo perto", texto: "Vacinas, exames e terapias organizados no mesmo lugar." },
 ];
 
+// A pediatra de verdade da Vittalis (14/11, foto mandada pela direção, a mesma
+// do Instagram "Dra. Luisa com amor e carinho"). O CFM (Res. 2.336/2023) pede
+// nome completo + CRM (+ RQE se tiver título de especialista) em toda
+// publicidade com o nome do médico: preencher `registro` ANTES de publicar.
+export const PEDIATRA_REAL = {
+  nome: "Dra. Luisa",
+  registro: "",
+  foto: "/images/otim/ped_luisa.webp",
+  alt: "Dra. Luisa, pediatra da Vittalis Saúde, sorrindo no consultório",
+  texto: [
+    "É ela quem recebe seu filho no consultório da Vittalis, no Jardim Renascença: consulta sem pressa, conversa com a família e explicação clara do que fazer em casa.",
+    "Acompanha o bebê desde os primeiros dias, nas consultas de rotina, e a criança nas dúvidas de cada fase, com vacinas e terapias no mesmo endereço.",
+  ],
+  mensagem: "Olá! Vim pelo site e quero agendar uma consulta com a Dra. Luisa.",
+};
+
 // Avaliações REAIS do Google Maps da Vittalis (14/11, pedido da direção:
 // "pega os comentários do google e faz imagens de avaliação"). Texto copiado
 // do jeito que a família escreveu; nome só com o primeiro nome e a inicial do

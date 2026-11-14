@@ -6,7 +6,7 @@ import { ENDERECO, HORARIOS, WHATSAPP_TERAPIAS } from "@/lib/config/contato";
 import { VideoVacina } from "../vacinas/VideoVacina";
 import { Perguntas } from "../campanhas/_componentes/Perguntas";
 import { LinkWhatsOrigem } from "../_landing-vacinas/LinkWhatsOrigem";
-import { ATENDIMENTOS, AVALIACOES, NOTA_GOOGLE, BAIRROS, COMO_TRABALHAM, DORES, FOTOS, MENSAGEM_GERAL, PERGUNTAS, PRECISA, PUERICULTURA, QUANDO_LEVAR } from "./conteudo";
+import { ATENDIMENTOS, AVALIACOES, NOTA_GOOGLE, PEDIATRA_REAL, BAIRROS, COMO_TRABALHAM, DORES, FOTOS, MENSAGEM_GERAL, PERGUNTAS, PRECISA, PUERICULTURA, QUANDO_LEVAR } from "./conteudo";
 import s from "./pediatria.module.css";
 
 // Títulos em Plus Jakarta Sans (14/11, pedido da direção: "quero até a paleta
@@ -117,6 +117,24 @@ export function Pediatria() {
               ))}
             </ol>
             <Whats mensagem={MENSAGEM_GERAL} nome="como trabalham">Quero agendar uma consulta</Whats>
+          </div>
+        </section>
+
+        {/* CONHEÇA A PEDIATRA (14/11, foto real da Dra. Luisa mandada pela
+            direção). ANTES DE PUBLICAR: nome completo + CRM-MA (+ RQE se tiver
+            título de pediatra) em PEDIATRA_REAL.registro, exigência do CFM. */}
+        <section id="pediatra" className={s.luisa} aria-labelledby="t-luisa">
+          <div className={s.luisaInterno}>
+            <div className={s.luisaFoto}>
+              <Image src={PEDIATRA_REAL.foto} alt={PEDIATRA_REAL.alt} width={795} height={1005} sizes="(max-width: 900px) 90vw, 420px" />
+            </div>
+            <div className={s.luisaTexto}>
+              <span className={s.rotulo}>Conheça a pediatra</span>
+              <h2 id="t-luisa" className={s.secaoTitulo}>{PEDIATRA_REAL.nome}, <em>com amor e carinho</em></h2>
+              {PEDIATRA_REAL.registro && <p className={s.luisaReg}>{PEDIATRA_REAL.registro}</p>}
+              {PEDIATRA_REAL.texto.map((t) => <p key={t}>{t}</p>)}
+              <Whats mensagem={PEDIATRA_REAL.mensagem} nome="pediatra real">Agendar com a {PEDIATRA_REAL.nome}</Whats>
+            </div>
           </div>
         </section>
 
