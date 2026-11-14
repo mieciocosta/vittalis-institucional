@@ -44,7 +44,6 @@
 
 /* Capa */
 .capaFundo { background: var(--rose); position: relative; overflow: hidden; }
-.capaFundo::before { content: ""; position: absolute; width: 420px; height: 420px; left: -160px; top: -160px; border-radius: 50%; border: 1.5px solid rgba(240,163,182,.35); }
 .capa { position: relative; max-width: 1200px; margin: 0 auto; padding: 64px 20px 80px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
 .selo { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: var(--cinza); background: rgba(255,255,255,.7); padding: 9px 16px; border-radius: 999px; }
 .capaTitulo { font-size: clamp(36px, 4.8vw, 58px); line-height: 1.06; font-weight: 800; margin: 20px 0 18px; color: var(--verde); }
@@ -281,7 +280,6 @@
 /* Final */
 .finalFundo { background: var(--verde); position: relative; overflow: hidden; isolation: isolate; }
 .finalFundo::before { content: ""; position: absolute; width: 520px; height: 520px; right: -160px; top: -220px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.10), transparent 70%); z-index: -1; }
-.finalFundo::after { content: ""; position: absolute; width: 260px; height: 260px; left: -90px; bottom: -110px; border-radius: 50%; border: 2px solid rgba(255,255,255,.18); z-index: -1; }
 .final { max-width: 1200px; margin: 0 auto; padding: 96px 20px; color: #fff; display: grid; grid-template-columns: 1.25fr 1fr; gap: 64px; align-items: center; scroll-margin-top: 70px; }
 .final h2 { font-size: clamp(38px, 5.2vw, 70px); line-height: 1.04; letter-spacing: -.02em; margin: 0 0 24px; color: #fff; }
 .final h2 span { display: block; color: #ffd0dc; }
@@ -362,14 +360,7 @@
 .botaoWhats:hover { animation-play-state: paused; }
 .centro > :nth-child(2), .capaAcoes > :nth-child(2) { animation-delay: -1.6s; }
 .barraBotao { animation: none; }
-/* Bolha fixa do WhatsApp no canto (computador) */
-.flutuante { composes: botaoWhats; position: fixed; right: 24px; bottom: 24px; z-index: 50; padding: 16px 22px 16px 18px; background: #25d366; color: #fff; box-shadow: 0 14px 34px rgba(0,0,0,.22); }
-.flutuante:hover { background: #1ebe5b; }
-.flutuante svg { width: 26px; height: 26px; }
-.flutuante::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 0 0 0 rgba(37,211,102,.55); animation: ondaZap 2.4s ease-out infinite; }
-@keyframes ondaZap { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,.55); } 100% { box-shadow: 0 0 0 18px rgba(37,211,102,0); } }
-@media (max-width: 900px) { .flutuante { display: none; } }
 @media (prefers-reduced-motion: reduce) {
   .botaoWhats, .cartao { transition: none; }
-  .botaoWhats, .flutuante::after { animation: none; }
+  .botaoWhats { animation: none; }
 }

@@ -3,6 +3,7 @@ import Script from "next/script";
 import localFont from "next/font/local";
 import "./globals.css";
 import { CapturaOrigem } from "./_componentes/CapturaOrigem";
+import { WhatsFlutuante } from "./_componentes/WhatsFlutuante";
 import { BRAND } from "@/lib/brand";
 import { GOOGLE_ADS_ID } from "@/lib/analytics";
 
@@ -126,6 +127,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MRC6N43D" height="0" width="0" style={{display:"none",visibility:"hidden"}}></iframe></noscript>
         {children}
         <CapturaOrigem />
+        <WhatsFlutuante />
 
         {/* ═══════════════════════════════════════════════════════════
             GOOGLE ANALYTICS 4 — ID: G-1T4S5WGY9W

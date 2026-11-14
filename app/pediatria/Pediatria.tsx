@@ -475,11 +475,6 @@ export function Pediatria() {
         <p className={s.rodapeFim}>© {BRAND.name} · Imagem da capa ilustrativa · Atendimento particular · <Link href="/politica-de-privacidade">Política de privacidade</Link> · <Link href="/">Site da Vittalis</Link></p>
       </footer>
 
-      {/* Botão flutuante do WhatsApp no computador (14/11); no celular a barra de baixo faz esse papel */}
-      <Whats mensagem={MENSAGEM_GERAL} nome="flutuante" className={s.flutuante}>
-        <span className={s.flutuanteTexto}>Agendar pelo WhatsApp</span>
-      </Whats>
-
       <div className={s.barraWhats}>
         <Whats mensagem={MENSAGEM_GERAL} nome="barra" className={s.barraBotao}>Agendar consulta pelo WhatsApp</Whats>
       </div>
