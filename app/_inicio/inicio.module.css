@@ -35,3 +35,5 @@
 @media (max-width: 1000px) { .esps { grid-template-columns: repeat(2, 1fr); } .precisa { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 900px) { .capaCartao { left: 12px; bottom: 12px; } .grupo { text-align: center; } }
 @media (max-width: 560px) { .esps { grid-template-columns: 1fr; } .precisa { grid-template-columns: 1fr; } }
+.buscaLink { text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 6px; transition: transform .2s, box-shadow .2s; }
+.buscaLink:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(26,26,26,.10); }

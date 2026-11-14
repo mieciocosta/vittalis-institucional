@@ -31,15 +31,29 @@ export const PRECISA = [
 
 export const PUBLICOS = ["👶 Bebês", "🧒 Crianças", "🧑 Adolescentes", "🤰 Gestantes", "🧑‍💼 Adultos", "👵 Idosos"];
 
+// O que mais se pesquisa no Maranhão (Planejador de Palavras-chave do Google,
+// média mensal nov/2025 a out/2026, 14/11): psicólogo 5.400, terapia
+// ocupacional 4.400, ginecologista 2.900, fonoaudiologia 2.400, dermatologista
+// 1.900, psicóloga 1.600, nutricionista 1.300, fisioterapeuta 1.000,
+// pneumologista 590, terapia ABA 320, avaliação neuropsicológica 320, clínico
+// geral 260, musicoterapia 210. Cada busca leva à página da especialidade.
 export const BUSCAS = [
-  { busca: "Clínica em São Luís", resposta: "Clínica multidisciplinar no Jardim Renascença, perto da Cohama, do Calhau e da Ponta d'Areia." },
-  { busca: "Vacinação particular", resposta: "Vacinas para todas as idades, na clínica ou em casa, com hora marcada." },
-  { busca: "Pediatra particular", resposta: "Consulta pediátrica de 1 hora e puericultura do recém-nascido ao adolescente." },
-  { busca: "Psicologia infantil e ABA", resposta: "Psicologia infantil, ABA, neuropsicologia e psicopedagogia na mesma clínica." },
-  { busca: "Fonoaudiologia", resposta: "Fala, linguagem, alimentação e voz, para crianças e adultos." },
-  { busca: "Ginecologia e dermatologia", resposta: "Consultas médicas particulares com hora marcada." },
-  { busca: "Fisioterapia e terapia ocupacional", resposta: "Atendimento infantil e adulto, com acompanhamento contínuo." },
-  { busca: "Clínica que atende sábado", resposta: "Segunda a sexta, das 8h às 18h, e sábado, das 8h às 12h." },
+  { busca: "Psicólogo e psicóloga", resposta: "Psicologia para adultos e para crianças, com hora marcada.", href: "/psicologia-adulto" },
+  { busca: "Terapia ocupacional", resposta: "Terapia ocupacional infantil e adulta, com integração sensorial.", href: "/terapia-ocupacional-infantil" },
+  { busca: "Ginecologista", resposta: "Consulta ginecológica particular no Jardim Renascença.", href: "/ginecologia" },
+  { busca: "Fonoaudiologia", resposta: "Fala, linguagem, alimentação e voz, para crianças e adultos.", href: "/fonoaudiologia" },
+  { busca: "Dermatologista", resposta: "Consulta dermatológica com hora marcada.", href: "/dermatologia" },
+  { busca: "Nutricionista", resposta: "Nutrição infantil e adulta, com plano feito para você.", href: "/nutricao-adulta" },
+  { busca: "Fisioterapeuta", resposta: "Fisioterapia infantil e adulta, com acompanhamento contínuo.", href: "/fisioterapia-adulta" },
+  { busca: "Pneumologista", resposta: "Asma, tosse e alergias respiratórias, em crianças e adultos.", href: "/pneumologia" },
+  { busca: "Pediatra", resposta: "Consulta de 1 hora e puericultura do bebê ao adolescente.", href: "/pediatria" },
+  { busca: "Terapia ABA", resposta: "Psicologia ABA para crianças com autismo, com plano individual.", href: "/psicologia-aba" },
+  { busca: "Avaliação neuropsicológica", resposta: "Avaliação de TDAH, aprendizagem e memória, com laudo.", href: "/neuropsicologia" },
+  { busca: "Clínico geral", resposta: "Check-up, prevenção e acompanhamento da saúde do adulto.", href: "/clinica-geral" },
+  { busca: "Musicoterapia", resposta: "Sessões com música para crianças com autismo, TDAH ou atraso.", href: "/musicoterapia" },
+  { busca: "Vacinação particular", resposta: "Vacinas para todas as idades, na clínica ou em casa.", href: "/vacinas" },
+  { busca: "Clínica que atende sábado", resposta: "Segunda a sexta, das 8h às 18h, e sábado, das 8h às 12h.", href: "#localizacao" },
+  { busca: "Clínica em São Luís", resposta: "No Jardim Renascença, perto da Cohama, do Calhau e da Ponta d'Areia.", href: "#localizacao" },
 ];
 
 export const PERGUNTAS = [

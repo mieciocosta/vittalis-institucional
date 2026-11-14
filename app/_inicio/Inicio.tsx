@@ -264,13 +264,14 @@ export function Inicio() {
         <section className={s.secao} aria-labelledby="t-buscas">
           <span className={s.rotulo}>Clínica em São Luís – MA</span>
           <h2 id="t-buscas" className={s.secaoTitulo}>Procurando <em>clínica em São Luís</em>?</h2>
-          <p className={s.secaoSub}>O que as famílias do Maranhão mais procuram, e o que encontram na Vittalis.</p>
+          <p className={s.secaoSub}>As buscas mais feitas no Maranhão, e onde encontrar cada uma na Vittalis.</p>
           <div className={s.buscas}>
             {BUSCAS.map((b) => (
-              <div key={b.busca} className={s.busca}>
-                <h3>🔎 {b.busca}</h3>
+              <a key={b.busca} href={b.href} className={`${s.busca} ${h.buscaLink}`}>
+                <h3>🔎 {b.busca} em São Luís</h3>
                 <p>{b.resposta}</p>
-              </div>
+                <span className={h.espLink}>Ver como funciona →</span>
+              </a>
             ))}
           </div>
           <p className={s.buscasBairros}><strong>Perto de você:</strong> {BAIRROS.join(" · ")}.</p>
