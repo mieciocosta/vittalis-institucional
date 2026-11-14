@@ -193,8 +193,8 @@ export const PEDIATRA_REAL = {
 export const NOTA_GOOGLE = { nota: "4,8", total: 49 };
 
 export const AVALIACOES = [
-  { nome: "Giulyanne T.", texto: "Encantada com o atendimento da clínica desde o primeiro contato no WhatsApp, tudo feito com tanto carinho e atenção! As técnicas que vieram aplicar as vacinas em casa foram super delicadas, pacientes e cuidadosas com o meu bebê. É um alívio enorme poder contar com um serviço tão humano e acolhedor. Recomendo!!" },
-  { nome: "Paloma F.", texto: "Equipe ótima, vem na residência, explicam tudo direitinho, usam técnicas pra amenizar as dores no local da aplicação da vacina. E realizam acompanhamento pós vacinal 😍" },
+  { nome: "Graziela S.", texto: "Empresa nota 10! Atendimento impecável, profissionais atenciosos e comprometidos, além de oferecerem qualidade e confiança em cada detalhe. ❤️" },
+  { nome: "André L.", texto: "Equipe excepcional! Atenciosos, comunicativos, atendimento muito humanizado." },
   { nome: "Lara F.", texto: "Sempre muito bem atendida e recebida. As profissionais são muito atenciosas e atuam com empatia e cuidado. As vacinas são e serão sempre com essa equipe top. Agradeço demais ❤️" },
   { nome: "Jéssica A.", texto: "Amei a equipe, profissionais excelentes. Obrigada mais uma vez por cuidarem com tanto amor de nossa bebê. Parabéns." },
   { nome: "Samila T.", texto: "Muito pacientes e atendimento de qualidade, meu filho nem chorou na vacina." },

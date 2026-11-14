@@ -120,7 +120,7 @@ export function Pediatria() {
                 </li>
               ))}
             </ol>
-            <Whats mensagem={MENSAGEM_GERAL} nome="como trabalham">Quero agendar uma consulta</Whats>
+            <Whats mensagem={MENSAGEM_GERAL} nome="como trabalham">Agendar pelo WhatsApp</Whats>
           </div>
         </section>
 
@@ -164,6 +164,9 @@ export function Pediatria() {
               </article>
             ))}
           </div>
+          <div className={s.centro}>
+            <Whats mensagem={MENSAGEM_GERAL} nome="atendimentos">Agendar pelo WhatsApp</Whats>
+          </div>
         </section>
 
         {/* DORES */}
@@ -181,6 +184,9 @@ export function Pediatria() {
               ))}
             </div>
             <p className={s.doresFecho}>Na Vittalis, a consulta pediátrica foi pensada para ser o contrário disso.</p>
+            <div className={s.centro}>
+              <Whats mensagem={MENSAGEM_GERAL} nome="dores">Agendar pelo WhatsApp</Whats>
+            </div>
           </div>
         </section>
 
@@ -191,7 +197,7 @@ export function Pediatria() {
               <span className={s.rotuloClaro}>O que a família procura</span>
               <h2 id="t-precisa">Não é só uma consulta. É <em>alguém que acompanha</em> o seu filho.</h2>
               <p>Mãe e pai querem respostas claras, tempo para perguntar e a segurança de saber quem cuida da criança a cada fase. É assim que a pediatria da Vittalis funciona.</p>
-              <a href="#sobre" className={s.linkClaro}>Conheça como trabalhamos →</a>
+              <Whats mensagem={MENSAGEM_GERAL} nome="o que procura" className={s.botaoClaro}>Agendar pelo WhatsApp</Whats>
             </div>
             <ul className={s.precisaGrade}>
               {PRECISA.map((p) => (
@@ -217,7 +223,7 @@ export function Pediatria() {
             ))}
           </div>
           <div className={s.centro}>
-            <Whats mensagem={MENSAGEM_GERAL} nome="equipe">Agendar com a nossa pediatria</Whats>
+            <Whats mensagem={MENSAGEM_GERAL} nome="equipe">Agendar pelo WhatsApp</Whats>
           </div>
         </section>
 
@@ -298,6 +304,9 @@ export function Pediatria() {
               <li key={l.titulo}><span aria-hidden>{l.icone}</span><strong>{l.titulo}</strong>{l.texto}</li>
             ))}
           </ul>
+          <div className={s.centro}>
+            <Whats mensagem={MENSAGEM_GERAL} nome="puericultura fim">Agendar pelo WhatsApp</Whats>
+          </div>
         </section>
         </div>
 
@@ -349,6 +358,7 @@ export function Pediatria() {
               <VideoVacina src="/videos/vacinacao-clinica.mp4" poster="/videos/vacinacao-clinica.jpg" titulo="Um dia na clínica" legenda="O bebê no colo da mãe, com calma e carinho" />
             </div>
             <div className={s.centro}>
+              <Whats mensagem={MENSAGEM_GERAL} nome="depoimentos">Agendar pelo WhatsApp</Whats>
               <a href={BRAND.mapsUrl} target="_blank" rel="noopener noreferrer" className={s.botaoSecundario}>⭐ Ver as avaliações no Google</a>
             </div>
           </div>
@@ -370,7 +380,7 @@ export function Pediatria() {
             </ul>
             <p className={s.localBairros}>Fácil de chegar de toda a Ilha: Cohama, Calhau, Ponta d&apos;Areia, Turu, Cohab, São José de Ribamar, Paço do Lumiar e Raposa.</p>
             <div className={s.capaAcoes}>
-              <Whats mensagem={MENSAGEM_GERAL} nome="localização">Falar no WhatsApp</Whats>
+              <Whats mensagem={MENSAGEM_GERAL} nome="localização">Agendar pelo WhatsApp</Whats>
               <a href={ENDERECO.mapsUrl} target="_blank" rel="noopener noreferrer" className={s.botaoSecundario}>Abrir no Google Maps</a>
             </div>
           </div>
@@ -397,7 +407,7 @@ export function Pediatria() {
             <strong>Pediatra perto de você:</strong> {BAIRROS.join(" · ")}.
           </p>
           <div className={s.centro}>
-            <Whats mensagem={MENSAGEM_GERAL} nome="buscas">Agendar consulta pediátrica</Whats>
+            <Whats mensagem={MENSAGEM_GERAL} nome="buscas">Agendar pelo WhatsApp</Whats>
           </div>
         </section>
 
@@ -406,6 +416,10 @@ export function Pediatria() {
           <h2 id="t-duvidas" className={s.secaoTitulo}>Dúvidas frequentes</h2>
           <div className={s.duvidas}>
             <Perguntas itens={PERGUNTAS} />
+          </div>
+          <p className={s.duvidaFim}>Ficou alguma dúvida? A equipe responde pelo WhatsApp.</p>
+          <div className={s.centro}>
+            <Whats mensagem={MENSAGEM_GERAL} nome="duvidas">Agendar pelo WhatsApp</Whats>
           </div>
         </section>
 
@@ -460,6 +474,11 @@ export function Pediatria() {
         </div>
         <p className={s.rodapeFim}>© {BRAND.name} · Imagem da capa ilustrativa · Atendimento particular · <Link href="/politica-de-privacidade">Política de privacidade</Link> · <Link href="/">Site da Vittalis</Link></p>
       </footer>
+
+      {/* Botão flutuante do WhatsApp no computador (14/11); no celular a barra de baixo faz esse papel */}
+      <Whats mensagem={MENSAGEM_GERAL} nome="flutuante" className={s.flutuante}>
+        <span className={s.flutuanteTexto}>Agendar pelo WhatsApp</span>
+      </Whats>
 
       <div className={s.barraWhats}>
         <Whats mensagem={MENSAGEM_GERAL} nome="barra" className={s.barraBotao}>Agendar consulta pelo WhatsApp</Whats>
