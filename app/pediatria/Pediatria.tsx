@@ -126,12 +126,13 @@ export function Pediatria() {
         <section id="pediatra" className={s.luisa} aria-labelledby="t-luisa">
           <div className={s.luisaInterno}>
             <div className={s.luisaFoto}>
-              <Image src={PEDIATRA_REAL.foto} alt={PEDIATRA_REAL.alt} width={1000} height={1053} sizes="(max-width: 900px) 90vw, 420px" />
+              <Image src={PEDIATRA_REAL.foto} alt={PEDIATRA_REAL.alt} width={1600} height={1686} sizes="(max-width: 900px) 90vw, 420px" />
             </div>
             <div className={s.luisaTexto}>
-              <span className={s.rotulo}>Conheça a pediatra</span>
-              <h2 id="t-luisa" className={s.secaoTitulo}>{PEDIATRA_REAL.nome}, <em>com amor e carinho</em></h2>
+              <span className={s.rotulo}>Nossa pediatra</span>
+              <h2 id="t-luisa" className={s.secaoTitulo}>Conheça a <em>{PEDIATRA_REAL.nome}</em></h2>
               {PEDIATRA_REAL.registro && <p className={s.luisaReg}>{PEDIATRA_REAL.registro}</p>}
+              <p className={s.luisaLegenda}>{PEDIATRA_REAL.legenda}</p>
               {PEDIATRA_REAL.texto.map((t) => <p key={t}>{t}</p>)}
               <Whats mensagem={PEDIATRA_REAL.mensagem} nome="pediatra real">Agendar com a {PEDIATRA_REAL.nome}</Whats>
             </div>

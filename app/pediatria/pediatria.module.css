@@ -171,6 +171,7 @@
 .luisaTexto { text-align: left; }
 .luisaTexto .secaoTitulo { text-align: left; margin-left: 0; }
 .luisaTexto p { color: var(--cinza); font-size: 17px; line-height: 1.7; margin: 0 0 16px; }
+.luisaTexto .luisaLegenda { font-size: 20px; line-height: 1.55; color: var(--tinta); font-weight: 600; border-left: 4px solid var(--coral); padding-left: 16px; margin-bottom: 20px; }
 .luisaTexto .luisaReg { font-size: 14px; color: var(--verde-escuro); font-weight: 700; margin-top: -6px; }
 @media (max-width: 900px) {
   .luisaInterno { grid-template-columns: 1fr; gap: 44px; padding: 64px 20px; }

@@ -82,7 +82,7 @@ export const PERGUNTAS = [
   },
   {
     pergunta: "Quanto tempo dura a consulta?",
-    resposta: "Em média de 40 a 50 minutos, para dar tempo de ouvir a família, examinar com calma e tirar as dúvidas.",
+    resposta: "Em média 1 hora, para dar tempo de ouvir a família, examinar com calma e tirar as dúvidas.",
   },
   {
     pergunta: "Vocês atendem por plano de saúde?",
@@ -117,7 +117,7 @@ export const PERGUNTAS = [
 // "O que você realmente procura" (no lugar das frases de mães do modelo: aqui
 // não inventamos depoimento, falamos do que a família encontra).
 export const PRECISA = [
-  { titulo: "Tempo", texto: "Consulta de 40 a 50 minutos, sem olhar para o relógio." },
+  { titulo: "Tempo", texto: "Consulta de 1 hora, sem olhar para o relógio." },
   { titulo: "Escuta", texto: "A história da criança contada com calma e ouvida até o fim." },
   { titulo: "Um plano claro", texto: "Você sai sabendo o que fazer em casa e quando voltar." },
   { titulo: "Tudo perto", texto: "Vacinas, exames e terapias organizados no mesmo lugar." },
@@ -128,15 +128,16 @@ export const PRECISA = [
 // nome completo + CRM (+ RQE se tiver título de especialista) em toda
 // publicidade com o nome do médico: preencher `registro` ANTES de publicar.
 export const PEDIATRA_REAL = {
-  nome: "Dra. Luisa",
+  nome: "Dra. Luísa",
+  // Legenda ditada pela direção (14/11).
+  legenda: "A Dra. Luísa é uma das pediatras mais requisitadas e está aqui para cuidar do seu filho com muito amor e carinho.",
   registro: "",
   foto: "/images/otim/ped_luisa.webp",
-  alt: "Dra. Luisa, pediatra da Vittalis Saúde, sorrindo no consultório",
+  alt: "Dra. Luísa, pediatra da Vittalis Saúde, sorrindo no consultório",
   texto: [
-    "É ela quem recebe seu filho no consultório da Vittalis, no Jardim Renascença: consulta sem pressa, conversa com a família e explicação clara do que fazer em casa.",
-    "Acompanha o bebê desde os primeiros dias, nas consultas de rotina, e a criança nas dúvidas de cada fase, com vacinas e terapias no mesmo endereço.",
+    "No consultório da Vittalis, no Jardim Renascença, ela acompanha o bebê desde os primeiros dias, nas consultas de rotina, e a criança nas dúvidas de cada fase, com vacinas e terapias no mesmo endereço.",
   ],
-  mensagem: "Olá! Vim pelo site e quero agendar uma consulta com a Dra. Luisa.",
+  mensagem: "Olá! Vim pelo site e quero agendar uma consulta com a Dra. Luísa.",
 };
 
 // Avaliações REAIS do Google Maps da Vittalis (14/11, pedido da direção:
