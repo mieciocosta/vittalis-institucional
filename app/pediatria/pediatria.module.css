@@ -5,11 +5,11 @@
    Títulos em Plus Jakarta Sans, texto em DM Sans. */
 .pagina {
   /* Paleta 2, escolhida na conversa com a direção (14/11): o turquesa do logo
-     da Vittalis com creme e pêssego. Os nomes das variáveis ficaram da
+     da Vittalis com creme e rosa bebê. Os nomes das variáveis ficaram da
      paleta anterior (verde = cor principal, coral = destaque, rose = fundo). */
   --verde: #0e8a91;
   --verde-escuro: #0a6f75;
-  --coral: #f2a07b;
+  --coral: #f0a3b6; /* rosa bebê (14/11, pedido da direção, no lugar do pêssego) */
   --laranja: #b88a33;
   --rose: #fbf1e6;
   --rose-claro: #fdf7f0;
@@ -39,11 +39,11 @@
 .botaoSecundario:hover { background: var(--coral); color: #fff; }
 .botaoCartao { composes: botaoWhats; width: 100%; font-size: 15px; padding: 14px 18px; margin-top: auto; }
 .botaoBranco { composes: botaoWhats; background: var(--coral); color: #fff; box-shadow: 0 12px 26px rgba(0,0,0,.18); }
-.botaoBranco:hover { background: #ec8c63; }
+.botaoBranco:hover { background: #e98aa2; }
 
 /* Capa */
 .capaFundo { background: var(--rose); position: relative; overflow: hidden; }
-.capaFundo::before { content: ""; position: absolute; width: 420px; height: 420px; left: -160px; top: -160px; border-radius: 50%; border: 1.5px solid rgba(242,160,123,.35); }
+.capaFundo::before { content: ""; position: absolute; width: 420px; height: 420px; left: -160px; top: -160px; border-radius: 50%; border: 1.5px solid rgba(240,163,182,.35); }
 .capa { position: relative; max-width: 1200px; margin: 0 auto; padding: 64px 20px 80px; display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
 .selo { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: var(--cinza); background: rgba(255,255,255,.7); padding: 9px 16px; border-radius: 999px; }
 .capaTitulo { font-size: clamp(36px, 4.8vw, 58px); line-height: 1.06; font-weight: 800; margin: 20px 0 18px; color: var(--verde); }
@@ -100,7 +100,7 @@
 .equipeFoto1 { grid-column: 1 / -1; }
 .equipeFoto1::before { background: var(--coral); }
 .equipeFoto2::before { background: var(--verde); opacity: .85; }
-.equipeFoto3::before { background: #f4c99a; }
+.equipeFoto3::before { background: #f8d3dc; }
 .equipeFoto img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 8px solid #fff; box-shadow: 0 20px 44px rgba(26,26,26,.14); }
 .equipeLegenda { grid-column: 1 / -1; margin: 6px 0 0; font-family: var(--titulos); font-weight: 700; color: var(--verde); font-size: 15px; }
 /* Como trabalham */
