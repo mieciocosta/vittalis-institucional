@@ -12,13 +12,6 @@ export const FOTOS = {
   // Recortada (sem o fundo da foto) para casar com o rosé da capa, como no modelo.
   capa: "/images/otim/ped_capa_recorte.webp",
   capaAlt: "Pediatra sorridente de jaleco com estetoscópio, sentada numa poltrona verde",
-  comoTrabalha: "/images/otim/vittalis_pediatria_2.webp",
-  comoTrabalhaAlt: "Pediatra sorrindo para um bebê durante a consulta",
-  consultorio: [
-    { src: "/images/otim/pediatria_02.webp", alt: "Consulta pediátrica com estetoscópio em menino sorridente" },
-    { src: "/images/otim/pediatria_01_logo.webp", alt: "Mãe e bebê em consulta no consultório infantil da Vittalis" },
-    { src: "/images/otim/vittalis_pediatria_2.webp", alt: "Pediatra sorrindo para um bebê durante a consulta" },
-  ],
 };
 
 export type Atendimento = { icone: string; titulo: string; texto: string; itens: string[]; mensagem: string };

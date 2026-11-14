@@ -166,18 +166,6 @@ export function Pediatria() {
           </div>
         </section>
 
-        {/* CONSULTÓRIO */}
-        <section className={s.secao} aria-labelledby="t-consultorio">
-          <span className={s.rotulo}>Nosso espaço</span>
-          <h2 id="t-consultorio" className={s.secaoTitulo}>Um consultório pensado para crianças</h2>
-          <p className={s.secaoSub}>Ambiente claro, tranquilo e acolhedor, para a consulta ser leve para a criança e para os pais.</p>
-          <div className={s.galeria}>
-            {FOTOS.consultorio.map((f) => (
-              <Image key={f.src} src={f.src} alt={f.alt} width={1200} height={800} sizes="(max-width: 760px) 100vw, 380px" />
-            ))}
-          </div>
-        </section>
-
         {/* LOCALIZAÇÃO */}
         <div className={s.localFundo}>
         <section id="localizacao" className={s.local} aria-labelledby="t-local">
