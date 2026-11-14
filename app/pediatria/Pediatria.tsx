@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 import { ENDERECO, HORARIOS, WHATSAPP_TERAPIAS } from "@/lib/config/contato";
 import { VideoVacina } from "../vacinas/VideoVacina";
-import { Bebe } from "./Bebe";
+import { Bebe, Crianca } from "./Bebe";
 import { Perguntas } from "../campanhas/_componentes/Perguntas";
 import { LinkWhatsOrigem } from "../_landing-vacinas/LinkWhatsOrigem";
 import { ATENDIMENTOS, AVALIACOES, BUSCAS, DESTAQUES_PEDIATRA, NOTA_GOOGLE, PEDIATRA_REAL, BAIRROS, COMO_TRABALHAM, DORES, FOTOS, MENSAGEM_GERAL, PERGUNTAS, CONSULTAS_ROTINA, IDADES_BEBE, LEVA_DA_CONSULTA, MARCOS, PUER_DEPOIS, PRECISA, QUANDO_LEVAR } from "./conteudo";
@@ -40,6 +40,9 @@ function Whats({ mensagem, nome, children, className }: { mensagem: string; nome
     </LinkWhatsOrigem>
   );
 }
+
+// Avaliação só sobre a equipe, ao lado do botão do recém-nascido (14/11).
+const AVAL_EQUIPE = AVALIACOES.find((a) => a.nome === "Jéssica A.") ?? AVALIACOES[0];
 
 export function Pediatria() {
   return (
@@ -245,14 +248,21 @@ export function Pediatria() {
           <h3 className={s.marcosTitulo}>E depois dos 2 anos, a puericultura continua</h3>
           <div className={s.depois}>
             {PUER_DEPOIS.map((d) => (
-              <div key={d.idade} className={s.depoisCartao}>
-                <span className={s.depoisIcone} aria-hidden>{d.icone}</span>
-                <strong>{d.idade}</strong>
-                <ul>{d.itens.map((it) => <li key={it}>{it}</li>)}</ul>
+              <div key={d.idade} className={`${s.depoisCartao} ${d.cor === "rosa" ? s.depoisRosa : ""}`}>
+                <div className={s.depoisTopo}><Crianca fase={d.fase} /></div>
+                <div className={s.depoisCorpo}>
+                  <strong className={s.marcoIdade}>{d.idade}</strong>
+                  <span className={s.marcoUnidade}>anos</span>
+                  <h4>{d.titulo}</h4>
+                  <p>{d.texto}</p>
+                  <ul>{d.itens.map(([ic, t]) => <li key={t}><span aria-hidden>{ic}</span>{t}</li>)}</ul>
+                  <LinkWhatsOrigem mensagem={d.msg} slug={SLUG} nomeCampanha={`${NOME}: puericultura ${d.idade} anos`} numero={WHATSAPP_TERAPIAS} className={s.depoisLink}>
+                    Agendar para essa fase →
+                  </LinkWhatsOrigem>
+                </div>
               </div>
             ))}
           </div>
-
           {/* Conversão (14/11): idade em um toque, recém-nascido em destaque,
               uma avaliação real e o que a família leva da consulta. */}
           <div className={s.converte}>
@@ -277,8 +287,8 @@ export function Pediatria() {
               </div>
               <figure className={s.puerAval}>
                 <span className={s.estrelas} aria-label="5 estrelas">★★★★★</span>
-                <blockquote>“{AVALIACOES[0].texto}”</blockquote>
-                <figcaption>{AVALIACOES[0].nome} · avaliação no Google</figcaption>
+                <blockquote>“{AVAL_EQUIPE.texto}”</blockquote>
+                <figcaption>{AVAL_EQUIPE.nome} · avaliação no Google</figcaption>
               </figure>
             </div>
           </div>

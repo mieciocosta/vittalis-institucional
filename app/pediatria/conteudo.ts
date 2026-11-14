@@ -220,9 +220,24 @@ export const MARCOS = [
 // Puericultura depois dos 2 anos (14/11, direção: "as consultas incluem
 // bebês, crianças e adolescentes").
 export const PUER_DEPOIS = [
-  { icone: "🧒", idade: "2 a 5 anos", itens: ["Fala e linguagem", "Alimentação e seletividade", "Sono e desfralde", "Comportamento e birras"] },
-  { icone: "🎒", idade: "6 a 11 anos", itens: ["Escola e aprendizagem", "Peso, altura e postura", "Visão e audição", "Esportes e telas"] },
-  { icone: "🧑", idade: "12 a 18 anos", itens: ["Puberdade", "Saúde emocional", "Alimentação e acne", "Vacinas da adolescência"] },
+  {
+    fase: 1, idade: "2-5", titulo: "A fase das descobertas", cor: "azul",
+    texto: "Fala, comida e sono mudam a cada mês. A consulta ajuda a separar o que é da idade do que merece atenção.",
+    itens: [["🗣️", "Fala e linguagem"], ["🥦", "Alimentação e seletividade"], ["🌙", "Sono e desfralde"], ["🧸", "Birras e limites"]],
+    msg: "Olá! Vim pelo site. Meu filho tem entre 2 e 5 anos e quero agendar a consulta de puericultura com a pediatra.",
+  },
+  {
+    fase: 2, idade: "6-11", titulo: "A fase da escola", cor: "rosa",
+    texto: "Aprendizagem, crescimento e rotina de telas e esportes, com um olhar atento ao que aparece na escola.",
+    itens: [["📚", "Escola e aprendizagem"], ["📏", "Peso, altura e postura"], ["👀", "Visão e audição"], ["⚽", "Esportes e telas"]],
+    msg: "Olá! Vim pelo site. Meu filho tem entre 6 e 11 anos e quero agendar a consulta de puericultura com a pediatra.",
+  },
+  {
+    fase: 3, idade: "12-18", titulo: "A fase das mudanças", cor: "azul",
+    texto: "Um espaço de confiança para o adolescente falar do corpo, das emoções e dos hábitos, com a família por perto.",
+    itens: [["🌱", "Puberdade"], ["💬", "Saúde emocional"], ["🍎", "Alimentação e pele"], ["💉", "Vacinas da adolescência"]],
+    msg: "Olá! Vim pelo site. Meu filho é adolescente e quero agendar a consulta de puericultura com a pediatra.",
+  },
 ];
 
 // "Qual a idade do seu filho?" (14/11, pra converter: a família toca na idade

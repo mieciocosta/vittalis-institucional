@@ -171,3 +171,80 @@ export function Bebe({ pose }: { pose: number }) {
     </svg>
   );
 }
+
+// Crianças maiores para "depois dos 2 anos" (14/11): mesma família de traço
+// dos bebês, com roupa e um objeto de cada fase.
+function Perna({ x, y1, y2, cor, w = 11 }: { x: number; y1: number; y2: number; cor: string; w?: number }) {
+  return (
+    <g>
+      <line x1={x} y1={y1} x2={x} y2={y2} stroke={cor} strokeWidth={w} strokeLinecap="round" />
+      <ellipse cx={x + 3} cy={y2 + 3} rx={8} ry={4.5} fill="#ffffff" stroke="#c9d3da" strokeWidth={1.4} />
+    </g>
+  );
+}
+
+const CRIANCAS: Record<number, React.ReactNode> = {
+  // 2 a 5 anos: com o ursinho
+  1: (
+    <>
+      <ellipse cx={86} cy={127} rx={34} ry={4} fill="#000" opacity={0.08} />
+      <Perna x={79} y1={96} y2={120} cor={PELE} />
+      <Perna x={93} y1={96} y2={120} cor={PELE} />
+      <rect x={68} y={84} width={36} height={16} rx={7} fill="#6f93d6" />
+      <Membro de={[70, 62]} ate={[58, 84]} w={10} />
+      <rect x={67} y={54} width={38} height={36} rx={14} fill="#8ccbe3" />
+      <g>
+        <circle cx={126} cy={76} r={13} fill="#c98b5a" />
+        <circle cx={117} cy={64} r={6} fill="#c98b5a" /><circle cx={135} cy={64} r={6} fill="#c98b5a" />
+        <circle cx={126} cy={74} r={9} fill="#d9a073" />
+        <circle cx={122} cy={72} r={1.6} fill="#3a2a20" /><circle cx={130} cy={72} r={1.6} fill="#3a2a20" />
+        <ellipse cx={126} cy={78} rx={3} ry={2} fill="#3a2a20" />
+        <circle cx={126} cy={95} r={12} fill="#c98b5a" />
+      </g>
+      <Membro de={[102, 64]} ate={[116, 80]} w={10} />
+      <Cabeca x={86} y={33} r={23} />
+    </>
+  ),
+  // 6 a 11 anos: mochila da escola
+  2: (
+    <>
+      <ellipse cx={86} cy={127} rx={32} ry={4} fill="#000" opacity={0.08} />
+      <rect x={96} y={50} width={26} height={34} rx={8} fill="#ffc94d" stroke="#e8ad2c" strokeWidth={1.5} />
+      <rect x={100} y={66} width={18} height={10} rx={4} fill="#ffdb85" />
+      <Perna x={79} y1={92} y2={121} cor={PELE} w={10} />
+      <Perna x={93} y1={92} y2={121} cor={PELE} w={10} />
+      <path d="M70 80 h32 l4 16 h-40 z" fill="#5b7fc0" />
+      <Membro de={[71, 56]} ate={[60, 80]} w={9} />
+      <rect x={69} y={46} width={34} height={38} rx={12} fill="#f4a6bd" />
+      <line x1={96} y1={48} x2={92} y2={80} stroke="#e8ad2c" strokeWidth={4} strokeLinecap="round" />
+      <Membro de={[100, 54]} ate={[114, 34]} w={9} />
+      <Cabeca x={86} y={27} r={21} />
+    </>
+  ),
+  // 12 a 18 anos: fone de ouvido e celular
+  3: (
+    <>
+      <ellipse cx={86} cy={127} rx={30} ry={4} fill="#000" opacity={0.08} />
+      <Perna x={79} y1={84} y2={121} cor="#3f5f8f" w={12} />
+      <Perna x={93} y1={84} y2={121} cor="#3f5f8f" w={12} />
+      <rect x={68} y={40} width={36} height={48} rx={13} fill="#6aa7c9" />
+      <path d="M76 40 q10 12 20 0" fill="none" stroke="#4f8db1" strokeWidth={3} />
+      <Membro de={[71, 50]} ate={[66, 80]} w={9} />
+      <Membro de={[101, 50]} ate={[92, 66]} w={9} />
+      <rect x={84} y={56} width={10} height={16} rx={2.5} fill="#2b2b2b" transform="rotate(-12 89 64)" />
+      <path d="M58 22 q-2 -24 28 -26 q30 2 28 26 q4 18 0 20 q-8 -6 -6 -24 q-22 -14 -44 0 q2 18 -6 24 q-4 -2 0 -20z" fill="#6b4226" />
+      <Cabeca x={86} y={21} r={19} />
+      <path d="M66 18 q20 -26 40 0" fill="none" stroke="#444" strokeWidth={3.2} strokeLinecap="round" />
+      <rect x={61} y={14} width={8} height={13} rx={3.5} fill="#ee8fab" />
+      <rect x={103} y={14} width={8} height={13} rx={3.5} fill="#ee8fab" />
+    </>
+  ),
+};
+
+export function Crianca({ fase }: { fase: number }) {
+  return (
+    <svg viewBox="0 0 170 132" role="img" aria-hidden width="100%" height="100%">
+      {CRIANCAS[fase]}
+    </svg>
+  );
+}
