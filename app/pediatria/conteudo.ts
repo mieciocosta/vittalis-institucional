@@ -204,10 +204,19 @@ export const AVALIACOES = [
 ];
 
 // Calendário de consultas de rotina (puericultura) do Ministério da Saúde.
-export const PUERICULTURA = [
-  { quando: "1ª semana", oque: "Primeira consulta: peso, amamentação, icterícia, teste do pezinho e vacinas ao nascer." },
-  { quando: "1, 2, 4 e 6 meses", oque: "Crescimento, desenvolvimento, sono, amamentação e as vacinas de cada mês." },
-  { quando: "9 e 12 meses", oque: "Introdução alimentar, primeiros passos e as primeiras palavras." },
-  { quando: "18 e 24 meses", oque: "Fala, comportamento, alimentação da família e vacinas de reforço." },
-  { quando: "A partir dos 2 anos", oque: "Uma consulta por ano, acompanhando escola, visão, peso e puberdade." },
+// Marcos do desenvolvimento (14/11, no modelo do quadro "Desenvolvimento do
+// bebê no 1º ano" mandado pela direção). Idades aproximadas, na linha da
+// Caderneta da Criança do Ministério da Saúde; cada bebê tem seu tempo.
+export const MARCOS = [
+  { pose: 1, idade: "0-2", unidade: "meses", texto: "Deitado de costas, mãozinhas fechadas e o primeiro sorriso" },
+  { pose: 2, idade: "2-4", unidade: "meses", texto: "De bruços, sustenta a cabeça" },
+  { pose: 3, idade: "4-6", unidade: "meses", texto: "Apoia nas mãos e começa a rolar" },
+  { pose: 4, idade: "6-9", unidade: "meses", texto: "Senta sem apoio" },
+  { pose: 5, idade: "7-10", unidade: "meses", texto: "Engatinha" },
+  { pose: 6, idade: "9-12", unidade: "meses", texto: "Fica em pé com apoio, primeiros passos" },
+  { pose: 7, idade: "12-18", unidade: "meses", texto: "Anda sozinho" },
+  { pose: 8, idade: "18-24", unidade: "meses", texto: "Corre, chuta bola e junta palavras" },
 ];
+
+// Calendário de consultas de rotina (puericultura) do Ministério da Saúde.
+export const CONSULTAS_ROTINA = ["1ª semana", "1 mês", "2 meses", "4 meses", "6 meses", "9 meses", "12 meses", "18 meses", "24 meses", "1 vez por ano a partir dos 2 anos"];

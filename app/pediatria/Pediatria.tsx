@@ -4,9 +4,10 @@ import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 import { ENDERECO, HORARIOS, WHATSAPP_TERAPIAS } from "@/lib/config/contato";
 import { VideoVacina } from "../vacinas/VideoVacina";
+import { Bebe } from "./Bebe";
 import { Perguntas } from "../campanhas/_componentes/Perguntas";
 import { LinkWhatsOrigem } from "../_landing-vacinas/LinkWhatsOrigem";
-import { ATENDIMENTOS, AVALIACOES, BUSCAS, DESTAQUES_PEDIATRA, NOTA_GOOGLE, PEDIATRA_REAL, BAIRROS, COMO_TRABALHAM, DORES, FOTOS, MENSAGEM_GERAL, PERGUNTAS, PRECISA, PUERICULTURA, QUANDO_LEVAR } from "./conteudo";
+import { ATENDIMENTOS, AVALIACOES, BUSCAS, DESTAQUES_PEDIATRA, NOTA_GOOGLE, PEDIATRA_REAL, BAIRROS, COMO_TRABALHAM, DORES, FOTOS, MENSAGEM_GERAL, PERGUNTAS, CONSULTAS_ROTINA, MARCOS, PRECISA, QUANDO_LEVAR } from "./conteudo";
 import s from "./pediatria.module.css";
 
 // Títulos em Plus Jakarta Sans (14/11, pedido da direção: "quero até a paleta
@@ -217,25 +218,31 @@ export function Pediatria() {
           </div>
         </section>
 
-        {/* PUERICULTURA */}
-        <section id="puericultura" className={s.secao} aria-labelledby="t-puer">
+        {/* PUERICULTURA (refeita em 14/11, no modelo do quadro "Desenvolvimento
+            do bebê" mandado pela direção: um bebê desenhado em cada marco) */}
+        <div className={s.puerFundo}>
+        <section id="puericultura" className={s.puer} aria-labelledby="t-puer">
           <span className={s.rotulo}>Puericultura</span>
-          <h2 id="t-puer" className={s.secaoTitulo}>O <em>acompanhamento</em> do bebê, consulta a consulta</h2>
-          <p className={s.secaoSub}>As consultas de rotina mostram se o seu filho está crescendo e se desenvolvendo bem, e antecipam dúvidas de cada fase.</p>
-          <ol className={s.linha}>
-            {PUERICULTURA.map((p, i) => (
-              <li key={p.quando}>
-                <span className={s.linhaPonto} aria-hidden>{i + 1}</span>
-                <strong>{p.quando}</strong>
-                <span>{p.oque}</span>
+          <h2 id="t-puer" className={s.puerTitulo}>Desenvolvimento do bebê <em>fase a fase</em></h2>
+          <p className={s.puerSub}>Na puericultura, a pediatra acompanha cada conquista do seu filho e orienta o que estimular em casa.</p>
+          <ol className={s.marcos}>
+            {MARCOS.map((m) => (
+              <li key={m.idade} className={s.marco}>
+                <div className={s.marcoImg}><Bebe pose={m.pose} /></div>
+                <strong className={s.marcoIdade}>{m.idade}</strong>
+                <span className={s.marcoUnidade}>{m.unidade}</span>
+                <p>{m.texto}</p>
               </li>
             ))}
           </ol>
-          <p className={s.notaPequena}>Calendário de consultas de rotina do Ministério da Saúde. A pediatra ajusta para cada criança.</p>
-          <div className={s.centro}>
+          <p className={s.puerTempo}>💛 Cada bebê tem o seu tempo. As idades são aproximadas, e é na consulta que a pediatra avalia o seu filho.</p>
+          <div className={s.rotina}>
+            <strong>📅 Consultas de rotina recomendadas pelo Ministério da Saúde</strong>
+            <ul>{CONSULTAS_ROTINA.map((c) => <li key={c}>{c}</li>)}</ul>
             <Whats mensagem="Olá! Vim pelo site e quero saber sobre o acompanhamento de puericultura do meu bebê." nome="puericultura">Quero acompanhar meu bebê</Whats>
           </div>
         </section>
+        </div>
 
         {/* QUANDO LEVAR */}
         <section className={s.quando} aria-labelledby="t-quando">
@@ -304,7 +311,7 @@ export function Pediatria() {
               <li>📸 <a href={BRAND.instagramDirect} target="_blank" rel="noopener noreferrer">@vittalissaudeslz</a></li>
               <li>✉️ <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a></li>
             </ul>
-            <p className={s.localBairros}>Fácil de chegar de toda a Ilha: Cohama, Calhau, Ponta d'Areia, Turu, Cohab, São José de Ribamar, Paço do Lumiar e Raposa.</p>
+            <p className={s.localBairros}>Fácil de chegar de toda a Ilha: Cohama, Calhau, Ponta d&apos;Areia, Turu, Cohab, São José de Ribamar, Paço do Lumiar e Raposa.</p>
             <div className={s.capaAcoes}>
               <Whats mensagem={MENSAGEM_GERAL} nome="localização">Falar no WhatsApp</Whats>
               <a href={ENDERECO.mapsUrl} target="_blank" rel="noopener noreferrer" className={s.botaoSecundario}>Abrir no Google Maps</a>
@@ -354,7 +361,7 @@ export function Pediatria() {
             <h2 id="t-final">Agende hoje.<span>A saúde do seu filho não pode esperar.</span></h2>
             <p>Consulta de 1 hora, escuta de verdade e acompanhamento em cada fase, do recém-nascido ao adolescente. Com vacinas e terapias no mesmo endereço, no Jardim Renascença.</p>
             <div className={s.finalAcao}>
-              <Whats mensagem={PEDIATRA_REAL.mensagem} nome="final" className={s.botaoFinal}>Falar com a {PEDIATRA_REAL.nome} pelo WhatsApp</Whats>
+              <Whats mensagem={PEDIATRA_REAL.mensagem} nome="final" className={s.botaoFinal}>Agende agora mesmo a consulta que seu FILHO merece!</Whats>
             </div>
             <ul className={s.finalSelos}>
               <li>⭐ {NOTA_GOOGLE.nota} no Google</li>

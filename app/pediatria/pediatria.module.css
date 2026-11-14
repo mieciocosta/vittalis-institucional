@@ -146,14 +146,27 @@
 .precisaGrade strong { font-family: var(--titulos); font-size: 20px; }
 .precisaGrade span { font-size: 15px; line-height: 1.55; opacity: .92; }
 
-/* Puericultura: linha do tempo */
-.linha { list-style: none; padding: 0; margin: 0 auto; max-width: 1080px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; position: relative; text-align: left; }
-.linha::before { content: ""; position: absolute; left: 6%; right: 6%; top: 22px; height: 3px; background: linear-gradient(90deg, var(--verde), var(--coral)); border-radius: 3px; z-index: 0; }
-.linha li { position: relative; z-index: 1; background: #fff; border: 1px solid #f0e6e0; border-radius: 22px; padding: 62px 18px 20px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 10px 26px rgba(26,26,26,.05); }
-.linhaPonto { position: absolute; top: 4px; left: 18px; width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--verde); color: #fff; font-family: var(--titulos); font-weight: 800; border: 4px solid #fff; }
-.linha li:nth-child(even) .linhaPonto { background: var(--coral); }
-.linha strong { font-family: var(--titulos); font-size: 17px; color: var(--verde); }
-.linha span:last-child { font-size: 14.5px; color: var(--cinza); line-height: 1.55; }
+/* Puericultura: marcos do desenvolvimento com bebês (14/11) */
+.puerFundo { background: #fbf3ee; }
+.puer { max-width: 1200px; margin: 0 auto; padding: 96px 20px; text-align: center; scroll-margin-top: 70px; }
+.puerTitulo { font-family: var(--titulos); font-size: clamp(34px, 4.6vw, 60px); line-height: 1.05; letter-spacing: -.02em; margin: 10px 0 16px; color: #6aa7c9; text-transform: uppercase; font-weight: 800; }
+.puerTitulo em { font-style: normal; color: #ee8fab; display: block; }
+.puerSub { font-size: 18px; color: var(--cinza); max-width: 640px; margin: 0 auto 48px; line-height: 1.6; }
+.marcos { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 34px 22px; }
+.marco { display: flex; flex-direction: column; align-items: center; }
+.marcoImg { width: 100%; max-width: 210px; aspect-ratio: 170 / 132; margin-bottom: 8px; transition: transform .25s; }
+.marco:hover .marcoImg { transform: translateY(-4px) rotate(-1deg); }
+.marcoIdade { font-family: var(--titulos); font-size: clamp(34px, 3.6vw, 46px); line-height: 1; font-weight: 800; color: #ee8fab; letter-spacing: -.01em; }
+.marco:nth-child(even) .marcoIdade { color: #6aa7c9; }
+.marcoUnidade { font-family: var(--titulos); font-size: 14px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #6aa7c9; margin: 2px 0 10px; }
+.marco:nth-child(even) .marcoUnidade { color: #ee8fab; }
+.marco p { margin: 0; font-size: 15.5px; line-height: 1.45; color: var(--tinta); max-width: 210px; }
+.puerTempo { margin: 40px auto 28px; font-size: 15px; color: var(--cinza); }
+.rotina { max-width: 980px; margin: 0 auto; background: #fff; border-radius: 28px; padding: 28px 28px 32px; box-shadow: 0 12px 34px rgba(26,26,26,.06); }
+.rotina > strong { display: block; font-family: var(--titulos); font-size: 18px; color: var(--verde-escuro); margin-bottom: 16px; }
+.rotina ul { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.rotina li { font-size: 14px; padding: 7px 14px; border-radius: 999px; background: #fdf0f4; color: #9c3c5a; font-weight: 600; }
+.rotina li:nth-child(even) { background: #e8f2f8; color: #2f6e92; }
 .notaPequena { font-size: 13.5px; color: var(--cinza); margin: 18px 0 0; }
 
 /* Depoimentos */
@@ -272,10 +285,10 @@
   .cartoes4 { grid-template-columns: 1fr; }
   .precisaInterno { grid-template-columns: 1fr; padding: 64px 20px; }
   .precisaGrade { grid-template-columns: 1fr 1fr; }
-  .linha { grid-template-columns: 1fr; }
-  .linha::before { left: 37px; right: auto; top: 20px; bottom: 20px; width: 3px; height: auto; }
-  .linha li { padding: 18px 18px 18px 70px; }
-  .linhaPonto { top: 16px; left: 18px; }
+  .puer { padding: 64px 16px; }
+  .marcos { grid-template-columns: repeat(2, 1fr); gap: 28px 14px; }
+  .marco p { font-size: 14px; }
+  .rotina { padding: 22px 16px 26px; }
   .depoInterno { padding: 64px 20px; }
   .final { grid-template-columns: 1fr; gap: 40px; padding: 64px 20px 72px; text-align: center; }
   .final p { margin-left: auto; margin-right: auto; font-size: 17px; }
