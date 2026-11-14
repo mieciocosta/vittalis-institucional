@@ -91,6 +91,35 @@ export function Pediatria() {
         </section>
         </div>
 
+        {/* 2ª seção, logo depois da capa (14/11, pedido da direção) */}
+        {/* COMO TRABALHAM */}
+        <section id="sobre" className={s.como} aria-labelledby="t-como">
+          <div className={s.equipe}>
+            {EQUIPE.map((src, i) => (
+              <div key={src} className={`${s.equipeFoto} ${s[`equipeFoto${i + 1}`]}`}>
+                <Image src={src} alt="Pediatra da equipe Vittalis sorrindo, de jaleco" width={330} height={330} sizes="(max-width: 900px) 40vw, 230px" />
+              </div>
+            ))}
+            <p className={s.equipeLegenda}>Equipe de pediatria Vittalis</p>
+          </div>
+          <div>
+            <span className={s.rotulo}>Pediatria Vittalis</span>
+            <h2 id="t-como" className={s.comoTitulo}>Você sabe como nossos <em>pediatras</em> trabalham?</h2>
+            <ol className={s.passos}>
+              {COMO_TRABALHAM.map((p, i) => (
+                <li key={p.titulo}>
+                  <span className={s.passoNumero} aria-hidden>{i + 1}</span>
+                  <div>
+                    <h3>{p.titulo}</h3>
+                    <p>{p.texto}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <Whats mensagem={MENSAGEM_GERAL} nome="como trabalham">Quero agendar uma consulta</Whats>
+          </div>
+        </section>
+
         {/* ATENDIMENTOS */}
         <section id="programas" className={s.secao} aria-labelledby="t-atendimentos">
           <span className={s.rotulo}>Nossos atendimentos</span>
@@ -146,34 +175,6 @@ export function Pediatria() {
                 </li>
               ))}
             </ul>
-          </div>
-        </section>
-
-        {/* COMO TRABALHAM */}
-        <section id="sobre" className={s.como} aria-labelledby="t-como">
-          <div className={s.equipe}>
-            {EQUIPE.map((src, i) => (
-              <div key={src} className={`${s.equipeFoto} ${s[`equipeFoto${i + 1}`]}`}>
-                <Image src={src} alt="Pediatra da equipe Vittalis sorrindo, de jaleco" width={330} height={330} sizes="(max-width: 900px) 40vw, 230px" />
-              </div>
-            ))}
-            <p className={s.equipeLegenda}>Equipe de pediatria Vittalis</p>
-          </div>
-          <div>
-            <span className={s.rotulo}>Pediatria Vittalis</span>
-            <h2 id="t-como" className={s.comoTitulo}>Você sabe como nossos <em>pediatras</em> trabalham?</h2>
-            <ol className={s.passos}>
-              {COMO_TRABALHAM.map((p, i) => (
-                <li key={p.titulo}>
-                  <span className={s.passoNumero} aria-hidden>{i + 1}</span>
-                  <div>
-                    <h3>{p.titulo}</h3>
-                    <p>{p.texto}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-            <Whats mensagem={MENSAGEM_GERAL} nome="como trabalham">Quero agendar uma consulta</Whats>
           </div>
         </section>
 
