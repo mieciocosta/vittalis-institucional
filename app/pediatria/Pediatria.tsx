@@ -1,4 +1,5 @@
 import Image from "next/image";
+import localFont from "next/font/local";
 import Link from "next/link";
 import { BRAND } from "@/lib/brand";
 import { ENDERECO, WHATSAPP_TERAPIAS } from "@/lib/config/contato";
@@ -6,6 +7,18 @@ import { Perguntas } from "../campanhas/_componentes/Perguntas";
 import { LinkWhatsOrigem } from "../_landing-vacinas/LinkWhatsOrigem";
 import { ATENDIMENTOS, BAIRROS, COMO_TRABALHAM, DORES, FOTOS, MENSAGEM_GERAL, PERGUNTAS, QUANDO_LEVAR } from "./conteudo";
 import s from "./pediatria.module.css";
+
+// Títulos em Plus Jakarta Sans (14/11, pedido da direção: "quero até a paleta
+// de cores" da clínica pediátrica modelo). Só nesta página.
+const fonteTitulos = localFont({
+  src: [
+    { path: "../../node_modules/@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-600-normal.woff2", weight: "600", style: "normal" },
+    { path: "../../node_modules/@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-700-normal.woff2", weight: "700", style: "normal" },
+    { path: "../../node_modules/@fontsource/plus-jakarta-sans/files/plus-jakarta-sans-latin-800-normal.woff2", weight: "800", style: "normal" },
+  ],
+  variable: "--fonte-ped",
+  display: "swap",
+});
 
 const SLUG = "pediatria";
 const NOME = "Pediatria";
@@ -23,7 +36,7 @@ function Whats({ mensagem, nome, children, className }: { mensagem: string; nome
 
 export function Pediatria() {
   return (
-    <div className={s.pagina}>
+    <div className={`${s.pagina} ${fonteTitulos.variable}`}>
       <meta name="color-scheme" content="only light" />
 
       <header className={s.topo}>
@@ -43,6 +56,7 @@ export function Pediatria() {
 
       <main>
         {/* CAPA */}
+        <div className={s.capaFundo}>
         <section className={s.capa} aria-labelledby="t-capa">
           <div className={s.capaTexto}>
             <span className={s.selo}>👶 Pediatria em São Luís · Jardim Renascença</span>
@@ -70,11 +84,12 @@ export function Pediatria() {
             </div>
           </div>
         </section>
+        </div>
 
         {/* ATENDIMENTOS */}
         <section id="atendimentos" className={s.secao} aria-labelledby="t-atendimentos">
           <span className={s.rotulo}>Nossos atendimentos</span>
-          <h2 id="t-atendimentos" className={s.secaoTitulo}>Pediatria para cada fase do seu filho</h2>
+          <h2 id="t-atendimentos" className={s.secaoTitulo}>Pediatria para cada <em>fase</em> do seu filho</h2>
           <p className={s.secaoSub}>Da primeira semana de vida à adolescência, com a mesma equipe acompanhando o crescimento.</p>
           <div className={s.cartoes}>
             {ATENDIMENTOS.map((a) => (
@@ -116,7 +131,7 @@ export function Pediatria() {
           </div>
           <div>
             <span className={s.rotulo}>Pediatria Vittalis</span>
-            <h2 id="t-como" className={s.comoTitulo}>Você sabe como nossos pediatras trabalham?</h2>
+            <h2 id="t-como" className={s.comoTitulo}>Você sabe como nossos <em>pediatras</em> trabalham?</h2>
             <ol className={s.passos}>
               {COMO_TRABALHAM.map((p, i) => (
                 <li key={p.titulo}>
@@ -158,6 +173,7 @@ export function Pediatria() {
         </section>
 
         {/* LOCALIZAÇÃO */}
+        <div className={s.localFundo}>
         <section id="localizacao" className={s.local} aria-labelledby="t-local">
           <div className={s.localTexto}>
             <span className={s.rotulo}>Venha nos visitar</span>
@@ -173,6 +189,7 @@ export function Pediatria() {
             <iframe src={ENDERECO.mapaEmbed} title="Mapa da Vittalis Saúde no Jardim Renascença" loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
           </div>
         </section>
+        </div>
 
         {/* DÚVIDAS */}
         <section id="duvidas" className={s.secao} aria-labelledby="t-duvidas">
