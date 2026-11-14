@@ -34,7 +34,9 @@ const O = (n: string) => `/images/otim/${n}.webp`;
 const IMG = {
   vacinacao: "/images/vittalis_vacinacao_1.png",
   pediatria: O("pediatria_02_logo"),
-  neuropediatria: O("pediatria_02_logo"),
+  // 14/11: a neuropediatria usava a mesma foto da pediatria e as duas
+  // páginas pareciam iguais (observação da direção).
+  neuropediatria: O("n_neuropediatria"),
   ginecologia: O("ginecologia_01"),
   clinicaGeral: O("clinica_geral_01"),
   dermatologia: O("dermatologia_01"),

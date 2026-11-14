@@ -1,0 +1,149 @@
+/* Página de Pediatria (14/11). Tons suaves de clínica infantil: turquesa da
+   marca, azul-petróleo, pêssego e creme. Estrutura no modelo das clínicas
+   pediátricas que ranqueiam bem: capa com foto, atendimentos, dores,
+   como trabalhamos, checklist, consultório, mapa, dúvidas. */
+.pagina {
+  --tq: #00b8c0;
+  --tq-claro: #e5f7f8;
+  --pt: #12576e;
+  --tinta: #16303a;
+  --cinza: #5b6b73;
+  --creme: #fbf7f1;
+  --pessego: #f6c9a8;
+  --verde: #1faf57;
+  font-family: var(--font-body), system-ui, sans-serif;
+  color: var(--tinta);
+  background: #fff;
+  padding-bottom: 76px;
+}
+.pagina h1, .pagina h2, .pagina h3 { letter-spacing: -0.02em; }
+
+/* Topo */
+.topo { position: sticky; top: 0; z-index: 30; background: rgba(255,255,255,.93); backdrop-filter: blur(10px); border-bottom: 1px solid #e8eff1; }
+.topoInterno { max-width: 1180px; margin: 0 auto; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.logo { height: 34px; width: auto; }
+.menu { display: flex; gap: 22px; font-size: 14.5px; font-weight: 600; }
+.menu a { color: var(--tinta); text-decoration: none; }
+.menu a:hover { color: var(--tq); }
+.topoBotao { display: inline-flex; align-items: center; gap: 8px; background: var(--verde); color: #fff; font-weight: 700; font-size: 14px; padding: 10px 16px; border-radius: 999px; text-decoration: none; white-space: nowrap; }
+
+/* Botões */
+.botaoWhats { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--verde); color: #fff; font-weight: 700; font-size: 16px; padding: 15px 24px; border-radius: 14px; text-decoration: none; box-shadow: 0 10px 24px rgba(31,175,87,.28); transition: transform .2s, box-shadow .2s; }
+.botaoWhats:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(31,175,87,.36); }
+.botaoSecundario { display: inline-flex; align-items: center; justify-content: center; padding: 15px 22px; border-radius: 14px; border: 2px solid rgba(18,87,110,.2); color: var(--pt); font-weight: 700; font-size: 15px; text-decoration: none; background: #fff; }
+.botaoSecundario:hover { border-color: var(--tq); }
+.botaoCartao { composes: botaoWhats; width: 100%; font-size: 15px; padding: 13px 16px; margin-top: auto; }
+.botaoBranco { composes: botaoWhats; background: #fff; color: var(--pt); box-shadow: 0 10px 24px rgba(0,0,0,.18); }
+
+/* Capa */
+.capa { max-width: 1180px; margin: 0 auto; padding: 56px 16px 64px; display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; }
+.selo { display: inline-block; font-size: 13.5px; font-weight: 700; color: var(--pt); background: var(--tq-claro); padding: 8px 14px; border-radius: 999px; }
+.capaTitulo { font-size: clamp(34px, 4.6vw, 54px); line-height: 1.06; font-weight: 800; margin: 18px 0 16px; color: var(--tinta); }
+.capaTitulo em { font-style: normal; color: var(--tq); }
+.capaResumo { font-size: 18.5px; line-height: 1.6; color: var(--cinza); margin: 0 0 28px; max-width: 540px; }
+.capaAcoes { display: flex; flex-wrap: wrap; gap: 12px; }
+.capaSelos { list-style: none; padding: 0; margin: 28px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.capaSelos li { font-size: 14px; font-weight: 600; background: var(--creme); border: 1px solid #f0e6d8; padding: 8px 12px; border-radius: 12px; }
+.capaFoto { position: relative; }
+.capaFoto img { width: 100%; height: auto; aspect-ratio: 4 / 3.4; object-fit: cover; border-radius: 32px 32px 32px 120px; box-shadow: 0 30px 60px rgba(18,87,110,.18); }
+.capaFoto::before { content: ""; position: absolute; inset: -18px -18px auto auto; width: 140px; height: 140px; border-radius: 50%; background: var(--pessego); opacity: .55; z-index: -1; }
+.capaCartao { position: absolute; left: -18px; bottom: 28px; background: #fff; border-radius: 18px; padding: 14px 18px; box-shadow: 0 18px 40px rgba(18,87,110,.18); display: flex; flex-direction: column; }
+.capaCartao strong { font-size: 15px; color: var(--pt); }
+.capaCartao span { font-size: 13px; color: var(--cinza); }
+
+/* Seções */
+.secao { max-width: 1180px; margin: 0 auto; padding: 72px 16px; text-align: center; }
+.rotulo { display: inline-block; font-size: 13px; font-weight: 700; color: var(--tq); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+.secaoTitulo { text-align: center; font-size: clamp(28px, 3.4vw, 40px); font-weight: 800; margin: 0 0 12px; color: var(--pt); }
+.secaoSub { text-align: center; color: var(--cinza); font-size: 17px; margin: 0 auto 36px; max-width: 640px; line-height: 1.55; }
+.centro { text-align: center; margin-top: 28px; }
+
+/* Cartões de atendimento */
+.cartoes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; text-align: left; }
+.cartao { display: flex; flex-direction: column; background: #fff; border: 1px solid #e3eef1; border-radius: 24px; padding: 26px; box-shadow: 0 10px 30px rgba(18,87,110,.07); transition: transform .2s, box-shadow .2s; }
+.cartao:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(18,87,110,.12); }
+.cartaoIcone { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; font-size: 28px; background: linear-gradient(135deg, var(--tq-claro), var(--creme)); }
+.cartao h3 { font-size: 21px; margin: 16px 0 8px; color: var(--tinta); }
+.cartao p { font-size: 15.5px; line-height: 1.6; color: var(--cinza); margin: 0 0 14px; }
+.cartao ul { list-style: none; padding: 0; margin: 0 0 22px; display: grid; gap: 8px; }
+.cartao li { font-size: 14.5px; padding-left: 26px; position: relative; }
+.cartao li::before { content: "✓"; position: absolute; left: 0; color: var(--tq); font-weight: 800; }
+
+/* Dores */
+.dores { background: var(--creme); }
+.doresInterno { max-width: 1180px; margin: 0 auto; padding: 72px 16px; }
+.doresGrade { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.dor { background: #fff; border-radius: 20px; padding: 22px; border: 1px solid #f0e6d8; }
+.dor span { font-size: 30px; }
+.dor h3 { font-size: 17px; margin: 10px 0 6px; }
+.dor p { font-size: 14.5px; color: var(--cinza); line-height: 1.55; margin: 0; }
+.doresFecho { text-align: center; font-size: 19px; font-weight: 700; color: var(--pt); margin: 32px 0 0; }
+
+/* Como trabalham */
+.como { max-width: 1180px; margin: 0 auto; padding: 80px 16px; display: grid; grid-template-columns: 460px 1fr; gap: 56px; align-items: center; scroll-margin-top: 70px; }
+.comoFoto img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 120px 32px 32px 32px; box-shadow: 0 30px 60px rgba(18,87,110,.18); }
+.comoTitulo { font-size: clamp(28px, 3.2vw, 38px); line-height: 1.12; font-weight: 800; margin: 0 0 24px; color: var(--pt); }
+.passos { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 16px; }
+.passos li { display: flex; gap: 14px; align-items: flex-start; }
+.passoNumero { flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--tq), var(--pt)); }
+.passos h3 { font-size: 17px; margin: 4px 0 3px; }
+.passos p { font-size: 15px; color: var(--cinza); line-height: 1.55; margin: 0; }
+
+/* Quando levar */
+.quando { background: linear-gradient(180deg, var(--tq-claro), #fff); padding: 72px 16px; scroll-margin-top: 70px; }
+.checklist { list-style: none; max-width: 760px; margin: 0 auto; padding: 0; display: grid; gap: 10px; }
+.checklist li { background: #fff; border: 1px solid #d8eef0; border-radius: 14px; padding: 14px 16px 14px 48px; position: relative; font-size: 16px; line-height: 1.45; }
+.checklist li::before { content: "✓"; position: absolute; left: 14px; top: 12px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--tq); color: #fff; font-weight: 800; font-size: 13px; }
+.emergencia { max-width: 760px; margin: 18px auto 0; font-size: 14.5px; color: #8a3b2a; background: #fdf0ec; border-radius: 12px; padding: 12px 16px; text-align: center; }
+
+/* Consultório */
+.galeria { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.galeria img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 22px; }
+
+/* Localização */
+.local { max-width: 1180px; margin: 0 auto; padding: 72px 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; scroll-margin-top: 70px; }
+.localEndereco { font-size: 17px; line-height: 1.55; margin: 0 0 12px; }
+.localBairros { font-size: 15px; color: var(--cinza); line-height: 1.55; margin: 0 0 24px; }
+.mapa { border-radius: 24px; overflow: hidden; box-shadow: 0 20px 50px rgba(18,87,110,.15); aspect-ratio: 4 / 3; background: var(--tq-claro); }
+.mapa iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* Dúvidas */
+.duvidas { max-width: 780px; margin: 0 auto; text-align: left; }
+
+/* Final */
+.final { margin: 0 16px 48px; border-radius: 32px; padding: 56px 24px; text-align: center; color: #fff; background: linear-gradient(135deg, var(--tq), var(--pt)); }
+.final h2 { font-size: clamp(28px, 3.4vw, 40px); margin: 0 0 10px; }
+.final p { font-size: 17px; margin: 0 0 26px; opacity: .92; }
+
+/* Rodapé */
+.rodape { text-align: center; font-size: 13.5px; color: var(--cinza); padding: 8px 16px 32px; }
+.rodape p { margin: 4px 0; }
+.rodape a { color: var(--pt); }
+
+/* Barra fixa do celular */
+.barraWhats { display: none; }
+.barraBotao { composes: botaoWhats; width: 100%; }
+
+@media (max-width: 900px) {
+  .menu { display: none; }
+  .capa { grid-template-columns: 1fr; padding-top: 28px; gap: 32px; }
+  .capaFoto { order: -1; }
+  .capaFoto img { border-radius: 24px 24px 24px 72px; aspect-ratio: 16 / 11; }
+  .capaCartao { left: 12px; bottom: 12px; }
+  .cartoes { grid-template-columns: 1fr; }
+  .doresGrade { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .como { grid-template-columns: 1fr; gap: 32px; padding: 56px 16px; }
+  .comoFoto img { aspect-ratio: 4 / 3; border-radius: 72px 24px 24px 24px; }
+  .galeria { grid-template-columns: 1fr; }
+  .local { grid-template-columns: 1fr; }
+  .secao, .doresInterno, .quando { padding-top: 56px; padding-bottom: 56px; }
+  .barraWhats { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.96); border-top: 1px solid #e3eef1; }
+}
+@media (max-width: 520px) {
+  .topoBotao { font-size: 13px; padding: 9px 12px; }
+  .doresGrade { grid-template-columns: 1fr; }
+  .capaAcoes > * { flex: 1 1 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .botaoWhats, .cartao { transition: none; }
+}
